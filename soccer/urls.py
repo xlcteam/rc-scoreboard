@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView, RedirectView
 
-urlpatterns = patterns('',
+urlpatterns = patterns('soccer.views',
     url(r'^$', 'index', name='index'),
     url(r'^login/', 'my_login'),
     url(r'^logout/', 'my_logout'),

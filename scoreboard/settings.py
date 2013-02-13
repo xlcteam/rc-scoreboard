@@ -137,8 +137,8 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
-    'scorebrd.processors.user',
-    'scorebrd.processors.next',
+    'soccer.processors.user',
+    'soccer.processors.next',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',

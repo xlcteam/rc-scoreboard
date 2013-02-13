@@ -1,0 +1,16 @@
+{% extends "@layout.html" %}
+{% block content %}
+<h1>Login to scoreBoard</h1>
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
+<form action="." method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}" />
+    <input type="submit" value="Submit" /> <br>
+</form>
+
+{% endblock %}

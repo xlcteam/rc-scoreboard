@@ -1,0 +1,24 @@
+{% extends "@layout.html" %}
+
+{% block content %}
+  {% if groups %}
+    <h2> Select the group in which you want to generate matches </h2>
+    {% for group in groups %}
+      <li><a href="/matches/generate/{{ group.id }}">{{group.name}}</a></li> 
+    {% endfor %}
+
+  {% else %}
+  <h2> You are about to generate matches for group <strong>{{ group.name }}</strong> of
+    <strong> {{ competition.name }} </strong></h2>
+
+  <form action="." method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="group_id" value="{{ group.id }}" />
+      <input type="submit" value="Generate!" class='button blue' /> <br>
+  </form>
+  {% endif %}
+
+{% endblock %}
+  
+
+

@@ -1,0 +1,219 @@
+<html>
+  <head>
+    <title> scoreBoard - {{ match.teamA.name }} vs {{ match.teamB.name }} </title>
+    <meta http-equiv="Content-Language" content="en-EN">
+
+    <script src="{{ STATIC_URL }}/js/lib/jquery.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery-ui.min.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/keylock.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.keylock.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.idle-timer.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.stopwatch.js"></script>
+    <script src="{{ STATIC_URL }}/js/scoreTracker.js"></script>
+    <script src="{{ STATIC_URL }}/js/fills.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/scoreBoard/style.css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/jquery-ui.css" type="text/css"/>
+
+    <script>
+            window.onbeforeunload = function(){
+                    if (window.finished)
+                        return;
+                    else
+                        return 'Are you sure you want to quit?';
+            }
+    </script>
+
+    <script>
+        var ST = new scoreTracker({
+          'update_url':  "{% url match_play match_id %}",
+          'back_url': "{% url index %}"
+        });
+
+        $(document).ready(function() {
+            $('#dialogMain').hide();
+            $('#tabs').tabs();
+            ST.teamA = $('#name1').html();
+            ST.teamB = $('#name2').html();
+
+            // only duration for now
+            if (window.location.hash !== ""){
+                var hash = parseInt(window.location.hash.match(/[0-9]+/)[0]);
+                var hash_min = Math.floor(hash / 60);
+                $('#fmins').val(hash_min);
+                $('#fsecs').val(Math.floor(hash % 60));
+                ST.newTime();
+            }
+
+            $.idleTimer(2500);
+            $(document).bind("contextmenu",function(e){
+                return false;
+            });
+
+            $(document).bind("idle.idleTimer", function() {
+              $("#main").fadeOut("slow");
+              $("#underMain").fadeOut("slow");
+            });
+
+            $(document).keylock({
+                w: function(){ ST.teamAGoal(); },
+                s: function(){ ST.teamADown(); },
+
+                i: function(){ ST.teamBGoal(); },
+                k: function(){ ST.teamBDown(); },
+
+                "<Space>": function(){ ST.toggle(); },
+
+                c: function(){ $('.btn-slide').click(); },
+            });
+
+
+            $(document).bind("active.idleTimer", function() {
+                $("#main").fadeIn("slow");
+                $("#underMain").fadeIn("slow");
+            });
+
+            $(".btn-slide").click(function(){
+                $("#panel").slideToggle("slow");
+                if ($(this).text() == String.fromCharCode(9660)) {
+                    $(this).text(String.fromCharCode(9650));
+                } else {
+                    $(this).text(String.fromCharCode(9660));
+                }
+            });
+
+            $('.element3').click(ST.toggle);
+
+            $('.leftBckg, .element1').mousedown(function(e) {
+                if (e.which === 1) { ST.teamAGoal();}
+                else if (e.which === 3) { ST.teamADown(); }
+            });
+
+            $('.rightBckg, .element2').mousedown(function(e) {
+                if (e.which === 1) { ST.teamBGoal();}
+                else if (e.which === 3) { ST.teamBDown(); }
+            });
+
+
+            $(".element1").bind("mouseover", fill1);
+            $(".element1").bind("mouseout", unfill1);
+            $(".element2").bind("mouseover", fill2);
+            $(".element2").bind("mouseout", unfill2);
+            $(".element3").bind("mouseover", fill3);
+            $(".element3").bind("mouseout", unfill3);
+
+            $(".leftBckg").bind("mouseover", fill1);
+            $(".leftBckg").bind("mouseout", unfill1);
+            $(".rightBckg").bind("mouseover", fill2);
+            $(".rightBckg").bind("mouseout", unfill2);
+            $(".startBckg").bind("mouseover", fill3);
+            $(".startBckg").bind("mouseout", unfill3);
+		});
+
+
+	</script>
+
+</head>
+<body>
+    <audio id="whistle" no-controls preload='auto'>
+      <source src="{{ STATIC_URL }}/js/sound/whistle.ogg" />
+      <source src="{{ STATIC_URL }}/js/sound/whistle.mp3" />
+    </audio>
+    <div id="startAll" onclick="ST.startMatch()">
+      <div id="startText">Start match</div>
+    </div>
+		<div id="underMain">
+		  <div id="panel">
+				<div id="tabs">
+        	<ul>
+        		<li><a href="#fragment-1"><span>Settings</span></a></li>
+        		<li><a href="#fragment-2"><span>ADV Settings</span></a></li>
+    			</ul>
+
+					<div id="fragment-1">
+						<div class="placeholder"><button id="btnResetTime" onclick="ST.resetTime()">Reset Time</button></div>
+						<div class="placeholder"><button id="btnResetScore" onclick="ST.resetScore()">Reset Score</button></div>
+						<div class="placeholder2">
+							<form name="frmtime">
+								<center>Time: <input class="input" type="text" id="fmins" value="20"/>
+								: <input class="input" type="text" id="fsecs" value="00"/>
+									<input type="button" onclick="ST.newTime()" value="Set time"/> <br />
+									<span class="saved">Saved!</span></center>
+							</form>
+						</div>
+					</div>
+
+					<div id="fragment-2">
+						<div class="placeholder3">
+							<form name="effects">
+								<b>Effects:</b>
+								<input type="radio" name="effgroup" value="ON" checked>ON</input>
+								<input type="radio" name="effgroup" value="OFF">OFF</input>
+							</form>
+						</div>
+						<div class="placeholder3">
+							<button onclick="ST.showD()">Show dialog</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slide" style="text-align: center;"><span class="btn-slide">&#9660;</span></div>
+		</div>
+
+		<div id="main">
+			<div class="leftBckg">
+				<span class="goalLText">Goal!</span>
+			</div>
+			<div class="rightBckg">
+				<span class="goalRText">Goal!</span>
+			</div>
+      <div class="startBckg" onclick="ST.toggle()">
+				<span id="btnStart" class="startText">Start</span>
+      </div>
+		</div>
+
+		<!-- dialog, hidden at the begin of game by jquery funct .hide() -->
+		<div id="dialogMain">
+			<div id="dialog" title="Results" style="font-size:50.5%;">
+				<div style="margin: 0 auto;height: 70px; font-size:130.5%;">
+          <form action="{% url match_save match_id %}" method="POST" id="dialogForm">
+              {% csrf_token %}
+                    <table style="width: 270px; margin: 0 auto;">
+                      <tr>
+                        <td style="width: 100px; text-align: right;"> <span id="dname"></span> </td>
+                        <td> <input style="width: 30px;" type="text"
+                          name="scoreA" id="dgoals"/> </td>
+                        <td> <b>:</b> </td>
+                        <td>  <input style="width: 30px;" type="text"
+                          name="scoreB" id="d2goals"/> </td>
+                        <td style="width: 100px; text-align: left;"><span id="d2name"></span> </td>
+                      </tr>
+                   </table>
+                   <table style="padding-top: 40px;">
+                      <tr>
+                        <td>Your password: </td>
+                        <td><input type="password" name="password" /> </td>
+                      </tr>
+                   </table>
+                    <input type="hidden" name="final" value="true" />
+          </form>
+				</div>
+			</div>
+		</div>
+
+    <div id="names">
+      <div class="half name"><span class="element1" id="name1">{{ match.teamA.name }}</span></div>
+      <div class="half name"><span class="element2" id="name2">{{ match.teamB.name }}</span></div>
+    </div>
+    <div id="scores" style="width: 100%;">
+      <div class="third score"><span class="element1" id="team1" style="display: inline-block;">0</span></div>
+      <div class="colon"><span class="element">:</span></div>
+      <div class="third score"><span class="element2" id="team2" style="display: inline-block;">0</span></div>
+      <dic style="clear:both;"></div>
+    </div>
+    <div id="timeBar" class="element3">
+			<div id="time" class="time"><span >00:00,00</span></div>
+		</div>
+		<div id="halftime" class="halftime"><span>1.</span></div>
+    <div style="clear: both;"></div>
+	</body>
+</html>

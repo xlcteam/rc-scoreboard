@@ -84,8 +84,25 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = ')n1fo*9_n*e$0#m08zg%9)&amp;j8%^)zf(vq4%)t$%bo-)hh$spmp'
+# SECRET_KEY: Make this unique, and don't share it with anybody.
+# taken from https://github.com/b3b/jadro/blob/master/jadro/settings.py
+def generate_secret_key():
+    # taken from Django core/management/commands/startproject.py
+    from django.utils.crypto import get_random_string
+    chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+    return get_random_string(50, chars)
+
+def create_secret_file(secret_file_name):
+    with open(os.path.join(SETTINGS_DIR, secret_file_name), 'w') as secret_file:
+        secret_file.write("SECRET_KEY = '%s'\n" % generate_secret_key())
+
+# http://stackoverflow.com/questions/4664724/distributing-django-projects-with-unique-secret-keys
+try:
+    from jadro.secret_key import SECRET_KEY
+except ImportError:
+    create_secret_file('secret_key.py')
+    from jadro.secret_key import SECRET_KEY
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

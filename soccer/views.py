@@ -31,7 +31,7 @@ def round_robin(units, sets=None):
     return schedule
 
 @render_to('login.html')
-def my_login(request, url='/'):
+def my_login(request, url='index'):
     
     if 'next' in request.POST:
         url = request.POST['next']

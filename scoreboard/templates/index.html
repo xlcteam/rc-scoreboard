@@ -1,0 +1,13 @@
+{% extends "@layout.html" %}
+{% block title %} scoreBoard - Dashboard {% endblock %}
+{% block content %}
+
+<h1>Welcome to scoreBoard</h1>
+
+{% if user.is_authenticated %}
+  <a class="button orange" href="/soccer">Soccer</a>
+  <a class="button orange" href="/dance">Dance</a>
+  <a class="button orange" href="/rescue">Rescue</a>
+{% endif %}
+
+{% endblock %}

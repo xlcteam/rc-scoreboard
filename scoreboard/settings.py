@@ -100,10 +100,10 @@ def create_secret_file(secret_file_name):
 
 # http://stackoverflow.com/questions/4664724/distributing-django-projects-with-unique-secret-keys
 try:
-    from jadro.secret_key import SECRET_KEY
+    from scoreboard.secret_key import SECRET_KEY
 except ImportError:
     create_secret_file('secret_key.py')
-    from jadro.secret_key import SECRET_KEY
+    from scoreboard.secret_key import SECRET_KEY
 
 
 # List of callables that know how to import templates from various sources.

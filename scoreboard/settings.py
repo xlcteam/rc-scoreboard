@@ -84,8 +84,10 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+
 # SECRET_KEY: Make this unique, and don't share it with anybody.
 # taken from https://github.com/b3b/jadro/blob/master/jadro/settings.py
+SETTINGS_DIR = os.path.dirname(os.path.abspath(__file__))
 def generate_secret_key():
     # taken from Django core/management/commands/startproject.py
     from django.utils.crypto import get_random_string

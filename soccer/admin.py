@@ -1,5 +1,5 @@
 from django.contrib import admin
-from scorebrd.models import Team, Group, Competition, Match, Event, TeamResult
+from .models import Team, Group, Competition, Match, Event, TeamResult
 
 admin.site.register(Team)
 admin.site.register(Group)

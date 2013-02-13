@@ -6,8 +6,6 @@ urlpatterns = patterns('',
     url(r'^login/', 'my_login'),
     url(r'^logout/', 'my_logout'),
     url(r'^results/live', 'results_live'),
-    url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', include(admin.site.urls)),
 
     url(r'^events/?$', 'events'),
     url(r'^event/(?P<event_id>\d+)/?$', 'event'),

@@ -7,4 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^/soccer', include('soccer.urls')),
+    url(r'^grappelli/', include('grappelli.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+
 )

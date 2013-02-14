@@ -96,6 +96,12 @@ def event(request, event_id):
     competitions = event.competitions.all()
     return {'event': event, 'competitions': competitions}
 
+@render_to('event/new.html')
+@login_required(login_url='/login/')
+def new_event(request):
+    return {}
+    
+
 # competition/s
 @render_to('competition.html')
 @login_required(login_url='/login/')

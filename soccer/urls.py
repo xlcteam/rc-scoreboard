@@ -9,6 +9,7 @@ urlpatterns = patterns('soccer.views',
 
     url(r'^events/?$', 'events'),
     url(r'^event/(?P<event_id>\d+)/?$', 'event'),
+    url(r'^event/new?$', 'new_event', name='new_event'),
     url(r'^competitions/?$', 'competitions'),
     url(r'^competition/(?P<competition_id>\d+)/?$', 'competition'),
     url(r'^groups/?$', 'groups'),

@@ -166,6 +166,7 @@ INSTALLED_APPS = (
 )
 
 GRAPPELLI_ADMIN_TITLE = 'scoreBoard Administration'
+APPEND_SLASHES = True
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

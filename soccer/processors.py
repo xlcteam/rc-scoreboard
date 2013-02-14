@@ -8,5 +8,5 @@ def next(request):
     url = '/'
     if 'next' in request.GET:
         url = request.GET['next']
-    return {'next': url}
+    return {'next': url, 'request': request}
  

@@ -26,10 +26,24 @@
 	{% block head %}{% endblock %}
 </head>
 
+
 <body>
         <div id="banner">
                 <div id="logo">
-	                <h1><a href="/">scoreBoard</a></h1>
+                  <h1><a href="/">scoreBoard
+
+{% load ifregex %}
+{% ifregex "^/soccer" request.path %}
+                      <small> soccer </small>
+{% endifregex %}
+{% ifregex "^/dance" request.path %}
+                      <small> dance </small>
+{% endifregex %}
+{% ifregex "^/rescue" request.path %}
+                      <small> rescue </small>
+{% endifregex %}
+                    </a>
+                  </h1>
                 </div>
                 {% if user.is_authenticated %}
                     <div id="userPanel">

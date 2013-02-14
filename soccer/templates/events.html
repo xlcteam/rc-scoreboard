@@ -1,4 +1,5 @@
 
+{% if events %}
 <table class="eventTable">
   {% for event in events %}
     <tr>
@@ -7,3 +8,7 @@
     </tr>
   {% endfor %}
 </table>
+
+{% else %}
+<p> No events were found. <a href="{% url new_event %}"><strong>Add some!</strong></a> </p>
+{% endif %}

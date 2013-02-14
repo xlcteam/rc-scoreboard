@@ -100,7 +100,7 @@ def event(request, event_id):
 @login_required(login_url='/login/')
 def new_event(request):
     return {}
-    
+
 
 # competition/s
 @render_to('competition.html')

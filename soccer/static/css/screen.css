@@ -15,6 +15,7 @@ a { color: #006aeb; padding: 3px 1px; }
 #logo {
         width: 80%;
         float: left;
+        height: 100px;
 }
 
 #logo a{

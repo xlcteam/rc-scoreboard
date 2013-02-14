@@ -163,8 +163,8 @@ def team(request, team_id):
     return {'group': group, 'competition': competition, 'event': event,
             'team': team, 'matches': matches, 'played': played}
 
-@render_to('index.html')
-def index(request):
+@render_to('index_soccer.html')
+def index_soccer(request):
     events = Event.objects.all()
     matches = Match.objects.all()
     return {'user': request.user, 'events': events, 'matches': matches}

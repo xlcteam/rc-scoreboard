@@ -162,7 +162,10 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'south',
-    'soccer'
+    'soccer',
+    'dance',
+    'rescue',
+    'scorebrd',
 )
 
 GRAPPELLI_ADMIN_TITLE = 'scoreBoard Administration'

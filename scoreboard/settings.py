@@ -134,7 +134,8 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(DIR, 'templates'),
-    os.path.join(DIR, '../soccer/templates')
+    os.path.join(DIR, '../soccer/templates'),
+    os.path.join(DIR, '../dance/templates')
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

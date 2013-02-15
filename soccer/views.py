@@ -30,7 +30,7 @@ def round_robin(units, sets=None):
         schedule.append(pairings)
     return schedule
 
-@render_to('login.html')
+@render_to('soccer/login.html')
 def my_login(request, url='index'):
     
     if 'next' in request.POST:
@@ -76,34 +76,34 @@ def my_logout(request):
         
     return redirect('index')
 
-@render_to('results_live.html')
+@render_to('soccer/results_live.html')
 def results_live(request):
     groups = Group.objects.all()
     events = Event.objects.all()
     return {'groups': groups, 'event': events}
 
 # event/s
-@render_to('events.html')
+@render_to('soccer/events.html')
 @login_required(login_url='/login/')
 def events(request):
     events = Event.objects.all()
     return {'events': events}
 
-@render_to('event.html')
+@render_to('soccer/event.html')
 @login_required(login_url='/login/')
 def event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     competitions = event.competitions.all()
     return {'event': event, 'competitions': competitions}
 
-@render_to('event/new.html')
+@render_to('soccer/event/new.html')
 @login_required(login_url='/login/')
 def new_event(request):
     return {}
 
 
 # competition/s
-@render_to('competition.html')
+@render_to('soccer/competition.html')
 @login_required(login_url='/login/')
 def competition(request, competition_id):
     competition = get_object_or_404(Competition, pk=competition_id)
@@ -111,14 +111,14 @@ def competition(request, competition_id):
     event = competition.event_set.all()[0]
     return {'event': event, 'competition': competition, 'groups': groups}
 
-@render_to('competitions.html')
+@render_to('soccer/competitions.html')
 @login_required(login_url='/login/')
 def competitions(request):
     competitions = Competition.objects.all()
     return {'competitions': competitions}
 
 # group/s
-@render_to('group.html')
+@render_to('soccer/group.html')
 @login_required(login_url='/login/')
 def group(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
@@ -133,20 +133,20 @@ def group(request, group_id):
             'matches': matches,
             'team_results': team_results}
 
-@render_to('groups.html')
+@render_to('soccer/groups.html')
 @login_required(login_url='/login/')
 def groups(request):
     groups = Group.objects.all()
     return {'groups': groups}
 
 # team/s
-@render_to('teams.html')
+@render_to('soccer/teams.html')
 @login_required(login_url='/login/')
 def teams(request):
     teams = Team.objects.all()
     return {'teams': teams}
 
-@render_to('team.html')
+@render_to('soccer/team.html')
 @login_required(login_url='/login/')
 def team(request, team_id):
     team = get_object_or_404(Team, pk=team_id)
@@ -163,20 +163,20 @@ def team(request, team_id):
     return {'group': group, 'competition': competition, 'event': event,
             'team': team, 'matches': matches, 'played': played}
 
-@render_to('index_soccer.html')
+@render_to('soccer/index_soccer.html')
 def index_soccer(request):
     events = Event.objects.all()
     matches = Match.objects.all()
     return {'user': request.user, 'events': events, 'matches': matches}
 
-@render_to('matches/generate.html')
+@render_to('soccer/matches/generate.html')
 @login_required(login_url='/login/')
 def matches_generate(request, group_id=None):
     group = get_object_or_404(Group, pk=group_id)
     competition = group.competition_set.all()[0]
     return {'group': group, 'competition': competition}
 
-@render_to('matches/generate_listing.html')
+@render_to('soccer/matches/generate_listing.html')
 def matches_generate_listing(request):
     group = get_object_or_404(Group, pk=request.POST['group_id'])
     teams = list(group.teams.all())
@@ -213,11 +213,11 @@ def match_play(request, match_id):
 
         return HttpResponse('{ok: true}', mimetype="application/json") 
        
-    return render_to_response('matches/play.html',
+    return render_to_response('soccer/matches/play.html',
                               {'match': match, 'match_id': match_id},
                               context_instance=RequestContext(request))
 
-@render_to('matches/save.html')
+@render_to('soccer/matches/save.html')
 @login_required(login_url='/login/')
 def match_save(request, match_id):
 
@@ -269,7 +269,7 @@ def match_save(request, match_id):
     else:
         return {'error': "How on earth did you get here?"}
 
-@render_to('results/live.html')
+@render_to('soccer/results/live.html')
 def results_live(request):
     if 'event' in request.GET:
         event = get_object_or_404(Event, pk=request.GET['event'])
@@ -297,7 +297,7 @@ def results(request):
 def results_team_view(request, team_id):
     pass
 
-@render_to('results/group.html')
+@render_to('soccer/results/group.html')
 @login_required(login_url='/login/')
 def results_group_view(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
@@ -309,7 +309,7 @@ def results_group_view(request, group_id):
             'competition': competition, 'event': event, 
             'team_results': team_results}
 
-@render_to('results/match.html')
+@render_to('soccer/results/match.html')
 @login_required(login_url='/login/')
 def results_match_view(request, match_id):
     match = get_object_or_404(Match, pk=match_id)

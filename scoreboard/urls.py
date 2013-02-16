@@ -6,13 +6,15 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'(^$|^login/|^logout/)', include('scorebrd.urls')),
-    #url(r'^login/', include('scorebrd.views.my_login'), name='login'),
-    #url(r'^logout/', include('scorebrd.views.my_logout', name='logout')),
+   #url(r'^$', include('scorebrd.views.index'), name='index')
+   #url(r'^login/', include('scorebrd.views.my_login'), name='login'),
+   #url(r'^logout/', include('scorebrd.views.my_logout', name='logout')),
 
     url(r'^dance/', include('dance.urls')),
     url(r'^soccer/', include('soccer.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('scorebrd.urls')),
+
 
 )

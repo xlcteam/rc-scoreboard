@@ -1,6 +1,6 @@
 # Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404, redirect
-from .models import (Team, Event, Group, Competition, LoginForm, Match,
+from .models import (Team, Event, Group, Competition, Match,
         TeamResult, MatchSaveForm)
 from django.contrib.auth import authenticate, login, logout
 from django.core.context_processors import csrf
@@ -29,52 +29,6 @@ def round_robin(units, sets=None):
         units.insert(1, units.pop())
         schedule.append(pairings)
     return schedule
-
-@render_to('soccer/login.html')
-def my_login(request, url='index'):
-    
-    if 'next' in request.POST:
-        url = request.POST['next']
-    
-    def errorHandle(error):
-        form = LoginForm()
-        c = {}
-        c.update(csrf(request))
-        c['form'] = form
-        c['error'] = error
-        return c
-
-    if request.user.is_authenticated():
-        return redirect(url)
-
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid(): 
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    # Redirect to a success page.
-                    login(request, user)
-                    return redirect(url)
-            else:
-                error = u'Invalid login'
-                return errorHandle(error)	
-        else:
-            return errorHandle(u'Invalid login')
-    else:
-        form = LoginForm()
-        c = {}
-        c.update(csrf(request))
-        c['form'] = form
-        return c
-
-def my_logout(request):
-    if request.user.is_authenticated():
-        logout(request)       
-        
-    return redirect('index')
 
 @render_to('soccer/results_live.html')
 def results_live(request):

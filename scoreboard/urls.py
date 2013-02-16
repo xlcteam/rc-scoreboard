@@ -6,7 +6,10 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', include('scorebrd.urls')),
+    url(r'(^$|^login/|^logout/)', include('scorebrd.urls')),
+    #url(r'^login/', include('scorebrd.views.my_login'), name='login'),
+    #url(r'^logout/', include('scorebrd.views.my_logout', name='logout')),
+
     url(r'^dance/', include('dance.urls')),
     url(r'^soccer/', include('soccer.urls')),
     url(r'^grappelli/', include('grappelli.urls')),

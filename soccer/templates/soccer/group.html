@@ -1,9 +1,9 @@
 {% extends "@layout.html" %}
 {% block content %}
 <div id="fastinfo">&raquo;
-    <a href="/event/{{event.id}}">{{event.name}}</a> &raquo;
-    <a href="/competition/{{competition.id}}">{{competition.name}}</a> &raquo;
-    <a href="/group/{{group.id}}">{{group.name}}</a> 
+    <a href="soccer/event/{{event.id}}">{{event.name}}</a> &raquo;
+    <a href="soccer/competition/{{competition.id}}">{{competition.name}}</a> &raquo;
+    <a href="soccer/group/{{group.id}}">{{group.name}}</a> 
 </div>
 
 <h2> Group {{ group.name }} </h2>
@@ -12,18 +12,18 @@
 
   <section class="col span_4 clr"> 
     <h3>Results</h3>
-    {% include "results.html" %}
+    {% include "soccer/results.html" %}
   </section>  
   
   <section class="col span_5 clr"> 
     <h3>Matches</h3>
-    {% include "quicksearch.html" %}
-    {% include "matches.html" %}
+    {% include "soccer/quicksearch.html" %}
+    {% include "soccer/matches.html" %}
   </section>  
 
   <section class="col span_3 clr"> 
     <h3>Teams </h3>
-    {% include "teams.html" %}
+    {% include "soccer/teams.html" %}
   </section>  
 
 </section>

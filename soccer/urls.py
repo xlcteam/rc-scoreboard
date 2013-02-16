@@ -3,8 +3,8 @@ from django.views.generic import TemplateView, RedirectView
 
 urlpatterns = patterns('soccer.views',
     url(r'^$', 'index_soccer', name='index'),
-    url(r'^login/', 'my_login', name='login'),
-    url(r'^logout/', 'my_logout', name='logout'),
+    # url(r'^login/', 'my_login', name='login'),
+    # url(r'^logout/', 'my_logout', name='logout'),
     url(r'^results/live', 'results_live'),
 
     url(r'^events/?$', 'events'),

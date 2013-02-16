@@ -8,12 +8,12 @@
   <section class="row">
     <div class="col span_6">
         <h2>Events registered with scoreBoard</h2>
-        {% include "events.html" %}
+        {% include "soccer/events.html" %}
     </div>
 
     <div class="col span_6">
       <strong style="font-size: 20px;">Upcoming matches: </strong><br />
-      {% include "quicksearch.html" %}
+      {% include "soccer/quicksearch.html" %}
       {% for event in events %}
         {% for competition in event.competitions.all %}
             {% for group in competition.groups.all %}
@@ -21,7 +21,7 @@
                   <strong>{{ event.name }} : </strong>{{ competition.name }} - {{ group.name }}
                 </div>
                 <div class="groupMatches">
-                    {% include "matches.html" with matches=group.matches.all not_started_only=True %}
+                    {% include "soccer/matches.html" with matches=group.matches.all not_started_only=True %}
                 </div>
             {% endfor %}
         {% endfor %}

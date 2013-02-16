@@ -1,21 +1,20 @@
 from django.db import models
 from django import forms
 
-class LoginForm(forms.Form):
-    username = forms.CharField(max_length=30)
-    password = forms.CharField(widget=forms.PasswordInput(render_value=False),
-                                max_length=100)
 
 class MatchSaveForm(forms.Form):
     scoreA = forms.IntegerField(label='Score of team A')
     scoreB = forms.IntegerField(label='Score of team B')
     password = forms.CharField(widget=forms.PasswordInput(render_value=False),
                                 max_length=100)
+
+
 class Team(models.Model):
     name = models.CharField(max_length=200)
 
     def __unicode__(self):
         return self.name
+
 
 class Match(models.Model):
     teamA = models.ForeignKey(Team, related_name='homelanders')
@@ -36,6 +35,7 @@ class Match(models.Model):
 
     def __unicode__(self):
         return "%s vs. %s" % (self.teamA.name, self.teamB.name)
+
 
 class TeamResult(models.Model):
     team = models.ForeignKey(Team)

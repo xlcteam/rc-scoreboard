@@ -135,7 +135,10 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(DIR, 'templates'),
     os.path.join(DIR, '../soccer/templates'),
-    os.path.join(DIR, '../dance/templates')
+    os.path.join(DIR, '../dance/templates'),
+    os.path.join(DIR, '../rescue/templates'),
+    os.path.join(DIR, '../scorebrd/templates')
+
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

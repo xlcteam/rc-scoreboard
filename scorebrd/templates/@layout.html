@@ -63,7 +63,7 @@
 {% ifregex "^/soccer" request.path %}
 <ul id="menu">
   <li>
-  <a href="{% url soccer.views.live_results %}"> Live results </a>
+  <a href="{% url soccer.views.results_live %}"> Live results </a>
   </li>
 </ul>
 {% endifregex %}
@@ -71,7 +71,7 @@
 {% ifregex "^/dance" request.path %}
 <ul id="menu">
   <li>
-  <a href="{% url dance.views.live_results %}"> Live results </a>
+  <a href="{% url dance.views.results_live %}"> Live results </a>
   </li>
 </ul>
 {% endifregex %}
@@ -79,7 +79,7 @@
 {% ifregex "^/rescue" request.path %}
 <ul id="menu">
   <li>
-  <a href="{% url rescue.views.live_results %}"> Live results </a>
+  <a href="{% url rescue.views.results_live %}"> Live results </a>
   </li>
 </ul>
 {% endifregex %}

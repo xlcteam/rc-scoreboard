@@ -12,6 +12,7 @@
     </div>
 
     <div class="col span_6">
+      {% if events %}
       <strong style="font-size: 20px;">Upcoming matches: </strong><br />
       {% include "soccer/quicksearch.html" %}
       {% for event in events %}
@@ -26,6 +27,7 @@
             {% endfor %}
         {% endfor %}
       {% endfor %}
+      {% endif %}
     </div>
   </section>
 

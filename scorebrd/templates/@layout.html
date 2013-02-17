@@ -30,17 +30,17 @@
 <body>
         <div id="banner">
                 <div id="logo">
-                  <h1><a href="/">scoreBoard
+                  <h1><a href="/">scoreBoard</a>
 
 {% load ifregex %}
 {% ifregex "^/soccer" request.path %}
-                      <small> soccer </small>
+                      - <a href="/soccer"><small> soccer </small></a>
 {% endifregex %}
 {% ifregex "^/dance" request.path %}
-                      <small> dance </small>
+                      - <a href="/dance"><small> dance </small></a>
 {% endifregex %}
 {% ifregex "^/rescue" request.path %}
-                      <small> rescue </small>
+                      - <a href="/rescue"><small> rescue </small></a>
 {% endifregex %}
                     </a>
                   </h1>

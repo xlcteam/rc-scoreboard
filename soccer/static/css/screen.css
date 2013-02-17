@@ -28,6 +28,10 @@ a { color: #006aeb; padding: 3px 1px; }
         text-decoration: underline;
 }
 
+#logo span {
+  color: #fff;
+}
+
 #userPanel {
         width: 20%;
         float: right;

@@ -34,13 +34,13 @@
 
 {% load ifregex %}
 {% ifregex "^/soccer" request.path %}
-                      - <a href="/soccer"><small> soccer </small></a>
+                      <span>-</span> <a href="/soccer"><small> soccer </small></a>
 {% endifregex %}
 {% ifregex "^/dance" request.path %}
-                      - <a href="/dance"><small> dance </small></a>
+                      <span>-</span> <a href="/dance"><small> dance </small></a>
 {% endifregex %}
 {% ifregex "^/rescue" request.path %}
-                      - <a href="/rescue"><small> rescue </small></a>
+                      <span>-</span> <a href="/rescue"><small> rescue </small></a>
 {% endifregex %}
                     </a>
                   </h1>

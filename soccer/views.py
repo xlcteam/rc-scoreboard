@@ -9,6 +9,7 @@ from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.contrib import messages
 
 # code from
 # http://code.activestate.com/recipes/65200-round-robin-pairings-generator/

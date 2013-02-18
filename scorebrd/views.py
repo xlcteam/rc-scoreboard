@@ -5,6 +5,7 @@ from annoying.decorators import render_to
 from .models import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.context_processors import csrf
+from django.contrib import messages
 
 
 @render_to('scorebrd/index.html')
@@ -54,5 +55,8 @@ def my_login(request, url='index'):
 def my_logout(request):
     if request.user.is_authenticated():
         logout(request)       
+
+        messages.success(request, 'You have been successfuly logged out.'
+                                    ' See you next time!')
         
     return redirect('index')

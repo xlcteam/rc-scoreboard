@@ -30,3 +30,20 @@ class Event(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Performance(models.Model):
+    team = models.ForeignKey(Team, related_name='homelanders')
+    PLAYING_CHOICES = (
+        ('N', 'Not performed yet'),
+        ('P', 'Being performed at the moment'),
+        ('D', 'Already performed (Done)'),
+    )
+    playing = models.CharField(max_length=1, choices=PLAYING_CHOICES,
+            default='N')
+    referee = models.ForeignKey('auth.User')
+
+    def __unicode__(self):
+        return "%s" % (self.team.name,)
+
+

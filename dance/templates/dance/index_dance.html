@@ -19,10 +19,9 @@
         {% for competition in event.competitions.all %}
             {% for group in competition.groups.all %}
                 <div class="gName">
-                  <strong>{{ event.name }} : </strong>{{ competition.name }} - {{ group.name }}
+                  <strong>{{ event.name }} : </strong>{{ competition.name }}
                 </div>
                 <div class="groupMatches">
-                    {% include "soccer/matches.html" with matches=group.matches.all not_started_only=True %}
                 </div>
             {% endfor %}
         {% endfor %}
@@ -34,13 +33,9 @@
 
 {% else %}
 
-<p>Since you are not logged in may I suggest you look at <a href="{% url
-  results_live%}">live scores</a>?</p>
+<p>Since you are not logged in may I suggest you look at <a href="">live scores</a>?</p>
 
-<p>Or you can still <a href="{% url login %}/?next={% url index %}">log in</a>.</p>
-
-{% endif %}
-
+<p>Or you can still <a href="{% url login %}/?next={% url dance.views.index_dance %}">log in</a>.</p>
 
 {% endif %}
 

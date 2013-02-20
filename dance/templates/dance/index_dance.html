@@ -2,13 +2,13 @@
 {% block title %} - Dashboard {% endblock %}
 {% block content %}
 
-<h1>Welcome to soccer</h1>
+<h1>Welcome to dance</h1>
 
 {% if user.is_authenticated %}
-  <section class="row">
+<section class="row">
     <div class="col span_6">
-        <h2>Soccer events registered with scoreBoard</h2>
-        {% include "soccer/events.html" %}
+        <h2>Dance events registered with scoreBoard</h2>
+        {% include "dance/events.html" %}
     </div>
 
     <div class="col span_6">
@@ -38,6 +38,9 @@
   results_live%}">live scores</a>?</p>
 
 <p>Or you can still <a href="{% url login %}/?next={% url index %}">log in</a>.</p>
+
+{% endif %}
+
 
 {% endif %}
 

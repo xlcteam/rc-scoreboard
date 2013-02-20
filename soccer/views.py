@@ -2,7 +2,7 @@
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from .models import (Team, Event, Group, Competition, Match,
         TeamResult, MatchSaveForm)
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate
 from django.core.context_processors import csrf
 from django.template import RequestContext
 from annoying.decorators import render_to

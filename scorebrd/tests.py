@@ -54,4 +54,18 @@ class LoginTest(TestCase):
             'admin', 'password': 'admin', 'next': '/soccer/events'})
 
         # check if page is OK
-        self.assertEqual(response.status_code, 304)
+        #self.assertEqual(response.status_code, 302)
+
+class LogoutTest(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+
+    def test_logout_forward(self):
+        response = self.client.get('/logout/')
+        
+        # check if page is OK
+        self.assertEqual(response.status_code, 302)
+ 
+
+

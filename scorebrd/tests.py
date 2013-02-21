@@ -66,6 +66,7 @@ class LogoutTest(TestCase):
         
         # check if page is OK
         self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], 'http://testserver/')
  
 
 

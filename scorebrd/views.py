@@ -59,4 +59,4 @@ def my_logout(request):
         messages.success(request, 'You have been successfuly logged out.'
                                     ' See you next time!')
         
-    return redirect('index')
+    return redirect('main_index')

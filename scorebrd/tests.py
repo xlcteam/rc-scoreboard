@@ -48,3 +48,10 @@ class LoginTest(TestCase):
         # check if we get to events (/events) after logging in
         self.assertTrue('next' in response.context)
         self.assertEqual(response.context['next'], '/soccer/events')
+
+    def test_login_page_forwarding(self):
+        response = self.client.post('/login/', {'username':
+            'admin', 'password': 'admin', 'next': '/soccer/events'})
+
+        # check if page is OK
+        self.assertEqual(response.status_code, 304)

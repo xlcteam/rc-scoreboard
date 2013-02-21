@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
-from .models import (Event, Competition, Group, Team)
+from .models import (Event, Competition, Group, Team, Performance)
 
 @render_to('dance/index_dance.html')
 def index_dance(request):
@@ -76,8 +76,11 @@ def team(request, team_id):
     competition = group.competition_set.all()[0]
     event = competition.event_set.all()[0]
 
+    performances = Performance.objects.filter(team=team).order_by('playing')
+    performed = Performance.objects.filter(team=team, playing='D').count()
+
     return {'group': group, 'competition': competition, 'event': event,
-            'team': team}
+            'team': team, 'performances': performances, 'performed': performed}
 
 #results
 @render_to('dance/results/live.html')

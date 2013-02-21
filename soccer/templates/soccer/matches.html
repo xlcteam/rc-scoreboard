@@ -12,7 +12,7 @@
                         {{ match.teamB.name }}
                 </td>
                 <td align="center">
-                  <a class='smaller button orange' href="soccer/match/play/{{ match.id }}"> Play ! </a>
+                  <a class='smaller button orange' href="/soccer/match/play/{{ match.id }}"> Play ! </a>
                 </td>
             {% elif match.playing == 'P' and not_started_only == False %}
                 <td class='left'>
@@ -32,7 +32,7 @@
                     {{ match.teamB.name }}
                 </td>
                 <td align="center">
-                  <a class="smaller button" href="soccer/results/match/{{ match.id }}"> See
+                  <a class="smaller button" href="/soccer/results/match/{{ match.id }}"> See
                     more info!</a>
                 </td>
            {% endif %}
@@ -44,9 +44,9 @@
 {% else %}
       Unfortunately, no matches were found.
         {% if group %}
-        <a href="soccer/matches/generate/{{ group.id }}"> Generate some!</a>
+        <a href="/soccer/matches/generate/{{ group.id }}"> Generate some!</a>
         {% else %}
-        <a href="soccer/matches/generate/"> Generate some!</a>
+        <a href="/soccer/matches/generate/"> Generate some!</a>
         {% endif %}
 
 {% endif %}

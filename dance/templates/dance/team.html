@@ -1,0 +1,17 @@
+{% extends "@layout.html" %}
+
+{% block content %}
+<div id="fastinfo">&raquo;
+    <a href="/dance/event/{{event.id}}">{{event.name}}</a> &raquo;
+    <a href="/dance/competition/{{competition.id}}">{{competition.name}}</a> &raquo;
+    <a href="/dance/group/{{group.id}}">{{group.name}}</a> &raquo;
+    <a href="/dance/team/{{team.id}}">{{team.name}}</a>
+</div>
+<h2> Performances for team {{ team.name }} </h2>
+{% include "dances/performances.html" %}
+
+<p>
+Team <strong>{{ team.name }} </strong> has performed {{ performed }} performance{{ performance|pluralize }}.
+</p>
+
+{% endblock %}

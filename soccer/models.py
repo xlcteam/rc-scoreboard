@@ -2,6 +2,10 @@ from django.db import models
 from django import forms
 
 
+class CreateForm(forms.Form):
+    name = forms.CharField(max_length=30)
+
+
 class MatchSaveForm(forms.Form):
     scoreA = forms.IntegerField(label='Score of team A')
     scoreB = forms.IntegerField(label='Score of team B')

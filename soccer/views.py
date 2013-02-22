@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from .models import (Team, Event, Group, Competition, Match,
-        TeamResult, MatchSaveForm)
+        TeamResult, MatchSaveForm, CreateForm)
 from django.contrib.auth import authenticate
 from django.core.context_processors import csrf
 from django.template import RequestContext
@@ -37,6 +37,36 @@ def results_live(request):
     events = Event.objects.all()
     return {'groups': groups, 'event': events}
 
+# create
+@render_to('soccer/event/new.html')
+@login_required(login_url='/login/')
+def new_event_soccer(request):
+    if request.method == 'POST':
+        pass
+    else:
+        form = CreateForm()
+        c = {}
+        c.update(csrf(request))
+        c['form'] = form
+        return c
+    
+    return {}
+
+@render_to('soccer/competition/new.html')
+@login_required(login_url='/login/')
+def new_competition_soccer(request):
+    return {}
+
+@render_to('soccer/group/new.html')
+@login_required(login_url='/login/')
+def new_group_soccer(request):
+    return {}
+
+@render_to('soccer/team/new.html')
+@login_required(login_url='/login/')
+def new_team_soccer(request):
+    return {}
+
 # event/s
 @render_to('soccer/events.html')
 @login_required(login_url='/login/')
@@ -50,12 +80,6 @@ def event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     competitions = event.competitions.all()
     return {'event': event, 'competitions': competitions}
-
-@render_to('soccer/event/new.html')
-@login_required(login_url='/login/')
-def new_event_soccer(request):
-    return {}
-
 
 # competition/s
 @render_to('soccer/competition.html')
@@ -274,3 +298,23 @@ def results_match_view(request, match_id):
     event = competition.event_set.all()[0]
     return {'group': group, 'match': match,
             'competition': competition, 'event': event}
+
+@render_to('soccer/results/generate.html')
+@login_required(login_url='/login/')
+def results_generate(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    competition = group.competition_set.all()[0]
+    event = competition.event_set.all()[0]
+
+    team_results = group.results.all()\
+                    .order_by('matches_played').reverse()
+
+    return {'event': event, 'competition': competition,
+            'group': group, 'team_results': team_results}
+
+
+
+
+
+
+

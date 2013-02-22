@@ -25,7 +25,7 @@ def event(request, event_id):
 
 @render_to('dance/event/new.html')
 @login_required(login_url='/login/')
-def new_event(request):
+def new_event_dance(request):
     return {}
 
 # competition/s

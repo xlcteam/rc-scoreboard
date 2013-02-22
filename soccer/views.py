@@ -53,7 +53,7 @@ def event(request, event_id):
 
 @render_to('soccer/event/new.html')
 @login_required(login_url='/login/')
-def new_event(request):
+def new_event_soccer(request):
     return {}
 
 

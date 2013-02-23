@@ -1,0 +1,20 @@
+<html>
+  <head>
+	  <link rel="stylesheet" media="screen,projection,tv" href="{{ STATIC_URL }}/css/screen.css" type="text/css">
+  </head>
+  
+  <style>
+    .center {
+      margin: 0 auto;
+    }
+  </style>
+
+  <body>
+    <h1 class="center">{{ event.name }}</h1>
+    <h2 class="center">{{ competition.name}} - {{group.name}}</h2>
+
+    <div style="text-align: center;">
+      {% include "soccer/results.html" %}
+    </div>  
+  </body>
+</html>

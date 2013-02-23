@@ -3,5 +3,16 @@
 
 <h2>Create new event</h2>
 
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
+<form action="{% url new_event_soccer %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}" />
+    <input type="submit" value="Save" /> <br>
+</form>
+
 
 {% endblock %}

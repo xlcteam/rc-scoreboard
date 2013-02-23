@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from .models import (Team, Event, Group, Competition, Match,
-        TeamResult, MatchSaveForm, CreateForm)
+        TeamResult, MatchSaveForm, NewEventForm)
 from django.contrib.auth import authenticate
 from django.core.context_processors import csrf
 from django.template import RequestContext
@@ -42,9 +42,18 @@ def results_live(request):
 @login_required(login_url='/login/')
 def new_event(request):
     if request.method == 'POST':
-        pass
+        form = NewEventForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            event = Event(name=name)
+            event.save()
+
+            msg = "New event {0} has been created!".format(name)
+            messages.success(request, msg)
+
+            return redirect('index')
     else:
-        form = CreateForm()
+        form = NewEventForm()
         c = {}
         c.update(csrf(request))
         c['form'] = form

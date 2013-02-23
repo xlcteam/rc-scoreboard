@@ -2,7 +2,7 @@ from django.db import models
 from django import forms
 
 
-class CreateForm(forms.Form):
+class NewEventForm(forms.Form):
     name = forms.CharField(max_length=30)
 
 

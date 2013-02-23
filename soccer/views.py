@@ -40,7 +40,7 @@ def results_live(request):
 # create
 @render_to('soccer/event/new.html')
 @login_required(login_url='/login/')
-def new_event_soccer(request):
+def new_event(request):
     if request.method == 'POST':
         pass
     else:

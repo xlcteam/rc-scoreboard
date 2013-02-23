@@ -4,7 +4,7 @@
   {% for event in events %}
     <tr>
       <td> #{{ event.id }} </td>
-      <td style='width: 250px;'> <a href="/soccer/event/{{ event.id }}">{{event.name}}</a> </td>
+      <td style='width: 250px;'> <a href="{% url event event.id %}">{{event.name}}</a> </td>
     </tr>
   {% endfor %}
 </table>

@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from .models import (Team, Event, Group, Competition, Match,
-        TeamResult, MatchSaveForm, NewEventForm)
+        TeamResult, MatchSaveForm, NewEventForm, NewTeamForm)
 from django.contrib.auth import authenticate
 from django.core.context_processors import csrf
 from django.template import RequestContext
@@ -58,23 +58,97 @@ def new_event(request):
         c.update(csrf(request))
         c['form'] = form
         return c
-    
-    return {}
 
 @render_to('soccer/competition/new.html')
 @login_required(login_url='/login/')
-def new_competition_soccer(request):
-    return {}
+def new_competition(request):
+    if 'event' in request.GET:
+        event = get_object_or_404(Event, pk=int(request.GET['event']))
+    if request.method == 'POST':
+        form = NewEventForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            competition = Competition(name=name)
+            competition.save()
+
+            event.competitions.add(competition)
+            event.save()
+
+            msg = "New competition {0} has been created!".format(name)
+            messages.success(request, msg)
+
+            return redirect('/soccer/competition/' + str(competition.id))
+    else:
+        form = NewEventForm()
+        c = {}
+        c.update(csrf(request))
+        c['form'] = form
+        c['event'] = event
+        return c
 
 @render_to('soccer/group/new.html')
 @login_required(login_url='/login/')
-def new_group_soccer(request):
-    return {}
+def new_group(request):
+    if 'competition' in request.GET:
+        competition = get_object_or_404(Competition, pk=int(request.GET['competition']))
+        event = competition.event_set.all()[0]
+    if request.method == 'POST':
+        form = NewEventForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            group = Group(name=name)
+            group.save()
+
+            competition.groups.add(group)
+            competition.save()
+
+            msg = "New group {0} has been created!".format(name)
+            messages.success(request, msg)
+
+            return redirect('/soccer/group/' + str(group.id))
+    else:
+        form = NewEventForm()
+        c = {}
+        c.update(csrf(request))
+        c['form'] = form
+        c['competition'] = competition
+        c['event'] = event
+        return c
 
 @render_to('soccer/team/new.html')
 @login_required(login_url='/login/')
-def new_team_soccer(request):
-    return {}
+def new_team(request):
+    if 'group' in request.GET:
+        group = get_object_or_404(Group, pk=int(request.GET['group']))
+        competition = group.competition_set.all()[0]
+        event = competition.event_set.all()[0]
+    if request.method == 'POST':
+        form = NewTeamForm(request.POST)
+        if form.is_valid():
+            teams = form.cleaned_data['names']
+            teams = teams.replace('\r', "")
+            teams = teams.split('\n')
+            
+            for t in teams:
+                team = Team(name=t)
+                team.save()
+                group.teams.add(team)
+            
+            group.save()
+
+            msg = "Teams for group {0} has been created!".format(group.name)
+            messages.success(request, msg)
+
+            return redirect('/soccer/group/' + str(group.id))
+    else:
+        form = NewTeamForm()
+        c = {}
+        c.update(csrf(request))
+        c['form'] = form
+        c['group'] = group
+        c['competition'] = competition
+        c['event'] = event
+        return c
 
 # event/s
 @render_to('soccer/events.html')

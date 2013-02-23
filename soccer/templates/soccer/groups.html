@@ -1,5 +1,15 @@
-<ul>
-{% for group in groups %}
-  <li><a href="/soccer/group/{{ group.id }}">{{group.name}}</a></li> 
-{% endfor %}
-</ul>
+{% if groups %}
+<table class="eventTable">
+  {% for group in groups %}
+    <tr>
+      <td> #{{ group.id }} </td>
+      <td style='width: 250px;'> <a href="{% url group group.id %}">{{group.name}}</a> </td>
+    </tr>
+  {% endfor %}
+</table> 
+
+<p> <a href="{% url new_group %}?competition={{competition.id}}"><strong>Add another group!</strong></a> </p>
+
+{% else %}
+<p> No groups were found. <a href="{% url new_group %}?competition={{competition.id}}"><strong>Add some!</strong></a> </p>
+{% endif %}

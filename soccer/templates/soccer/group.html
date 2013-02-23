@@ -8,23 +8,29 @@
 
 <h2> Group {{ group.name }} </h2>
 
-<section class="row">
+{% if teams %}
+  <section class="row">
 
-  <section class="col span_4 clr"> 
-    <h3>Results</h3>
-    {% include "soccer/results.html" %}
-  </section>  
-  
-  <section class="col span_5 clr"> 
-    <h3>Matches</h3>
-    {% include "soccer/quicksearch.html" %}
-    {% include "soccer/matches.html" %}
-  </section>  
+    <section class="col span_4 clr"> 
+      <h3>Results</h3>
+      {% include "soccer/results.html" %}
+    </section>  
+    
+    <section class="col span_5 clr"> 
+      <h3>Matches</h3>
+      {% include "soccer/quicksearch.html" %}
+      {% include "soccer/matches.html" %}
+    </section>  
 
-  <section class="col span_3 clr"> 
-    <h3>Teams </h3>
-    {% include "soccer/teams.html" %}
-  </section>  
+    <section class="col span_3 clr"> 
+      <h3>Teams </h3>
+      {% include "soccer/teams.html" %}
+      <p> <a href="{% url new_team %}?group={{group.id}}"><strong>Add another teams!</strong></a> </p>
+    </section>  
 
-</section>
+  </section>
+{% else %}
+  <p> No teams were found. <a href="{% url new_team %}?group={{group.id}}"><strong>Add some!</strong></a> </p>
+{% endif %}
+
 {% endblock %}

@@ -4,7 +4,11 @@
     <a href="/soccer/event/{{event.id}}">{{event.name}}</a> &raquo; 
     <a href="/soccer/competition/{{competition.id}}">{{competition.name}}</a> 
 </div>
-<h2> Groups competing in {{ competition.name }} </h2>
 
-{% include "soccer/groups.html" %}
+<section class="row">
+  <div class="col span_6">
+    <h2> Groups competing in {{ competition.name }} </h2>
+    {% include "soccer/groups.html" %}
+  </div>
+</section>
 {% endblock %}

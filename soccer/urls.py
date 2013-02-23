@@ -12,16 +12,16 @@ urlpatterns = patterns('soccer.views',
     url(r'^event/new/?$', 'new_event', name='new_event'),
 
     url(r'^competitions/?$', 'competitions'),
-    url(r'^competition/(?P<competition_id>\d+)/?$', 'competition'),
-    url(r'^competition/new?$', 'new_competition_soccer', name='new_competition_soccer'),
+    url(r'^competition/(?P<competition_id>\d+)/?$', 'competition', name="competition"),
+    url(r'^competition/new/?$', 'new_competition', name="new_competition"),
 
     url(r'^groups/?$', 'groups'),
-    url(r'^group/(?P<group_id>\d+)/?$', 'group'),
-    url(r'^group/new?$', 'new_group_soccer', name='new_group_soccer'),
+    url(r'^group/(?P<group_id>\d+)/?$', 'group', name="group"),
+    url(r'^group/new/?$', 'new_group', name='new_group'),
 
     url(r'^teams/?$', 'teams'),
-    url(r'^team/(?P<team_id>\d+)/?$', 'team'),
-    url(r'^tean/new?$', 'new_team_soccer', name='new_team_soccer'),
+    url(r'^team/(?P<team_id>\d+)/?$', 'team', name="team"),
+    url(r'^team/new/?$', 'new_team', name='new_team'),
 
     url(r'^matches/generate/?$', 'matches_generate_listing'),
     url(r'^matches/generate/(?P<group_id>\d+)/?$', 'matches_generate'),

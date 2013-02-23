@@ -5,6 +5,9 @@ from django import forms
 class NewEventForm(forms.Form):
     name = forms.CharField(max_length=30)
 
+class NewTeamForm(forms.Form):
+    names = forms.CharField(widget=forms.Textarea(attrs={'size':'20'}))
+
 
 class MatchSaveForm(forms.Form):
     scoreA = forms.IntegerField(label='Score of team A')

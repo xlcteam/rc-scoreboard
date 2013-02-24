@@ -16,12 +16,12 @@
     {{ form.as_p }}
     <input type="hidden" name="next" value="{{ next }}" />
     <p>
-    <label for="event">Event: </label>
-    <select id="event" name="event">
-      {% for event in events %}
-      <option value="{{ event.id }}"> {{ event.name }} </option>
-      {% endfor %}
-    </select>
+      <label for="event">Event: </label>
+      <select id="event" name="event">
+        {% for event in events %}
+        <option value="{{ event.id }}"> {{ event.name }} </option>
+        {% endfor %}
+      </select>
     </p>
     <input type="submit" value="Save" /> <br>
 </form>

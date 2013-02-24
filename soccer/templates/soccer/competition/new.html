@@ -7,10 +7,22 @@
 <p>{{ error }}</p>
 {% endif %}
 
+{% if event %}
 <form action="{% url new_competition %}?event={{event.id}}" method="POST">
+{% else %}
+<form action="{% url new_competition %}" method="POST">
+{% endif %}
     {% csrf_token %}
     {{ form.as_p }}
     <input type="hidden" name="next" value="{{ next }}" />
+    <p>
+    <label for="event">Event: </label>
+    <select id="event" name="event">
+      {% for event in events %}
+      <option value="{{ event.id }}"> {{ event.name }} </option>
+      {% endfor %}
+    </select>
+    </p>
     <input type="submit" value="Save" /> <br>
 </form>
 

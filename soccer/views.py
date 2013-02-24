@@ -62,6 +62,7 @@ def new_event(request):
 @render_to('soccer/competition/new.html')
 @login_required(login_url='/login/')
 def new_competition(request):
+    event = None
     if 'event' in request.GET:
         event = get_object_or_404(Event, pk=int(request.GET['event']))
     if request.method == 'POST':
@@ -83,7 +84,10 @@ def new_competition(request):
         c = {}
         c.update(csrf(request))
         c['form'] = form
-        c['event'] = event
+        if event:
+            c['event'] = event
+        else:
+            c['events'] = Event.objects.all()
         return c
 
 @render_to('soccer/group/new.html')

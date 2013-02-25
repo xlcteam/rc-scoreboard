@@ -88,6 +88,7 @@ def new_competition(request):
             c['event'] = event
         else:
             c['events'] = Event.objects.all()
+            c['clean'] = True
         return c
 
 @render_to('soccer/group/new.html')
@@ -117,10 +118,12 @@ def new_group(request):
         c = {}
         c.update(csrf(request))
         c['form'] = form
+
         if competition:
             c['competition'] = competition
         else:
             c['competition'] = Competition.objects.all()
+            c['clean'] = True
 
         if event:
             c['event'] = event

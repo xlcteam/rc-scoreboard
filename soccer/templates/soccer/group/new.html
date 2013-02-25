@@ -1,10 +1,10 @@
 {% extends "@layout.html" %}
 {% block content %}
 
-{% if competition %}
-<h2>Create new group in {{ event.name }} - {{ competition.name }}</h2>
+{% if clean %}
+<h2>Create new group </h2>
 {% else %}
-<h2>Create new group <h2>
+<h2>Create new group in {{ event.name }} - {{ competition.name }}</h2>
 {% endif %}
 
 {% if error %}
@@ -15,7 +15,7 @@
     {% csrf_token %}
     {{ form.as_p }}
     <input type="hidden" name="next" value="{{ next }}" />
-    {% if not competition %}
+    {% if clean %}
     <p>
       <label for="competition">Competition: </label>
       <select id="competition" name="competition">

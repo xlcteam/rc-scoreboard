@@ -15,6 +15,8 @@
     {% csrf_token %}
     {{ form.as_p }}
     <input type="hidden" name="next" value="{{ next }}" />
+
+    {% if not event %}
     <p>
       <label for="event">Event: </label>
       <select id="event" name="event">
@@ -23,6 +25,8 @@
         {% endfor %}
       </select>
     </p>
+    {% endif %}
+
     <input type="submit" value="Save" /> <br>
 </form>
 

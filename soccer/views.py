@@ -93,6 +93,8 @@ def new_competition(request):
 @render_to('soccer/group/new.html')
 @login_required(login_url='/login/')
 def new_group(request):
+    competition = None
+    event = None
     if 'competition' in request.GET:
         competition = get_object_or_404(Competition, pk=int(request.GET['competition']))
         event = competition.event_set.all()[0]
@@ -115,8 +117,16 @@ def new_group(request):
         c = {}
         c.update(csrf(request))
         c['form'] = form
-        c['competition'] = competition
-        c['event'] = event
+        if competition:
+            c['competition'] = competition
+        else:
+            c['competition'] = Competition.objects.all()
+
+        if event:
+            c['event'] = event
+        else:
+            c['events'] = Event.objects.all()
+ 
         return c
 
 @render_to('soccer/team/new.html')

@@ -3,9 +3,12 @@ scoreBoard
 
 scoreBoard is a simple tool for displaying the score of any game.
 
-
 The [original scoreBoard](https://github.com/xlcteam/scoreBoard-php) has been written in messy PHP.
 
+## About rc-scoreboard
+
+`rc-scoreboard` is a fork of scoreboard which is aiming at providing a fully
+comprehensive solution for the RoboCup competition.
 
 ## Dependencies
 The only real dependency is `python` (preferably cpython2) and `pip` so that you

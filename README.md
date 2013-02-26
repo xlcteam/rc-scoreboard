@@ -1,7 +1,9 @@
 scoreBoard
 ==========
 
-scoreBoard is a simple tool for displaying the score of any game. <br>
+scoreBoard is a simple tool for displaying the score of any game.
+
+
 The [original scoreBoard](https://github.com/xlcteam/scoreBoard-php) has been written in messy PHP.
 
 

@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
 from .models import (Event, Competition, Group, Team, Performance, NewEventForm)
+from django.core.context_processors import csrf
 
 @render_to('dance/index_dance.html')
 def index_dance(request):

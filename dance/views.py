@@ -3,6 +3,7 @@ from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
 from .models import (Event, Competition, Group, Team, Performance, NewEventForm)
 from django.core.context_processors import csrf
+from django.contrib import messages
 
 @render_to('dance/index_dance.html')
 def index_dance(request):

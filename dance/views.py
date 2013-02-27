@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
-from .models import (Event, Competition, Group, Team, Performance)
+from .models import (Event, Competition, Group, Team, Performance, NewEventForm)
 
 @render_to('dance/index_dance.html')
 def index_dance(request):
@@ -26,7 +26,23 @@ def event(request, event_id):
 @render_to('dance/event/new.html')
 @login_required(login_url='/login/')
 def new_event(request):
-    return {}
+    if request.method == 'POST':
+        form = NewEventForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            event = Event(name=name)
+            event.save()
+
+            msg = "New event {0} has been created!".format(name)
+            messages.success(request, msg)
+
+            return redirect('index')
+    else:
+        form = NewEventForm()
+        c = {}
+        c.update(csrf(request))
+        c['form'] = form
+        return c
 
 # competition/s
 @render_to('dance/competition.html')

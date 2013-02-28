@@ -8,6 +8,10 @@ from django.core.context_processors import csrf
 from django.contrib import messages
 
 
+@render_to('404.html')
+def 404_error(request_path):
+    return {'request_path': request_path}
+
 @render_to('scorebrd/index.html')
 def index(request):
     return {'user': request.user}

@@ -9,8 +9,8 @@
   {% endfor %}
 </table>
 
-<p> <a href="{% url new_event %}"><strong>Add another event!</strong></a> </p>
+<p> <a href="{% url dance.views.new_event %}"><strong>Add another event!</strong></a> </p>
 
 {% else %}
-<p> No events were found. <a href="{% url new_event %}"><strong>Add some!</strong></a> </p>
+<p> No events were found. <a href="{% url dance.views.new_event %}"><strong>Add some!</strong></a> </p>
 {% endif %}

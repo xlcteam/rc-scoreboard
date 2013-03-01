@@ -13,7 +13,7 @@
 
     <div class="col span_6">
       {% if events %}
-      <strong style="font-size: 20px;">Upcoming matches: </strong><br />
+      <strong style="font-size: 20px;">Upcoming performances: </strong><br />
       {% include "soccer/quicksearch.html" %}
       {% for event in events %}
         {% for competition in event.competitions.all %}

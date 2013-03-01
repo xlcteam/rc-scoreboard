@@ -78,7 +78,7 @@ def new_competition(request):
             msg = "New competition {0} has been created!".format(name)
             messages.success(request, msg)
 
-            return redirect('/soccer/competition/' + str(competition.id))
+            return redirect('competition', str(competition.id))
     else:
         form = NewEventForm()
         c = {}
@@ -111,7 +111,7 @@ def new_group(request):
             msg = "New group {0} has been created!".format(name)
             messages.success(request, msg)
 
-            return redirect('/soccer/group/' + str(group.id))
+            return redirect('group', str(group.id))
     else:
         form = NewEventForm()
         c = {}
@@ -154,7 +154,7 @@ def new_team(request):
             msg = "Teams for group {0} has been created!".format(group.name)
             messages.success(request, msg)
 
-            return redirect('/soccer/group/' + str(group.id))
+            return redirect('group', str(group.id))
     else:
         form = NewTeamForm()
         c = {}

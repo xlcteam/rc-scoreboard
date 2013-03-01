@@ -1,13 +1,14 @@
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
-from .models import (Event, Competition, Group, Team, Performance, NewEventForm)
+from dance.models import (Event, Competition, Group, Team, Performance, NewEventForm, NewTeamForm)
 from django.core.context_processors import csrf
 from django.contrib import messages
 
 @render_to('dance/index_dance.html')
 def index_dance(request):
-    return {}
+    events = Event.objects.all()
+    return {'user': request.user, 'events': events}
 
 
 
@@ -18,7 +19,7 @@ def events(request):
     events = Event.objects.all()
     return {'events': events}
 
-render_to('dance/event.html')
+@render_to('dance/event.html')
 @login_required(login_url='/login/')
 def event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
@@ -38,7 +39,7 @@ def new_event(request):
             msg = "New event {0} has been created!".format(name)
             messages.success(request, msg)
 
-            return redirect('index')
+            return redirect('index_dance')
     else:
         form = NewEventForm()
         c = {}
@@ -61,6 +62,37 @@ def competitions(request):
     competitions = Competition.objects.all()
     return {'competitions': competitions}
 
+@render_to('dance/competition/new.html')
+@login_required(login_url='/login/')
+def new_competition(request):
+    event = None
+    if 'event' in request.GET:
+        event = get_object_or_404(Event, pk=int(request.GET['event']))
+    if request.method == 'POST':
+        form = NewEventForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            competition = Competition(name=name)
+            competition.save()
+
+            event.competitions.add(competition)
+            event.save()
+
+            msg = "New competition {0} has been created!".format(name)
+            messages.success(request, msg)
+
+            return redirect('dance.views.competition', str(competition.id))
+    else:
+        form = NewEventForm()
+        c = {}
+        c.update(csrf(request))
+        c['form'] = form
+        if event:
+            c['event'] = event
+        else:
+            c['events'] = Event.objects.all()
+        return c
+
 # group/s
 @render_to('dance/group.html')
 @login_required(login_url='/login/')
@@ -78,6 +110,46 @@ def group(request, group_id):
 def groups(request):
     groups = Group.objects.all()
     return {'groups': groups}
+
+@render_to('dance/group/new.html')
+@login_required(login_url='/login/')
+def new_group(request):
+    competition = None
+    event = None
+    if 'competition' in request.GET:
+        competition = get_object_or_404(Competition, pk=int(request.GET['competition']))
+        event = competition.event_set.all()[0]
+    if request.method == 'POST':
+        form = NewEventForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            group = Group(name=name)
+            group.save()
+
+            competition.groups.add(group)
+            competition.save()
+
+            msg = "New group {0} has been created!".format(name)
+            messages.success(request, msg)
+
+            return redirect('group', str(group.id))
+    else:
+        form = NewEventForm()
+        c = {}
+        c.update(csrf(request))
+        c['form'] = form
+
+        if competition:
+            c['competition'] = competition
+        else:
+            c['competitions'] = Competition.objects.all()
+
+        if event:
+            c['event'] = event
+        else:
+            c['events'] = Event.objects.all()
+ 
+        return c
 
 # team/s
 @render_to('dance/teams.html')
@@ -99,6 +171,41 @@ def team(request, team_id):
 
     return {'group': group, 'competition': competition, 'event': event,
             'team': team, 'performances': performances, 'performed': performed}
+
+@render_to('dance/team/new.html')
+@login_required(login_url='/login/')
+def new_team(request):
+    if 'group' in request.GET:
+        group = get_object_or_404(Group, pk=int(request.GET['group']))
+        competition = group.competition_set.all()[0]
+        event = competition.event_set.all()[0]
+    if request.method == 'POST':
+        form = NewTeamForm(request.POST)
+        if form.is_valid():
+            teams = form.cleaned_data['names']
+            teams = teams.replace('\r', "")
+            teams = teams.split('\n')
+            
+            for t in teams:
+                team = Team(name=t)
+                team.save()
+                group.teams.add(team)
+            
+            group.save()
+
+            msg = "Teams for group {0} has been created!".format(group.name)
+            messages.success(request, msg)
+
+            return redirect('group', str(group.id))
+    else:
+        form = NewTeamForm()
+        c = {}
+        c.update(csrf(request))
+        c['form'] = form
+        c['group'] = group
+        c['competition'] = competition
+        c['event'] = event
+        return c
 
 #results
 @render_to('dance/results/live.html')

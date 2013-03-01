@@ -4,6 +4,9 @@ from django import forms
 class NewEventForm(forms.Form):
     name = forms.CharField(max_length=30)
 
+class NewTeamForm(forms.Form):
+    names = forms.CharField(widget=forms.Textarea(attrs={'size':'20'}))
+
 class Team(models.Model):
     name = models.CharField(max_length=200)
 

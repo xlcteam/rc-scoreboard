@@ -9,7 +9,7 @@ from django.contrib import messages
 
 
 @render_to('404.html')
-def 404_error(request):
+def error_404(request):
     return {'request': request}
 
 @render_to('scorebrd/index.html')

@@ -12,9 +12,9 @@
 {% endif %}
 
 {% if event %}
-<form action="{% url new_competition %}?event={{event.id}}" method="POST">
+<form action="{% url dance.views.new_competition %}?event={{event.id}}" method="POST">
 {% else %}
-<form action="{% url new_competition %}" method="POST">
+<form action="{% url dance.views.new_competition %}" method="POST">
 {% endif %}
     {% csrf_token %}
     {{ form.as_p }}

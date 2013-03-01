@@ -9,8 +9,8 @@ from django.contrib import messages
 
 
 @render_to('404.html')
-def 404_error(request_path):
-    return {'request_path': request_path}
+def 404_error(request):
+    return {'request': request}
 
 @render_to('scorebrd/index.html')
 def index(request):
@@ -43,6 +43,7 @@ def my_login(request, url='index'):
                 if user.is_active:
                     # Redirect to a success page.
                     login(request, user)
+                    messages.success(request, 'You have been successfuly logged in.')
                     return redirect(url)
             else:
                 error = u'Invalid login'

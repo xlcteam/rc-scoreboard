@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
-from dance.models import (Event, Competition, Group, Team, Performance, NewEventForm, NewTeamForm)
+from models import (Event, Competition, Group, Team, Performance, NewEventForm, NewTeamForm)
 from django.core.context_processors import csrf
 from django.contrib import messages
 
@@ -132,7 +132,7 @@ def new_group(request):
             msg = "New group {0} has been created!".format(name)
             messages.success(request, msg)
 
-            return redirect('group', str(group.id))
+            return redirect('dance.views.group', str(group.id))
     else:
         form = NewEventForm()
         c = {}
@@ -196,7 +196,7 @@ def new_team(request):
             msg = "Teams for group {0} has been created!".format(group.name)
             messages.success(request, msg)
 
-            return redirect('group', str(group.id))
+            return redirect('dance.views.group', str(group.id))
     else:
         form = NewTeamForm()
         c = {}

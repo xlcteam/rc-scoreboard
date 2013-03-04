@@ -323,6 +323,36 @@ def match_save(request, match_id):
                 match.scoreB = scoreB
                 match.playing = 'D'
                 match.save()
+
+                rA = get_object_or_404(TeamResult, pk=match.teamA.id)
+                rB = get_object_or_404(TeamResult, pk=match.teamB.id)
+
+                if match.scoreA > match.scoreB:
+                    rA.wins += 1
+                    rA.points += 3
+                    rB.loses += 1
+                elif match.scoreB > match.scoreA:
+                    rB.wins += 1
+                    rB.points += 3
+                    rA.loses += 1
+                else:
+                    rA.draws += 1
+                    rB.draws += 1
+                    rA.points += 1
+                    rB.points += 1
+
+                rA.matches_played += 1
+                rB.matches_played += 1
+
+                rA.goal_shot += int(match.scoreA)
+                rB.goal_shot += int(match.scoreB)
+                
+                rA.goal_diff += int(match.scoreA) - int(match.scoreB)
+                rB.goal_diff += int(match.scoreB) - int(match.scoreA)
+
+                rA.save()
+                rB.save()
+
                 return True
         return errorHandle('Invalid login', request, scoreA, scoreB, match_id)
 

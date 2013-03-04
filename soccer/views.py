@@ -297,8 +297,6 @@ def match_play(request, match_id):
 @render_to('soccer/matches/save.html')
 @login_required(login_url='/login/')
 def match_save(request, match_id):
-
-    #TODO: Django messages
     
     def errorHandle(error, request, scoreA, scoreB, match_id):
         form = MatchSaveForm(request.POST, initial={'scoreA': scoreA, 'scoreB': scoreB})
@@ -352,6 +350,9 @@ def match_save(request, match_id):
 
                 rA.save()
                 rB.save()
+
+                messages.success(request, "Match between {0} and {1} has been successfully saved"\
+                                                .format(match.teamA.name, match.teamB.name))
 
                 return True
         return errorHandle('Invalid login', request, scoreA, scoreB, match_id)

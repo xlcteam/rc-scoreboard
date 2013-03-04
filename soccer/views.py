@@ -203,7 +203,7 @@ def group(request, group_id):
     competition = group.competition_set.all()[0]
     event = competition.event_set.all()[0]
     team_results = group.results.all()\
-                    .order_by('matches_played').reverse()
+                    .order_by('points').reverse()
     matches = group.matches.all().order_by('playing')
     return {'group': group, 'teams': teams,
             'competition': competition, 'event': event, 

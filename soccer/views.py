@@ -436,7 +436,7 @@ def results_generate(request, group_id):
     event = competition.event_set.all()[0]
 
     team_results = group.results.all()\
-                    .order_by('matches_played').reverse()
+                    .order_by('points').reverse()
 
     return {'event': event, 'competition': competition,
             'group': group, 'team_results': team_results}

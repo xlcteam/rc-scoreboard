@@ -4,12 +4,25 @@ from .models import (Team, Event, Group, Competition, Match,
         TeamResult, MatchSaveForm, NewEventForm, NewTeamForm)
 from django.contrib.auth import authenticate
 from django.core.context_processors import csrf
-from django.template import RequestContext
+from django.template import Context, RequestContext
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
+from django.template.loader import get_template
+import xhtml2pdf.pisa as pisa
+import cStringIO as StringIO
+
+def render_to_pdf(template_src, context_dict):
+    template = get_template(template_src)
+    context = Context(context_dict)
+    html  = template.render(context)
+    result = StringIO.StringIO()
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return http.HttpResponse(result.getvalue(), mimetype='application/pdf')
+    return http.HttpResponse('We had some errors<pre>%s</pre>' % (html)
 
 # code from
 # http://code.activestate.com/recipes/65200-round-robin-pairings-generator/

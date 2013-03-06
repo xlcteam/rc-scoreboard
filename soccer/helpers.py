@@ -10,7 +10,7 @@ def render_to_pdf(template_src, context_dict):
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
     if not pdf.err:
         return http.HttpResponse(result.getvalue(), mimetype='application/pdf')
-    return http.HttpResponse('We had some errors<pre>%s</pre>' % (html)
+    return http.HttpResponse('We had some errors<pre>%s</pre>' % (html))
 
 # code from
 # http://code.activestate.com/recipes/65200-round-robin-pairings-generator/

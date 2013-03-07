@@ -2,6 +2,7 @@ from django.template.loader import get_template
 from django.template import Context
 import xhtml2pdf.pisa as pisa
 import cStringIO as StringIO
+from django.http import HttpResponse
 
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
@@ -10,8 +11,8 @@ def render_to_pdf(template_src, context_dict):
     result = StringIO.StringIO()
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
     if not pdf.err:
-        return http.HttpResponse(result.getvalue(), mimetype='application/pdf')
-    return http.HttpResponse('We had some errors<pre>%s</pre>' % (html))
+        return HttpResponse(result.getvalue(), mimetype='application/pdf')
+    return HttpResponse('We had some errors<pre>%s</pre>' % (html))
 
 # code from
 # http://code.activestate.com/recipes/65200-round-robin-pairings-generator/

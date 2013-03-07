@@ -378,7 +378,6 @@ def results_match_view(request, match_id):
     return {'group': group, 'match': match,
             'competition': competition, 'event': event}
 
-@render_to('soccer/results/generate.html')
 @login_required(login_url='/login/')
 def results_group_pdf(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
@@ -388,8 +387,9 @@ def results_group_pdf(request, group_id):
     team_results = group.results.all()\
                     .order_by('matches_played').reverse()
 
-    return {'event': event, 'competition': competition,
-            'group': group, 'team_results': team_results}
+    return render_to_pdf('soccer/results/generate/group.html', 
+                            {'event': event, 'competition': competition,
+                             'group': group, 'team_results': team_results})
 
 
 

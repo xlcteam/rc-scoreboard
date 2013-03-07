@@ -380,7 +380,7 @@ def results_match_view(request, match_id):
 
 @render_to('soccer/results/generate.html')
 @login_required(login_url='/login/')
-def results_generate(request, group_id):
+def results_group_pdf(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     competition = group.competition_set.all()[0]
     event = competition.event_set.all()[0]

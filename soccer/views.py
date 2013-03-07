@@ -431,3 +431,11 @@ def results_competition_pdf(request, competition_id):
     return render_to_pdf('soccer/results/generate/competition.html', 
                             {'event': event, 'competition': competition,
                              'groups': groups})
+
+@login_required(login_url='/login/')
+def results_event_pdf(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    competitions = event.competitions.all()
+
+    return render_to_pdf('soccer/results/generate/event.html', 
+                            {'event': event, 'competitions': competitions})

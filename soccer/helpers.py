@@ -1,4 +1,5 @@
 from django.template.loader import get_template
+from django.template import Context
 import xhtml2pdf.pisa as pisa
 import cStringIO as StringIO
 

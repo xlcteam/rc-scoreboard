@@ -422,9 +422,12 @@ def results_group_pdf(request, group_id):
                             {'event': event, 'competition': competition,
                              'group': group, 'team_results': team_results})
 
+@login_required(login_url='/login/')
+def results_competition_pdf(request, competition_id):
+    competition = get_object_or_404(Competition, pk=competition_id)
+    groups = competition.groups.all()
+    event = competition.event_set.all()[0]
 
-
-
-
-
-
+    return render_to_pdf('soccer/results/generate/competition.html', 
+                            {'event': event, 'competition': competition,
+                             'groups': groups})

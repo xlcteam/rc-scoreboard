@@ -71,6 +71,9 @@ class Group(models.Model):
     def __unicode__(self):
         return self.name
 
+    def sorted_results(self):
+        return self.results.all().order_by('points').reverse()
+
 
 class Competition(models.Model):
     name = models.CharField(max_length=200)

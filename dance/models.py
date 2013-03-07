@@ -49,5 +49,8 @@ class Performance(models.Model):
             default='N')
     referee = models.ForeignKey('auth.User')
 
+    class Meta:
+        verbose_name_plural = 'performances'
+
     def __unicode__(self):
         return "%s" % (self.team.name,)

@@ -184,7 +184,7 @@ def group(request, group_id):
     competition = group.competition_set.all()[0]
     event = competition.event_set.all()[0]
     team_results = group.results.all()\
-                    .order_by('matches_played').reverse()
+                    .order_by('points').reverse()
     matches = group.matches.all().order_by('playing')
     return {'group': group, 'teams': teams,
             'competition': competition, 'event': event, 
@@ -278,8 +278,6 @@ def match_play(request, match_id):
 @render_to('soccer/matches/save.html')
 @login_required(login_url='/login/')
 def match_save(request, match_id):
-
-    #TODO: Django messages
     
     def errorHandle(error, request, scoreA, scoreB, match_id):
         form = MatchSaveForm(request.POST, initial={'scoreA': scoreA, 'scoreB': scoreB})
@@ -304,6 +302,39 @@ def match_save(request, match_id):
                 match.scoreB = scoreB
                 match.playing = 'D'
                 match.save()
+
+                rA = get_object_or_404(TeamResult, pk=match.teamA.id)
+                rB = get_object_or_404(TeamResult, pk=match.teamB.id)
+
+                if match.scoreA > match.scoreB:
+                    rA.wins += 1
+                    rA.points += 3
+                    rB.loses += 1
+                elif match.scoreB > match.scoreA:
+                    rB.wins += 1
+                    rB.points += 3
+                    rA.loses += 1
+                else:
+                    rA.draws += 1
+                    rB.draws += 1
+                    rA.points += 1
+                    rB.points += 1
+
+                rA.matches_played += 1
+                rB.matches_played += 1
+
+                rA.goal_shot += int(match.scoreA)
+                rB.goal_shot += int(match.scoreB)
+                
+                rA.goal_diff += int(match.scoreA) - int(match.scoreB)
+                rB.goal_diff += int(match.scoreB) - int(match.scoreA)
+
+                rA.save()
+                rB.save()
+
+                messages.success(request, "Match between {0} and {1} has been successfully saved"\
+                                                .format(match.teamA.name, match.teamB.name))
+
                 return True
         return errorHandle('Invalid login', request, scoreA, scoreB, match_id)
 
@@ -385,7 +416,7 @@ def results_group_pdf(request, group_id):
     event = competition.event_set.all()[0]
 
     team_results = group.results.all()\
-                    .order_by('matches_played').reverse()
+                    .order_by('points').reverse()
 
     return render_to_pdf('soccer/results/generate/group.html', 
                             {'event': event, 'competition': competition,

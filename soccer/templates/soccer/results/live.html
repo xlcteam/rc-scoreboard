@@ -50,7 +50,7 @@
                       <th>L</th>
                       <th>Pts.</th>
                     </tr>
-                    {% for result in group.results.all %}
+                    {% for result in group.sorted_results %}
                       <tr>
                         <td>{{ forloop.counter }}.</td>
                         <td class="name">{{ result.team.name }}</td>
@@ -96,7 +96,7 @@
                     <th>L</th>
                     <th>Pts.</th>
                   </tr>
-                  {% for result in group.results.all %}
+                  {% for result in group.sorted_results %}
                     <tr>
                       <td>{{ forloop.counter }}.</td>
                       <td class="name">{{ result.team.name }}</td>
@@ -140,7 +140,7 @@
                   <th>L</th>
                   <th>Pts.</th>
                 </tr>
-                {% for result in group.results.all %}
+                {% for result in group.sorted_results %}
                   <tr>
                     <td>{{ forloop.counter }}.</td>
                     <td class="name">{{ result.team.name }}</td>
@@ -186,7 +186,7 @@
                         <th>L</th>
                         <th>Pts.</th>
                       </tr>
-                      {% for result in group.results.all %}
+                      {% for result in group.sorted_results %}
                         <tr>
                           <td>{{ forloop.counter }}.</td>
                           <td class="name">{{ result.team.name }}</td>

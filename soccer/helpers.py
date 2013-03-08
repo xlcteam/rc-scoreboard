@@ -11,7 +11,16 @@ def render_to_pdf(template_src, context_dict):
     result = StringIO.StringIO()
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
     if not pdf.err:
-        return HttpResponse(result.getvalue(), mimetype='application/pdf')
+        response = HttpResponse(result.getvalue(), mimetype='application/pdf')
+        if "group" in context_dict:
+            name = context_dict["group"].name
+        elif "groups" in context_dict and "competition" in context_dict:
+            name = context_dict["competition"].name
+        elif "competitions" in context_dict:
+            name = context_dict["event"].name
+
+        response['Content-Disposition'] = 'attachment; filename="' + name + '.pdf"'
+        return response
     return HttpResponse('We had some errors<pre>%s</pre>' % (html))
 
 # code from

@@ -11,8 +11,5 @@ gevent-socketio==0.2.1
 gevent-websocket==0.3.6
 greenlet==0.4.0
 html5lib==0.95
-pyPdf==1.13
-reportlab==2.6
 sphinx-me==0.1.2
 wsgiref==0.1.2
-xhtml2pdf==0.0.4

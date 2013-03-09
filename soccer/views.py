@@ -1,5 +1,6 @@
 # Create your views here.
-from django.shortcuts import render_to_response, get_object_or_404, redirect
+from django.shortcuts import (render_to_response, get_object_or_404, redirect,
+            render)
 from .models import (Team, Event, Group, Competition, Match,
         TeamResult, MatchSaveForm, NewEventForm, NewTeamForm)
 from django.contrib.auth import authenticate
@@ -419,7 +420,7 @@ def results_group_pdf(request, group_id):
     team_results = group.results.all()\
                     .order_by('points').reverse()
 
-    return render_to_pdf('soccer/results/generate/group.html', 
+    return render_to_pdf(request, 'soccer/results/generate/group.html', 
                             {'event': event, 'competition': competition,
                              'group': group, 'team_results': team_results})
 

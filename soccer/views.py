@@ -332,8 +332,9 @@ def match_save(request, match_id):
                 rA.save()
                 rB.save()
 
-                messages.success(request, "Match between {0} and {1} has been successfully saved"\
-                                                .format(match.teamA.name, match.teamB.name))
+                messages.success(request, "Match between {0} and {1}"
+                                            " has been successfully saved"\
+                                        .format(match.teamA.name, match.teamB.name))
 
                 return True
         return errorHandle('Invalid login', request, scoreA, scoreB, match_id)

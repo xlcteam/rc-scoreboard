@@ -1,27 +1,7 @@
-from django.template.loader import get_template
-from django.template import Context
-import xhtml2pdf.pisa as pisa
-import cStringIO as StringIO
-from django.http import HttpResponse
+from wkhtmltopdf.views import PDFTemplateResponse 
 
-def render_to_pdf(template_src, context_dict):
-    template = get_template(template_src)
-    context = Context(context_dict)
-    html  = template.render(context)
-    result = StringIO.StringIO()
-    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
-    if not pdf.err:
-        response = HttpResponse(result.getvalue(), mimetype='application/pdf')
-        if "group" in context_dict:
-            name = context_dict["group"].name
-        elif "groups" in context_dict and "competition" in context_dict:
-            name = context_dict["competition"].name
-        elif "competitions" in context_dict:
-            name = context_dict["event"].name
-
-        response['Content-Disposition'] = 'attachment; filename="' + name + '.pdf"'
-        return response
-    return HttpResponse('We had some errors<pre>%s</pre>' % (html))
+def render_to_pdf(request, template_name, context_dict):
+    return PDFTemplateResponse(request, template_name, context_dict)
 
 # code from
 # http://code.activestate.com/recipes/65200-round-robin-pairings-generator/

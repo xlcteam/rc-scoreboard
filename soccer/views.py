@@ -419,10 +419,12 @@ def results_group_pdf(request, group_id):
 
     team_results = group.results.all()\
                     .order_by('points').reverse()
+    matches = group.matches.filter(playing='D')
 
     return render_to_pdf(request, 'soccer/results/generate/group.html', 
                             {'event': event, 'competition': competition,
-                             'group': group, 'team_results': team_results})
+                             'group': group, 'team_results': team_results,
+                             'matches': matches})
 
 @login_required(login_url='/login/')
 def results_competition_pdf(request, competition_id):

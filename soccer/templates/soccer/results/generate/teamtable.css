@@ -57,3 +57,8 @@ h1, h2, h3 {
   text-align: center;
 }
 
+.matchTable {
+  padding-top: 20px;
+  margin: 0 auto;
+}
+

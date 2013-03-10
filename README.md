@@ -20,6 +20,8 @@ can install other dependencies (see requirements.txt).
 * Then install all the dependencies by running `$ pip install -r requirements.txt`
 * Then, to get all we need `$ python manage.py collectstatic`
 * Now we shall sync the DB `$ python manage.py syncdb`
+* And in case we want to export results to PDF files, `wkhtmltopdf` has to be
+  installed.
 
 *Note*: This application is still in the alpha version and not meant for actual use. Please [contact us](http://xlc-team.info/contact) if you plan on using it.
 

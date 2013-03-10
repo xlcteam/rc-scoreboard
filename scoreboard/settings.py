@@ -175,7 +175,7 @@ INSTALLED_APPS = (
 GRAPPELLI_ADMIN_TITLE = 'scoreBoard Administration'
 APPEND_SLASHES = True
 WKHTMLTOPDF_CMD_OPTIONS = { 
-    'user-style-sheet': "file://{0}/scorebrd/static/css/screen.css".format(DIR)
+    'footer-html': "file://{0}/../scorebrd/templates/footer.html".format(DIR)
 }
 
 # A sample logging configuration. The only tangible logging

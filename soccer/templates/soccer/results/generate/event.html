@@ -17,9 +17,9 @@
           <h3>{{ group.name }}</h3>
           {% include "soccer/results.html" with team_results=group.sorted_results %}
 
-          {% if matches %}
+          {% if group.sorted_matches %}
             <table class='matchTable'>
-              {% for match in matches %}
+              {% for match in group.sorted_matches %}
                 <tr>
                   <td class='left'>
                       {{ match.teamA.name }}

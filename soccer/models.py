@@ -74,6 +74,10 @@ class Group(models.Model):
     def sorted_results(self):
         return self.results.all().order_by('points').reverse()
 
+    def sorted_matches(self):
+        return self.matches.filter(playing='D').reverse()
+
+
 
 class Competition(models.Model):
     name = models.CharField(max_length=200)

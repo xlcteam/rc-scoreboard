@@ -166,6 +166,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'wkhtmltopdf',
     'south',
+    'django_socketio',
     'soccer',
     'dance',
     'rescue',

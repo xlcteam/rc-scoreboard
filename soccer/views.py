@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import (render_to_response, get_object_or_404, redirect,
             render)
-from .models import (Team, Event, Group, Competition, Match,
+from soccer.models import (Team, Event, Group, Competition, Match,
         TeamResult, MatchSaveForm, NewEventForm, NewTeamForm)
 from django.contrib.auth import authenticate
 from django.core.context_processors import csrf
@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
-from .helpers import *
+from soccer.helpers import *
 
 @render_to('soccer/results_live.html')
 def results_live(request):

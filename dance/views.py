@@ -247,5 +247,6 @@ def performances_generate_listing(request):
         performance = Performance(team=team, referee=request.user)
         performance.save()
         group.performances.add(performance)
-
+    
+    performances = group.performances.all()
     return {'performances': performances}

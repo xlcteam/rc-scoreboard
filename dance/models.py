@@ -14,9 +14,27 @@ class Team(models.Model):
         return self.name
 
 
+class Performance(models.Model):
+    team = models.ForeignKey(Team, related_name='homelanders')
+    PLAYING_CHOICES = (
+        ('N', 'Not performed yet'),
+        ('P', 'Being performed at the moment'),
+        ('D', 'Already performed (Done)'),
+    )
+    playing = models.CharField(max_length=1, choices=PLAYING_CHOICES,
+            default='N')
+    referee = models.ForeignKey('auth.User')
+
+    class Meta:
+        verbose_name_plural = 'performances'
+
+    def __unicode__(self):
+        return "%s" % (self.team.name,)
+
 class Group(models.Model):
     name = models.CharField(max_length=200)
     teams = models.ManyToManyField(Team)
+    performances = models.ManyToManyField(Performance)
 
     def __unicode__(self):
         return self.name
@@ -37,20 +55,3 @@ class Event(models.Model):
     def __unicode__(self):
         return self.name
 
-
-class Performance(models.Model):
-    team = models.ForeignKey(Team, related_name='homelanders')
-    PLAYING_CHOICES = (
-        ('N', 'Not performed yet'),
-        ('P', 'Being performed at the moment'),
-        ('D', 'Already performed (Done)'),
-    )
-    playing = models.CharField(max_length=1, choices=PLAYING_CHOICES,
-            default='N')
-    referee = models.ForeignKey('auth.User')
-
-    class Meta:
-        verbose_name_plural = 'performances'
-
-    def __unicode__(self):
-        return "%s" % (self.team.name,)

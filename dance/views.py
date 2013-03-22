@@ -230,3 +230,24 @@ def results_live(request):
 
     else:
         return {'events': Event.objects.all()}
+
+@render_to('dance/performances/generate.html')
+@login_required(login_url='/login/')
+def performances_generate(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    competition = group.competition_set.all()[0]
+
+    return {'group': group, 'competition': competition}
+
+@render_to('dance/performances/generate_listing.html')
+def performances_generate_listing(request):
+    group = get_object_or_404(Group, pk=request.POST['group_id'])
+    teams = list(group.teams.all())
+
+    for team in teams:
+        performance = Performance(team=team, referee=request.user)
+        performance.save()
+        group.performances.add(performance)
+    
+    performances = group.performances.all()
+    return {'performances': performances}

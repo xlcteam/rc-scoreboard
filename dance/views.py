@@ -102,9 +102,11 @@ def group(request, group_id):
     teams = group.teams.all()
     competition = group.competition_set.all()[0]
     event = competition.event_set.all()[0]
+    performances = group.performances.all()
 
     return {'group': group, 'teams': teams,
-            'competition': competition, 'event': event}
+            'competition': competition, 'event': event,
+            'performances': performances}
 
 @render_to('dance/groups.html')
 @login_required(login_url='/login/')

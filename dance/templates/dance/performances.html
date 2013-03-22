@@ -8,14 +8,14 @@
                         {{ performance.team.name }}
                 </td>
                 <td align="center">
-                  <a class='smaller button orange' href="/dance/performance/play/{{ match.id }}"> Perform ! </a>
+                  <a class='smaller button orange' href="/dance/performance/play/{{ performance.id }}"> Start ! </a>
                 </td>
             {% elif not_started_only == False %}
                 <td class='left'>
                     {{ performance.team.name }}
                 </td>
                 <td align="center">
-                  <a class="smaller button" href="/dance/results/performance/{{ match.id }}"> See more info!</a>
+                  <a class="smaller button" href="/dance/results/performance/{{ performance.id }}"> See more info!</a>
                 </td>
            {% endif %}
 

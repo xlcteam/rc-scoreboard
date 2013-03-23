@@ -10,10 +10,16 @@
 
 <form action="{% url new_team %}?group={{group.id}}" method="POST">
     {% csrf_token %}
+    <textarea class='text'></textarea>
     {{ form.as_p }}
     <input type="hidden" name="next" value="{{ next }}" />
     <input type="submit" value="Save" /> <br>
 </form>
 
+<script>
+  $('textarea.text').tokenField('', {
+    'regex' : '/^[A-Za-z0-9]+$/i'
+  });
+</script>
 
 {% endblock %}

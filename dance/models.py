@@ -31,10 +31,21 @@ class Performance(models.Model):
     def __unicode__(self):
         return "%s" % (self.team.name,)
 
+class TeamResult(models.Model):
+    team = models.ForeignKey(Team)
+
+    matches_played = models.IntegerField(default=0)
+    points = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return "{0} - {1} - {2} -> {3}".format(self.wins, self.draws,
+                self.loses, self.team)
+
 class Group(models.Model):
     name = models.CharField(max_length=200)
     teams = models.ManyToManyField(Team)
     performances = models.ManyToManyField(Performance)
+    results = models.ManyToManyField(TeamResult)
 
     def __unicode__(self):
         return self.name

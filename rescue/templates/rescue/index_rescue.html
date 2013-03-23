@@ -7,14 +7,14 @@
 {% if user.is_authenticated %}
 <section class="row">
     <div class="col span_6">
-        <h2>Dance events registered with scoreBoard</h2>
-        {% include "dance/events.html" %}
+        <h2>Rescue events registered with scoreBoard</h2>
+        {% include "rescue/events.html" %}
     </div>
 
     <div class="col span_6">
       {% if events %}
       <strong style="font-size: 20px;">Upcoming performances: </strong><br />
-      {% include "dance/quicksearch.html" %}
+      {% include "rescue/quicksearch.html" %}
       {% for event in events %}
         {% for competition in event.competitions.all %}
             {% for group in competition.groups.all %}
@@ -22,7 +22,7 @@
                   <strong>{{ event.name }} : </strong>{{ competition.name }}
                 </div>
                 <div class="groupMatches">
-                    {% include "dance/performances.html" with performances=group.performances.all not_started_only=True %}
+                    {% include "rescue/performances.html" with performances=group.performances.all not_started_only=True %}
                 </div>
             {% endfor %}
         {% endfor %}
@@ -36,7 +36,7 @@
 
 <p>Since you are not logged in may I suggest you look at <a href="">live scores</a>?</p>
 
-<p>Or you can still <a href="{% url login %}/?next={% url dance.views.index_dance %}">log in</a>.</p>
+<p>Or you can still <a href="{% url login %}/?next={% url rescue.views.index_dance %}">log in</a>.</p>
 
 {% endif %}
 

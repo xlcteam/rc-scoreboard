@@ -1,0 +1,16 @@
+
+{% if events %}
+<table class="eventTable">
+  {% for event in events %}
+    <tr>
+      <td> #{{ event.id }} </td>
+      <td style='width: 250px;'> <a href="{% url rescue.views.event event.id %}">{{event.name}}</a> </td>
+    </tr>
+  {% endfor %}
+</table>
+
+<p> <a href="{% url rescue.views.new_event %}"><strong>Add another event!</strong></a> </p>
+
+{% else %}
+<p> No events were found. <a href="{% url rescue.views.new_event %}"><strong>Add some!</strong></a> </p>
+{% endif %}

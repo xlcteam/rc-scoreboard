@@ -1,0 +1,28 @@
+{% load substract %}
+{% if team_results %}
+<table class='teamTable'>
+    <tr>
+        <th> <abbr title="Position in the table"> Pos. </abbr></th>
+        <th></th>
+        <th> <abbr title="Performances performed"> P </abbr> </th>
+    </tr>
+    {% for result in team_results %}
+
+        {% if forloop.counter0|divisibleby:"2" %}
+            <tr class="even">
+        {% else %}
+            <tr class="odd">
+        {% endif %}
+            <td> {{ forloop.counter }}. </td>
+            <td class='name'> {{ result.team.name }} </td>
+            <td> {{ result.matches_played }} </td>
+            <td class="points"> {{ result.points }} </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+  Unfortunately, no performances have been performed yet.
+{% endif %}
+
+

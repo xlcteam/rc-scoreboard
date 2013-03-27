@@ -1,0 +1,34 @@
+{% if performances %}
+
+<table class='matchTable'>
+        {% for performance in performances %}
+          <tr>
+            {% if performance.playing == 'N' %}
+                <td class='left'>
+                        {{ performance.team.name }}
+                </td>
+                <td align="center">
+                  <a class='smaller button orange' href="/rescue/performance/play/{{ performance.id }}"> Start ! </a>
+                </td>
+            {% elif not_started_only == False %}
+                <td class='left'>
+                    {{ performance.team.name }}
+                </td>
+                <td align="center">
+                  <a class="smaller button" href="/rescue/results/performance/{{ performance.id }}"> See more info!</a>
+                </td>
+           {% endif %}
+
+        </tr>
+      {% endfor %}
+</table>
+
+{% else %}
+      Unfortunately, no performances were found.
+        {% if group %}
+        <a href="/rescue/performances/generate/{{ group.id }}"> Generate some!</a>
+        {% else %}
+        <a href="/rescue/performances/generate/"> Generate some!</a>
+        {% endif %}
+
+{% endif %}

@@ -1,0 +1,6 @@
+
+<ul>
+{% for team in teams %}
+  <li><a href="/rescue/team/{{ team.id }}">{{team.name}}</a></li>
+{% endfor %}
+</ul>

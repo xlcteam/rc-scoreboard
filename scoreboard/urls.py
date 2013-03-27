@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 
     url(r'^dance/', include('dance.urls')),
     url(r'^soccer/', include('soccer.urls')),
+    url(r'^rescue/', include('rescue.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('django_socketio.urls')),

@@ -247,7 +247,7 @@ def performances_generate_listing(request):
     teams = list(group.teams.all())
 
     for team in teams:
-        performance = Performance(team=team) #referee=request.user)
+        performance = Performance(team=team, referee=request.user)
         performance.save()
         group.performances.add(performance)
     

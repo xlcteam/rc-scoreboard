@@ -23,7 +23,7 @@ class Performance(models.Model):
     )
     playing = models.CharField(max_length=1, choices=PLAYING_CHOICES,
             default='N')
-    #referee = models.ForeignKey('auth.User')
+    referee = models.ForeignKey('auth.User')
 
     class Meta:
         verbose_name_plural = 'performances'

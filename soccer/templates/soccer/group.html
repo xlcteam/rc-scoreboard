@@ -14,6 +14,9 @@
     <section class="col span_4 clr"> 
       <h3>Results</h3>
       {% include "soccer/results.html" %}
+      {% if team_results %}
+        <a class='button red' style="margin-top: 10px;" href="/soccer/results/group/{{ group.id }}.pdf">Generate PDF!</a>
+      {% endif %}
     </section>  
     
     <section class="col span_5 clr"> 
@@ -25,12 +28,12 @@
     <section class="col span_3 clr"> 
       <h3>Teams </h3>
       {% include "soccer/teams.html" %}
-      <p> <a href="{% url new_team %}?group={{group.id}}"><strong>Add another teams!</strong></a> </p>
+      <p> <a href="{% url soccer.views.new_team %}?group={{group.id}}"><strong>Add another teams!</strong></a> </p>
     </section>  
 
   </section>
 {% else %}
-  <p> No teams were found. <a href="{% url new_team %}?group={{group.id}}"><strong>Add some!</strong></a> </p>
+  <p> No teams were found. <a href="{% url soccer.views.new_team %}?group={{group.id}}"><strong>Add some!</strong></a> </p>
 {% endif %}
 
 {% endblock %}

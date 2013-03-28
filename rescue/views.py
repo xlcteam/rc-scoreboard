@@ -251,6 +251,10 @@ def performances_generate_listing(request):
         performance.save()
         group.performances.add(performance)
     
+    group.actual_round = 1
+
+    group.save()
+
     performances = group.performances.all()
     return {'performances': performances}
 

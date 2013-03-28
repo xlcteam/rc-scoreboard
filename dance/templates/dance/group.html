@@ -14,6 +14,9 @@
     <section class="col span_4 clr"> 
       <h3>Results</h3>
       {% include "dance/results.html" %}
+      {% if team_results %}
+        <a class='button red' style="margin-top: 10px;" href="dance.views.results_group_pdf {{ group.id }}">Generate PDF!</a>
+      {% endif %} 
     </section>  
     
     <section class="col span_5 clr"> 

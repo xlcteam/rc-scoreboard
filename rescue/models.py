@@ -50,6 +50,8 @@ class Group(models.Model):
     performances = models.ManyToManyField(Performance)
     results = models.ManyToManyField(TeamResult)
 
+    actual_round = models.IntegerField(default=0) # NOTE: 0 == performances not generated
+
     def __unicode__(self):
         return self.name
 

@@ -3,13 +3,13 @@
   {% for competition in competitions %}
     <tr>
       <td> #{{ competition.id }} </td>
-      <td style='width: 250px;'> <a href="{% url competition competition.id %}">{{competition.name}}</a> </td>
+      <td style='width: 250px;'> <a href="{% url soccer.views.competition competition.id %}">{{competition.name}}</a> </td>
     </tr>
   {% endfor %}
 </table>
 
-<p> <a href="{% url new_competition %}?event={{event.id}}"><strong>Add another competition!</strong></a> </p>
+<p> <a href="{% url soccer.views.new_competition %}?event={{event.id}}"><strong>Add another competition!</strong></a> </p>
 
 {% else %}
-<p> No competitions were found. <a href="{% url new_competition %}?event={{event.id}}"><strong>Add some!</strong></a> </p>
+<p> No competitions were found. <a href="{% url soccer.views.new_competition %}?event={{event.id}}"><strong>Add some!</strong></a> </p>
 {% endif %}

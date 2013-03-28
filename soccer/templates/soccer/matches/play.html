@@ -25,8 +25,8 @@
 
     <script>
         var ST = new scoreTracker({
-          'update_url':  "{% url match_play match_id %}",
-          'back_url': "{% url index %}"
+          'update_url':  "{% url soccer.views.match_play match_id %}",
+          'back_url': "{% url soccer.views.index %}"
         });
 
         $(document).ready(function() {
@@ -175,7 +175,7 @@
 		<div id="dialogMain">
 			<div id="dialog" title="Results" style="font-size:50.5%;">
 				<div style="margin: 0 auto;height: 70px; font-size:130.5%;">
-          <form action="{% url match_save match_id %}" method="POST" id="dialogForm">
+          <form action="{% url soccer.views.match_save match_id %}" method="POST" id="dialogForm">
               {% csrf_token %}
                     <table style="width: 270px; margin: 0 auto;">
                       <tr>

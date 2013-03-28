@@ -3,13 +3,13 @@
   {% for group in groups %}
     <tr>
       <td> #{{ group.id }} </td>
-      <td style='width: 250px;'> <a href="{% url group group.id %}">{{group.name}}</a> </td>
+      <td style='width: 250px;'> <a href="{% url soccer.views.group group.id %}">{{group.name}}</a> </td>
     </tr>
   {% endfor %}
 </table> 
 
-<p> <a href="{% url new_group %}?competition={{competition.id}}"><strong>Add another group!</strong></a> </p>
+<p> <a href="{% url soccer.views.new_group %}?competition={{competition.id}}"><strong>Add another group!</strong></a> </p>
 
 {% else %}
-<p> No groups were found. <a href="{% url new_group %}?competition={{competition.id}}"><strong>Add some!</strong></a> </p>
+<p> No groups were found. <a href="{% url soccer.views.new_group %}?competition={{competition.id}}"><strong>Add some!</strong></a> </p>
 {% endif %}

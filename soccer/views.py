@@ -188,9 +188,8 @@ def team(request, team_id):
 
 @render_to('soccer/index_soccer.html')
 def index_soccer(request):
-    events = Event.objects.all()
     matches = Match.objects.all()
-    return {'user': request.user, 'events': events, 'matches': matches}
+    return {'user': request.user, 'matches': matches}
 
 @render_to('soccer/matches/generate.html')
 @login_required(login_url='/login/')

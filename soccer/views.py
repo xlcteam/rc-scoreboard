@@ -22,17 +22,12 @@ def results_live(request):
 @login_required(login_url='/login/')
 def new_competition(request):
     event = None
-    if 'event' in request.GET:
-        event = get_object_or_404(Event, pk=int(request.GET['event']))
     if request.method == 'POST':
         form = NewEventForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
             competition = Competition(name=name)
             competition.save()
-
-            event.competitions.add(competition)
-            event.save()
 
             msg = "New competition {0} has been created!".format(name)
             messages.success(request, msg)
@@ -43,10 +38,6 @@ def new_competition(request):
         c = {}
         c.update(csrf(request))
         c['form'] = form
-        if event:
-            c['event'] = event
-        else:
-            c['events'] = Event.objects.all()
         return c
 
 @render_to('soccer/group/new.html')
@@ -189,7 +180,8 @@ def team(request, team_id):
 @render_to('soccer/index_soccer.html')
 def index_soccer(request):
     matches = Match.objects.all()
-    return {'user': request.user, 'matches': matches}
+    competitions = Competition.objects.all()
+    return {'user': request.user, 'competitions': competitions, 'matches': matches}
 
 @render_to('soccer/matches/generate.html')
 @login_required(login_url='/login/')

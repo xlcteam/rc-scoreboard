@@ -34,8 +34,11 @@ class Performance(models.Model):
 class TeamResult(models.Model):
     team = models.ForeignKey(Team)
 
-    matches_played = models.IntegerField(default=0)
+    performances_played = models.IntegerField(default=0)
     points = models.IntegerField(default=0)
+
+    # NOTE: time in seconds
+    time = models.FloatField(default=0.0)
 
     def __unicode__(self):
         return "{0} - {1} - {2} -> {3}".format(self.wins, self.draws,

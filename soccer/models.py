@@ -85,11 +85,3 @@ class Competition(models.Model):
 
     def __unicode__(self):
         return self.name
-
-
-class Event(models.Model):
-    name = models.CharField(max_length=200)
-    competitions = models.ManyToManyField(Competition)
-
-    def __unicode__(self):
-        return self.name

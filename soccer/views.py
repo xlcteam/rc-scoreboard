@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import (render_to_response, get_object_or_404, redirect,
             render)
-from soccer.models import (Team, Event, Group, Competition, Match,
+from soccer.models import (Team, Group, Competition, Match,
         TeamResult, MatchSaveForm, NewEventForm, NewTeamForm)
 from django.contrib.auth import authenticate
 from django.core.context_processors import csrf
@@ -16,30 +16,7 @@ from soccer.helpers import *
 @render_to('soccer/results_live.html')
 def results_live(request):
     groups = Group.objects.all()
-    events = Event.objects.all()
     return {'groups': groups, 'event': events}
-
-# create
-@render_to('soccer/event/new.html')
-@login_required(login_url='/login/')
-def new_event(request):
-    if request.method == 'POST':
-        form = NewEventForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            event = Event(name=name)
-            event.save()
-
-            msg = "New event {0} has been created!".format(name)
-            messages.success(request, msg)
-
-            return redirect('index')
-    else:
-        form = NewEventForm()
-        c = {}
-        c.update(csrf(request))
-        c['form'] = form
-        return c
 
 @render_to('soccer/competition/new.html')
 @login_required(login_url='/login/')
@@ -147,19 +124,6 @@ def new_team(request):
         c['event'] = event
         return c
 
-# event/s
-@render_to('soccer/events.html')
-@login_required(login_url='/login/')
-def events(request):
-    events = Event.objects.all()
-    return {'events': events}
-
-@render_to('soccer/event.html')
-@login_required(login_url='/login/')
-def event(request, event_id):
-    event = get_object_or_404(Event, pk=event_id)
-    competitions = event.competitions.all()
-    return {'event': event, 'competitions': competitions}
 
 # competition/s
 @render_to('soccer/competition.html')

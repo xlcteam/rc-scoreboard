@@ -4,7 +4,7 @@
 {% if competitions %}
 <h2>Create new group </h2>
 {% else %}
-<h2>Create new group in {{ event.name }} - {{ competition.name }}</h2>
+<h2>Create new group in {{ competition.name }}</h2>
 {% endif %}
 
 {% if error %}
@@ -20,10 +20,7 @@
       <label for="competition">Competition: </label>
       <select id="competition" name="competition">
         {% for competition in competitions %}
-        <option value="{{ competition.id }}"> {{ competition.name }} in
-        {% for event in competition.event_set.all %}
-        {{ event.name }}
-        {% endfor %}
+        <option value="{{ competition.id }}"> {{ competition.name }}
         </option>
         {% endfor %}
       </select>

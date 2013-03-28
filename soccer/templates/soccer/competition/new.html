@@ -1,11 +1,7 @@
 {% extends "@layout.html" %}
 {% block content %}
 
-{% if events %}
 <h2>Create new competition</h2>
-{% else %}
-<h2>Create new competition in {{ event.name }}</h2>
-{% endif %}
 
 {% if error %}
 <p>{{ error }}</p>

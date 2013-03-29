@@ -1,35 +1,39 @@
 {% extends "@layout.html" %}
-{% block content %}
-<div id="fastinfo">&raquo;
-    <a href="/soccer/event/{{event.id}}">{{event.name}}</a> &raquo;
-    <a href="/soccer/competition/{{competition.id}}">{{competition.name}}</a> &raquo;
-    <a href="/soccer/group/{{group.id}}">{{group.name}}</a> 
-</div>
 
+{% block fastinfo %}
+<div id="fastinfo">&raquo;
+    <a href="{% url scorebrd.views.index %}">{{SITE_NAME}}</a> &raquo;
+    <a href="{% url soccer.views.index_soccer %}">Soccer</a> &raquo;
+    <a href="{% url soccer.views.competition competition.id %}">{{competition.name}}</a> &raquo;
+    <a href="{% url soccer.views.group group.id %}">{{group.name}}</a>
+</div>
+{% endblock %}
+
+{% block content %}
 <h2> Group {{ group.name }} </h2>
 
 {% if teams %}
   <section class="row">
 
-    <section class="col span_4 clr"> 
+    <section class="col span_4 clr">
       <h3>Results</h3>
       {% include "soccer/results.html" %}
       {% if team_results %}
         <a class='button red' style="margin-top: 10px;" href="/soccer/results/group/{{ group.id }}.pdf">Generate PDF!</a>
       {% endif %}
-    </section>  
-    
-    <section class="col span_5 clr"> 
+    </section>
+
+    <section class="col span_5 clr">
       <h3>Matches</h3>
       {% include "soccer/quicksearch.html" %}
       {% include "soccer/matches.html" %}
-    </section>  
+    </section>
 
-    <section class="col span_3 clr"> 
+    <section class="col span_3 clr">
       <h3>Teams </h3>
       {% include "soccer/teams.html" %}
       <p> <a href="{% url soccer.views.new_team %}?group={{group.id}}"><strong>Add another teams!</strong></a> </p>
-    </section>  
+    </section>
 
   </section>
 {% else %}

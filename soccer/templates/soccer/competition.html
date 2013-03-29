@@ -2,7 +2,8 @@
 
 {% block fastinfo %}
 <div id="fastinfo">&raquo;
-    <a href="{% url soccer.views.index_soccer %}">{{SITE_NAME}}</a> &raquo;
+    <a href="{% url scorebrd.views.index %}">{{SITE_NAME}}</a> &raquo;
+    <a href="{% url soccer.views.index_soccer %}">Soccer</a> &raquo;
     <a href="{% url soccer.views.competition competition.id %}">{{competition.name}}</a>
 </div>
 {% endblock %}

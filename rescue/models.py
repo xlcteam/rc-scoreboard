@@ -55,13 +55,13 @@ class Group(models.Model):
     def __unicode__(self):
         return self.name
 
-    def round_1(self):
+    def results_round_1(self):
         return self.performances.filter(round_number=1).order_by('points').order_by('time').reverse()
 
-    def round_2(self):
+    def results_round_2(self):
         return self.performances.filter(round_number=2).order_by('points').order_by('time').reverse()
 
-    def round_3(self):
+    def results_round_3(self):
         return self.performances.filter(round_number=3).order_by('points').order_by('time').reverse()
 
 

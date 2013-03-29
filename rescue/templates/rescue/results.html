@@ -2,10 +2,10 @@
 {% if performances %}
 <table class='teamTable'>
 
-  {% include "rescue/table.html" with performances=group.round_1 round=1 %}
-  {% include "rescue/table.html" with performances=group.round_2 round=2 %}
-  {% include "rescue/table.html" with performances=group.round_3 round=3 %}  
-            
+  {% include "rescue/table.html" with performances=group.results_round_1 round=1 %}
+  {% include "rescue/table.html" with performances=group.results_round_2 round=2 %}
+  {% include "rescue/table.html" with performances=group.results_round_3 round=3 %}  
+  <div style="clear: both;"></div>            
 </table>
 {% else %}
   Unfortunately, no performances have been performed yet.

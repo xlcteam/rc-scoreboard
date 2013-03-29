@@ -13,9 +13,9 @@
 
     <div class="col span_6">
       {% if competitions %}
-      <strong style="font-size: 20px;">Upcoming performances: </strong><br />
-      {% include "rescue/quicksearch.html" %}
-      {% for competitions in competitions %}
+        <strong style="font-size: 20px;">Upcoming performances: </strong><br />
+        {% include "rescue/quicksearch.html" %}
+        {% for competitions in competitions %}
             {% for group in competition.groups.all %}
                 <div class="gName">
                   <strong>{{ competition.name }}</strong>
@@ -25,7 +25,6 @@
                 </div>
             {% endfor %}
         {% endfor %}
-      {% endfor %}
       {% endif %}
     </div>
   </section>

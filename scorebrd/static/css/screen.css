@@ -383,3 +383,7 @@ ul {
     margin-top: 10px;
 }
 
+select {
+    width: 120px;
+}
+

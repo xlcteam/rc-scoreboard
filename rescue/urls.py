@@ -4,10 +4,6 @@ from django.views.generic import TemplateView, RedirectView
 urlpatterns = patterns('rescue.views',
     url(r'^$', 'index_rescue', name='index_rescue'),
 
-    url(r'^events/?$', 'events'),
-    url(r'^event/(?P<event_id>\d+)/?$', 'event', name="event"),
-    url(r'^event/new/?$', 'new_event', name='new_event'),
-
     url(r'^competitions/?$', 'competitions'),
     url(r'^competition/(?P<competition_id>\d+)/?$', 'competition', name="competition"),
     url(r'^competition/new/?$', 'new_competition', name="new_competition"),

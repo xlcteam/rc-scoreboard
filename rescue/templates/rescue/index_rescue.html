@@ -7,26 +7,24 @@
 {% if user.is_authenticated %}
 <section class="row">
     <div class="col span_6">
-        <h2>Rescue events registered with scoreBoard</h2>
-        {% include "rescue/events.html" %}
+        <h2>Rescue competitions registered with scoreBoard</h2>
+        {% include "rescue/competitions.html" %}
     </div>
 
     <div class="col span_6">
-      {% if events %}
-      <strong style="font-size: 20px;">Upcoming performances: </strong><br />
-      {% include "rescue/quicksearch.html" %}
-      {% for event in events %}
-        {% for competition in event.competitions.all %}
+      {% if competitions %}
+        <strong style="font-size: 20px;">Upcoming performances: </strong><br />
+        {% include "rescue/quicksearch.html" %}
+        {% for competition in competitions %}
             {% for group in competition.groups.all %}
                 <div class="gName">
-                  <strong>{{ event.name }} : </strong>{{ competition.name }}
+                  <strong>{{ competition.name }}</strong> - {{ group.name }}
                 </div>
                 <div class="groupMatches">
                     {% include "rescue/performances.html" with performances=group.performances.all not_started_only=True %}
                 </div>
             {% endfor %}
         {% endfor %}
-      {% endfor %}
       {% endif %}
     </div>
   </section>

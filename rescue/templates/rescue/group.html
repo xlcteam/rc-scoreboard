@@ -17,7 +17,7 @@
     <section class="col span_4 clr"> 
       <h3>Results</h3>
       {% include "rescue/results.html" %}
-      {% if team_results %}
+      {% if performances %}
         <a class='button red' style="margin-top: 10px;" href="{% url rescue.views.results_group_pdf group.id %}">Generate PDF!</a>
       {% endif %} 
     </section>  

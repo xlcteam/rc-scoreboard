@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
-from rescue.models import (Competition, Group, Team, Performance,
-        NewEventForm, NewTeamForm)
+from rescue.models import (Competition, Group, Team, NewEventForm, 
+        NewTeamForm)
 from django.core.context_processors import csrf
 from django.contrib import messages
 
@@ -185,11 +185,12 @@ def performances_generate_listing(request):
     teams = list(group.teams.all())
 
     for team in teams:
-        performance = Performance(team=team)
-        performance.save()
-        group.performances.add(performance)
-   
+        for rnd in range(1, 3):
+            performance = Performance(team=team, round_number=rnd)
+            performance.save()
+            group.performances.add(performance)
+       
     group.save()
-    performances = group.performances.all()
+    performances = group.performances.all().order_by(round_number)
     return {'performances': performances}
 

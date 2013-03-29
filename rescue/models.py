@@ -14,7 +14,8 @@ class Team(models.Model):
         return self.name
 
 
-class TeamResult(models.Model):
+class Performance(models.Model):
+    team = models.ForeignKey(Team, related_name='performance_rescue')
     round_number = models.IntegerField(default=0)
     referee = models.ForeignKey('auth.User')
 
@@ -42,31 +43,22 @@ class TeamResult(models.Model):
     time = models.FloatField(default=0.0)
 
 
-class Performance(models.Model):
-    """
-        Perfomance for each team. It holds Team Results for each performance
-    """
-
-    team = models.ForeignKey(Team, related_name='performance_rescue')
-
-    
-    results = models.ManyToManyField(TeamResult)
-    perf_performed = models.IntegerField(default=0)
-
-    class Meta: 
-        verbose_name_plural = 'performances'
-
-    def __unicode__(self):
-        return "%s" % (self.team.name)
-
-
 class Group(models.Model):
     name = models.CharField(max_length=200)
     teams = models.ManyToManyField(Team)
-    performance = models.ManyToManyField(Performance)
+    performances = models.ManyToManyField(Performance)
 
     def __unicode__(self):
         return self.name
+
+    def round_1(self):
+        return self.performances.filter(round_number=1).order_by(points).order_by(time).reverse()
+
+    def round_2(self):
+        return self.performances.filter(round_number=2).order_by(points).order_by(time).reverse()
+
+    def round_3(self):
+        return self.performances.filter(round_number=3).order_by(points).order_by(time).reverse()
 
 
 class Competition(models.Model):

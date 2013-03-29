@@ -15,10 +15,10 @@
       {% if competitions %}
         <strong style="font-size: 20px;">Upcoming performances: </strong><br />
         {% include "rescue/quicksearch.html" %}
-        {% for competitions in competitions %}
+        {% for competition in competitions %}
             {% for group in competition.groups.all %}
                 <div class="gName">
-                  <strong>{{ competition.name }}</strong>
+                  <strong>{{ competition.name }}</strong> - {{ group.name }}
                 </div>
                 <div class="groupMatches">
                     {% include "rescue/performances.html" with performances=group.performances.all not_started_only=True %}

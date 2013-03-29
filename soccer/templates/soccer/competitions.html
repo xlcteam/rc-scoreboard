@@ -8,7 +8,7 @@
   {% endfor %}
 </table>
 
-<p> <a href="{% url soccer.views.new_competition %}?event={{event.id}}"><strong>Add another competition!</strong></a> </p>
+<p style="clear: left;"> <a href="{% url soccer.views.new_competition %}"><strong>Add another competition!</strong></a> </p>
 
 {% else %}
 <p> No competitions were found. <a href="{% url soccer.views.new_competition %}?event={{event.id}}"><strong>Add some!</strong></a> </p>

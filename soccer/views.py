@@ -310,25 +310,19 @@ def match_save(request, match_id):
 
 @render_to('soccer/results/live.html')
 def results_live(request):
-    if 'event' in request.GET:
-        event = get_object_or_404(Event, pk=request.GET['event'])
-        return {'event': event, 'event_only': True}
-
-    elif 'competition' in request.GET:
+    if 'competition' in request.GET:
         competition = get_object_or_404(Competition, pk=request.GET['competition'])
-        event = competition.event_set.all()[0]
-        return {'event': event, 'competition': competition,
+        return {'competition': competition,
                 'competition_only': True}
 
     elif 'group' in request.GET:
         group = get_object_or_404(Group, pk=request.GET['group'])
         competition = group.competition_set.all()[0]
-        event = competition.event_set.all()[0]
-        return {'event': event, 'competition': competition,
+        return {'competition': competition,
                 'group': group, 'group_only': True}
 
     else:
-        return {'events': Event.objects.all()}
+        return {'competitions': Competition.objects.all()}
 
 def results(request):
     pass
@@ -342,10 +336,9 @@ def results_group_view(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     teams = group.teams.all()
     competition = group.competition_set.all()[0]
-    event = competition.event_set.all()[0]
     team_results = TeamResult.objects.filter(group__id=group.id)
     return {'group': group, 'teams': teams,
-            'competition': competition, 'event': event, 
+            'competition': competition,
             'team_results': team_results}
 
 @render_to('soccer/results/match.html')
@@ -355,22 +348,20 @@ def results_match_view(request, match_id):
 
     group = match.group_set.all()[0]
     competition = group.competition_set.all()[0]
-    event = competition.event_set.all()[0]
     return {'group': group, 'match': match,
-            'competition': competition, 'event': event}
+            'competition': competition}
 
 @login_required(login_url='/login/')
 def results_group_pdf(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     competition = group.competition_set.all()[0]
-    event = competition.event_set.all()[0]
 
     team_results = group.results.all()\
                     .order_by('points').reverse()
     matches = group.matches.filter(playing='D')
 
     return render_to_pdf(request, 'soccer/results/generate/group.html', 
-                            {'event': event, 'competition': competition,
+                            {'competition': competition,
                              'group': group, 'team_results': team_results,
                              'matches': matches})
 
@@ -378,16 +369,14 @@ def results_group_pdf(request, group_id):
 def results_competition_pdf(request, competition_id):
     competition = get_object_or_404(Competition, pk=competition_id)
     groups = competition.groups.all()
-    event = competition.event_set.all()[0]
 
     return render_to_pdf(request, 'soccer/results/generate/competition.html', 
-                            {'event': event, 'competition': competition,
+                            {'competition': competition,
                              'groups': groups})
 
 @login_required(login_url='/login/')
 def results_event_pdf(request, event_id):
-    event = get_object_or_404(Event, pk=event_id)
     competitions = event.competitions.all()
 
     return render_to_pdf(request, 'soccer/results/generate/event.html', 
-                            {'event': event, 'competitions': competitions})
+                            {competitions': competitions})

@@ -1,10 +1,14 @@
 {% extends "@layout.html" %}
-{% block content %}
+{% block fastinfo %}
 <div id="fastinfo">&raquo;
-    <a href="/rescue/event/{{event.id}}">{{event.name}}</a> &raquo;
-    <a href="/rescue/competition/{{competition.id}}">{{competition.name}}</a> &raquo;
-    <a href="/rescue/group/{{group.id}}">{{group.name}}</a> 
+    <a href="{% url scorebrd.views.index %}">{{SITE_NAME}}</a> &raquo;
+    <a href="{% url rescue.views.index_rescue %}">Rescue</a> &raquo;
+    <a href="{% url rescue.views.competition competition.id %}">{{competition.name}}</a> &raquo;
+    <a href="{% url rescue.views.group group.id %}">{{group.name}}</a>
 </div>
+{% endblock %}
+
+{% block content %}
 
 <h2>Results for {{ group.name }} </h2>
 

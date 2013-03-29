@@ -1,52 +1,16 @@
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
-from rescue.models import (Event, Competition, Group, Team, Performance,
+from rescue.models import (Competition, Group, Team, Performance,
         NewEventForm, NewTeamForm)
 from django.core.context_processors import csrf
 from django.contrib import messages
 
 @render_to('rescue/index_rescue.html')
 def index_rescue(request):
-    events = Event.objects.all()
-    return {'user': request.user, 'events': events}
+    competitions = Competition.objects.all()
+    return {'user': request.user, 'competitions': competitions}
 
-
-
-# event/s
-@render_to('rescue/events.html')
-@login_required(login_url='/login/')
-def events(request):
-    events = Event.objects.all()
-    return {'events': events}
-
-@render_to('rescue/event.html')
-@login_required(login_url='/login/')
-def event(request, event_id):
-    event = get_object_or_404(Event, pk=event_id)
-    competitions = event.competitions.all()
-    return {'event': event, 'competitions': competitions}
-
-@render_to('rescue/event/new.html')
-@login_required(login_url='/login/')
-def new_event(request):
-    if request.method == 'POST':
-        form = NewEventForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            event = Event(name=name)
-            event.save()
-
-            msg = "New event {0} has been created!".format(name)
-            messages.success(request, msg)
-
-            return redirect('index_rescue')
-    else:
-        form = NewEventForm()
-        c = {}
-        c.update(csrf(request))
-        c['form'] = form
-        return c
 
 # competition/s
 @render_to('rescue/competition.html')
@@ -54,8 +18,7 @@ def new_event(request):
 def competition(request, competition_id):
     competition = get_object_or_404(Competition, pk=competition_id)
     groups = competition.groups.all()
-    event = competition.event_set.all()[0]
-    return {'event': event, 'competition': competition, 'groups': groups}
+    return {'competition': competition, 'groups': groups}
 
 @render_to('rescue/competitions.html')
 @login_required(login_url='/login/')
@@ -66,18 +29,12 @@ def competitions(request):
 @render_to('rescue/competition/new.html')
 @login_required(login_url='/login/')
 def new_competition(request):
-    event = None
-    if 'event' in request.GET:
-        event = get_object_or_404(Event, pk=int(request.GET['event']))
     if request.method == 'POST':
         form = NewEventForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
             competition = Competition(name=name)
             competition.save()
-
-            event.competitions.add(competition)
-            event.save()
 
             msg = "New competition {0} has been created!".format(name)
             messages.success(request, msg)
@@ -88,10 +45,6 @@ def new_competition(request):
         c = {}
         c.update(csrf(request))
         c['form'] = form
-        if event:
-            c['event'] = event
-        else:
-            c['events'] = Event.objects.all()
         return c
 
 # group/s
@@ -101,11 +54,10 @@ def group(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     teams = group.teams.all()
     competition = group.competition_set.all()[0]
-    event = competition.event_set.all()[0]
     performances = group.performances.all()
 
     return {'group': group, 'teams': teams,
-            'competition': competition, 'event': event,
+            'competition': competition,
             'performances': performances}
 
 @render_to('rescue/groups.html')
@@ -118,10 +70,8 @@ def groups(request):
 @login_required(login_url='/login/')
 def new_group(request):
     competition = None
-    event = None
     if 'competition' in request.GET:
         competition = get_object_or_404(Competition, pk=int(request.GET['competition']))
-        event = competition.event_set.all()[0]
     if request.method == 'POST':
         form = NewEventForm(request.POST)
         if form.is_valid():
@@ -146,11 +96,6 @@ def new_group(request):
             c['competition'] = competition
         else:
             c['competitions'] = Competition.objects.all()
-
-        if event:
-            c['event'] = event
-        else:
-            c['events'] = Event.objects.all()
  
         return c
 
@@ -167,12 +112,11 @@ def team(request, team_id):
     team = get_object_or_404(Team, pk=team_id)
     group = team.group_set.all()[0]
     competition = group.competition_set.all()[0]
-    event = competition.event_set.all()[0]
 
     performances = Performance.objects.filter(team=team).order_by('playing')
     performed = Performance.objects.filter(team=team, playing='D').count()
 
-    return {'group': group, 'competition': competition, 'event': event,
+    return {'group': group, 'competition': competition,
             'team': team, 'performances': performances, 'performed': performed}
 
 @render_to('rescue/team/new.html')
@@ -181,7 +125,6 @@ def new_team(request):
     if 'group' in request.GET:
         group = get_object_or_404(Group, pk=int(request.GET['group']))
         competition = group.competition_set.all()[0]
-        event = competition.event_set.all()[0]
     if request.method == 'POST':
         form = NewTeamForm(request.POST)
         if form.is_valid():
@@ -207,17 +150,12 @@ def new_team(request):
         c['form'] = form
         c['group'] = group
         c['competition'] = competition
-        c['event'] = event
         return c
 
 #results
 @render_to('rescue/results/live.html')
 def results_live(request):
-    if 'event' in request.GET:
-        event = get_object_or_404(Event, pk=request.GET['event'])
-        return {'event': event, 'event_only': True}
-
-    elif 'competition' in request.GET:
+    if 'competition' in request.GET:
         competition = get_object_or_404(Competition, pk=request.GET['competition'])
         event = competition.event_set.all()[0]
         return {'event': event, 'competition': competition,

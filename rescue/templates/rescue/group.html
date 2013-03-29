@@ -1,11 +1,14 @@
 {% extends "@layout.html" %}
-{% block content %}
+{% block fastinfo %}
 <div id="fastinfo">&raquo;
-    <a href="/rescue/event/{{event.id}}">{{event.name}}</a> &raquo;
-    <a href="/rescue/competition/{{competition.id}}">{{competition.name}}</a> &raquo;
-    <a href="/rescue/group/{{group.id}}">{{group.name}}</a> 
+    <a href="{% url scorebrd.views.index %}">{{SITE_NAME}}</a> &raquo;
+    <a href="{% url rescue.views.index_rescue %}">Rescue</a> &raquo;
+    <a href="{% url rescue.views.competition competition.id %}">{{competition.name}}</a> &raquo;
+    <a href="{% url rescue.views.group group.id %}">{{group.name}}</a>
 </div>
+{% endblock %}
 
+{% block content %}
 <h2> Group {{ group.name }} </h2>
 
 {% if teams %}
@@ -15,7 +18,7 @@
       <h3>Results</h3>
       {% include "rescue/results.html" %}
       {% if team_results %}
-        <a class='button red' style="margin-top: 10px;" href="rescue.views.results_group_pdf {{ group.id }}">Generate PDF!</a>
+        <a class='button red' style="margin-top: 10px;" href="{% url rescue.views.results_group_pdf group.id %}">Generate PDF!</a>
       {% endif %} 
     </section>  
     

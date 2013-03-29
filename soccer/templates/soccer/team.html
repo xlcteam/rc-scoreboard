@@ -1,12 +1,16 @@
 {% extends "@layout.html" %}
 
-{% block content %}
+{% block fastinfo %}
 <div id="fastinfo">&raquo;
-    <a href="/soccer/event/{{event.id}}">{{event.name}}</a> &raquo;
-    <a href="/soccer/competition/{{competition.id}}">{{competition.name}}</a> &raquo;
-    <a href="/soccer/group/{{group.id}}">{{group.name}}</a> &raquo;
-    <a href="/soccer/team/{{team.id}}">{{team.name}}</a>
+    <a href="{% url scorebrd.views.index %}">{{SITE_NAME}}</a> &raquo;
+    <a href="{% url soccer.views.index_soccer %}">Soccer</a> &raquo;
+    <a href="{% url soccer.views.competition competition.id %}">{{competition.name}}</a> &raquo;
+    <a href="{% url soccer.views.group group.id %}">{{group.name}}</a> &raquo;
+    <a href="{% url soccer.views.team team.id %}">{{team.name}}</a>
 </div>
+{% endblock %}
+
+{% block content %}
 <h2> Matches for team {{ team.name }} </h2>
 {% include "soccer/matches.html" %}
 

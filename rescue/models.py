@@ -31,18 +31,19 @@ class Performance(models.Model):
     def __unicode__(self):
         return "%s" % (self.team.name,)
 
+
+class Round(models.Model):
+    pass
+
 class TeamResult(models.Model):
     team = models.ForeignKey(Team)
 
     performances_played = models.IntegerField(default=0)
-    points = models.IntegerField(default=0)
-
-    # NOTE: time in seconds
-    time = models.FloatField(default=0.0)
 
     def __unicode__(self):
         return "{0} - {1} - {2} -> {3}".format(self.wins, self.draws,
                 self.loses, self.team)
+
 
 class Group(models.Model):
     name = models.CharField(max_length=200)
@@ -63,11 +64,4 @@ class Competition(models.Model):
     def __unicode__(self):
         return self.name
 
-
-class Event(models.Model):
-    name = models.CharField(max_length=200)
-    competitions = models.ManyToManyField(Competition)
-
-    def __unicode__(self):
-        return self.name
 

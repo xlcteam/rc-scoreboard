@@ -21,7 +21,7 @@
                   <strong>{{ competition.name }}</strong> - {{ group.name }}
                 </div>
                 <div class="groupMatches">
-                    {% include "rescue/performances.html" with performances=group.results.all not_started_only=True %}
+                    {% include "rescue/performances.html" with performances=group.performances.all not_started_only=True %}
                 </div>
             {% endfor %}
         {% endfor %}

@@ -56,13 +56,13 @@ class Group(models.Model):
         return self.name
 
     def round_1(self):
-        return self.performances.filter(round_number=1).order_by(points).order_by(time).reverse()
+        return self.performances.filter(round_number=1).order_by('points').order_by('time').reverse()
 
     def round_2(self):
-        return self.performances.filter(round_number=2).order_by(points).order_by(time).reverse()
+        return self.performances.filter(round_number=2).order_by('points').order_by('time').reverse()
 
     def round_3(self):
-        return self.performances.filter(round_number=3).order_by(points).order_by(time).reverse()
+        return self.performances.filter(round_number=3).order_by('points').order_by('time').reverse()
 
 
 class Competition(models.Model):

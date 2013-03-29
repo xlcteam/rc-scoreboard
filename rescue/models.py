@@ -15,6 +15,10 @@ class Team(models.Model):
 
 
 class Performance(models.Model):
+    """
+        Each team has 3 performances. All of them are stored in group.performances
+        and when you want to sort them by a round, just call function group.round_XXX
+    """
     team = models.ForeignKey(Team, related_name='performance_rescue')
     round_number = models.IntegerField(default=0)
     referee = models.ForeignKey('auth.User')

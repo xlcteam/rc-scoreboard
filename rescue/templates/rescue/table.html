@@ -1,4 +1,4 @@
-
+{% if performances %}
 <h3>Round {{ round }}</h3>
 {% for result in performances %}
   <tr>
@@ -39,4 +39,5 @@
         <td class="points"> {{ result.points }} </td>
     </tr>
 {% endfor %}
+{% endif %}
 

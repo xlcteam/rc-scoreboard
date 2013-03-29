@@ -379,4 +379,4 @@ def results_event_pdf(request, event_id):
     competitions = event.competitions.all()
 
     return render_to_pdf(request, 'soccer/results/generate/event.html', 
-                            {competitions': competitions})
+                            {'competitions': competitions})

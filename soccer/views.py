@@ -81,7 +81,6 @@ def new_team(request):
     if 'group' in request.GET:
         group = get_object_or_404(Group, pk=int(request.GET['group']))
         competition = group.competition_set.all()[0]
-        event = competition.event_set.all()[0]
     if request.method == 'POST':
         form = NewTeamForm(request.POST)
         if form.is_valid():
@@ -107,7 +106,6 @@ def new_team(request):
         c['form'] = form
         c['group'] = group
         c['competition'] = competition
-        c['event'] = event
         return c
 
 
@@ -159,7 +157,6 @@ def team(request, team_id):
     team = get_object_or_404(Team, pk=team_id)
     group = team.group_set.all()[0]
     competition = group.competition_set.all()[0]
-    event = competition.event_set.all()[0]
     from itertools import chain
 
     matches = list(chain(Match.objects.filter(teamA=team).order_by('playing'),
@@ -167,7 +164,7 @@ def team(request, team_id):
     played = Match.objects.filter(teamA=team, playing='D').count() + \
             Match.objects.filter(teamB=team, playing='D').count()
 
-    return {'group': group, 'competition': competition, 'event': event,
+    return {'group': group, 'competition': competition,
             'team': team, 'matches': matches, 'played': played}
 
 @render_to('soccer/index_soccer.html')

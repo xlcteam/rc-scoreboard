@@ -185,14 +185,11 @@ def performances_generate_listing(request):
     teams = list(group.teams.all())
 
     for team in teams:
-        performance = Performance(team=team, referee=request.user)
+        performance = Performance(team=team)
         performance.save()
         group.performances.add(performance)
-    
-    group.actual_round = 1
-
+   
     group.save()
-
     performances = group.performances.all()
     return {'performances': performances}
 

@@ -1,10 +1,14 @@
 {% extends "@layout.html" %}
-{% block content %}
-<div id="fastinfo">&raquo;
-    <a href="/soccer/event/{{event.id}}">{{event.name}}</a> &raquo; 
-    <a href="/soccer/competition/{{competition.id}}">{{competition.name}}</a> 
-</div>
 
+{% block fastinfo %}
+<div id="fastinfo">&raquo;
+    <a href="{% url soccer.views.index_soccer %}">{{SITE_NAME}}</a> &raquo;
+    <a href="{% url soccer.views.competition competition.id %}">{{competition.name}}</a>
+</div>
+{% endblock %}
+
+
+{% block content %}
 <section class="row">
   <div class="col span_6">
     <h2> Groups competing in {{ competition.name }} </h2>

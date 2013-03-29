@@ -11,7 +11,11 @@
 <p>{{ error }}</p>
 {% endif %}
 
+{% if competition %}
 <form action="{% url soccer.views.new_group %}?competition={{competition.id}}" method="POST">
+{% else %}
+<form action="{% url soccer.views.new_group %}" method="POST">
+{% endif %}
     {% csrf_token %}
     {{ form.as_p }}
     <input type="hidden" name="next" value="{{ next }}" />

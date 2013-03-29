@@ -46,6 +46,8 @@ def new_group(request):
     competition = None
     if 'competition' in request.GET:
         competition = get_object_or_404(Competition, pk=int(request.GET['competition']))
+    if 'competition' in request.POST:
+        competition = get_object_or_404(Competition, pk=int(request.POST['competition']))
     if request.method == 'POST':
         form = NewEventForm(request.POST)
         if form.is_valid():
@@ -130,12 +132,11 @@ def group(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     teams = group.teams.all()
     competition = group.competition_set.all()[0]
-    event = competition.event_set.all()[0]
     team_results = group.results.all()\
                     .order_by('points').reverse()
     matches = group.matches.all().order_by('playing')
     return {'group': group, 'teams': teams,
-            'competition': competition, 'event': event, 
+            'competition': competition, 
             'matches': matches,
             'team_results': team_results}
 

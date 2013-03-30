@@ -1,0 +1,43 @@
+{% if performances %}
+  <h3>Round {{ round }}</h3>
+  <tr>
+      <th> <abbr title="Position in the table"> Pos. </abbr></th>
+      <th></th>
+      <th> <abbr title="Room 1"       > R1 </abbr></th>
+      <th> <abbr title="Room 2"       > R2 </abbr></th>
+      <th> <abbr title="Room 3"       > R3 </abbr></th>
+      <th> <abbr title="Ramp"         > Rmp </abbr></th>
+      <th> <abbr title="Hallway"      > Hlw </abbr></th>
+      <th> <abbr title="Gaps"         > Gps </abbr></th>
+      <th> <abbr title="Obstacles"    > Obs </abbr></th>
+      <th> <abbr title="Speed bumps"  > SpB </abbr></th>
+      <th> <abbr title="Intersections"> Ins </abbr></th>
+      <th> <abbr title="Victim"       > Vct </abbr></th>
+      <th> <abbr title="Time"         > Tim </abbr></th>
+      <th> <abbr title="Points"       > Pts </abbr></th>
+  </tr>
+  {% for result in performances %}
+    {% if forloop.counter0|divisibleby:"2" %}
+        <tr class="even">
+    {% else %}
+        <tr class="odd">
+    {% endif %}
+        <td> {{ forloop.counter }}. </td>
+        <td class='name'> {{ result.team.name }} </td>
+        <td> {{ result.room1 }} </td>
+        <td> {{ result.room2 }} </td>
+        <td> {{ result.room3 }} </td>
+        <td> {{ result.ramp }} </td>
+        <td> {{ result.hallway }} </td>
+        <td> {{ result.gaps }} </td>
+        <td> {{ result.obstacles }} </td>
+        <td> {{ result.speed_bumps }} </td>
+        <td> {{ result.intersections }} </td>
+        <td> {{ result.victim }} </td>
+
+        <td> {{ result.time }} </td>
+        <td class="points"> {{ result.points }} </td>
+    </tr>
+{% endfor %}
+{% endif %}
+

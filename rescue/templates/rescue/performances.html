@@ -8,7 +8,7 @@
                         {{ performance.team.name }}
                 </td>
                 <td align="center">
-                  <a class='smaller button orange' href="/rescue/performance/play/{{ performance.id }}"> Start ! </a>
+                  <a class='smaller button orange' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>
                 </td>
             {% elif not_started_only == False %}
                 <td class='left'>

@@ -62,6 +62,11 @@ font-weight: normal;
 
 #content > h3 { font-size: 110%; font-weight: bold; color: #666; clear: both; padding: 0.7em 0 0 0; margin: 0; }
 
+#content > h4 { font-size: 100%; font-weight: bold; color: #666; clear: both; padding: 0.7em 0 0 0; margin: 0; }
+
+h4 {
+  margin-bottom: 0.1em;
+}
 
 h2 span { color: #87A7D5; }
 h2 a { text-decoration: none; background: transparent; }
@@ -109,11 +114,14 @@ a[href^="error:"] {
 .teamTable{
         text-align: center;
         border-spacing: 0;
+        padding-bottom: 8px;
 }
 .teamTable th{
-        margin: 0 5px;
-        font-size: 120%;
+        margin: 0 7px;
+        font-weight: bold;
+        font-height: 110%;
 	      min-width: 30px;
+        padding: 0 3px;
         border: 0;
 }
 .teamTable td{

@@ -1,12 +1,9 @@
 {% load substract %}
 {% if performances %}
-<table class='teamTable'>
-
   {% include "rescue/table.html" with performances=group.results_round_1 round=1 %}
   {% include "rescue/table.html" with performances=group.results_round_2 round=2 %}
-  {% include "rescue/table.html" with performances=group.results_round_3 round=3 %}  
-  <div style="clear: both;"></div>            
-</table>
+  {% include "rescue/table.html" with performances=group.results_round_3 round=3 %}
+  <div style="clear: both;"></div>
 {% else %}
   Unfortunately, no performances have been performed yet.
 {% endif %}

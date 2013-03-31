@@ -1,20 +1,21 @@
 {% if performances %}
-  <h3>Round {{ round }}</h3>
+  <h4>Round {{ round }}</h4>
+  <table class='teamTable'>
   <tr>
       <th> <abbr title="Position in the table"> Pos. </abbr></th>
       <th></th>
       <th> <abbr title="Room 1"       > R1 </abbr></th>
       <th> <abbr title="Room 2"       > R2 </abbr></th>
       <th> <abbr title="Room 3"       > R3 </abbr></th>
-      <th> <abbr title="Ramp"         > Rmp </abbr></th>
-      <th> <abbr title="Hallway"      > Hlw </abbr></th>
-      <th> <abbr title="Gaps"         > Gps </abbr></th>
-      <th> <abbr title="Obstacles"    > Obs </abbr></th>
-      <th> <abbr title="Speed bumps"  > SpB </abbr></th>
-      <th> <abbr title="Intersections"> Ins </abbr></th>
-      <th> <abbr title="Victim"       > Vct </abbr></th>
-      <th> <abbr title="Time"         > Tim </abbr></th>
-      <th> <abbr title="Points"       > Pts </abbr></th>
+      <th> <abbr title="Ramp"         > R </abbr></th>
+      <th> <abbr title="Hallway"      > H </abbr></th>
+      <th> <abbr title="Gaps"         > G </abbr></th>
+      <th> <abbr title="Obstacles"    > O </abbr></th>
+      <th> <abbr title="Speed bumps"  > S </abbr></th>
+      <th> <abbr title="Intersections"> I </abbr></th>
+      <th> <abbr title="Victim"       > V </abbr></th>
+      <th> <abbr title="Time"         > Time </abbr></th>
+      <th> <abbr title="Points"       > Pts. </abbr></th>
   </tr>
   {% for result in performances %}
     {% if forloop.counter0|divisibleby:"2" %}
@@ -39,5 +40,6 @@
         <td class="points"> {{ result.points }} </td>
     </tr>
 {% endfor %}
+  </table>
 {% endif %}
 

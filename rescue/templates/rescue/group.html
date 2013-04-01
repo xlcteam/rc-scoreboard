@@ -14,25 +14,25 @@
 {% if teams %}
   <section class="row">
 
-    <section class="col span_6 clr"> 
+    <section class="col span_6 clr">
       <h3>Results</h3>
       {% include "rescue/results.html" %}
       {% if performances %}
-        <a class='button red' style="margin-top: 10px;" href="/rescue/results/group/{{ group.id }}.pdf">Generate PDF!</a>
-      {% endif %} 
-    </section>  
-    
-    <section class="col span_4 clr"> 
+        <a class='button green' style="margin-top: 10px;" href="/rescue/results/group/{{ group.id }}.pdf">Generate PDF!</a>
+      {% endif %}
+    </section>
+
+    <section class="col span_3 clr">
       <h3>Performances</h3>
       {% include "rescue/quicksearch.html" %}
       {% include "rescue/performances.html" %}
-    </section>  
+    </section>
 
-    <section class="col span_3 clr"> 
+    <section class="col span_3 clr">
       <h3>Teams </h3>
       {% include "rescue/teams.html" %}
       <p> <a href="{% url rescue.views.new_team %}?group={{group.id}}"><strong>Add another teams!</strong></a> </p>
-    </section>  
+    </section>
 
   </section>
 {% else %}

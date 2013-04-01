@@ -401,7 +401,8 @@ select {
         table thead { display: block; float: left; }
         table tbody { display: block; width: auto; position: relative; overflow-x: auto; white-space: nowrap; }
         table thead tr { display: block; }
-        table th { display: block; padding: 2px 5px !important;}
+        table th { display: block; }
+        .teamTable th { padding: 2px 5px !important; }
         table tbody tr { display: inline-block; vertical-align: top; }
         table  td { display: block; min-height: 1.25em; }
         /* sort out borders */

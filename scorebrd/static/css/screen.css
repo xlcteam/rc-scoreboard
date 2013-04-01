@@ -115,6 +115,8 @@ a[href^="error:"] {
         text-align: center;
         border-spacing: 0;
         padding-bottom: 8px;
+        display: block;
+        width: 100%;
 }
 .teamTable th{
         margin: 0 7px;
@@ -397,21 +399,21 @@ select {
 
 @media only screen and (max-width: 40em) { /*640*/
 
-        table { display: block; position: relative; width: 100%; }
-        table thead { display: block; float: left; }
-        table tbody { display: block; width: auto; position: relative; overflow-x: auto; white-space: nowrap; }
-        table thead tr { display: block; }
-        table th { display: block; }
+        .teamTable { display: block; position: relative; width: 100%; }
+        .teamTable thead { display: block; float: left; }
+        .teamTable tbody { display: block; width: auto; position: relative; overflow-x: auto; white-space: nowrap; }
+        .teamTable thead tr { display: block; }
+        .teamTable th { display: block; }
         .teamTable th { padding: 2px 5px !important; }
-        table tbody tr { display: inline-block; vertical-align: top; }
-        table  td { display: block; min-height: 1.25em; }
+        .teamTable tbody tr { display: inline-block; vertical-align: top; }
+        .teamTable td { display: block; min-height: 1.25em; }
         /* sort out borders */
 
-        table th { border-bottom: 0; }
-        table td { border-left: 0; border-right: 0; border-bottom: 0; }
-        table tbody tr { border-right: 1px solid #babcbf; }
-        table th:last-child,
-        table td:last-child { border-bottom: 1px solid #babcbf; }
+        .teamTable th { border-bottom: 0; }
+        .teamTable td { border-left: 0; border-right: 0; border-bottom: 0; }
+        .teamTable tbody tr { border-right: 1px solid #babcbf; }
+        .teamTable th:last-child,
+        .teamTable td:last-child { border-bottom: 1px solid #babcbf; }
 
 }
 

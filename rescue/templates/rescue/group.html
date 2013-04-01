@@ -14,18 +14,18 @@
 {% if teams %}
   <section class="row">
 
+    <section class="col span_3 clr">
+      <h3>Performances</h3>
+      {% include "rescue/quicksearch.html" %}
+      {% include "rescue/performances.html" %}
+    </section>
+
     <section class="col span_6 clr">
       <h3>Results</h3>
       {% include "rescue/results.html" %}
       {% if performances %}
         <a class='button' style="margin-top: 10px;" href="/soccer/results/group/{{ group.id }}.pdf">Download results in PDF.</a>
       {% endif %}
-    </section>
-
-    <section class="col span_3 clr">
-      <h3>Performances</h3>
-      {% include "rescue/quicksearch.html" %}
-      {% include "rescue/performances.html" %}
     </section>
 
     <section class="col span_3 clr">

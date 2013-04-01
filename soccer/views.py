@@ -198,7 +198,7 @@ def matches_generate_listing(request):
             match.save()
             group.matches.add(match)
             matches.append(match)
-    return {'matches': matches}
+    return {'matches': matches, 'group': group}
 
 
 @login_required(login_url='/login/')

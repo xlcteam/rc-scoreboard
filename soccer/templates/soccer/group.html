@@ -14,6 +14,11 @@
 
 {% if teams %}
   <section class="row">
+    <section class="col span_5 clr">
+      <h3>Matches</h3>
+      {% include "soccer/quicksearch.html" %}
+      {% include "soccer/matches.html" %}
+    </section>
 
     <section class="col span_4 clr">
       <h3>Results</h3>
@@ -21,12 +26,6 @@
       {% if team_results %}
         <a class='button' style="margin-top: 10px;" href="/soccer/results/group/{{ group.id }}.pdf">Download results in PDF.</a>
       {% endif %}
-    </section>
-
-    <section class="col span_5 clr">
-      <h3>Matches</h3>
-      {% include "soccer/quicksearch.html" %}
-      {% include "soccer/matches.html" %}
     </section>
 
     <section class="col span_3 clr">

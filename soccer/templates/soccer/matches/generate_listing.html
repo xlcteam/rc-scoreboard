@@ -3,7 +3,9 @@
 {% block content %}
   <h2> Generated matches: </h2>
   {% include "soccer/matches.html" %}
+
+  <a href="{% url group group.id %}">Let's go back to the group listing.</a>
 {% endblock %}
-  
+
 
 

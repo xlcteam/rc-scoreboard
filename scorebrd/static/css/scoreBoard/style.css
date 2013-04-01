@@ -158,13 +158,13 @@ body {
 .element1 {
 	position: relative;
 	z-index: 20;
-        width: 420px !important;
+  width: 420px !important;
 }
 
 .element2 {
 	position: relative;
 	z-index: 20;
-        width: 420px !important;
+  width: 420px !important;
 }
 
 .goalLText {
@@ -342,5 +342,38 @@ button:active {
 
 #startText {
   text-align: center;
+}
+
+@media only screen and (max-width: 40em) { /*640*/
+  #startAll, .startText {
+    font-size: 2.5em; 
+  } 
+
+  .name {
+    font-size: 2.2em;
+  }
+  .time {
+    font-size: 2.5em;
+    text-align: center;
+  }
+  .halftime {
+    font-size: 2.5em;
+  }
+
+  .goalRText, .goalLText {
+    font-size: 4em; 
+  }
+
+  .third {
+    width: 47%; 
+  }
+  .score, .colon {
+    font-size: 4em; 
+  }
+
+  .element2, .element1 {
+    width: auto !important; 
+  }
+
 }
 

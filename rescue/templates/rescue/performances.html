@@ -8,7 +8,13 @@
                         {{ performance.team.name }}
                 </td>
                 <td align="center">
-                  <a class='smaller button orange' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>
+                {% if performance.round_number == 1 %}
+                  <a class='smaller button green' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>
+                {% elif performance.round_number == 2 %}
+                  <a class='smaller button orange' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>             
+                {% else %}
+                  <a class='smaller button blue' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>
+                {% endif %}
                 </td>
             {% elif not_started_only == False %}
                 <td class='left'>

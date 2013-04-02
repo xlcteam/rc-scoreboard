@@ -4,7 +4,7 @@
 <div id="fastinfo">&raquo;
     <a href="{% url scorebrd.views.index %}">{{SITE_NAME}}</a> &raquo;
     <a href="{% url rescue.views.index_rescue %}">Rescue</a> &raquo; 
-    <a href="{% url soccer.views.competition competition.id %}">{{competition.name}}</a> 
+    <a href="{% url rescue.views.competition competition.id %}">{{competition.name}}</a> 
 </div>
 {% endblock %}
 
@@ -13,6 +13,7 @@
   <div class="col span_6">
     <h2> Groups competing in {{ competition.name }} </h2>
     {% include "rescue/groups.html" %}
+    <a class='button red' style="margin-top: 10px;" href="/rescue/results/competition/{{ competition.id }}.pdf">Generate PDF!</a>
   </div>
 </section>
 {% endblock %}

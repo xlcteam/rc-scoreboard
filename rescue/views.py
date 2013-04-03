@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from rescue.models import (Competition, Group, Team, NewEventForm, Performance,
         NewTeamForm)
 from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 
 @render_to('rescue/index_rescue.html')
@@ -194,3 +195,98 @@ def performances_generate_listing(request):
     performances = group.performances.all().order_by('round_number')
     return {'performances': performances}
 
+@login_required(login_url='/login/')
+@csrf_exempt
+def performance_play(request, performance_id):
+    performance = get_object_or_404(Performance, pk=performance_id)
+       
+    return render_to_response('rescue/performances/play.html',
+                              {'performance': performance, 'performance_id': performance_id},
+                              context_instance=RequestContext(request))
+
+@render_to('rescue/performances/save.html')
+@login_required(login_url='/login/')
+def performance_save(request, performance_id):
+    scoresheet = {
+        'try' : {
+            'room1' : {1 : 60, 2 : 40, 3 : 20},
+            'room2' : {1 : 60, 2 : 40, 3 : 20},
+            'room3' : {1 : 60, 2 : 40, 3 : 20},
+            'ramp'  : {1 : 30, 2 : 20, 3 : 10},
+            'hallway':{1 : 30, 2 : 20, 3 : 10},
+            'victim': {1 : 60, 2 : 40, 3 : 20},      
+        },
+        'each' : {
+            'gap' : 10,
+            'obstacle': 10,
+            'speed_bump': 5,
+            'intersection': 10,
+        }
+    }    
+
+    def errorHandle(error, request, scoreA, scoreB, match_id):
+        form = MatchSaveForm(request.POST, initial={'scoreA': scoreA, 'scoreB': scoreB})
+        c = {}
+        c.update(csrf(request))
+        c['form'] = form
+        c['error'] = error
+        c['match_id'] = match_id
+        return c
+    
+    def authorize_and_save(request):
+        username = request.user
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                performance = get_object_or_404(Performance, pk=performance_id)
+                performance.referee = request.user
+                performance.playing = 'D'
+                
+                performance.room1 = scoresheet["try"]["room1"][int(request.POST["room1"])]
+                performance.room2 = scoresheet["try"]["room2"][int(request.POST["room2"])]
+                performance.room3 = scoresheet["try"]["room3"][int(request.POST["room3"])]
+                performance.ramp = scoresheet["try"]["ramp"][int(request.POST["ramp"])]
+                performance.hallway = scoresheet["try"]["hallway"][int(request.POST["hallway"])]
+                performance.victim = scoresheet["try"]["victim"][int(request.POST["victim"])]                
+                
+                performance.gap = scoresheet["each"]["gap"] * int(request.POST["gap"])
+                performance.obstacle = scoresheet["each"]["obstacle"] * int(request.POST["obstacle"])
+                performance.speed_bump = scoresheet["each"]["speed_bump"] * int(request.POST["speed_bump"])
+                performance.intersection = scoresheet["each"]["intersection"] * int(request.POST["intersection"])
+
+                performance.points = int(request.POST["points"])
+                
+                strtime = request.POST["time"]
+                finaltime = 0.0
+                finaltime += float(strtime.split(':')[0]) * 60.0 
+                finaltime += float(strtime.split(':')[1].replace(",", "."))
+                performance.time = finaltime                
+
+                performance.save()
+                messages.success(request, "Performance of team {0} has been successfuly saved"\
+                                        .format(performance.team.name))
+
+                return True
+        return errorHandle('Invalid login', request, scoreA, scoreB, match_id)
+
+    if request.method == 'POST':
+        if 'final' in request.POST:
+            res = authorize_and_save(request)
+            if res is True:
+                return redirect('index')
+            else:
+                return res
+        else:
+            form = MatchSaveForm(request.POST)
+            if form.is_valid(): 
+                res = authorize_and_save(request)
+                if res is True:
+                    return redirect('index')
+                else:
+                    return res
+            else:
+                return errorHandle(u'Invalid login')
+    else:
+        return {'error': "How on earth did you get here?"}

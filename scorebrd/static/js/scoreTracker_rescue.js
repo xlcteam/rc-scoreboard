@@ -2,8 +2,10 @@ function scoreTracker(options)
 {
     $this = this;
     $this.team = 'Robot';
-    $this.final_score = 0;;
+    $this.final_score = 0;
 
+    $this.mins = 8;
+    $this.secs = 0;
     $this.finished = false;
     $this.back_url = options['back_url'];
     $this.update_url = options['update_url'];
@@ -143,6 +145,15 @@ scoreTracker.prototype = {
         seconds = Math.floor(millis / 1000);                               
         millis = Math.floor(millis % 1000);                                
         millis = Math.floor(millis / 10);
+
+        if (minutes >= $this.mins){
+            if (seconds >= $this.secs){
+                $("#time").stopwatch().stopwatch('stop');        
+                $.idleTimer('destroy');
+                $this.finished = true;
+                $this.showD();
+            }
+        }
 		
         return [pad2(minutes), pad2(seconds)].join(':') + ',' + pad2(millis);
     },

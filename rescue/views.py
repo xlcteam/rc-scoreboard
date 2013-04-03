@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
 from rescue.models import (Competition, Group, Team, NewEventForm, Performance,
-        NewTeamForm)
+        NewTeamForm, MatchSaveForm)
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt

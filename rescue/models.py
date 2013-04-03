@@ -69,6 +69,10 @@ class Group(models.Model):
     teams = models.ManyToManyField(Team)
     performances = models.ManyToManyField(Performance)
 
+    # stuff for final table
+    result_table_generated = models.BooleanField(default=False)
+    perfs_final = models.ManyToManyField(Performance, related_name="final_results")
+
     def __unicode__(self):
         return self.name
 
@@ -81,6 +85,8 @@ class Group(models.Model):
     def results_round_3(self):
         return self.performances.filter(round_number=3).order_by('points', '-time').reverse()
 
+    def results_final(self):
+        return self.perfs_final.all().order_by('points', '-time').reverse()
 
 class Competition(models.Model):
     name = models.CharField(max_length=200)

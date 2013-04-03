@@ -59,6 +59,9 @@ def group(request, group_id):
     competition = group.competition_set.all()[0]
     performances = group.performances.all()
 
+    if group.perfs_final:
+        perfs_final = group.perfs_final.all()
+
     return {'group': group, 'teams': teams,
             'competition': competition,
             'performances': performances}
@@ -195,7 +198,7 @@ def performances_generate_listing(request):
        
     group.save()
     performances = group.performances.all().order_by('round_number')
-    return {'performances': performances}
+    return {'performances': performances, 'group': group}
 
 @login_required(login_url='/login/')
 @csrf_exempt
@@ -211,12 +214,12 @@ def performance_play(request, performance_id):
 def performance_save(request, performance_id):
     scoresheet = {
         'try' : {
-            'room1' : {1 : 60, 2 : 40, 3 : 20},
-            'room2' : {1 : 60, 2 : 40, 3 : 20},
-            'room3' : {1 : 60, 2 : 40, 3 : 20},
-            'ramp'  : {1 : 30, 2 : 20, 3 : 10},
-            'hallway':{1 : 30, 2 : 20, 3 : 10},
-            'victim': {1 : 60, 2 : 40, 3 : 20},      
+            'room1' : {1 : 60, 2 : 40, 3 : 20, '---': 0},
+            'room2' : {1 : 60, 2 : 40, 3 : 20, '---': 0},
+            'room3' : {1 : 60, 2 : 40, 3 : 20, '---': 0},
+            'ramp'  : {1 : 30, 2 : 20, 3 : 10, '---': 0},
+            'hallway':{1 : 30, 2 : 20, 3 : 10, '---': 0},
+            'victim': {1 : 60, 2 : 40, 3 : 20, '---': 0},      
         },
         'each' : {
             'gap' : 10,
@@ -248,6 +251,12 @@ def performance_save(request, performance_id):
         c['performance_id'] = performance_id
         return c
     
+    def check_try(post):
+        if post == '---':
+            return scoresheet["try"]["room1"][post]
+        else:
+            return scoresheet["try"]["room1"][int(post)]
+
     def authorize_and_save(request):
         username = request.user
         password = request.POST['password']
@@ -259,12 +268,12 @@ def performance_save(request, performance_id):
                 performance.referee = request.user
                 performance.playing = 'D'
                 
-                performance.room1 = scoresheet["try"]["room1"][int(request.POST["room1"])]
-                performance.room2 = scoresheet["try"]["room2"][int(request.POST["room2"])]
-                performance.room3 = scoresheet["try"]["room3"][int(request.POST["room3"])]
-                performance.ramp = scoresheet["try"]["ramp"][int(request.POST["ramp"])]
-                performance.hallway = scoresheet["try"]["hallway"][int(request.POST["hallway"])]
-                performance.victim = scoresheet["try"]["victim"][int(request.POST["victim"])]                
+                performance.room1 = check_try(request.POST['room1'])
+                performance.room2 = check_try(request.POST['room2'])
+                performance.room3 = check_try(request.POST['room3'])
+                performance.ramp = check_try(request.POST['ramp'])
+                performance.hallway = check_try(request.POST['hallway'])
+                performance.victim = check_try(request.POST['victim'])              
                 
                 performance.gap = scoresheet["each"]["gap"] * int(request.POST["gap"])
                 performance.obstacle = scoresheet["each"]["obstacle"] * int(request.POST["obstacle"])
@@ -306,3 +315,35 @@ def performance_save(request, performance_id):
                 return errorHandle('Invalid login', request, performance_id)
     else:
         return {'error': "How on earth did you get here?"}
+
+@login_required(login_url='/login/')
+def table_final_generate(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    for team in group.teams.all():
+        teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()   
+        
+        newperf = Performance(team=team, round_number=4)
+        newperf.referee = request.user
+        newperf.room1 = teamres[0].room1 + teamres[1].room1
+        newperf.room2 = teamres[0].room2 + teamres[1].room2
+        newperf.room3 = teamres[0].room3 + teamres[1].room3
+        newperf.ramp = teamres[0].ramp + teamres[1].ramp
+        newperf.hallway = teamres[0].hallway + teamres[1].hallway
+        newperf.gap = teamres[0].gap + teamres[1].gap
+        newperf.obstacle = teamres[0].obstacle + teamres[1].obstacle
+        newperf.speed_bump = teamres[0].speed_bump + teamres[1].speed_bump
+        newperf.intersection = teamres[0].intersection + teamres[1].intersection
+        newperf.victim = teamres[0].victim + teamres[1].victim
+
+        newperf.points = teamres[0].points + teamres[1].points
+        newperf.time = teamres[0].time + teamres[1].time
+        
+        newperf.save()
+        group.perfs_final.add(newperf)
+
+    group.result_table_generated = True
+    group.save()
+    return redirect('rescue.views.group', group_id)
+
+
+

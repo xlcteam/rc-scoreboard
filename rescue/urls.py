@@ -19,6 +19,7 @@ urlpatterns = patterns('rescue.views',
     url(r'^performances/generate/(?P<group_id>\d+)/?$', 'performances_generate'),
     url(r'^performances/generate/?$', 'performances_generate_listing'),
 
+    url(r'^table/final/generate/(?P<group_id>\d+)/?$', 'table_final_generate'),
     url(r'^performance/play/(?P<performance_id>\d+)/?$', 'performance_play',
         name='performance_play'),
     url(r'^performance/save/(?P<performance_id>\d+)/?$', 'performance_save', 

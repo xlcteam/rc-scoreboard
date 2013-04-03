@@ -1,7 +1,7 @@
 {% extends "@layout.html" %}
 
 {% block content %}
-  <h2> Generated performances: </h2>
+  <h2> Generated performances of group <a href="{% url rescue.views.group group.id %}">{{group.name}}</a>: </h2>
   {% include "rescue/performances.html" %}
 {% endblock %}
   

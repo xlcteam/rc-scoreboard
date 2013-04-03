@@ -95,7 +95,8 @@
 	<div id="dialogMain">
     <div id="dialog" title="Results of the team Robot" style="font-size:50.5%;">
 			<div style="height: 70px; font-size:130.5%;text-align: center;">
-        <form action="" method="POST" id="dialogForm">
+        <form action="{% url rescue.views.performance_save performance_id %}" method="POST" id="dialogForm">
+          {% csrf_token %}
           <table style="width: 50%; float: right;">
             <tr>
               <td style="float: right;">Gap:</td>
@@ -114,7 +115,7 @@
               <td> <input style="width: 30px;" type="text" id="intersection" name="intersection"/>x</td>
             <tr>
           </table>
-           
+
           <table style="width: 50%;">
             <tr>
               <td style="float: right;">Room 1:</td>
@@ -139,7 +140,7 @@
             <tr>
               <td style="float: right;">Victim:</td>
               <td> <input style="width: 30px;" type="text" id="victim" name="victim"/>. try</td>
-            </tr> 
+            </tr>
           </table>
 
           <div style="width: 100%; text-alig: center;">
@@ -151,8 +152,8 @@
               </tr>
             </table>
             <table>
-              <tr> 
-                <td>Time:</td> 
+              <tr>
+                <td>Time:</td>
                 <td><input style="width: 130px;" type="text" id="time_dialog" name="time_dialog"/></td>
               </tr>
             </table>
@@ -169,7 +170,7 @@
 			</div>
 		</div>
 	</div>
-    
+
   <div id="names">
     <div class="name"><span class="element1" id="name1">Robot</span></div>
   </div>
@@ -205,7 +206,7 @@
       </tr>
     </table>
   </div>
-  
+
   <div id="scores_each" class="scores" style="width: 50%;">
     <table style="margin: 0 auto; font-size: 100%; color: #8E8E8E;">
       <tr>
@@ -249,7 +250,7 @@
         <td><span id="Tryvictim" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
         <td><a class="button green" onclick="ST.addTry('#Tryvictim', 'victim');">+</a></td>
       </tr>
-    </table>     
+    </table>
   </div>
   <div style="clear:both;"></div>
 

@@ -280,10 +280,12 @@ def performance_save(request, performance_id):
                 return True
         return errorHandle('Invalid login', request, performance_id)
 
+    
     if request.method == 'POST':
         if 'final' in request.POST:
             res = authorize_and_save(request)
             if res is True:
+                print "redirecting to index"
                 return redirect('index')
             else:
                 return res
@@ -292,6 +294,7 @@ def performance_save(request, performance_id):
             if form.is_valid(): 
                 res = authorize_and_save(request)
                 if res is True:
+                    print "redirecting to index"
                     return redirect('index')
                 else:
                     return res

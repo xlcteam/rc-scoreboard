@@ -152,6 +152,8 @@ scoreTracker.prototype = {
 	    $("#dialog").dialog({ 
             buttons: {
             "Send results": function() {
+                window.onbeforeunload = function(){}
+
                 var df = confirm("Are you sure you want to save these results?");
 
                 if (df)

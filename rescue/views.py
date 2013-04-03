@@ -230,11 +230,12 @@ def performance_save(request, performance_id):
         post = request.POST
         initial = {'gap': post["gap"], 'obstacle': post["obstacle"],
                         'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
-                        'time': unicode(post["time_dialog"]), 'points': int(post["points_dialog"]),}
+                        'time': post["time_dialog"], 'points': post["points_dialog"],}
 
         for x in scoresheet["try"]:
+            
             if post[x] == u'---':
-                initial[x] = u'0'
+                initial[x] = u'4'
             else:            
                 initial[x] = post[x]
 
@@ -302,6 +303,6 @@ def performance_save(request, performance_id):
                 else:
                     return res
             else:
-                return errorHandle(u'Invalid login')
+                return errorHandle('Invalid login', request, performance_id)
     else:
         return {'error': "How on earth did you get here?"}

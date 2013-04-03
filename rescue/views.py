@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from rescue.models import (Competition, Group, Team, NewEventForm, Performance,
         NewTeamForm)
 from django.core.context_processors import csrf
+from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.template import Context, RequestContext
@@ -233,7 +234,7 @@ def performance_save(request, performance_id):
                         'hallway': post["hallway"], 'victim': post["victim"],
                         'gap': post["gap"], 'obstacle': post["obstacle"],
                         'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
-                        'time': post["time"], 'points': post["points"],
+                        'time': post["time"], 'points': post["points_dialog"],
                 })
         c = {}
         c.update(csrf(request))

@@ -1,0 +1,262 @@
+<html>
+  <head>
+    <title> scoreTracker - rescue</title>
+    <meta http-equiv="Content-Language" content="en-EN">
+
+    <script src="{{ STATIC_URL }}/js/lib/jquery.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery-ui.min.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/keylock.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.keylock.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.idle-timer.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.stopwatch.js"></script>
+    <script src="{{ STATIC_URL }}/js/scoreTracker_rescue.js"></script>
+    <script src="{{ STATIC_URL }}/js/fills.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/scoreBoard/style_rescue.css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/jquery-ui.css" type="text/css"/>
+
+    <script>
+            window.onbeforeunload = function(){
+                    if (window.finished)
+                        return;
+                    else
+                        return 'Are you sure you want to quit?';
+            }
+    </script>
+
+    <script>
+        var ST = new scoreTracker({
+          'update_url':  "{% url rescue.views.performance_play performance_id %}",
+          'back_url': "{% url rescue.views.index_rescue %}"
+        });
+
+        $(document).ready(function() {
+            $('#dialogMain').hide();
+            $('#tabs').tabs();
+
+          $(".btn-slide").click(function(){
+              $("#panel").slideToggle("slow");
+              if ($(this).text() == String.fromCharCode(9660)) {
+                  $(this).text(String.fromCharCode(9650));
+              } else {
+                  $(this).text(String.fromCharCode(9660));
+              }
+          });
+
+          $.idleTimer(2500);
+          $(document).bind("idle.idleTimer", function() {
+            $("#main").fadeOut("slow");
+            $("#underMain").fadeOut("slow");
+          });
+          $(document).bind("active.idleTimer", function() {
+            $("#main").fadeIn("slow");
+            $("#underMain").fadeIn("slow");
+          });
+
+          $('.element3').click(ST.toggle);
+          $(".element3").bind("mouseover", fill3);
+          $(".element3").bind("mouseout", unfill3);
+          $(".startBckg").bind("mouseover", fill3);
+          $(".startBckg").bind("mouseout", unfill3);
+
+        });
+  	</script>
+
+</head>
+<body>
+    <div id="startAll" onclick="ST.startPerf()">
+      <div id="startText">Start 1. round</div>
+    </div>
+	<div id="underMain">
+        <div id="panel">
+			<div id="tabs">
+    	<ul>
+    		<li><a href="#fragment-1"><span>Settings</span></a></li>
+			</ul>
+
+				<div id="fragment-1">
+					<div class="placeholder"><button id="btnResetTime" onclick="ST.resetTime()">Reset Time</button></div>
+					<div class="placeholder"><button id="btnResetScore" onclick="ST.resetScore()">Reset Score</button></div>
+					<div class="placeholder"><button id="btnShowDialog" onclick="ST.showD()">Show Dialog</button></div>
+				</div>
+
+			</div>
+		</div>
+		<div class="slide" style="text-align: center;"><span class="btn-slide">&#9660;</span></div>
+	</div>
+
+	<div id="main">
+		<div class="middleBckg">    <a class="button orange" onclick="ST.showD" style="position: absolute; right: 2px; bottom: 2px;"> Send Results </a></div>
+    <div class="startBckg" onclick="ST.toggle()">
+			<span id="btnStart" class="startText">Start</span>
+    </div>
+	</div>
+
+	<!-- dialog, hidden at the begin of game by jquery funct .hide() -->
+	<div id="dialogMain">
+    <div id="dialog" title="Results of the team Robot" style="font-size:50.5%;">
+			<div style="height: 70px; font-size:130.5%;text-align: center;">
+        <form action="" method="POST" id="dialogForm">
+          <table style="width: 50%; float: right;">
+            <tr>
+              <td style="float: right;">Gap:</td>
+              <td> <input style="width: 30px;" type="text" id="gap" name="gap"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">Obstacle:</td>
+              <td> <input style="width: 30px;" type="text" id="obstacle" name="obstacle"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">Speed bump:</td>
+              <td> <input style="width: 30px;" type="text" id="speed_bump" name="speed_bump"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">Intersection:</td>
+              <td> <input style="width: 30px;" type="text" id="intersection" name="intersection"/>x</td>
+            <tr>
+          </table>
+           
+          <table style="width: 50%;">
+            <tr>
+              <td style="float: right;">Room 1:</td>
+              <td> <input style="width: 30px;" type="text" id="room1" name="room1"/>. try</td>
+            </tr>
+            <tr>
+              <td style="float: right;">Room 2:</td>
+              <td> <input style="width: 30px;" type="text" id="room2" name="room2"/>. try</td>
+            </tr>
+            <tr>
+              <td style="float: right;">Room 3:</td>
+              <td> <input style="width: 30px;" type="text" id="room3" name="room3"/>. try</td>
+            </tr>
+            <tr>
+              <td style="float: right;">Ramp:</td>
+              <td> <input style="width: 30px;" type="text" id="ramp" name="ramp"/>. try</td>
+            </tr>
+            <tr>
+              <td style="float: right;">Hallway:</td>
+              <td> <input style="width: 30px;" type="text" id="hallway" name="hallway"/>. try</td>
+            </tr>
+            <tr>
+              <td style="float: right;">Victim:</td>
+              <td> <input style="width: 30px;" type="text" id="victim" name="victim"/>. try</td>
+            </tr> 
+          </table>
+
+          <div style="width: 100%; text-alig: center;">
+            <table style="float: right;">
+              <tr>
+                <td><strong>Points:</strong></td>
+                <td><input style="width: 130px;" type="text" id="points_dialog" name="points_dialog"/></td>
+                <td><input type="button" value="Recount" onclick="ST.recount();"/></td>
+              </tr>
+            </table>
+            <table>
+              <tr> 
+                <td>Time:</td> 
+                <td><input style="width: 130px;" type="text" id="time_dialog" name="time_dialog"/></td>
+              </tr>
+            </table>
+          </div>
+          <hr>
+          <table style="padding-top: 10px;">
+            <tr>
+              <td>Your password: </td>
+              <td><input type="password" name="pass" /> </td>
+            </tr>
+          </table>
+          <input type="hidden" name="final" value="true" />
+        </form>
+			</div>
+		</div>
+	</div>
+    
+  <div id="names">
+    <div class="name"><span class="element1" id="name1">Robot</span></div>
+  </div>
+
+  <div id="scores_try" class="scores" style="width: 50%;float: right;">
+    <table style="margin: 0 auto; font-size: 100%; color: #8E8E8E;">
+      <tr>
+        <td> Gap: </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachgap', 'gap');">-</a> </td>
+        <td> <span id="Eachgap" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachgap', 'gap');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td>Obstacle: </td>
+        <td><a class="button red" onclick="ST.rmEach('#Eachobstacle', 'obstacle');">-</a> </td>
+        <td><span id="Eachobstacle" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td><a class="button green" onclick="ST.addEach('#Eachobstacle', 'obstacle');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td>Speed Bump: </td>
+        <td><a class="button red" onclick="ST.rmEach('#Eachspeed_bump', 'speed_bump');">-</a> </td>
+        <td><span id="Eachspeed_bump" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td><a class="button green" onclick="ST.addEach('#Eachspeed_bump', 'speed_bump');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td>Intersection: </td>
+        <td><a class="button red" onclick="ST.rmEach('#Eachintersection', 'intersection');">-</a> </td>
+        <td><span id="Eachintersection" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td><a class="button green" onclick="ST.addEach('#Eachintersection', 'intersection');">+</a> </td>
+      </tr>
+    </table>
+  </div>
+  
+  <div id="scores_each" class="scores" style="width: 50%;">
+    <table style="margin: 0 auto; font-size: 100%; color: #8E8E8E;">
+      <tr>
+        <td>Room 1:</td>
+        <td><a class="button red" onclick="ST.rmTry('#Tryroom1', 'room1');">-</a></td>
+        <td><span id="Tryroom1" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><a class="button green" onclick="ST.addTry('#Tryroom1', 'room1');">+</a></td>
+      </tr>
+
+      <tr>
+        <td>Room 2:</td>
+        <td><a class="button red" onclick="ST.rmTry('#Tryroom2', 'room2');">-</a></td>
+        <td><span id="Tryroom2" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><a class="button green" onclick="ST.addTry('#Tryroom2', 'room2');">+</a></td>
+      </tr>
+
+      <tr>
+        <td>Room 3:</td>
+        <td><a class="button red" onclick="ST.rmTry('#Tryroom3', 'room3');">-</a></td>
+        <td><span id="Tryroom3" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><a class="button green" onclick="ST.addTry('#Tryroom3', 'room3');">+</a></td>
+      </tr>
+
+      <tr>
+        <td>Ramp:</td>
+        <td><a class="button red" onclick="ST.rmTry('#Tryramp', 'ramp');">-</a></td>
+        <td><span id="Tryramp" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><a class="button green" onclick="ST.addTry('#Tryramp', 'ramp');">+</a></td>
+      </tr>
+
+      <tr>
+        <td>Hallway:</td>
+        <td><a class="button red" onclick="ST.rmTry('#Tryhallway', 'hallway');">-</a></td>
+        <td><span id="Tryhallway" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><a class="button green" onclick="ST.addTry('#Tryhallway', 'hallway');">+</a></td>
+      </tr>
+
+      <tr>
+        <td>Victim:</td>
+        <td><a class="button red" onclick="ST.rmTry('#Tryvictim', 'victim');">-</a></td>
+        <td><span id="Tryvictim" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><a class="button green" onclick="ST.addTry('#Tryvictim', 'victim');">+</a></td>
+      </tr>
+    </table>     
+  </div>
+  <div style="clear:both;"></div>
+
+  <div id="timeBar" class="element3">
+		<div id="time" class="time">00:00,00</div>
+	</div>
+	<div id="halftime" class="halftime"><span>1.</span></div>
+  <div style="clear: both;"></div>
+</body>
+</html>

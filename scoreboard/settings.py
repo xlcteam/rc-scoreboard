@@ -173,6 +173,7 @@ INSTALLED_APPS = (
     'dance',
     'rescue',
     'scorebrd',
+    'gunicorn',
 )
 
 GRAPPELLI_ADMIN_TITLE = 'scoreBoard Administration'

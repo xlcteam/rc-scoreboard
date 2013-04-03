@@ -228,14 +228,18 @@ def performance_save(request, performance_id):
 
     def errorHandle(error, request, performance_id):
         post = request.POST
-        form = MatchSaveForm(post,
-                initial={'room1': post["room1"], 'room2': post["room2"],
-                        'room3': post["room3"], 'ramp': post["ramp"],
-                        'hallway': post["hallway"], 'victim': post["victim"],
-                        'gap': post["gap"], 'obstacle': post["obstacle"],
+        initial = {'gap': post["gap"], 'obstacle': post["obstacle"],
                         'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
-                        'time': str(post["time_dialog"]), 'points': int(post["points_dialog"]),
-                })
+                        'time': unicode(post["time_dialog"]), 'points': int(post["points_dialog"]),}
+
+        for x in scoresheet["try"]:
+            if post[x] == u'---':
+                initial[x] = u'0'
+            else:            
+                initial[x] = post[x]
+
+        print initial
+        form = MatchSaveForm(post, initial=initial)
         c = {}
         c.update(csrf(request))
         c['form'] = form
@@ -275,7 +279,7 @@ def performance_save(request, performance_id):
                 performance.time = finaltime                
 
                 performance.save()
-                messages.success(request, "Performance of team {0} has been successfuly saved"\
+                messages.success(request, "Performance of team {0} has been successfully saved"\
                                         .format(performance.team.name))
 
                 return True

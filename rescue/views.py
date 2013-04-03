@@ -266,9 +266,9 @@ def performance_save(request, performance_id):
                 performance.speed_bump = scoresheet["each"]["speed_bump"] * int(request.POST["speed_bump"])
                 performance.intersection = scoresheet["each"]["intersection"] * int(request.POST["intersection"])
 
-                performance.points = int(request.POST["points"])
+                performance.points = int(request.POST["points_dialog"])
                 
-                strtime = request.POST["time"]
+                strtime = request.POST["time_dialog"]
                 finaltime = 0.0
                 finaltime += float(strtime.split(':')[0]) * 60.0 
                 finaltime += float(strtime.split(':')[1].replace(",", "."))
@@ -286,8 +286,7 @@ def performance_save(request, performance_id):
         if 'final' in request.POST:
             res = authorize_and_save(request)
             if res is True:
-                print "redirecting to index"
-                return redirect('index')
+                return redirect('rescue.views.index_rescue')
             else:
                 return res
         else:
@@ -295,8 +294,7 @@ def performance_save(request, performance_id):
             if form.is_valid(): 
                 res = authorize_and_save(request)
                 if res is True:
-                    print "redirecting to index"
-                    return redirect('index')
+                    return redirect('rescue.views.index_rescue')
                 else:
                     return res
             else:

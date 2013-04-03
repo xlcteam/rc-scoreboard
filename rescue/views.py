@@ -224,13 +224,21 @@ def performance_save(request, performance_id):
         }
     }    
 
-    def errorHandle(error, request, scoreA, scoreB, match_id):
-        form = MatchSaveForm(request.POST, initial={'scoreA': scoreA, 'scoreB': scoreB})
+    def errorHandle(error, request, performance_id):
+        post = request.POST
+        form = MatchSaveForm(post,
+                initial={'room1': post["room1"], 'room2': post["room2"],
+                        'room3': post["room3"], 'ramp': post["ramp"],
+                        'hallway': post["hallway"], 'victim': post["victim"],
+                        'gap': post["gap"], 'obstacle': post["obstacle"],
+                        'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
+                        'time': post["time"], 'points': post["points"],
+                })
         c = {}
         c.update(csrf(request))
         c['form'] = form
         c['error'] = error
-        c['match_id'] = match_id
+        c['performance_id'] = performance_id
         return c
     
     def authorize_and_save(request):
@@ -269,7 +277,7 @@ def performance_save(request, performance_id):
                                         .format(performance.team.name))
 
                 return True
-        return errorHandle('Invalid login', request, scoreA, scoreB, match_id)
+        return errorHandle('Invalid login', request, performance_id)
 
     if request.method == 'POST':
         if 'final' in request.POST:

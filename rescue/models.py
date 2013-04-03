@@ -8,10 +8,10 @@ class NewTeamForm(forms.Form):
     names = forms.CharField(widget=forms.Textarea(attrs={'size':'20'}))
 
 class MatchSaveForm(forms.Form):
-    room1 = forms.IntegerField(label='Room 1')
-    room2 = forms.IntegerField(label='Room 2')
-    room3 = forms.IntegerField(label='Room 3')
-    ramp = forms.IntegerField(label='Ramp')
+    room1 = forms.IntegerField(label='Room 1 (try)')
+    room2 = forms.IntegerField(label='Room 2 (try)')
+    room3 = forms.IntegerField(label='Room 3 (try)')
+    ramp = forms.IntegerField(label='Ramp (try)')
     hallway = forms.IntegerField(label='Obstacle')
     victim = forms.IntegerField(label='Victim')
     gap = forms.IntegerField(label='Room 1')
@@ -19,7 +19,7 @@ class MatchSaveForm(forms.Form):
     speed_bump = forms.IntegerField(label='Speed Bump')
     intersection = forms.IntegerField(label='Intersection')
 
-    time = forms.IntegerField(label='Time')
+    time = forms.CharField(label='Time')
     points = forms.IntegerField(label='Points')
     password = forms.CharField(widget=forms.PasswordInput(render_value=False),
                                 max_length=100)

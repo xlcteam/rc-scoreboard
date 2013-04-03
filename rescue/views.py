@@ -234,7 +234,7 @@ def performance_save(request, performance_id):
                         'hallway': post["hallway"], 'victim': post["victim"],
                         'gap': post["gap"], 'obstacle': post["obstacle"],
                         'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
-                        'time': post["time"], 'points': post["points_dialog"],
+                        'time': str(post["time_dialog"]), 'points': int(post["points_dialog"]),
                 })
         c = {}
         c.update(csrf(request))

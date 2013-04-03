@@ -175,7 +175,7 @@ scoreTracker.prototype = {
                 }	
             },
             width: 550,
-            height: 435
+            height: 440
         });
 
         for (x in $this.scores["try"]){

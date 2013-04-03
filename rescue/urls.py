@@ -21,7 +21,7 @@ urlpatterns = patterns('rescue.views',
 
     url(r'^performance/play/(?P<performance_id>\d+)/?$', 'performance_play',
         name='performance_play'),
-    url(r'^performance/save/(?P<match_id>\d+)/?$', 'performance_save', 
+    url(r'^performance/save/(?P<performance_id>\d+)/?$', 'performance_save', 
         name='performance_save'),
 
     url(r'^results/live/?$', 'results_live'),

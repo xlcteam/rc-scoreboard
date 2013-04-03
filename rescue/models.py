@@ -8,10 +8,10 @@ class NewTeamForm(forms.Form):
     names = forms.CharField(widget=forms.Textarea(attrs={'size':'20'}))
 
 class MatchSaveForm(forms.Form):
-    room1 = forms.IntegerField(label='Room 1')
-    room2 = forms.IntegerField(label='Room 2')
-    room3 = forms.IntegerField(label='Room 3')
-    ramp = forms.IntegerField(label='Ramp')
+    room1 = forms.IntegerField(label='Room 1 (try)')
+    room2 = forms.IntegerField(label='Room 2 (try)')
+    room3 = forms.IntegerField(label='Room 3 (try)')
+    ramp = forms.IntegerField(label='Ramp (try)')
     hallway = forms.IntegerField(label='Obstacle')
     victim = forms.IntegerField(label='Victim')
     gap = forms.IntegerField(label='Room 1')
@@ -19,7 +19,7 @@ class MatchSaveForm(forms.Form):
     speed_bump = forms.IntegerField(label='Speed Bump')
     intersection = forms.IntegerField(label='Intersection')
 
-    time = forms.IntegerField(label='Time')
+    time = forms.CharField(label='Time')
     points = forms.IntegerField(label='Points')
     password = forms.CharField(widget=forms.PasswordInput(render_value=False),
                                 max_length=100)
@@ -69,6 +69,10 @@ class Group(models.Model):
     teams = models.ManyToManyField(Team)
     performances = models.ManyToManyField(Performance)
 
+    # stuff for final table
+    result_table_generated = models.BooleanField(default=False)
+    perfs_final = models.ManyToManyField(Performance, related_name="final_results")
+
     def __unicode__(self):
         return self.name
 
@@ -81,6 +85,8 @@ class Group(models.Model):
     def results_round_3(self):
         return self.performances.filter(round_number=3).order_by('points', '-time').reverse()
 
+    def results_final(self):
+        return self.perfs_final.all().order_by('points', '-time').reverse()
 
 class Competition(models.Model):
     name = models.CharField(max_length=200)

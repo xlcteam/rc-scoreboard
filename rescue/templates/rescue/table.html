@@ -1,5 +1,9 @@
 {% if performances %}
-  <h4>Round {{ round }}</h4>
+  {% if round %}
+    <h4>Round {{ round }}</h4>
+  {% else %}
+    <h1>Final</h1>
+  {% endif %}
   <table class='teamTable'>
   <tr>
       <th> <abbr title="Position in the table"> Pos. </abbr></th>

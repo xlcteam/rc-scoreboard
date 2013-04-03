@@ -6,6 +6,7 @@ from rescue.models import (Competition, Group, Team, NewEventForm, Performance,
 from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+from django.template import Context, RequestContext
 
 @render_to('rescue/index_rescue.html')
 def index_rescue(request):

@@ -11,7 +11,7 @@
     <script src="{{ STATIC_URL }}/js/lib/jquery.stopwatch.js"></script>
     <script src="{{ STATIC_URL }}/js/scoreTracker_rescue.js"></script>
     <script src="{{ STATIC_URL }}/js/fills.js"></script>
-    <link rel="stylesheet" href="{{ STATIC_URL }}/css/style_rescue.css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/scoreBoard/style_rescue.css"/>
     <link rel="stylesheet" href="{{ STATIC_URL }}/css/jquery-ui.css" type="text/css"/>
 
     <script>
@@ -25,8 +25,8 @@
 
     <script>
         var ST = new scoreTracker({
-          'update_url':  "{% url performance_play performance_id %}",
-          'back_url': "{% url index_rescue %}"
+          'update_url':  "{% url rescue.views.performance_play performance_id %}",
+          'back_url': "{% url rescue.views.index_rescue %}"
         });
 
         $(document).ready(function() {

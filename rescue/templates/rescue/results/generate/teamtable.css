@@ -1,0 +1,67 @@
+body {
+  background-color: #ffffff !important;
+  font-family: Verdana, "Geneva CE", lucida, sans-serif;
+}
+
+h1, h2, h3 {
+  color: #000000 !important;
+  font-family: Georgia, "New York CE", utopia, serif;
+}
+
+.teamTable {
+  padding-top: 20px;
+  margin: 0 auto;
+}
+
+.teamTable{
+        text-align: center;
+        border-spacing: 0;
+}
+
+.teamTable th{
+        margin: 0 5px;
+        font-size: 120%;
+        min-width: 30px;
+        border: 0;
+}
+
+.teamTable td{
+        padding: 2px 7px;
+        margin: 0;
+        border: 0;
+        text-align: right;
+}
+
+.teamTable .name {
+        min-width: 120px;
+        text-align: left;
+        font-weight: bold;
+}
+
+.points {
+    background: #444;
+    color: #fff;
+    font-weight: bold;
+}
+
+.even {
+  background-color: #E6E6E6;
+}
+
+.odd {
+  background-color: #ffffff;
+}
+
+
+#paper {
+  text-align: center;
+}
+
+.matchTable {
+  padding-top: 20px;
+  margin: 0 auto;
+}
+
+.footer {
+  padding-top: 30px;
+}

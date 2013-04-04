@@ -17,12 +17,14 @@
         {% if matches %}
             {% for match in matches %}
                 <li> <strong>{{ match.teamA.name }} </strong>
-                            {{ match.teamA }}:{{ match.teamB }}
+                            {{ match.scoreA }}:{{ match.scoreB }}
                     <strong>{{ match.teamB.name }}</strong>
                 </li>
             {% endfor %}
-            {% if matches|length <= 2 %}
-              <li> <div style="width: 3 - {{ matches|length  }}*300px;"></div></li>
+            {% if matches|length <= 1 %}
+              <li> <div style="width: 800px;"></div></li>
+            {% elif %}
+              <li> <div style="width: 600px;"></div></li>
             {% endif %}
         {% else %}
           <li> No matches are being played at the moment.

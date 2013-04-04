@@ -319,7 +319,8 @@ def results_live(request):
                 'group': group, 'group_only': True}
 
     else:
-        return {'competitions': Competition.objects.all()}
+        return {'competitions': Competition.objects.all(), 
+                'matches': Match.objects.filter(playing='P')}
 
 @render_to('soccer/results/livefeed.html')
 def results_live_feed(request):

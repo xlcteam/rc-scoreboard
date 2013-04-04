@@ -23,7 +23,7 @@
             {% endfor %}
             {% if matches|length <= 1 %}
               <li> <div style="width: 800px;"></div></li>
-            {% elif %}
+            {% elif matches|length <= 2 %}
               <li> <div style="width: 600px;"></div></li>
             {% endif %}
         {% else %}

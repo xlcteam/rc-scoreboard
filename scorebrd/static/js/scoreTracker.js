@@ -53,9 +53,8 @@ scoreTracker.prototype = {
 	        $("#team1").html($this.scoreA);
 	        if(document.forms['effects'][0].checked) {
 	            $this.scaling1 = 1;
-		        $("#team1").effect("scale", { percent: 150}, 500)
-			               .effect("scale", { percent: (100 / (150 / 100))}, 1000, function(){
-
+				$("#team1").animate({ fontSize: '1.5em'}, 500)
+                           .animate({ fontSize: '1em'}, 1000, function(){
                                     $(this).css({'left': '0px', 'right': '0px', 'top': '0px', 'bottom': '0px'});        
 	                                $this.scaling1 = 0;
 	                        });
@@ -77,9 +76,8 @@ scoreTracker.prototype = {
 		    $("#team2").html($this.scoreB);
 		    if(document.forms['effects'][0].checked) {
 			    $this.scaling2 = 1;
-			    $("#team2").effect("scale", { percent: 150}, 500)
-				           .effect("scale", { percent: 100 / (150 / 100)}, 1000, function(){
-
+				$("#team2").animate({ fontSize: '1.5em'}, 500)
+                           .animate({ fontSize: '1em'}, 1000, function(){
                                     $(this).css({'left': '0px', 'right': '0px', 'top': '0px', 'bottom': '0px'});        
 								    $this.scaling2 = 0;
 			                });
@@ -105,9 +103,8 @@ scoreTracker.prototype = {
 			    if(document.forms['effects'][0].checked) {
 				    $this.scaling1 = 1;	
                     //soundPlay("whistle");
-				    $("#team1").effect("scale", { percent: 150}, 500)
-		                 	   .effect("scale", { percent: (100 / (150 / 100.0))}, 1000, function(){
-
+				    $("#team1").animate({ fontSize: '1.5em'}, 500)
+				               .animate({ fontSize: '1em'}, 1000, function(){
                                     $(this).css({'left': '0px', 'right': '0px', 'top': '0px', 'bottom': '0px'});        
                         	        $this.scaling1 = 0;
 						        });
@@ -133,8 +130,8 @@ scoreTracker.prototype = {
 			    if(document.forms['effects'][0].checked) {
 				    $this.scaling2 = 1;
                     //soundPlay("whistle");
-				    $("#team2").effect("scale", { percent: 150}, 500)
-				               .effect("scale", { percent: (100 / (150 / 100.0))}, 1000, function(){
+				    $("#team2").animate({ fontSize: '1.5em'}, 500)
+				               .animate({ fontSize: '1em'}, 1000, function(){
                                     $(this).css({'left': '0px', 'right': '0px', 'top': '0px', 'bottom': '0px'});        
 								    $this.scaling2 = 0
 							    });

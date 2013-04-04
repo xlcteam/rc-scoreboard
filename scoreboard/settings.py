@@ -1,6 +1,6 @@
 # Django settings for scoreboard project.
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 import os
@@ -67,7 +67,10 @@ STATIC_ROOT = os.path.join(DIR, 'staticed/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/staticed/'
+if DEBUG:
+    STATIC_URL = '/scorebrd/static/'
+else:
+    STATIC_URL = '/staticed/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (

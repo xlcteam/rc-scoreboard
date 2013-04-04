@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Language" content="en-EN">
 
     <script src="{{ STATIC_URL }}/js/lib/jquery.js"></script>
-    <script src="{{ STATIC_URL }}/js/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     <script src="{{ STATIC_URL }}/js/lib/keylock.js"></script>
     <script src="{{ STATIC_URL }}/js/lib/jquery.keylock.js"></script>
     <script src="{{ STATIC_URL }}/js/lib/jquery.idle-timer.js"></script>
@@ -12,7 +12,7 @@
     <script src="{{ STATIC_URL }}/js/scoreTracker.js"></script>
     <script src="{{ STATIC_URL }}/js/fills.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}/css/scoreBoard/style.css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}/css/jquery-ui.css" type="text/css"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" type="text/css"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
     <script>
             window.onbeforeunload = function(){
@@ -128,7 +128,6 @@
         		<li><a href="#fragment-1"><span>Settings</span></a></li>
         		<li><a href="#fragment-2"><span>ADV Settings</span></a></li>
     			</ul>
-
 					<div id="fragment-1">
 						<div class="placeholder"><button id="btnResetTime" onclick="ST.resetTime()">Reset Time</button></div>
 						<div class="placeholder"><button id="btnResetScore" onclick="ST.resetScore()">Reset Score</button></div>

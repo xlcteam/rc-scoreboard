@@ -321,6 +321,12 @@ def results_live(request):
     else:
         return {'competitions': Competition.objects.all()}
 
+@render_to('soccer/results/livefeed.html')
+def results_live_feed(request):
+    print "in here"
+    return {'matches': Match.objects.filter(playing='P')}
+
+
 def results(request):
     pass
 

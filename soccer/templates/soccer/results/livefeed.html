@@ -1,0 +1,12 @@
+{% if matches %}
+    {% for match in matches %}
+        <li> <strong>{{ match.teamA.name }} </strong>
+                    {{ match.scoreA }}:{{ match.scoreB }}
+            <strong>{{ match.teamB.name }}</strong>
+        </li>
+    {% endfor %}
+{% else %}
+  <li> No matches are being played at the moment.
+  <li> Sorry for any inconvenience.
+{% endif %}
+

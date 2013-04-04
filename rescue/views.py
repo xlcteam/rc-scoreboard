@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.template import Context, RequestContext
+from rescue.helpers import *
 
 @render_to('rescue/index_rescue.html')
 def index_rescue(request):
@@ -346,4 +347,12 @@ def table_final_generate(request, group_id):
     return redirect('rescue.views.group', group_id)
 
 
+@login_required(login_url='/login/')
+def results_group_pdf(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    competition = group.competition_set.all()[0]
+    performances = group.performances.all()
 
+    return render_to_pdf(request, 'rescue/results/generate/group.html',
+                            {'competition': competition, 'group': group,
+                             'performances': performances})

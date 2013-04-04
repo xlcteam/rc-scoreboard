@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      {% include "rescue/results/generate/teamtable.css" %}
+    </style>
+
+  </head>
+  <body>
+    <div id="paper">
+      <strong><h1>{{ SITE_NAME }}</h1></strong>
+      <h3>{{ competition.name}} - {{group.name}}</h3>
+      {% include "rescue/results.html" %}
+
+      {% include "rescue/results/generate/footer.html" %}
+  </div>
+  </body>
+</html>

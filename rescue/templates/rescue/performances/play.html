@@ -114,6 +114,10 @@
               <td style="float: right;">Intersection:</td>
               <td> <input style="width: 30px;" type="text" id="intersection" name="intersection"/>x</td>
             <tr>
+            <tr>
+              <td style="float: right;">Lift:</td>
+              <td> <input style="width: 30px;" type="text" id="lift" name="lift"/>x</td>
+            <tr>
           </table>
 
           <table style="width: 50%;">
@@ -203,6 +207,13 @@
         <td><a class="button red" onclick="ST.rmEach('#Eachintersection', 'intersection');">-</a> </td>
         <td><span id="Eachintersection" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
         <td><a class="button green" onclick="ST.addEach('#Eachintersection', 'intersection');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td>Lift: </td>
+        <td><a class="button red" onclick="ST.rmEach('#Eachlift', 'lift');">-</a> </td>
+        <td><span id="Eachlift" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td><a class="button green" onclick="ST.addEach('#Eachlift', 'lift');">+</a> </td>
       </tr>
     </table>
   </div>

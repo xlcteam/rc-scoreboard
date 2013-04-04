@@ -227,6 +227,7 @@ def performance_save(request, performance_id):
             'obstacle': 10,
             'speed_bump': 5,
             'intersection': 10,
+            'lift': 20,
         }
     }    
 
@@ -234,7 +235,7 @@ def performance_save(request, performance_id):
         post = request.POST
         initial = {'gap': post["gap"], 'obstacle': post["obstacle"],
                         'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
-                        'time': post["time_dialog"], 'points': post["points_dialog"],}
+                        'lift': post['lift'], 'time': post["time_dialog"], 'points': post["points_dialog"],}
 
         for x in scoresheet["try"]:
             
@@ -280,6 +281,7 @@ def performance_save(request, performance_id):
                 performance.obstacle = scoresheet["each"]["obstacle"] * int(request.POST["obstacle"])
                 performance.speed_bump = scoresheet["each"]["speed_bump"] * int(request.POST["speed_bump"])
                 performance.intersection = scoresheet["each"]["intersection"] * int(request.POST["intersection"])
+                performance.lift = scoresheet["each"]["lift"] * int(request.POST["lift"])
 
                 performance.points = int(request.POST["points_dialog"])
                 
@@ -335,6 +337,7 @@ def table_final_generate(request, group_id):
         newperf.speed_bump = teamres[0].speed_bump + teamres[1].speed_bump
         newperf.intersection = teamres[0].intersection + teamres[1].intersection
         newperf.victim = teamres[0].victim + teamres[1].victim
+        newpert.lift = teamres[0].lift + teamres[1].lift
 
         newperf.points = teamres[0].points + teamres[1].points
         newperf.time = teamres[0].time + teamres[1].time

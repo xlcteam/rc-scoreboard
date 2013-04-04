@@ -63,7 +63,37 @@ function TeamScore( uid ) {
   return score;
 }
 
+function TeamTable( uid ) {
+  binder = new DataBinder( uid ),
 
+      score = {
+        attributes: {},
+
+        // The attribute setter publish changes using the DataBinder PubSub
+        set: function( attr_name, val ) {
+          this.attributes[ attr_name ] = val;
+          binder.trigger( uid + ":change", [ attr_name, val, this ] );
+        },
+
+        get: function( attr_name ) {
+          return this.attributes[ attr_name ];
+        },
+
+        _binder: binder
+      };
+
+  // Subscribe to the PubSub
+  binder.on( uid + ":change", function( evt, attr_name, new_val, initiator ) {
+    if ( initiator !== user ) {
+      score.set( attr_name, new_val );
+    }
+  });
+
+  return score;
+}
+
+
+tables = new Array();
 $(document).ready(function() {
   $('#slider').scrollingCarousel( {
     scrollerAlignment : 'horizontal',
@@ -84,7 +114,6 @@ $(document).ready(function() {
     $(this).css('max-height', $(window).height() - 180);
   });
 
-  tables = new Array();
   $('.table').each(function(){
     tables.push($(this));
   });

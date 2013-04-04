@@ -55,7 +55,9 @@ scoreTracker.prototype = {
 	            $this.scaling1 = 1;
 		        $("#team1").effect("scale", { percent: 150}, 500)
 			               .effect("scale", { percent: (100 / (150 / 100))}, 1000, function(){
-	                                                $this.scaling1 = 0;
+
+                                    $(this).css({'left': '0px', 'right': '0px', 'top': '0px', 'bottom': '0px'});        
+	                                $this.scaling1 = 0;
 	                        });
 	        }
         }
@@ -77,7 +79,9 @@ scoreTracker.prototype = {
 			    $this.scaling2 = 1;
 			    $("#team2").effect("scale", { percent: 150}, 500)
 				           .effect("scale", { percent: 100 / (150 / 100)}, 1000, function(){
-											        $this.scaling2 = 0;
+
+                                    $(this).css({'left': '0px', 'right': '0px', 'top': '0px', 'bottom': '0px'});        
+								    $this.scaling2 = 0;
 			                });
 		    }
 	    }
@@ -102,8 +106,10 @@ scoreTracker.prototype = {
 				    $this.scaling1 = 1;	
                     //soundPlay("whistle");
 				    $("#team1").effect("scale", { percent: 150}, 500)
-		                 	   .effect("scale", { percent: Math.ceil(100 / (150 / 100))}, 1000, function(){
-                        	                            $this.scaling1 = 0;
+		                 	   .effect("scale", { percent: (100 / (150 / 100.0))}, 1000, function(){
+
+                                    $(this).css({'left': '0px', 'right': '0px', 'top': '0px', 'bottom': '0px'});        
+                        	        $this.scaling1 = 0;
 						        });
 			    }
 		    }
@@ -128,8 +134,9 @@ scoreTracker.prototype = {
 				    $this.scaling2 = 1;
                     //soundPlay("whistle");
 				    $("#team2").effect("scale", { percent: 150}, 500)
-				               .effect("scale", { percent: Math.ceil(100 / (150 / 100))}, 1000, function(){
-													    $this.scaling2 = 0
+				               .effect("scale", { percent: (100 / (150 / 100.0))}, 1000, function(){
+                                    $(this).css({'left': '0px', 'right': '0px', 'top': '0px', 'bottom': '0px'});        
+								    $this.scaling2 = 0
 							    });
 			    }
 		    }

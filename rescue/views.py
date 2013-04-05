@@ -358,4 +358,4 @@ def results_group_pdf(request, group_id):
 
     return render_to_pdf(request, 'rescue/results/generate/group.html',
                             {'competition': competition, 'group': group,
-                             'performances': performances})
+                             'performances': performances, 'title': group.name})

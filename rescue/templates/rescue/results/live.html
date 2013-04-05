@@ -18,12 +18,16 @@
           <div class="table">
             <div class="title"><span class="group_name">{{group.name}}</span></div>
             <div class="results">
-              {% if group.result_table_generated %}
-                {% include "rescue/table.html" with performances=group.results_final liveresults=True %}
-              {% endif %}
-              {% include "rescue/table.html" with performances=group.results_round_1 round=1 liveresults=True %}
-              {% include "rescue/table.html" with performances=group.results_round_2 round=2 liveresults=True %}
-              {% include "rescue/table.html" with performances=group.results_round_3 round=3 liveresults=True %}
+                <div class="matches">
+                  <ul>
+                    {% if group.result_table_generated %}
+                      <li>{% include "rescue/table.html" with performances=group.results_final liveresults=1 %}</li>
+                    {% endif %}
+                    <li>{% include "rescue/table.html" with performances=group.results_round_1 round=1 liveresults=1 %}</li>
+                    <li>{% include "rescue/table.html" with performances=group.results_round_2 round=2 liveresults=1 %}</li>
+                    <li>{% include "rescue/table.html" with performances=group.results_round_3 round=3 liveresults=1 %}</li>
+                  </ul>
+                </div>
               <span class="eventName">{{ competition.name }}</span>
             </div>
           </div>
@@ -36,12 +40,16 @@
           <div class="table">
             <div class="title"><span class="group_name">{{group.name}}</span></div>
             <div class="results">
-              {% if group.result_table_generated %}
-                {% include "rescue/table.html" with performances=group.results_final liveresults=True %}
-              {% endif %}
-              {% include "rescue/table.html" with performances=group.results_round_1 round=1 liveresults=True %}
-              {% include "rescue/table.html" with performances=group.results_round_2 round=2 liveresults=True %}
-              {% include "rescue/table.html" with performances=group.results_round_3 round=3 liveresults=True %}
+                <div class="matches">
+                  <ul>
+                    {% if group.result_table_generated %}
+                      <li>{% include "rescue/table.html" with performances=group.results_final liveresults=1 %}</li>
+                    {% endif %}
+                    <li>{% include "rescue/table.html" with performances=group.results_round_1 round=1 liveresults=1 %}</li>
+                    <li>{% include "rescue/table.html" with performances=group.results_round_2 round=2 liveresults=1 %}</li>
+                    <li>{% include "rescue/table.html" with performances=group.results_round_3 round=3 liveresults=1 %}</li>
+                  </ul>
+                </div>
               <span class="eventName">{{ competition.name }}</span>
             </div>
           </div>
@@ -55,12 +63,16 @@
             <div class="table">
               <div class="title"><span class="group_name">{{group.name}}</span></div>
               <div class="results">
-                {% if group.result_table_generated %}
-                  {% include "rescue/table.html" with performances=group.results_final liveresults=True %}
-                {% endif %}
-                {% include "rescue/table.html" with performances=group.results_round_1 round=1 liveresults=True %}
-                {% include "rescue/table.html" with performances=group.results_round_2 round=2 liveresults=True %}
-                {% include "rescue/table.html" with performances=group.results_round_3 round=3 liveresults=True %}
+                <div class="matches">
+                  <ul>
+                    {% if group.result_table_generated %}
+                      <li>{% include "rescue/table.html" with performances=group.results_final liveresults=1 %}</li>
+                    {% endif %}
+                    <li>{% include "rescue/table.html" with performances=group.results_round_1 round=1 liveresults=1 %}</li>
+                    <li>{% include "rescue/table.html" with performances=group.results_round_2 round=2 liveresults=1 %}</li>
+                    <li>{% include "rescue/table.html" with performances=group.results_round_3 round=3 liveresults=1 %}</li>
+                  </ul>
+                </div>
                 <span class="eventName">{{ competition.name }}</span>
               </div>
             </div>

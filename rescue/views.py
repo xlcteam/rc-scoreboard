@@ -234,8 +234,8 @@ def performance_save(request, performance_id):
     def errorHandle(error, request, performance_id):
         post = request.POST
         initial = {'gap': post["gap"], 'obstacle': post["obstacle"],
-                        'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
-                        'lift': post['lift'], 'time': post["time_dialog"], 'points': post["points_dialog"],}
+                   'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
+                   'lift': post['lift'], 'time': post["time"], 'points': post["points"],}
 
         for x in scoresheet["try"]:
             
@@ -244,7 +244,6 @@ def performance_save(request, performance_id):
             else:            
                 initial[x] = post[x]
 
-        print initial
         form = MatchSaveForm(post, initial=initial)
         c = {}
         c.update(csrf(request))
@@ -283,9 +282,9 @@ def performance_save(request, performance_id):
                 performance.intersection = scoresheet["each"]["intersection"] * int(request.POST["intersection"])
                 performance.lift = scoresheet["each"]["lift"] * int(request.POST["lift"])
 
-                performance.points = int(request.POST["points_dialog"])
+                performance.points = int(request.POST["points"])
                 
-                strtime = request.POST["time_dialog"]
+                strtime = request.POST["time"]
                 finaltime = 0.0
                 finaltime += float(strtime.split(':')[0]) * 60.0 
                 finaltime += float(strtime.split(':')[1].replace(",", "."))

@@ -18,10 +18,10 @@ class MatchSaveForm(forms.Form):
     obstacle = forms.IntegerField(label='Obstacle')
     speed_bump = forms.IntegerField(label='Speed Bump')
     intersection = forms.IntegerField(label='Intersection')
-    lift = forms.IntegerField(label="Lift")
-
-    time = forms.CharField(label='Time')
+    lift = forms.IntegerField(label="Lift (secondary)")
     points = forms.IntegerField(label='Points')
+    time = forms.CharField(label='Time')
+    
     password = forms.CharField(widget=forms.PasswordInput(render_value=False),
                                 max_length=100)
 

@@ -102,12 +102,12 @@ scoreTracker.prototype = {
 
         if ($("#btnStart").html() == "Start" || $("#btnStart").html() == "Resume"){
             $("#btnStart").html('Pause')
-	        $("#time").stopwatch({formatter: $this.format, updateInterval: 50})
+	        $("#timeStopwatch").stopwatch({formatter: $this.format, updateInterval: 50})
                         .stopwatch('start');
             return;
         } else if ($("#btnStart").html() == "Pause"){
             $("#btnStart").html("Resume");
-	        $("#time").stopwatch().stopwatch('stop');
+	        $("#timeStopwatch").stopwatch().stopwatch('stop');
 	        return;
         }
     },
@@ -120,9 +120,9 @@ scoreTracker.prototype = {
 
     resetTime: function (){
 	    if ($("#btnStart").html() == "Resume" || $("#btnStart").html() == "Pause") {
-            $("#time").stopwatch().stopwatch('stop');		
-            $("#time").stopwatch().stopwatch('reset');
-            $("#time").html("00:00,00");
+            $("#timeStopwatch").stopwatch().stopwatch('stop');		
+            $("#timeStopwatch").stopwatch().stopwatch('reset');
+            $("#timeStopwatch").html("00:00,00");
             $("#btnStart").html("Start");
         }
         if ($("#startAll").is(':hidden')){
@@ -150,7 +150,7 @@ scoreTracker.prototype = {
 
         if (minutes >= $this.mins){
             if (seconds >= $this.secs){
-                $("#time").stopwatch().stopwatch('stop');        
+                $("#timeStopwatch").stopwatch().stopwatch('stop');        
                 $.idleTimer('destroy');
                 $this.finished = true;
                 $this.showD();
@@ -193,7 +193,7 @@ scoreTracker.prototype = {
         }
 
         $this.scoreCount();
-        $('#time_dialog').val($('#time').html());
+        $('#time').val($('#timeStopwatch').html());
     },
 
     scoreCount: function (){
@@ -206,7 +206,7 @@ scoreTracker.prototype = {
             $this.final_score += $this.scores["each"][y] * $this.scoresheet['each'][y];
         }
 
-        $('#points_dialog').val($this.final_score);
+        $('#points').val($this.final_score);
     },
 
     recount: function () {

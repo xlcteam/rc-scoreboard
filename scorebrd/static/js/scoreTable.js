@@ -135,4 +135,17 @@ $(document).ready(function() {
 
   }, 10000);
 
+  setInterval(function() {
+    $.get(FEED_URL, function(data){
+        $("#slider").append(data);
+        $("#slider").append(data);
+        setTimeout(function(){
+            #("#slider ul:first").remove();
+            setTimeout(function(){
+                #("#slider ul:first").remove();
+            }, 10000);
+        }, 10000);
+    });
+  }, 10000);
+
 });

@@ -9,6 +9,9 @@
     <script src="{{ STATIC_URL }}/js/lib/jquery.masonry.min.js"></script>
     <script src="{{ STATIC_URL }}/js/scoreTable.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}/css/scoreTable/style.css">
+    <script>
+      FEED_URL = '{% url soccer.views.results_live_feed %}';
+    </script>
   </head>
 
   <body>

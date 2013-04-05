@@ -93,7 +93,7 @@
 
 	<!-- dialog, hidden at the begin of game by jquery funct .hide() -->
 	<div id="dialogMain">
-    <div id="dialog" title="Results of the team {{ performance.team.name }}" style="font-size:50.5%;">
+    <div id="dialog" title="Results of the team {{ performance.team.name }} ({{performance.round_number}}. round)" style="font-size:50.5%;">
 			<div style="height: 70px; font-size:130.5%;text-align: center;">
         <form action="{% url rescue.views.performance_save performance_id %}" method="POST" id="dialogForm">
           {% csrf_token %}

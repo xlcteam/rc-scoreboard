@@ -324,7 +324,6 @@ def results_live(request):
 
 @render_to('soccer/results/livefeed.html')
 def results_live_feed(request):
-    print "in here"
     return {'matches': Match.objects.filter(playing='P')}
 
 

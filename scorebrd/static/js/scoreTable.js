@@ -93,9 +93,17 @@ function TeamTable( uid ) {
 }
 
 
+function carouselUpdate () {
+  carousel.Update( {
+    scrollerAlignment : 'horizontal',
+    autoScroll: true,
+    autoScrollSpeed: 20000
+  });
+}
+
 tables = new Array();
 $(document).ready(function() {
-  $('#slider').scrollingCarousel( {
+  carousel = $('#slider').scrollingCarousel( {
     scrollerAlignment : 'horizontal',
     autoScroll: true,
     autoScrollSpeed: 20000
@@ -118,6 +126,15 @@ $(document).ready(function() {
     tables.push($(this));
   });
 
+  setInterval(function() {
+    console.log('slider update');
+    $.get(FEED_URL, function(data){
+        $("#slider ul").html(data);
+    });
+  }, 10000);
+
+
+
   if (tables.length <= 2) {
     return;
   }
@@ -133,19 +150,6 @@ $(document).ready(function() {
     //console.log(tables[tables.length-1].find('.group_name').text());
     tables.push(table);
 
-  }, 10000);
-
-  setInterval(function() {
-    $.get(FEED_URL, function(data){
-        $("#slider").append(data);
-        $("#slider").append(data);
-        setTimeout(function(){
-            #("#slider ul:first").remove();
-            setTimeout(function(){
-                #("#slider ul:first").remove();
-            }, 10000);
-        }, 10000);
-    });
   }, 10000);
 
 });

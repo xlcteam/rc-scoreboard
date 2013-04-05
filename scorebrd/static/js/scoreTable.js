@@ -92,6 +92,21 @@ function TeamTable( uid ) {
   return score;
 }
 
+function arrange() {
+   $('.matches').each(function() {
+     $(this).css('height', $(window).height() - 230 - $(this).prev().height());
+     $(this).scrollingCarousel({
+         scrollerAlignment : 'vertical',
+         autoScroll: true,
+         autoScrollSpeed: 10000
+       });
+   });
+
+
+   $('.results').each(function(){
+     $(this).css('max-height', $(window).height() - 180);
+   });
+}
 
 tables = new Array();
 $(document).ready(function() {
@@ -100,19 +115,8 @@ $(document).ready(function() {
     autoScroll: true,
     autoScrollSpeed: 20000
   });
-
-  $('.matches').each(function() {
-    $(this).css('height', $(window).height() - 230 - $(this).prev().height());
-    $(this).scrollingCarousel({
-        scrollerAlignment : 'vertical',
-        autoScroll: true,
-        autoScrollSpeed: 10000
-      });
-  });
-
-  $('.results').each(function(){
-    $(this).css('max-height', $(window).height() - 180);
-  });
+    
+  arrange();
 
   $('.table').each(function(){
     tables.push($(this));
@@ -134,19 +138,8 @@ $(document).ready(function() {
             i += 1;
         });
 
-        $('.matches').each(function() {
-          $(this).css('height', $(window).height() - 230 - $(this).prev().height());
-          $(this).scrollingCarousel({
-              scrollerAlignment : 'vertical',
-              autoScroll: true,
-              autoScrollSpeed: 10000
-            });
-        });
+        arrange();
 
-
-        $('.results').each(function(){
-          $(this).css('max-height', $(window).height() - 180);
-        });
     });
   }, 10000);
 

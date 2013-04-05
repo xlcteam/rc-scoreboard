@@ -93,14 +93,6 @@ function TeamTable( uid ) {
 }
 
 
-function carouselUpdate () {
-  carousel.Update( {
-    scrollerAlignment : 'horizontal',
-    autoScroll: true,
-    autoScrollSpeed: 20000
-  });
-}
-
 tables = new Array();
 $(document).ready(function() {
   carousel = $('#slider').scrollingCarousel( {

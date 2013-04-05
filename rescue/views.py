@@ -337,7 +337,7 @@ def table_final_generate(request, group_id):
         newperf.speed_bump = teamres[0].speed_bump + teamres[1].speed_bump
         newperf.intersection = teamres[0].intersection + teamres[1].intersection
         newperf.victim = teamres[0].victim + teamres[1].victim
-        newpert.lift = teamres[0].lift + teamres[1].lift
+        newperf.lift = teamres[0].lift + teamres[1].lift
 
         newperf.points = teamres[0].points + teamres[1].points
         newperf.time = teamres[0].time + teamres[1].time

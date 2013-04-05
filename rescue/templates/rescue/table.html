@@ -4,7 +4,12 @@
   {% else %}
     <h1>Final</h1>
   {% endif %}
-  <table class='teamTable'>
+ 
+  {% if liveresults %}
+    <table class='results_table'>
+  {% else %}
+    <table class='teamTable'>
+  {% endif %}
   <tr>
       <th> <abbr title="Position in the table"> Pos. </abbr></th>
       <th>&nbsp;</th>
@@ -29,7 +34,12 @@
         <tr class="odd">
     {% endif %}
         <td> {{ forloop.counter }}. </td>
+        
+    {% if liveresults %}
+        <td class='name-live'> {{ result.team.name }} </td>
+    {% else %}
         <td class='name'> {{ result.team.name }} </td>
+    {% endif %}
         <td> {{ result.room1 }} </td>
         <td> {{ result.room2 }} </td>
         <td> {{ result.room3 }} </td>

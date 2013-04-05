@@ -176,7 +176,7 @@ def results_live(request):
                 'group': group, 'group_only': True}
 
     else:
-        return {'events': Event.objects.all()}
+        return {'competitions': Competition.objects.all()}
 
 @render_to('rescue/performances/generate.html')
 @login_required(login_url='/login/')

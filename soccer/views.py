@@ -326,6 +326,11 @@ def results_live(request):
 def results_live_feed(request):
     return {'matches': Match.objects.filter(playing='P')}
 
+@render_to('soccer/results/livetables.html')
+def results_live_tables(request):
+    return {'competitions': Competition.objects.all()}
+
+
 
 def results(request):
     pass

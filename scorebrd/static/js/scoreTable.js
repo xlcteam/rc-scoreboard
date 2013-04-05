@@ -92,13 +92,20 @@ function TeamTable( uid ) {
   return score;
 }
 
+function arrange() {
+   $('.matches').each(function() {
+     $(this).css('height', $(window).height() - 230 - $(this).prev().height());
+     $(this).scrollingCarousel({
+         scrollerAlignment : 'vertical',
+         autoScroll: true,
+         autoScrollSpeed: 10000
+       });
+   });
 
-function carouselUpdate () {
-  carousel.Update( {
-    scrollerAlignment : 'horizontal',
-    autoScroll: true,
-    autoScrollSpeed: 20000
-  });
+
+   $('.results').each(function(){
+     $(this).css('max-height', $(window).height() - 180);
+   });
 }
 
 tables = new Array();
@@ -108,28 +115,31 @@ $(document).ready(function() {
     autoScroll: true,
     autoScrollSpeed: 20000
   });
-
-  $('.matches').each(function() {
-    $(this).css('height', $(window).height() - 230 - $(this).prev().height());
-    $(this).scrollingCarousel({
-        scrollerAlignment : 'vertical',
-        autoScroll: true,
-        autoScrollSpeed: 10000
-      });
-  });
-
-  $('.results').each(function(){
-    $(this).css('max-height', $(window).height() - 180);
-  });
+    
+  arrange();
 
   $('.table').each(function(){
     tables.push($(this));
   });
 
   setInterval(function() {
-    console.log('slider update');
     $.get(FEED_URL, function(data){
         $("#slider ul").html(data);
+    });
+  }, 10000);
+
+  setInterval(function() {
+    $.get(TABLES_URL, function(data){
+        tbls = $('<div/>').html(data).contents().toArray();
+        tbls = tbls.slice(1, tbls.length - 1);
+        var i = 0;
+        $('.table').each(function(){
+            $(this).html($(tbls[0]).html());
+            i += 1;
+        });
+
+        arrange();
+
     });
   }, 10000);
 

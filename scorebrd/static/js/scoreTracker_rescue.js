@@ -12,12 +12,12 @@ function scoreTracker(options)
 
     $this.scores = {
         'try' : {
-            'room1' : 1,
-            'room2' : 1,
-            'room3' : 1,
-            'ramp'  : 1,
-            'hallway':1,
-            'victim': 1,
+            'room1' : 0,
+            'room2' : 0,
+            'room3' : 0,
+            'ramp'  : 0,
+            'hallway':0,
+            'victim': 0,
         },
         'each' : {
             'gap' : 0,
@@ -62,9 +62,13 @@ scoreTracker.prototype = {
     },
 
     rmTry: function (Try, string){
-        if ($this.scores["try"][string] > 1){
+        if ($this.scores["try"][string] > 0){
             $this.scores["try"][string]--;
-            $(Try).html($this.scores["try"][string] + '. <span style="font-size: 50%;">try<span>');  
+            if ($this.scores["try"][string] == 0){
+                $(Try).html('-----');  
+            } else {
+                $(Try).html($this.scores["try"][string] + '. <span style="font-size: 50%;">try<span>');  
+            }
         } 
     },
 
@@ -181,7 +185,7 @@ scoreTracker.prototype = {
         });
 
         for (x in $this.scores["try"]){
-            if ($this.scores["try"][x] == 4){
+            if ($this.scores["try"][x] == 4 || $this.scores["try"][x] == 0){
                 $('#' + x).val("---");
             } else {
                 $('#' + x).val($this.scores["try"][x]);
@@ -212,7 +216,7 @@ scoreTracker.prototype = {
     recount: function () {
         for (x in $this.scores["try"]){
             if ($this.scores["try"][x] == '' ||
-                    $this.scores["try"][x] == '---'){
+                    $this.scores["try"][x] == '---' || $this.scores["try"][x] == 0){
                 $this.scores["try"][x] = 4;
             }else {
                 $this.scores["try"][x] = $('#' + x).val();

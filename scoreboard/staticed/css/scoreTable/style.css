@@ -179,6 +179,7 @@ body {
 .matches {
   overflow: hidden;
   padding: 5px 0;
+  width: auto !important;
 }
 
 .points  {

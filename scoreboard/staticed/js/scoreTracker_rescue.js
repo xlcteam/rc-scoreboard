@@ -24,6 +24,7 @@ function scoreTracker(options)
             'obstacle': 0,
             'speed_bump': 0,
             'intersection': 0,
+            'lift': 0,
         }
     };
 
@@ -41,6 +42,7 @@ function scoreTracker(options)
             'obstacle': 10,
             'speed_bump': 5,
             'intersection': 10,
+            'lift': 20,
         }
     }
 }

@@ -492,3 +492,9 @@ button:active {
 .smaller {
         padding: .5em 1em .55em;
 }
+
+.bigger {
+    font: 25px/100% Arial, Helvetica, sans-serif;
+    margin-top: 25px;
+    /*padding: .5em 2em .55em;*/
+}

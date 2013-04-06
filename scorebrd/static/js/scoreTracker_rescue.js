@@ -30,12 +30,12 @@ function scoreTracker(options)
 
     $this.scoresheet = {
         'try' : {
-            'room1' : {1 : 60, 2 : 40, 3 : 20},
-            'room2' : {1 : 60, 2 : 40, 3 : 20},
-            'room3' : {1 : 60, 2 : 40, 3 : 20},
-            'ramp'  : {1 : 30, 2 : 20, 3 : 10},
-            'hallway':{1 : 30, 2 : 20, 3 : 10},
-            'victim': {1 : 60, 2 : 40, 3 : 20},      
+            'room1' : {1 : 60, 2 : 40, 3 : 20, '---' : 0},
+            'room2' : {1 : 60, 2 : 40, 3 : 20, '---' : 0},
+            'room3' : {1 : 60, 2 : 40, 3 : 20, '---' : 0},
+            'ramp'  : {1 : 30, 2 : 20, 3 : 10, '---' : 0},
+            'hallway':{1 : 30, 2 : 20, 3 : 10, '---' : 0},
+            'victim': {1 : 60, 2 : 40, 3 : 20, '---' : 0},      
         },
         'each' : {
             'gap' : 10,
@@ -106,8 +106,7 @@ scoreTracker.prototype = {
 
         if ($("#btnStart").html() == "Start" || $("#btnStart").html() == "Resume"){
             $("#btnStart").html('Pause')
-	        $("#timeStopwatch").stopwatch({formatter: $this.format, updateInterval: 50})
-                        .stopwatch('start');
+	        $("#timeStopwatch").stopwatch({formatter: $this.format, updateInterval: 50}).stopwatch('start');
             return;
         } else if ($("#btnStart").html() == "Pause"){
             $("#btnStart").html("Resume");

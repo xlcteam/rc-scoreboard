@@ -24,9 +24,11 @@
       <h3>Results</h3>
       {% include "soccer/results.html" %}
       {% if team_results %}
+        <a class='button orange' style="margin-top: 10px;"
+          href="/soccer/group/generate/schedule/{{ group.id }}.pdf">Export
+          schedule to PDF!</a>
         <a class='button' style="margin-top: 10px;" href="/soccer/results/group/{{ group.id }}.pdf">Download results in PDF.</a>
       {% endif %}
-        <a class='button orange' style="margin-top: 10px;" href="/soccer/group/generate/schedule/{{ group.id }}.pdf">Generate schedule</a>
     </section>
 
     <section class="col span_3 clr">

@@ -9,6 +9,11 @@
     <script src="{{ STATIC_URL }}/js/lib/jquery.masonry.min.js"></script>
     <script src="{{ STATIC_URL }}/js/scoreTable.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}/css/scoreTable/style.css">
+    <style type="text/css">
+      .matches ul {
+        width: auto !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -71,6 +76,7 @@
                     <li>{% include "rescue/table.html" with performances=group.results_round_1 round=1 liveresults=1 %}</li>
                     <li>{% include "rescue/table.html" with performances=group.results_round_2 round=2 liveresults=1 %}</li>
                     <li>{% include "rescue/table.html" with performances=group.results_round_3 round=3 liveresults=1 %}</li>
+                    <li style="height: 300px;"></li>
                   </ul>
                 </div>
                 <span class="eventName">{{ competition.name }}</span>
@@ -78,11 +84,8 @@
             </div>
           {% endfor %}
         {% endfor %}
-  
+
       {% endif %}
     </div>
-
-
-
   </body>
 </html>

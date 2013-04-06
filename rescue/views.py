@@ -176,7 +176,7 @@ def results_live(request):
                 'group': group, 'group_only': True}
 
     else:
-        return {'events': Event.objects.all()}
+        return {'competitions': Competition.objects.all()}
 
 @render_to('rescue/performances/generate.html')
 @login_required(login_url='/login/')
@@ -215,12 +215,12 @@ def performance_play(request, performance_id):
 def performance_save(request, performance_id):
     scoresheet = {
         'try' : {
-            'room1' : {1 : 60, 2 : 40, 3 : 20, '---': 0},
-            'room2' : {1 : 60, 2 : 40, 3 : 20, '---': 0},
-            'room3' : {1 : 60, 2 : 40, 3 : 20, '---': 0},
-            'ramp'  : {1 : 30, 2 : 20, 3 : 10, '---': 0},
-            'hallway':{1 : 30, 2 : 20, 3 : 10, '---': 0},
-            'victim': {1 : 60, 2 : 40, 3 : 20, '---': 0},      
+            'room1' : {1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},
+            'room2' : {1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},
+            'room3' : {1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},
+            'ramp'  : {1 : 30, 2 : 20, 3 : 10, '---': 0, u'---': 0},
+            'hallway':{1 : 30, 2 : 20, 3 : 10, '---': 0, u'---': 0},
+            'victim': {1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},      
         },
         'each' : {
             'gap' : 10,
@@ -234,17 +234,16 @@ def performance_save(request, performance_id):
     def errorHandle(error, request, performance_id):
         post = request.POST
         initial = {'gap': post["gap"], 'obstacle': post["obstacle"],
-                        'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
-                        'lift': post['lift'], 'time': post["time_dialog"], 'points': post["points_dialog"],}
+                   'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
+                   'lift': post['lift'], 'time': post["time"], 'points': post["points"],}
 
         for x in scoresheet["try"]:
             
-            if post[x] == u'---':
+            if post[x] == u'---' or post[x] == '---':
                 initial[x] = u'4'
             else:            
                 initial[x] = post[x]
 
-        print initial
         form = MatchSaveForm(post, initial=initial)
         c = {}
         c.update(csrf(request))
@@ -254,7 +253,7 @@ def performance_save(request, performance_id):
         return c
     
     def check_try(post):
-        if post == '---':
+        if post == '---' or post == u'---':
             return scoresheet["try"]["room1"][post]
         else:
             return scoresheet["try"]["room1"][int(post)]
@@ -283,9 +282,9 @@ def performance_save(request, performance_id):
                 performance.intersection = scoresheet["each"]["intersection"] * int(request.POST["intersection"])
                 performance.lift = scoresheet["each"]["lift"] * int(request.POST["lift"])
 
-                performance.points = int(request.POST["points_dialog"])
+                performance.points = int(request.POST["points"])
                 
-                strtime = request.POST["time_dialog"]
+                strtime = request.POST["time"]
                 finaltime = 0.0
                 finaltime += float(strtime.split(':')[0]) * 60.0 
                 finaltime += float(strtime.split(':')[1].replace(",", "."))

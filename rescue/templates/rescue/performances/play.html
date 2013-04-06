@@ -151,14 +151,14 @@
             <table style="float: right;">
               <tr>
                 <td><strong>Points:</strong></td>
-                <td><input style="width: 130px;" type="text" id="points_dialog" name="points_dialog"/></td>
+                <td><input style="width: 130px;" type="text" id="points" name="points"/></td>
                 <td><input type="button" value="Recount" onclick="ST.recount();"/></td>
               </tr>
             </table>
             <table>
               <tr>
                 <td>Time:</td>
-                <td><input style="width: 130px;" type="text" id="time_dialog" name="time_dialog"/></td>
+                <td><input style="width: 130px;" type="text" id="time" name="time"/></td>
               </tr>
             </table>
           </div>
@@ -225,42 +225,42 @@
       <tr>
         <td>Room 1:</td>
         <td><a class="button red" onclick="ST.rmTry('#Tryroom1', 'room1');">-</a></td>
-        <td><span id="Tryroom1" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><span id="Tryroom1" style="color: #ffffff;">-----</span></td>
         <td><a class="button green" onclick="ST.addTry('#Tryroom1', 'room1');">+</a></td>
       </tr>
 
       <tr>
         <td>Room 2:</td>
         <td><a class="button red" onclick="ST.rmTry('#Tryroom2', 'room2');">-</a></td>
-        <td><span id="Tryroom2" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><span id="Tryroom2" style="color: #ffffff;">-----</span></td>
         <td><a class="button green" onclick="ST.addTry('#Tryroom2', 'room2');">+</a></td>
       </tr>
 
       <tr>
         <td>Room 3:</td>
         <td><a class="button red" onclick="ST.rmTry('#Tryroom3', 'room3');">-</a></td>
-        <td><span id="Tryroom3" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><span id="Tryroom3" style="color: #ffffff;">-----</span></td>
         <td><a class="button green" onclick="ST.addTry('#Tryroom3', 'room3');">+</a></td>
       </tr>
 
       <tr>
         <td>Ramp:</td>
         <td><a class="button red" onclick="ST.rmTry('#Tryramp', 'ramp');">-</a></td>
-        <td><span id="Tryramp" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><span id="Tryramp" style="color: #ffffff;">-----</span></td>
         <td><a class="button green" onclick="ST.addTry('#Tryramp', 'ramp');">+</a></td>
       </tr>
 
       <tr>
         <td>Hallway:</td>
         <td><a class="button red" onclick="ST.rmTry('#Tryhallway', 'hallway');">-</a></td>
-        <td><span id="Tryhallway" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><span id="Tryhallway" style="color: #ffffff;">-----</span></td>
         <td><a class="button green" onclick="ST.addTry('#Tryhallway', 'hallway');">+</a></td>
       </tr>
 
       <tr>
         <td>Victim:</td>
         <td><a class="button red" onclick="ST.rmTry('#Tryvictim', 'victim');">-</a></td>
-        <td><span id="Tryvictim" style="color: #ffffff;">1. <span style="font-size: 50%;">try</span></span></td>
+        <td><span id="Tryvictim" style="color: #ffffff;">-----</span></td>
         <td><a class="button green" onclick="ST.addTry('#Tryvictim', 'victim');">+</a></td>
       </tr>
     </table>
@@ -268,7 +268,7 @@
   <div style="clear:both;"></div>
 
   <div id="timeBar" class="element3">
-		<div id="time" class="time">00:00,00</div>
+		<div id="timeStopwatch" class="time">00:00,00</div>
 	</div>
 	<div id="halftime" class="halftime"><span>1.</span></div>
   <div style="clear: both;"></div>

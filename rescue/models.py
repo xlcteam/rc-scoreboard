@@ -12,16 +12,16 @@ class MatchSaveForm(forms.Form):
     room2 = forms.IntegerField(label='Room 2 (try)')
     room3 = forms.IntegerField(label='Room 3 (try)')
     ramp = forms.IntegerField(label='Ramp (try)')
-    hallway = forms.IntegerField(label='Obstacle')
-    victim = forms.IntegerField(label='Victim')
-    gap = forms.IntegerField(label='Room 1')
+    hallway = forms.IntegerField(label='Hallway (try)')
+    victim = forms.IntegerField(label='Victim (try)')
+    gap = forms.IntegerField(label='Gap')
     obstacle = forms.IntegerField(label='Obstacle')
     speed_bump = forms.IntegerField(label='Speed Bump')
     intersection = forms.IntegerField(label='Intersection')
-    lift = forms.IntegerField(label="Lift")
-
-    time = forms.CharField(label='Time')
+    lift = forms.IntegerField(label="Lift (secondary)")
     points = forms.IntegerField(label='Points')
+    time = forms.CharField(label='Time')
+    
     password = forms.CharField(widget=forms.PasswordInput(render_value=False),
                                 max_length=100)
 

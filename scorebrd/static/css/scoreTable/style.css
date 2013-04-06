@@ -160,11 +160,17 @@ body {
 	color: #ffffff;
 	font-size: 70%;
 	margin: 0 auto;
-  padding: 0 20px;
+    margin-top: -20px;
+    width: 80%;
 }
 
 .resultDiv {
 	text-align: center;
+}
+
+.name-live {
+    text-align: left;
+
 }
 
 .name {
@@ -187,15 +193,6 @@ body {
 	color: #771E10;	
 	min-width: 60px;
 }
-
-.odd {
-	background-color: #ffffff;	
-}
-
-.even {
-	background-color: #8c9cbf;	
-}
-
 
 .eventName {
   float: right;

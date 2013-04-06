@@ -185,7 +185,7 @@ scoreTracker.prototype = {
         });
 
         for (x in $this.scores["try"]){
-            if ($this.scores["try"][x] == 4 || $this.scores["try"][x] == 0){
+            if ($this.scores["try"][x] == 4){
                 $('#' + x).val("---");
             } else {
                 $('#' + x).val($this.scores["try"][x]);

@@ -215,12 +215,12 @@ def performance_play(request, performance_id):
 def performance_save(request, performance_id):
     scoresheet = {
         'try' : {
-            'room1' : {1 : 60, 2 : 40, 3 : 20, '---': 0},
-            'room2' : {1 : 60, 2 : 40, 3 : 20, '---': 0},
-            'room3' : {1 : 60, 2 : 40, 3 : 20, '---': 0},
-            'ramp'  : {1 : 30, 2 : 20, 3 : 10, '---': 0},
-            'hallway':{1 : 30, 2 : 20, 3 : 10, '---': 0},
-            'victim': {1 : 60, 2 : 40, 3 : 20, '---': 0},      
+            'room1' : {1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},
+            'room2' : {1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},
+            'room3' : {1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},
+            'ramp'  : {1 : 30, 2 : 20, 3 : 10, '---': 0, u'---': 0},
+            'hallway':{1 : 30, 2 : 20, 3 : 10, '---': 0, u'---': 0},
+            'victim': {1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},      
         },
         'each' : {
             'gap' : 10,
@@ -239,7 +239,7 @@ def performance_save(request, performance_id):
 
         for x in scoresheet["try"]:
             
-            if post[x] == u'---':
+            if post[x] == u'---' or post[x] == '---':
                 initial[x] = u'4'
             else:            
                 initial[x] = post[x]
@@ -253,7 +253,7 @@ def performance_save(request, performance_id):
         return c
     
     def check_try(post):
-        if post == '---':
+        if post == '---' or post == u'---':
             return scoresheet["try"]["room1"][post]
         else:
             return scoresheet["try"]["room1"][int(post)]

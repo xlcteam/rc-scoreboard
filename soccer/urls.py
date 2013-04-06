@@ -13,6 +13,7 @@ urlpatterns = patterns('soccer.views',
     url(r'^groups/?$', 'groups'),
     url(r'^group/(?P<group_id>\d+)/?$', 'group', name="group"),
     url(r'^group/new/?$', 'new_group', name='new_group'),
+    url(r'^group/generate/schedule/(?P<group_id>\d+)\.pdf/?$', 'schedule_generate'),
 
     url(r'^teams/?$', 'teams'),
     url(r'^team/(?P<team_id>\d+)/?$', 'team', name="team"),

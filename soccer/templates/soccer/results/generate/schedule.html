@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      {% include "soccer/results/generate/teamtable.css" %}
+    </style>
+
+  </head>
+  <body>
+    <div id="paper">
+      <strong><h1>{{ SITE_NAME }}</h1></strong>
+      <h3>{{ competition.name}} - {{group.name}}</h3>
+
+      {% if matches %}
+        <table class='matchTable'>
+          {% for match in matches %}
+            <tr>
+              <td style="font-size: 180%; text-align: right;">
+                  {{ match.teamA.name }}
+              </td>
+              <td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td style="font-size: 180%; text-align: left;">
+                  {{ match.teamB.name }}
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+
+      {% else %}
+        <p>No matches have been generated yet</p>
+      {% endif %}
+
+      {% include "soccer/results/generate/footer.html" %}
+  </div>
+  </body>
+</html>

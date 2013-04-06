@@ -388,3 +388,12 @@ def results_event_pdf(request, event_id):
 
     return render_to_pdf(request, 'soccer/results/generate/event.html', 
                             {'competitions': competitions})
+
+def schedule_generate(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    competition = group.competition_set.all()[0]
+
+    matches = group.matches.all()
+    
+    return render_to_pdf(request, 'soccer/results/generate/schedule.html',
+                            {'competition': competition, 'matches': matches, 'group': group})

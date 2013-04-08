@@ -64,7 +64,7 @@
 </head>
 <body>
     <div id="startAll" onclick="ST.startPerf()">
-      <div id="startText">Start 1. round</div>
+      <div id="startText">Start {{performance.round_number}}. round</div>
     </div>
 	<div id="underMain">
         <div id="panel">
@@ -270,7 +270,7 @@
   <div id="timeBar" class="element3">
 		<div id="timeStopwatch" class="time">00:00,00</div>
 	</div>
-	<div id="halftime" class="halftime"><span>1.</span></div>
+	<div id="halftime" class="halftime"><span>{{performance.round_number}}.</span></div>
   <div style="clear: both;"></div>
 </body>
 </html>

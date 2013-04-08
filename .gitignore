@@ -37,3 +37,4 @@ nosetests.xml
 admin/
 grappelli/
 secret_key.py
+logs/

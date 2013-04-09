@@ -73,6 +73,9 @@ scoreTracker.prototype = {
     },
 
     addEach: function (Each, string){
+        if (string == 'lift' && $this.scores["each"][string] == 1){
+            return;    
+        }
         $this.scores["each"][string]++;
         $(Each).html($this.scores["each"][string] + '<span style="font-size: 50%;">x</span>');              
     }, 
@@ -88,11 +91,11 @@ scoreTracker.prototype = {
 
         for (i in $this.scores["try"]){
             $this.scores["try"][i] = 0;
-            $("#Try" + $this.scores["try"][i]).html("0. <span style='font-size: 50%;'>try<span>")
+            $("#Try" + i).html("-----")
         }
         for (j in $this.scores["each"]){
             $this.scores["each"][i] = 0;
-            $("#Each" + this.scores["each"][i]).html('0 <span style="font-size: 50%;">x</span>');  
+            $("#Each" + j).html('0<span style="font-size: 50%;">x</span>');  
         }
         
     },
@@ -185,7 +188,7 @@ scoreTracker.prototype = {
 
         for (x in $this.scores["try"]){
             if ($this.scores["try"][x] == 4){
-                $('#' + x).val("---");
+                $('#' + x).val(0);
             } else {
                 $('#' + x).val($this.scores["try"][x]);
             }        

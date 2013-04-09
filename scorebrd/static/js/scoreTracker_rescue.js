@@ -73,6 +73,9 @@ scoreTracker.prototype = {
     },
 
     addEach: function (Each, string){
+        if (string == 'lift' && $this.scores["each"][string] == 1){
+            return;    
+        }
         $this.scores["each"][string]++;
         $(Each).html($this.scores["each"][string] + '<span style="font-size: 50%;">x</span>');              
     }, 

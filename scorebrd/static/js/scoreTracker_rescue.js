@@ -100,6 +100,17 @@ scoreTracker.prototype = {
         
     },
 
+    newTime: function (){
+	    var inpMins = $('#fmins').val();
+	    var inpSecs = $('#fsecs').val();
+	
+        $this.mins = inpMins;
+        $this.secs = inpSecs;
+        $('.saved').fadeIn(200).delay(500).fadeOut(200);
+        
+        return false;
+    },
+
 
     // stopwatch
     toggle: function (){

@@ -6,16 +6,21 @@
     <a href="{% url rescue.views.index_rescue %}">Rescue</a> &raquo;
     <a href="{% url rescue.views.competition competition.id %}">{{competition.name}}</a> &raquo;
     <a href="{% url rescue.views.group group.id %}">{{group.name}}</a> &raquo;
-    <a href="{% url rescue.views.results_match_view group.id %}"> </a>
+    <a href="{% url rescue.views.results_performance_view group.id %}"> </a>
 </div>
 {% endblock %}
 
 {% block content %}
 
-<h2> Match between <strong>{{match.teamA.name}}</strong> and <strong>{{match.teamB.name}}</strong></h2>
+<h2> Performance of the <strong>{{performance.team.name}}</strong></h2>
 
-Result - {{match.scoreA}} : {{match.scoreB}}<br>
-Referee - <strong>{{match.referee.username}}</strong>
+{% if performance.playing == 'D'%}
+  Result - Time <strong>{{performance.time}}</strong> secs, Points <strong>{{performance.points}}</strong><br>
+  Referee - <strong>{{performance.referee.username}}</strong><br>
+  Finished at - <strong>{{performance.finished_at}}</strong>
+{% else %}
+  <h3>Round has not been started yet</h3>
+{% endif %}
 
 
 {% endblock %}

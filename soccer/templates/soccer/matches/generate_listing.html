@@ -4,7 +4,7 @@
   <h2> Generated matches: </h2>
   {% include "soccer/matches.html" %}
 
-  <a href="{% url group group.id %}">Let's go back to the group listing.</a>
+  <a href="{% url soccer.views.group group.id %}">Let's go back to the group listing.</a>
 {% endblock %}
 
 

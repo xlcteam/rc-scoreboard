@@ -94,7 +94,7 @@ scoreTracker.prototype = {
             $("#Try" + i).html("-----")
         }
         for (j in $this.scores["each"]){
-            $this.scores["each"][i] = 0;
+            $this.scores["each"][j] = 0;
             $("#Each" + j).html('0<span style="font-size: 50%;">x</span>');  
         }
         

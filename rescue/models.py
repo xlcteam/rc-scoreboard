@@ -65,6 +65,8 @@ class Performance(models.Model):
     points = models.IntegerField(default=0)
     time = models.FloatField(default=0.0)
 
+    finished_at = models.DateTimeField(auto_now=True)
+
 
 class Group(models.Model):
     name = models.CharField(max_length=200)

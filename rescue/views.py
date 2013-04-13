@@ -358,3 +358,13 @@ def results_group_pdf(request, group_id):
     return render_to_pdf(request, 'rescue/results/generate/group.html',
                             {'competition': competition, 'group': group,
                              'performances': performances, 'title': group.name})
+
+@render_to('rescue/results/performance.html')
+@login_required(login_url='/login/')
+def results_performance_view(request, performance_id):
+    performance = get_object_or_404(Performance, pk=performance_id)
+
+    group = performance.group_set.all()[0]
+    competition = group.competition_set.all()[0]
+    return {'group': group, 'performance': performance,
+            'competition': competition}

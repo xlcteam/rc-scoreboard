@@ -36,7 +36,7 @@ class Match(models.Model):
     playing = models.CharField(max_length=1, choices=PLAYING_CHOICES,
             default='N')
     referee = models.ForeignKey('auth.User')
-    #finished_at = #TODO: date and time of finished match
+    finished_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = 'matches'

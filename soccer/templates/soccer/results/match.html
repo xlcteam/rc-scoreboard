@@ -2,7 +2,7 @@
 {% block fastinfo %}
 <div id="fastinfo">&raquo;
     <a href="{% url scorebrd.views.index %}">{{SITE_NAME}}</a> &raquo;
-    <a href="{% url soccer.views.index_rescue %}">Soccer</a> &raquo;
+    <a href="{% url soccer.views.index_soccer %}">Soccer</a> &raquo;
     <a href="{% url soccer.views.competition competition.id %}">{{competition.name}}</a> &raquo;
     <a href="{% url soccer.views.group group.id %}">{{group.name}}</a> &raquo;
     <a href="{% url soccer.views.results_match_view group.id %}">{{match.teamA.name}} vs {{match.teamB.name}}</a>
@@ -13,8 +13,9 @@
 
 <h2> Match between <strong>{{match.teamA.name}}</strong> and <strong>{{match.teamB.name}}</strong></h2>
 
-Result - {{match.scoreA}} : {{match.scoreB}}<br>
-Referee - <strong>{{match.referee.username}}</strong>
+Result - <strong>{{match.scoreA}} : {{match.scoreB}}</strong><br>
+Referee - <strong>{{match.referee.username}}</strong><br>
+Finished at - <strong>{{match.finished_at}}</strong>
 
 
 {% endblock %}

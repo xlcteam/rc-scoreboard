@@ -27,6 +27,8 @@ can install other dependencies (see requirements.txt).
 ### Server installation
 
 * Install Python, PIP and GIT. Make sure the `libevent-dev` is also installed.
+  You can easily installed by running `apt-get install libevent-dev` as root on
+  Debian-like Linux servers.
 * Clone this repository to a directory of your linking.
 * Install all the dependencies by running `$ pip install -r requirements.txt`
   as superuser

@@ -79,6 +79,13 @@ class Group(models.Model):
     # stuff for final table
     result_table_generated = models.BooleanField(default=False)
     perfs_final = models.ManyToManyField(Performance, related_name="final_results")
+    RESULTS_CHOICES = (
+        ('S', 'Play three rounds - take the sum of the best two as the result (slovak system)'),
+        ('D', 'Play two rounds - take the best one as the result'),
+    )
+
+    results_type = models.CharField(max_length=1, choices=PLAYING_CHOICES,
+        default='S')
 
     def __unicode__(self):
         return self.name

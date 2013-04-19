@@ -191,7 +191,11 @@ def performances_generate_listing(request):
     group = get_object_or_404(Group, pk=request.POST['group_id'])
     teams = list(group.teams.all())
 
-    for rnd in range(1, 4):
+    n_rounds = 3
+    if group.results_type == 'D':
+        n_rounds = 2
+
+    for rnd in range(1, 1+n_rounds):
         for team in teams:
             performance = Performance(team=team, round_number=rnd, referee=request.user)
             performance.save()
@@ -323,25 +327,29 @@ def table_final_generate(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     for team in group.teams.all():
         teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()   
-        
-        newperf = Performance(team=team, round_number=4)
-        newperf.referee = request.user
-        newperf.room1 = teamres[0].room1 + teamres[1].room1
-        newperf.room2 = teamres[0].room2 + teamres[1].room2
-        newperf.room3 = teamres[0].room3 + teamres[1].room3
-        newperf.ramp = teamres[0].ramp + teamres[1].ramp
-        newperf.hallway = teamres[0].hallway + teamres[1].hallway
-        newperf.gap = teamres[0].gap + teamres[1].gap
-        newperf.obstacle = teamres[0].obstacle + teamres[1].obstacle
-        newperf.speed_bump = teamres[0].speed_bump + teamres[1].speed_bump
-        newperf.intersection = teamres[0].intersection + teamres[1].intersection
-        newperf.victim = teamres[0].victim + teamres[1].victim
-        newperf.lift = teamres[0].lift + teamres[1].lift
+        if group.results_type = 'S':
 
-        newperf.points = teamres[0].points + teamres[1].points
-        newperf.time = teamres[0].time + teamres[1].time
-        
-        newperf.save()
+            newperf = Performance(team=team, round_number=4)
+            newperf.referee = request.user
+            newperf.room1 = teamres[0].room1 + teamres[1].room1
+            newperf.room2 = teamres[0].room2 + teamres[1].room2
+            newperf.room3 = teamres[0].room3 + teamres[1].room3
+            newperf.ramp = teamres[0].ramp + teamres[1].ramp
+            newperf.hallway = teamres[0].hallway + teamres[1].hallway
+            newperf.gap = teamres[0].gap + teamres[1].gap
+            newperf.obstacle = teamres[0].obstacle + teamres[1].obstacle
+            newperf.speed_bump = teamres[0].speed_bump + teamres[1].speed_bump
+            newperf.intersection = teamres[0].intersection + teamres[1].intersection
+            newperf.victim = teamres[0].victim + teamres[1].victim
+            newperf.lift = teamres[0].lift + teamres[1].lift
+
+            newperf.points = teamres[0].points + teamres[1].points
+            newperf.time = teamres[0].time + teamres[1].time
+
+            newperf.save()
+        else:
+            newperf = teamres[0]
+
         group.perfs_final.add(newperf)
 
     group.result_table_generated = True

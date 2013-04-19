@@ -577,3 +577,41 @@ button:active {
     padding-top: 0px; 
   }
 }
+
+@media only screen and (max-width: 1024px) { 
+  #startAll, .startText {
+    font-size: 2em; 
+  } 
+
+  .name {
+    font-size: 1.8em;
+  }
+  .time {
+    font-size: 2.5em;
+    text-align: center;
+  }
+
+  .third {
+    width: 47%; 
+  }
+
+  .scores table {
+    font-size: 22px !important; 
+  }
+
+  .scores table tr td {
+    padding-top: 7px !important; 
+  }
+
+  #names {
+    height: auto !important;   
+  }
+
+  .button {
+  }
+
+  .scores {
+    padding-top: 0px; 
+  }
+}
+

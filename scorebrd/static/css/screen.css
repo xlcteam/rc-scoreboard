@@ -305,6 +305,10 @@ a[href^="error:"] {
         width: 200px !important;
 }
 
+form label {
+  vertical-align: top;
+}
+
 .back {
   float: left; 
   cursor: pointer;

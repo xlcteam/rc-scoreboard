@@ -15,13 +15,26 @@ The only real dependency is `python` (preferably cpython2) and `pip` so that you
 can install other dependencies (see requirements.txt).
 
 
-## Installing
+## Setting up a development environment
 * You need to create some virtual environment
-* Then install all the dependencies by running `$ pip install -r requirements.txt`
+* Then install all the dependencies by running `$ pip install -r requirements.txt` as
+  superuser
 * Then, to get all we need `$ python manage.py collectstatic`
 * Now we shall sync the DB `$ python manage.py syncdb`
 * And in case we want to export results to PDF files, `wkhtmltopdf` has to be
   installed (the actual application, not the python wrapper)
+
+### Server installation
+
+* Install Python, PIP and GIT. Make sure the `libevent-dev` is also installed.
+  You can easily installed by running `apt-get install libevent-dev` as root on
+  Debian-like Linux servers.
+* Clone this repository to a directory of your linking.
+* Install all the dependencies by running `$ pip install -r requirements.txt`
+  as superuser
+* If you want to export results to PDF files, make sure the `wkhtmltopdf`
+  executable is present at the server.
+
 
 *Note*: This application is still in the alpha version and not meant for actual use. Please [contact us](http://xlc-team.info/contact) if you plan on using it.
 

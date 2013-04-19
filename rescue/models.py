@@ -66,6 +66,9 @@ class Performance(models.Model):
     time = models.FloatField(default=0.0)
 
     finished_at = models.DateTimeField(auto_now=True)
+    
+    def __unicode__(self):
+        return "{0} - {1} round".format(self.team.name, self.round_number)
 
 
 class Group(models.Model):

@@ -1,6 +1,6 @@
 # Django settings for scoreboard project.
 
-DEBUG = True
+DEBUG = True 
 TEMPLATE_DEBUG = DEBUG
 
 import os

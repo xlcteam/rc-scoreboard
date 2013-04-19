@@ -73,6 +73,9 @@ scoreTracker.prototype = {
     },
 
     addEach: function (Each, string){
+        if (string == 'lift' && $this.scores["each"][string] == 1){
+            return;    
+        }
         $this.scores["each"][string]++;
         $(Each).html($this.scores["each"][string] + '<span style="font-size: 50%;">x</span>');              
     }, 
@@ -88,13 +91,24 @@ scoreTracker.prototype = {
 
         for (i in $this.scores["try"]){
             $this.scores["try"][i] = 0;
-            $("#Try" + $this.scores["try"][i]).html("0. <span style='font-size: 50%;'>try<span>")
+            $("#Try" + i).html("-----")
         }
         for (j in $this.scores["each"]){
-            $this.scores["each"][i] = 0;
-            $("#Each" + this.scores["each"][i]).html('0 <span style="font-size: 50%;">x</span>');  
+            $this.scores["each"][j] = 0;
+            $("#Each" + j).html('0<span style="font-size: 50%;">x</span>');  
         }
         
+    },
+
+    newTime: function (){
+	    var inpMins = $('#fmins').val();
+	    var inpSecs = $('#fsecs').val();
+	
+        $this.mins = inpMins;
+        $this.secs = inpSecs;
+        $('.saved').fadeIn(200).delay(500).fadeOut(200);
+        
+        return false;
     },
 
 
@@ -185,7 +199,7 @@ scoreTracker.prototype = {
 
         for (x in $this.scores["try"]){
             if ($this.scores["try"][x] == 4){
-                $('#' + x).val("---");
+                $('#' + x).val(0);
             } else {
                 $('#' + x).val($this.scores["try"][x]);
             }        

@@ -88,10 +88,27 @@ footer { font-size: 70%; padding: 1em 0; color: gray; }
 
 div.flash {
 	color: black;
-	background: #FFF9D7;
-	border: 1px solid #E2C822;
 /*	padding: 1em;
 	margin: 1em 0;*/
+}
+
+div.flash ul {
+        padding-left: 0px;
+        list-style-type: none;
+}
+
+div.flash ul li {
+        padding: 10px;
+}
+
+div.flash .warning {
+	background: #FFF9D7;
+	border: 1px solid #E2C822;
+}
+
+div.flash .success {
+	background: #E6EFC2;
+	border: 1px solid #C6D880;
 }
 
 a[href^="error:"] {

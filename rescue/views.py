@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
 from rescue.models import (Competition, Group, Team, NewEventForm, Performance,
-        NewTeamForm, MatchSaveForm)
+        NewTeamForm, MatchSaveForm, NewGroupForm)
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
@@ -80,10 +80,11 @@ def new_group(request):
     if 'competition' in request.GET:
         competition = get_object_or_404(Competition, pk=int(request.GET['competition']))
     if request.method == 'POST':
-        form = NewEventForm(request.POST)
+        form = NewGroupForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            group = Group(name=name)
+            results_type = form.cleaned_data['results_type']
+            group = Group(name=name, results_type=results_type)
             group.save()
 
             competition.groups.add(group)
@@ -94,7 +95,7 @@ def new_group(request):
 
             return redirect('rescue.views.group', str(group.id))
     else:
-        form = NewEventForm()
+        form = NewGroupForm()
         c = {}
         c.update(csrf(request))
         c['form'] = form
@@ -327,7 +328,7 @@ def table_final_generate(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     for team in group.teams.all():
         teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()   
-        if group.results_type = 'S':
+        if group.results_type == 'S':
 
             newperf = Performance(team=team, round_number=4)
             newperf.referee = request.user

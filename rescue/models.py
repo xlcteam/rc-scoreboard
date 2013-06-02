@@ -4,6 +4,16 @@ from django import forms
 class NewEventForm(forms.Form):
     name = forms.CharField(max_length=30)
 
+class NewGroupForm(forms.Form):
+    name = forms.CharField(max_length=30)
+
+    RESULTS_CHOICES = (
+        ('S', 'Play three rounds - take the sum of the best two as the result (slovak system)'),
+        ('D', 'Play two rounds - take the best one as the result (dutch system)'),
+    )
+
+    results_type = forms.ChoiceField(choices=RESULTS_CHOICES)
+
 class NewTeamForm(forms.Form):
     names = forms.CharField(widget=forms.Textarea(attrs={'size':'20'}))
 
@@ -79,6 +89,13 @@ class Group(models.Model):
     # stuff for final table
     result_table_generated = models.BooleanField(default=False)
     perfs_final = models.ManyToManyField(Performance, related_name="final_results")
+    RESULTS_CHOICES = (
+        ('S', 'Play three rounds - take the sum of the best two as the result (slovak system)'),
+        ('D', 'Play two rounds - take the best one as the result (dutch system)'),
+    )
+
+    results_type = models.CharField(max_length=1, choices=RESULTS_CHOICES,
+        default='S')
 
     def __unicode__(self):
         return self.name

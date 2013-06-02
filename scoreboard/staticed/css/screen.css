@@ -32,6 +32,10 @@ a { color: #006aeb; padding: 3px 1px; }
   color: #fff;
 }
 
+#logo .sublogo {
+  padding-left: 40px;
+}
+
 #userPanel {
         width: 20%;
         float: right;
@@ -52,7 +56,7 @@ a { color: #006aeb; padding: 3px 1px; }
         color: white;
 }
 
-#banner h1 { color: white; font-size: 50px; line-height: 121px; margin: 0; padding-left: 40px; text-shadow: 1px 1px 0 rgba(0, 0, 0, .9); 
+#banner h1 { color: white; font-size: 50px; padding-top: 20px; margin: 0; padding-left: 40px; text-shadow: 1px 1px 0 rgba(0, 0, 0, .9); 
 font-family: Georgia, "New York CE", utopia, serif; -webkit-text-stroke: 1px rgba(0,0,0,0);
 font-weight: normal;
 }
@@ -84,10 +88,27 @@ footer { font-size: 70%; padding: 1em 0; color: gray; }
 
 div.flash {
 	color: black;
-	background: #FFF9D7;
-	border: 1px solid #E2C822;
 /*	padding: 1em;
 	margin: 1em 0;*/
+}
+
+div.flash ul {
+        padding-left: 0px;
+        list-style-type: none;
+}
+
+div.flash ul li {
+        padding: 10px;
+}
+
+div.flash .warning {
+	background: #FFF9D7;
+	border: 1px solid #E2C822;
+}
+
+div.flash .success {
+	background: #E6EFC2;
+	border: 1px solid #C6D880;
 }
 
 a[href^="error:"] {
@@ -303,6 +324,10 @@ a[href^="error:"] {
 
 #frmteamForm-groupID{
         width: 200px !important;
+}
+
+form label {
+  vertical-align: top;
 }
 
 .back {

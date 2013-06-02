@@ -142,7 +142,7 @@ body {
 	/*height: 200px;*/
     padding-top: 20px;
     color: #fff;
-    font-size: 200%;
+    font-size: 200% !important;
     text-align: center;
 }
 
@@ -498,3 +498,120 @@ button:active {
     margin-top: 25px;
     /*padding: .5em 2em .55em;*/
 }
+
+.scores table {
+  font-size: 100%;
+}
+
+@media only screen and (max-width: 40em) { /*640*/
+  #startAll, .startText {
+    font-size: 2.5em; 
+  } 
+
+  .name {
+    font-size: 2.2em;
+  }
+  .time {
+    font-size: 2.5em;
+    text-align: center;
+  }
+  .halftime {
+    font-size: 2.5em;
+  }
+
+  .third {
+    width: 47%; 
+  }
+
+  .scores table {
+    font-size: 18px !important; 
+  }
+
+  #names {
+    height: auto !important;   
+  }
+
+  .button {
+    padding: 2px 6px; 
+  }
+
+  .scores {
+    padding-top: 0px; 
+  }
+}
+
+@media only screen and (max-width: 30em) { /*640*/
+  #startAll, .startText {
+    font-size: 2em; 
+  } 
+
+  .name {
+    font-size: 1.8em;
+  }
+  .time {
+    font-size: 2.5em;
+    text-align: center;
+  }
+
+  .third {
+    width: 47%; 
+  }
+
+  .scores table {
+    font-size: 18px !important; 
+  }
+
+  .scores table tr td {
+    padding-top: 5px !important; 
+  }
+
+  #names {
+    height: auto !important;   
+  }
+
+  .button {
+    padding: 2px 6px; 
+  }
+
+  .scores {
+    padding-top: 0px; 
+  }
+}
+
+@media only screen and (max-width: 1024px) { 
+  #startAll, .startText {
+    font-size: 2em; 
+  } 
+
+  .name {
+    font-size: 1.8em;
+  }
+  .time {
+    font-size: 2.5em;
+    text-align: center;
+  }
+
+  .third {
+    width: 47%; 
+  }
+
+  .scores table {
+    font-size: 22px !important; 
+  }
+
+  .scores table tr td {
+    padding-top: 7px !important; 
+  }
+
+  #names {
+    height: auto !important;   
+  }
+
+  .button {
+  }
+
+  .scores {
+    padding-top: 0px; 
+  }
+}
+

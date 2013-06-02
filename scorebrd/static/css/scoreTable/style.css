@@ -64,168 +64,169 @@ body {
 
 
 .results {	
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #771E10), color-stop(100%, #771E10));
-  background-image: -webkit-linear-gradient(top, #771E10, #771E10);
-  background-image: -moz-linear-gradient(top, #771E10, #771E10);
-  background-image: -ms-linear-gradient(top, #771E10, #771E10);
-  background-image: -o-linear-gradient(top, #771E10, #771E10);
-  background-image: linear-gradient(top, #771E10, #771E10);
-  border-top: 1px solid #771E10;
-  border-right: 1px solid #771E10;
-  border-bottom: 1px solid #771E10;
-  border-left: 1px solid #771E10;
-  -webkit-border-radius: 18px;
-  -moz-border-radius: 18px;
-  -ms-border-radius: 18px;
-  -o-border-radius: 18px;
-  border-radius: 0px 18px 18px 18px;
-  -webkit-box-shadow: inset 0 1px 0 0 #771E10;
-  -moz-box-shadow: inset 0 1px 0 0 #771E10;
-  -ms-box-shadow: inset 0 1px 0 0 #771E10;
-  -o-box-shadow: inset 0 1px 0 0 #771E10;
-  box-shadow: inset 0 1px 0 0 #771E10;
-  color: #1a3e66;
-  font: normal 11px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
-	width: 97%;
-	/*height: 37%;*/
-	margin: 0 auto;
-	color: #fff;
-  font: bold 40px "helvetica neue", helvetica, arial, sans-serif;
-  overflow: hidden;
-  height: 100%;
-	/*text-align: center;*/
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #771E10), color-stop(100%, #771E10));
+        background-image: -webkit-linear-gradient(top, #771E10, #771E10);
+        background-image: -moz-linear-gradient(top, #771E10, #771E10);
+        background-image: -ms-linear-gradient(top, #771E10, #771E10);
+        background-image: -o-linear-gradient(top, #771E10, #771E10);
+        background-image: linear-gradient(top, #771E10, #771E10);
+        border-top: 1px solid #771E10;
+        border-right: 1px solid #771E10;
+        border-bottom: 1px solid #771E10;
+        border-left: 1px solid #771E10;
+        -webkit-border-radius: 18px;
+        -moz-border-radius: 18px;
+        -ms-border-radius: 18px;
+        -o-border-radius: 18px;
+        border-radius: 0px 18px 18px 18px;
+        -webkit-box-shadow: inset 0 1px 0 0 #771E10;
+        -moz-box-shadow: inset 0 1px 0 0 #771E10;
+        -ms-box-shadow: inset 0 1px 0 0 #771E10;
+        -o-box-shadow: inset 0 1px 0 0 #771E10;
+        box-shadow: inset 0 1px 0 0 #771E10;
+        color: #1a3e66;
+        font: normal 11px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+        width: 97%;
+        /*height: 37%;*/
+        margin: 0 auto;	color: #fff;
+        font: bold 40px "helvetica neue", helvetica, arial, sans-serif;
+        overflow: hidden;
+        height: 100%;
+        padding-top: 20px;
+        /*text-align: center;*/
 }
 
 .group_name {
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #771E10), color-stop(100%, #771E10));
-  background-image: -webkit-linear-gradient(top, #771E10, #771E10);
-  background-image: -moz-linear-gradient(top, #771E10, #771E10);
-  background-image: -ms-linear-gradient(top, #771E10, #771E10);
-  background-image: -o-linear-gradient(top, #771E10, #771E10);
-  background-image: linear-gradient(top, #771E10, #771E10);
-  border-top: 1px solid #771E10;
-  border-right: 1px solid #771E10;
-  border-bottom: 1px solid #771E10;
-  border-left: 1px solid #771E10;
-  -webkit-border-radius: 18px;
-  -moz-border-radius: 18px;
-  -ms-border-radius: 18px;
-  -o-border-radius: 18px;
-  border-radius: 18px 18px 0px 0px;
-  -webkit-box-shadow: inset 0 1px 0 0 #771E10;
-  -moz-box-shadow: inset 0 1px 0 0 #771E10;
-  -ms-box-shadow: inset 0 1px 0 0 #771E10;
-  -o-box-shadow: inset 0 1px 0 0 #771E10;
-  box-shadow: inset 0 1px 0 0 #771E10;
-  color: #EBC137;
-	margin-left: -1px;
-	padding: 0 20px;
-  /*font: bold 40px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;*/
-  font-family: "Chango";
-	font-size: 40px;
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #771E10), color-stop(100%, #771E10));
+        background-image: -webkit-linear-gradient(top, #771E10, #771E10);
+        background-image: -moz-linear-gradient(top, #771E10, #771E10);
+        background-image: -ms-linear-gradient(top, #771E10, #771E10);
+        background-image: -o-linear-gradient(top, #771E10, #771E10);
+        background-image: linear-gradient(top, #771E10, #771E10);
+        border-top: 1px solid #771E10;
+        border-right: 1px solid #771E10;
+        border-bottom: 1px solid #771E10;
+        border-left: 1px solid #771E10;
+        -webkit-border-radius: 18px;
+        -moz-border-radius: 18px;
+        -ms-border-radius: 18px;
+        -o-border-radius: 18px;
+        border-radius: 18px 18px 0px 0px;
+        -webkit-box-shadow: inset 0 1px 0 0 #771E10;
+        -moz-box-shadow: inset 0 1px 0 0 #771E10;
+        -ms-box-shadow: inset 0 1px 0 0 #771E10;
+        -o-box-shadow: inset 0 1px 0 0 #771E10;
+        box-shadow: inset 0 1px 0 0 #771E10;
+        color: #EBC137;
+        margin-left: -1px;
+        padding: 0 20px;
+        /*font: bold 40px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;*/
+        font-family: "Chango";
+        font-size: 40px;
+
 }
 
 .title {
-	width: 97%;
-	margin: 0 auto;
+        width: 97%;
+        margin: 0 auto;
 }
 
 .match {
-	width: 97%;
-	margin: 0 auto;
-  font-family: "Trebuchet MS",Helvetica,Jamrul,sans-serif;
-	padding: 10px;
+        width: 97%;
+        margin: 0 auto;
+        font-family: "Trebuchet MS",Helvetica,Jamrul,sans-serif;
+        padding: 10px;
 }
 
 .leftName {
-	width: 40%;
-	text-align: center;	
-	float: left;
+        width: 40%;
+        text-align: center;	
+        float: left;
 }
 
 .rightName {
-	width: 40%;
-	text-align: center;
-	float: right;
+        width: 40%;
+        text-align: center;
+        float: right;
 }
 
 .score {
-	width: 20%;
-	text-align: center;
-	float: left;
+        width: 20%;
+        text-align: center;
+        float: left;
 }
 
 .results_table {
-	text-align: center;
-	color: #ffffff;
-	font-size: 70%;
-	margin: 0 auto;
-    margin-top: -20px;
-    width: 80%;
+        text-align: center;
+        color: #ffffff;
+        font-size: 70%;
+        margin: 0 auto;
+        margin-top: -20px;
+        width: 80%;
 }
 
 .resultDiv {
-	text-align: center;
+        text-align: center;
 }
 
 .name-live {
-    text-align: left;
-
+        text-align: left;
+        width: 300px;
 }
 
 .name {
-	min-width: 250px;
-	text-align: left;
+        min-width: 250px;
+        text-align: left;
 }
 
 .results-table > td, th {
-	padding: 0 5px;
+        padding: 0 5px;
 }
 
 .matches {
-  overflow: hidden;
-  padding: 5px 0;
-  width: auto !important;
+        overflow: hidden;
+        padding: 5px 0;
+        width: auto !important;
 }
 
 .points  {
-	background-color: #fff;
-	color: #771E10;	
-	min-width: 60px;
+        background-color: #fff;
+        color: #771E10;	
+        min-width: 60px;
 }
 
 .eventName {
-  float: right;
-  color: #EBC137;
-  margin-right: 40px;
-  padding-top: 8px;
-  font: 20px/100% Georgia, "New York CE", utopia, serif;
-  font-style: italic;
+        float: right;
+        color: #EBC137;
+        margin-right: 40px;
+        padding-top: 8px;
+        font: 20px/100% Georgia, "New York CE", utopia, serif;
+        font-style: italic;
 }
 
 #footer {
-  width: 100%;
-  background:#EBC137;
-  color: #000; 
-  height: 55px;
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  z-index: 1000000;
-  text-align: center;
-  font-size: 2em;
+        width: 100%;
+        background:#EBC137;
+        color: #000; 
+        height: 55px;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        z-index: 1000000;
+        text-align: center;
+        font-size: 2em;
 }
 
 .group_tables {
-  width: 100%;
+        width: 100%;
 }
 
 .matches_played {
-  width: 100%;
+        width: 100%;
 }
 
 .results ul {
-  list-style: none;
-  text-align: center;
+        list-style: none;
+        text-align: center;
 }
 

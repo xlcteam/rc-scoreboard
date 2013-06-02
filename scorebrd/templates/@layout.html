@@ -42,9 +42,13 @@
 {% ifregex "^/dance" request.path %}
                       <span>-</span> <a href="/dance"><small> dance </small></a>
 {% endifregex %}
-{% ifregex "^/rescue" request.path %}
-                      <span>-</span> <a href="/rescue"><small> rescue </small></a>
+{% ifregex "^/rescueA" request.path %}
+                      <span>-</span> <a href="/rescueA"><small> rescue A</small></a>
 {% endifregex %}
+{% ifregex "^/rescueB" request.path %}
+                      <span>-</span> <a href="/rescueB"><small> rescue B</small></a>
+{% endifregex %}
+
                     </a>
                   </h1>
                 <small class="sublogo">{{ SITE_NAME }}</small>

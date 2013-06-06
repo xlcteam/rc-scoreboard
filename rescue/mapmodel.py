@@ -21,6 +21,14 @@ class Map(models.Model):
     name = models.CharField(max_length=60)
     tiles = models.ManyToManyField(Tile)
 
+    room1_tries = models.IntegerField(initial=0)
+    room2_tries = models.IntegerField(initial=0)
+    room3_tries = models.IntegerField(initial=0)
+
+    ramp_tries = models.IntegerField(initial=0)
+    hallway_tries = models.IntegerField(initial=0)
+    victim_tries = models.IntegerField(initial=0)
+
     def score(self):
        
         scoresum = 0
@@ -31,7 +39,3 @@ class Map(models.Model):
         map(cout_up_score, self.tiles)
 
         return scoresum
-
-
-    
-

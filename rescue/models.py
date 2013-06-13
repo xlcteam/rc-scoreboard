@@ -1,6 +1,7 @@
 from django.db import models
 from django import forms
 from rescue.forms import *
+from rescue.mapmodel import *
 
 class Team(models.Model):
     name = models.CharField(max_length=200)

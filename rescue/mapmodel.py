@@ -3,7 +3,7 @@ from django import forms
 
 class Tile(models.Model):
     points = 0
-    completed = models.BooleanField(initial=False)
+    completed = models.BooleanField(default=False)
     image = models.CharField(max_length=60)
     rotation = models.IntegerField()
 
@@ -21,21 +21,23 @@ class Map(models.Model):
     name = models.CharField(max_length=60)
     tiles = models.ManyToManyField(Tile)
 
-    room1_tries = models.IntegerField(initial=0)
-    room2_tries = models.IntegerField(initial=0)
-    room3_tries = models.IntegerField(initial=0)
+    room1_tries = models.IntegerField(default=0)
+    room2_tries = models.IntegerField(default=0)
+    room3_tries = models.IntegerField(default=0)
 
-    ramp_tries = models.IntegerField(initial=0)
-    hallway_tries = models.IntegerField(initial=0)
-    victim_tries = models.IntegerField(initial=0)
+    ramp_tries = models.IntegerField(default=0)
+    hallway_tries = models.IntegerField(default=0)
+    victim_tries = models.IntegerField(default=0)
 
     def score(self):
        
         scoresum = 0
 
         def cout_up_score(tile):
-            scoresum += tile.points if tile.completed
+            if tile.completed:
+                scoresum += tile.points 
 
         map(cout_up_score, self.tiles)
 
         return scoresum
+    

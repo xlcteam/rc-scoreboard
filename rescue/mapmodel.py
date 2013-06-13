@@ -5,7 +5,7 @@ class Tile(models.Model):
     points = 0
     completed = models.BooleanField(default=False)
     image = models.CharField(max_length=60)
-    rotation = models.IntegerField()
+    rotation = models.IntegerField(default=0)
 
 class GapTile(Tile):
     points = 10

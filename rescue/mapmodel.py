@@ -29,15 +29,30 @@ class Map(models.Model):
     hallway_tries = models.IntegerField(default=0)
     victim_tries = models.IntegerField(default=0)
 
+    
+class Run(Map):
+
     def score(self):
        
+        scores = {
+            'room1' : {0: 0, 1 : 60, 2 : 40, 3 : 20},
+            'room2' : {0: 0, 1 : 60, 2 : 40, 3 : 20},
+            'room3' : {0: 0, 1 : 60, 2 : 40, 3 : 20},
+            'ramp'  : {0: 0, 1 : 30, 2 : 20, 3 : 10},
+            'hallway':{0: 0, 1 : 30, 2 : 20, 3 : 10},
+            'victim': {0: 0, 1 : 60, 2 : 40, 3 : 20},      
+        }
+
         scoresum = 0
 
         def cout_up_score(tile):
             if tile.completed:
                 scoresum += tile.points 
 
+
         map(cout_up_score, self.tiles)
 
+        
+
         return scoresum
-    
+

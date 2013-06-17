@@ -45,14 +45,27 @@ class Run(Map):
 
         scoresum = 0
 
-        def cout_up_score(tile):
+        def count_up_score(tile):
             if tile.completed:
                 scoresum += tile.points 
 
 
-        map(cout_up_score, self.tiles)
+        map(count_up_score, self.tiles)
 
+        def count_up_tries(type, tries):
+            if tries < 0 and tries > 3:
+                return 0
+            else:
+                return scores[type]
         
+        
+        scoresum += count_up_tries('room1', self.room1_tries)
+        scoresum += count_up_tries('room2', self.room2_tries)
+        scoresum += count_up_tries('room3', self.room3_tries)
+
+        scoresum += count_up_tries('ramp', self.ramp_tries)
+        scoresum += count_up_tries('hallway', self.hallway_tries)
+        scoresum += count_up_tries('victim', self.victim_tries)
 
         return scoresum
 

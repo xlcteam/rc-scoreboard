@@ -377,3 +377,8 @@ def results_performance_view(request, performance_id):
     competition = group.competition_set.all()[0]
     return {'group': group, 'performance': performance,
             'competition': competition}
+
+@render_to('rescue/maps/editor.html')
+@login_required(login_url='/login/')
+def mapeditor_view(request)
+    return {}

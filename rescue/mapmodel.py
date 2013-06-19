@@ -30,7 +30,9 @@ class Map(models.Model):
     victim_tries = models.IntegerField(default=0)
 
     
-class Run(Map):
+class Run(models.Model):
+
+    map = models.ForeignKey(Map)
 
     def score(self):
        

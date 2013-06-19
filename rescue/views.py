@@ -378,7 +378,7 @@ def results_performance_view(request, performance_id):
     return {'group': group, 'performance': performance,
             'competition': competition}
 
-@render_to('rescue/maps/editor.html')
+@render_to('rescue/map/editor.html')
 @login_required(login_url='/login/')
-def mapeditor_view(request)
+def mapeditor_view(request):
     return {}

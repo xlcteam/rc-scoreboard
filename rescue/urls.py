@@ -30,4 +30,7 @@ urlpatterns = patterns('rescue.views',
     url(r'^results/performance/(?P<performance_id>\d+)/?$', 'results_performance_view'),
 
 
+    url(r'^map/new', 'mapeditor_view'),
+
+
 )

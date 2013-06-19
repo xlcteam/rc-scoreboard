@@ -58,7 +58,7 @@ class Run(models.Model):
             if tries < 0 and tries > 3:
                 return 0
             else:
-                return scores[type]
+                return scores[type][tries]
         
         
         scoresum += count_up_tries('room1', self.room1_tries)

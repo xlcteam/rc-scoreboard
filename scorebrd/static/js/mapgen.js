@@ -4,7 +4,6 @@ $(document).ready(function () {
    
     var mapID = $_GET.id;// The variable needs to be set in the page that loads this js-file
     
-    
     var map = $("#map");
     // Create the user interface
     $('<h1>Create map</h1>').appendTo(map);
@@ -18,7 +17,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "POST",
-            url: "mapgen.php",
+            url: MAP_SAVE_URL,
             data: {"json": JSON.stringify(json)},
             dataType: "json",
             success: function(data){alert("The map is now saved!"); mapID = data;},
@@ -88,7 +87,7 @@ $(document).ready(function () {
             'helper': 'clone',
             'revert': 'invalid'
         }).append(
-            $('<img src="img/tiles/tile-'+i+'.png">').addClass('path').bind("contextmenu",function(e){
+            $('<img src="'+ IMG_DIR +'img/tiles/tile-'+i+'.png">').addClass('path').bind("contextmenu",function(e){
                 $(this).rotBy(90);
                 return false;// Prevents the default context menu to show up
             })
@@ -103,7 +102,7 @@ $(document).ready(function () {
         // Ask the server for tiles!
         $.ajax({
             type: "POST",
-            url: "mapgen.php",
+            url: MAP_SAVE_URL,
             data: {"json": JSON.stringify({"mapID": mapID, "action": "getTiles"})},
             dataType: "json",
             success: function(data){ 

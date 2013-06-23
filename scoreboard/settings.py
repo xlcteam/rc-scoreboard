@@ -37,7 +37,7 @@ TIME_ZONE = 'Europe/Bratislava'
 LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
-SITE_NAME = "RoboCup Junior Dutch Open 2013"
+SITE_NAME = "RoboCupJunior World Championships 2013"
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.

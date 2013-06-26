@@ -97,5 +97,3 @@ class SimpleRun(models.Model):
     time = models.FloatField(default=0.0)
 
     finished_at = models.DateTimeField(auto_now=True)
- 
-

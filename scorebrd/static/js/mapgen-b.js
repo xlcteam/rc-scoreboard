@@ -232,3 +232,7 @@ $(document).ready(function () {
     });*/
 });
 
+// checks a value lies within +- of target value
+function plusminus(val, comp, pad) {
+	return (val >= (comp - pad) && val <= (comp + pad));	
+}

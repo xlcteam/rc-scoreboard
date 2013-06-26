@@ -167,21 +167,20 @@ $(document).ready(function () {
                 }else if($(this).hasClass('victim')){
                     $(this).addClass('black-tile').removeClass('victim').children('.victim').remove();;
                 }else{
-					var x = e.pageX - this.offsetLeft - 8;
-					var y = e.pageY - this.offsetTop - 113;
-					if(plusminus(y, 25, 10) && plusminus(x, 10, 10)) {
-						$(this).addClass('victim').append('<img src="' + IMG_DIR + 'img/rescueB/victim0.png" class="victim">'); // left
-					}
-					else if(plusminus(y, 25, 10) && plusminus(x, 40, 10)) {
-						$(this).addClass('victim').append('<img src="' + IMG_DIR + 'img/rescueB/victim2.png" class="victim">'); // right
-					}
-					else if(plusminus(y, 5, 5) && plusminus(x, 25, 10)) {
-						$(this).addClass('victim').append('<img src="' + IMG_DIR + 'img/rescueB/victim3.png" class="victim">'); // top
-					}
-					else if(plusminus(y, 45, 5) && plusminus(x, 25, 10)) {
-						$(this).addClass('victim').append('<img src="' + IMG_DIR + 'img/rescueB/victim1.png" class="victim">'); // bottom
-					}
-                    
+                    var x = e.pageX - this.offsetLeft - 8;
+                    var y = e.pageY - this.offsetTop - 113;
+                    if(plusminus(y, 25, 10) && plusminus(x, 10, 10)) {
+                    	$(this).addClass('victim').append('<img src="' + IMG_DIR + 'img/rescueB/victim0.png" class="victim">'); // left
+                    }
+                    else if(plusminus(y, 25, 10) && plusminus(x, 40, 10)) {
+                    	$(this).addClass('victim').append('<img src="' + IMG_DIR + 'img/rescueB/victim2.png" class="victim">'); // right
+                    }
+                    else if(plusminus(y, 5, 5) && plusminus(x, 25, 10)) {
+                    	$(this).addClass('victim').append('<img src="' + IMG_DIR + 'img/rescueB/victim3.png" class="victim">'); // top
+                    }
+                    else if(plusminus(y, 45, 5) && plusminus(x, 25, 10)) {
+                    	$(this).addClass('victim').append('<img src="' + IMG_DIR + 'img/rescueB/victim1.png" class="victim">'); // bottom
+                    }              
                 }
             }).contextmenu(function(){
                 $('.start').remove();

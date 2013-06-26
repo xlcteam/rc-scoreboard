@@ -9,7 +9,7 @@
         {% for map in maps %}
           <tr>
             <td> #{{ map.id }} </td>
-            <td style='width: 250px;'> <a href="{% url rescue.views.mapeditor_edit map.id %}">{{map.name}}</a> </td>
+            <td style='width: 250px;'> <a href="{% url rescueB.views.mapeditor_edit map.id %}">{{map.name}}</a> </td>
           </tr>
         {% endfor %}
       </table>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="col span_6">
-      <a href="{% url rescue.views.mapeditor_view %}">Create a new map</a>
+      <a href="{% url rescueB.views.mapeditor_view %}">Create a new map</a>
     </div>
 </section>
 

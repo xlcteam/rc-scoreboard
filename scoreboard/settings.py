@@ -140,6 +140,7 @@ TEMPLATE_DIRS = (
     os.path.join(DIR, '../soccer/templates'),
     os.path.join(DIR, '../dance/templates'),
     os.path.join(DIR, '../rescue/templates'),
+    os.path.join(DIR, '../rescueB/templates'),
     os.path.join(DIR, '../scorebrd/templates')
 
 )
@@ -173,6 +174,7 @@ INSTALLED_APPS = (
     'django_socketio',
     'soccer',
     'dance',
+    'rescueB',
     'rescue',
     'scorebrd',
     'gunicorn',

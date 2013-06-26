@@ -7,10 +7,12 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf
+from django.contrib.auth.decorators import login_required
 
 @render_to('rescueB/index.html')
 @login_required(login_url='/login/')
 def index_rescueB(request):
+    return {}
 
 @render_to('rescueB/map/editor.html')
 @login_required(login_url='/login/')

@@ -35,20 +35,6 @@
                 <div id="logo">
                   <h1><a href="/">scoreBoard</a>
 
-{% load ifregex %}
-{% ifregex "^/soccer" request.path %}
-                      <span>-</span> <a href="/soccer"><small> soccer </small></a>
-{% endifregex %}
-{% ifregex "^/dance" request.path %}
-                      <span>-</span> <a href="/dance"><small> dance </small></a>
-{% endifregex %}
-{% ifregex "^/rescue" request.path %}
-                      <span>-</span> <a href="/rescue"><small> rescue A</small></a>
-{% endifregex %}
-{% ifregex "^/rescueB" request.path %}
-                      <span>-</span> <a href="/rescueB"><small> rescue B</small></a>
-{% endifregex %}
-
                     </a>
                   </h1>
                 <small class="sublogo">{{ SITE_NAME }}</small>
@@ -67,31 +53,6 @@
 
         <div id="content">
           {% block topmenu %}
-
-{% ifregex "^/soccer" request.path %}
-<ul id="menu">
-  <li>
-  <a href="{% url soccer.views.results_live %}"> Live results </a>
-  </li>
-</ul>
-{% endifregex %}
-
-{% ifregex "^/dance" request.path %}
-<ul id="menu">
-  <li>
-  <a href="{% url dance.views.results_live %}"> Live results </a>
-  </li>
-</ul>
-{% endifregex %}
-
-{% ifregex "^/rescue" request.path %}
-<ul id="menu">
-  <li>
-  <a href="{% url rescue.views.results_live %}"> Live results </a>
-  </li>
-</ul>
-{% endifregex %}
-
 
           {% endblock %}
 

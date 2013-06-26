@@ -1,0 +1,85 @@
+form{
+    float:left;
+    margin-right: 3em;
+}
+
+.field{/* table */
+    border-collapse: collapse;
+}
+/* Specify for both because the ramp does not have border class yet */
+/*.border,.wall{
+    width: 5px;
+    height: 5px;
+}*/
+.empty{
+    height: 5px;
+    width: 5px;
+}
+
+/* Potential wall */
+.border{
+    background-color: #CCCCCC;
+}
+
+.border:hover{
+    background-color: #333333;
+}
+.square, .square img{
+    width: 50px;
+    height: 50px;
+}
+.square img{
+    position: absolute;
+    vertical-align: bottom;/* See http://stackoverflow.com/questions/6133931/css-how-do-i-get-rid-of-some-inexplicable-space-padding */
+}
+.square{
+    display: inline-block;
+}
+
+/*
+  .square:hover{
+  background-color: #FFFFCC;
+  }*/
+/* Solid wall */
+.wall{
+    background-color: black;
+}
+/* Black square */
+.black-tile{
+    background-color: black;
+}
+/* Square with victim*/
+.victim{
+    
+}
+
+/* The square where the robot is supposed to start and end*/
+.start{
+    
+}
+
+
+/* Image for decreasing a number */
+.minus{
+    width: 3em;
+/*    padding: 0em 3em;*/
+}
+/* Image for increasing a number */
+.plus{
+    width: 3em;
+/*    padding: 0em 3em;*/
+}
+.count{
+    font-size: 5em;
+}
+
+/* Confirmation box where the competitor is signing the run */
+#confirmation{
+    margin-top: 5px;
+    width: 300px;
+    border: 1px dashed black;
+    clear: both; /* Remove the left floating of the table-element */
+}
+.right-col{
+    padding-left: 5px;
+}

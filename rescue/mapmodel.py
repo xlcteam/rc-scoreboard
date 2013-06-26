@@ -82,6 +82,11 @@ class SimpleMap(models.Model):
     data = models.TextField()
     name = models.CharField(max_length=60)
 
+
+    def __unicode__(self):
+        return self.name
+
+
 class SimpleRun(models.Model):
     map = models.ForeignKey(SimpleMap)
     round_number = models.IntegerField(default=0)

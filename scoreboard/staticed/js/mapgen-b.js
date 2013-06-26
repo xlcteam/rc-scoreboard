@@ -30,7 +30,7 @@ $(document).ready(function () {
         });
         $.ajax({
             type: "POST",
-            url: "{{ MAP_SAVE_URL }}",
+            url: MAP_SAVE_URL,
             data: {"json": JSON.stringify(json)},
             dataType: "json",
             success: function(data){alert("The map is now saved!"); mapID = data;},
@@ -184,7 +184,7 @@ $(document).ready(function () {
                 // Ask the server for maze data!
                 $.ajax({
                     type: "POST",
-                    url: "{{ MAP_SAVE_URL }}",
+                    url: MAP_SAVE_URL,
                     data: {"json": JSON.stringify({"mapID": mapID, "action": "getMaze"})},
                     dataType: "json",
                     success: function(data){

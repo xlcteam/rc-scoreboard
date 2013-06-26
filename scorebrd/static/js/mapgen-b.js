@@ -161,7 +161,7 @@ $(document).ready(function () {
                 $(this).toggleClass("wall");    
             });
             
-            $('.square').click(function(){
+            $('.square').click(function(e){
                 if($(this).hasClass('black-tile')){
                     $(this).removeClass('black-tile');
                 }else if($(this).hasClass('victim')){

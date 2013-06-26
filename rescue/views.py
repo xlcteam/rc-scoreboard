@@ -392,7 +392,7 @@ def mapeditor_save(request):
 
     if data['mapID'] == -1: 
         name = data['name']
-        map = SimpleMap(data='')
+        map = SimpleMap(name=name, data='')
         map.save()
         data['mapID'] = map.id
         map.data = json.dumps(data)

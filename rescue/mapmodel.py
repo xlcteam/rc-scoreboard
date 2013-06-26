@@ -80,6 +80,7 @@ class Team(models.Model):
 
 class SimpleMap(models.Model):
     data = models.TextField()
+    name = models.CharField(max_length=60)
 
 class SimpleRun(models.Model):
     map = models.ForeignKey(SimpleMap)

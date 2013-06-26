@@ -32,6 +32,8 @@ urlpatterns = patterns('rescue.views',
 
     url(r'^map/new', 'mapeditor_view'),
     url(r'^map/save', 'mapeditor_save'),
+    url(r'^map/edit/(?P<map_id>\d+)', 'mapeditor_edit'),
+    url(r'^map/listing', 'mapeditor_listing'),
 
 
 )

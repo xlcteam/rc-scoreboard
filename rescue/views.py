@@ -390,6 +390,13 @@ def mapeditor_view(request):
 def mapeditor_save(request):
     data = json.loads(request.POST['json'])
 
+    if data['action'] == 'getTiles':
+        id = data['mapID']
+        map = get_object_or_404(SimpleMap, pk=id)
+        return HttpResponse(map.data,
+                mimetype="application/json")
+
+
     if data['mapID'] == -1: 
         name = data['name']
         map = SimpleMap(name=name, data='')
@@ -401,5 +408,24 @@ def mapeditor_save(request):
         messages.success(request, "The map has been saved");
         return HttpResponse(json.dumps(map.id),
                 mimetype="application/json")
+    else:
+        map = get_object_or_404(SimpleMap, pk=data['mapID'])
+        map.data = request.POST['json']
+        map.save()
+        return HttpResponse(json.dumps(map.id),
+                mimetype="application/json")
 
     return {}
+
+@render_to('rescue/map/editor.html')
+@login_required(login_url='/login/')
+def mapeditor_edit(request, map_id):
+    return {'id': map_id}
+
+@render_to('rescue/map/listing.html')
+@login_required(login_url='/login/')
+def mapeditor_listing(request):
+    maps = SimpleMap.objects.all()
+    return {'maps': maps}
+
+

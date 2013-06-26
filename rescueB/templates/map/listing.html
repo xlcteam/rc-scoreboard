@@ -1,0 +1,24 @@
+{% extends "@layout.html" %}
+
+{% block content %}
+<section class="row">
+    <div class="col span_6">
+      <h2> Listing of maps </h2>
+      {% if maps %}
+      <table class="eventTable">
+        {% for map in maps %}
+          <tr>
+            <td> #{{ map.id }} </td>
+            <td style='width: 250px;'> <a href="{% url rescue.views.mapeditor_edit map.id %}">{{map.name}}</a> </td>
+          </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+    </div>
+
+    <div class="col span_6">
+      <a href="{% url rescue.views.mapeditor_view %}">Create a new map</a>
+    </div>
+</section>
+
+{% endblock %}

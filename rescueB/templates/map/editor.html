@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Mapgen</title>
+
+    <script src=""></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery-ui.min.js"></script>
+    <script>
+      var $_GET = {"id": {{ id|default:"-1" }}};
+      var IMG_DIR = "{{ STATIC_URL }}";
+      var MAP_SAVE_URL = "{% url rescueB.views.mapeditor_save %}";
+    </script>
+    <script src="{{ STATIC_URL }}/js/mapgen-b.js"></script><style type="text/css"></style>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/rescueB/map-style.css">
+  </head>
+  <body>
+    <div id="creator">
+                <form id="map">
+</form>
+</div>
+  </body>
+</html>

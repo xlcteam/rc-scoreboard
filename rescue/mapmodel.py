@@ -91,6 +91,8 @@ class SimpleRun(models.Model):
     round_number = models.IntegerField(default=0)
     referee = models.ForeignKey('auth.User')
     team = models.ForeignKey(Team, related_name='simplerun_rescueb')
+    
+    data = models.TextField()
 
     points = models.IntegerField(default=0)
     time = models.FloatField(default=0.0)

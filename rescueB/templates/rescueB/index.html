@@ -1,0 +1,26 @@
+{% extends "@layout.html" %}
+{% block title %} - Dashboard {% endblock %}
+{% block content %}
+
+<h1>Welcome to rescueB</h1>
+
+{% if user.is_authenticated %}
+<section class="row">
+    <div class="col span_6">
+  <a href="{% url rescueB.views.mapeditor_listing %}">Listing of all maps</a>
+    </div>
+
+    <div class="col span_6">
+      </div>
+  </section>
+
+
+{% else %}
+
+<p>Since you are not logged in may I suggest you look at <a href="">live scores</a>?</p>
+
+<p>Or you can still <a href="{% url login %}/?next={% url rescueB.views.index_rescue %}">log in</a>.</p>
+
+{% endif %}
+
+{% endblock %}

@@ -28,7 +28,7 @@ $(document).ready(function () {
         });
 //        console.log(json);
 //
-        console.log(json);
+        console.log(JSON.stringify(json));
         $.ajax({
             type: "POST",
             url: "mapgen.php",

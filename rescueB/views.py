@@ -24,7 +24,7 @@ def mapeditor_view(request):
 def mapeditor_save(request):
     data = json.loads(request.POST['json'])
 
-    if data['action'] == 'getTiles':
+    if data['action'] == 'getMaze':
         id = data['mapID']
         map = get_object_or_404(SimpleMap, pk=id)
         return HttpResponse(map.data,

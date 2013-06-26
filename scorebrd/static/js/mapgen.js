@@ -31,7 +31,7 @@ $(document).ready(function () {
         console.log(JSON.stringify(json));
         $.ajax({
             type: "POST",
-            url: "mapgen.php",
+            url: MAP_SAVE_URL,
             data: {"json": JSON.stringify(json)},
             dataType: "json",
             success: function(data){alert("The map is now saved!"); mapID = data;},
@@ -104,13 +104,13 @@ $(document).ready(function () {
     
     
     // If it is a certain map we are loading
-    if(mapID>0) // This is only executed during initiating, and it is okay to change the mapID when saving a newly created map
+    if(mapID>=0) // This is only executed during initiating, and it is okay to change the mapID when saving a newly created map
     {
         alert("Loading map!!");
         // Ask the server for tiles!
         $.ajax({
             type: "POST",
-            url: "mapgen.php",
+            url: MAP_SAVE_URL,
             data: {"json": JSON.stringify({"mapID": mapID, "action": "getTiles"})},
             dataType: "json",
             success: function(data){ 

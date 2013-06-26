@@ -2,13 +2,15 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
 from rescue.models import (Competition, Group, Team, NewEventForm, Performance,
-        NewTeamForm, MatchSaveForm, NewGroupForm)
+        NewTeamForm, MatchSaveForm, NewGroupForm, SimpleMap, SimpleRun)
 from django.core.context_processors import csrf
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.template import Context, RequestContext
 from rescue.helpers import *
+from django.http import HttpResponse
+import json
 
 @render_to('rescue/index_rescue.html')
 def index_rescue(request):
@@ -381,4 +383,23 @@ def results_performance_view(request, performance_id):
 @render_to('rescue/map/editor.html')
 @login_required(login_url='/login/')
 def mapeditor_view(request):
+    return {}
+
+@login_required(login_url='/login/')
+@csrf_exempt
+def mapeditor_save(request):
+    data = json.loads(request.POST['json'])
+
+    if data['mapID'] == -1: 
+        name = data['name']
+        map = SimpleMap(data='')
+        map.save()
+        data['mapID'] = map.id
+        map.data = json.dumps(data)
+        map.save()
+
+        messages.success(request, "The map has been saved");
+        return HttpResponse(json.dumps(map.id),
+                mimetype="application/json")
+
     return {}

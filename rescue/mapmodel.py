@@ -82,7 +82,6 @@ class SimpleMap(models.Model):
     data = models.TextField()
     name = models.CharField(max_length=60)
 
-
     def __unicode__(self):
         return self.name
 

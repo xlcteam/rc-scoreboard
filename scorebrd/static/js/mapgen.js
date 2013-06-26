@@ -27,6 +27,8 @@ $(document).ready(function () {
             }
         });
 //        console.log(json);
+//
+        console.log(json);
         $.ajax({
             type: "POST",
             url: "mapgen.php",
@@ -93,7 +95,7 @@ $(document).ready(function () {
             'helper': 'clone',
             'revert': 'invalid'
         }).append(
-            $('<img src="' + IMG_DIR + 'img/tiles/tile-'+i+'.png">').addClass('path').bind("contextmenu",function(e){
+            $('<img src="' + IMG_DIR + 'img/rescueA/tiles/tile-'+i+'.png">').addClass('path').bind("contextmenu",function(e){
                 $(this).rotBy(90);
                 return false;// Prevents the default context menu to show up
             })
@@ -168,7 +170,7 @@ $(document).ready(function () {
                        tile.children('img[src$="'+key+'.png"]').remove();
                        // If it should be an image here I will add it once again... // TODO: Don't remove the image first
                        if(tile.data(key)>0)
-                           $('<img src="img/'+key+'.png" class="'+key+'">').appendTo(tile);
+                           $('<img src="'+ IMG_DIR +'img/rescueA/'+key+'.png" class="'+key+'">').appendTo(tile);
                        
                    };
                });

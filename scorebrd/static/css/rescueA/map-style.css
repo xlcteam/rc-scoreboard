@@ -25,10 +25,10 @@ td{
 }
 
 /* The separator line between each room */
-.separator{
+/*.separator{
     height: 5px; 
     background: black;
-}
+}*/
 
 /* When a tile hovering this location in the map editor */
 .location-hover{
@@ -38,7 +38,6 @@ td{
 
 /* Tile container, contains images. */
 .tile{
-    /* The size is set in the js file */
     z-index: 1;
     padding: 0px;
     display: inline-block; /* To break the tiles on several lines in the tile box, among others? */
@@ -90,34 +89,43 @@ td{
 /* The container of room specifc points, such as LoP, negtiate whole room or lifted the victim */
 .room-info{
     vertical-align:top;
-    font-size: 20pt;
+/*    font-size: 20pt;*/
 }
+
 
 /* Title of the rooms */
 .room-info h2{
-    position:relative;
-    font-size: 12pt;
+/*    position:relative;
+    font-size: 12pt;*/
     margin: 0px;
 }
+.room-info table{
+    border: 0px;
+    border-collapse: collapse;
+}
 /* Text when a room is not yet negoiated */
-.room-info label, .room-info span{
+/*.room-info label, .room-info span{
     color: red;
-}
+}*/
 /* Text when a room is negoiated successfully */
-label.room-negoiated, span.room-negoiated{
+/*label.room-negoiated, span.room-negoiated{
     color: green;
-}
+}*/
 
 /* Image for decreasing the number of LoPs */
 .minus{
-    width: 1em;
-    padding: 0px 15px;
+    width: 2em;
+/*    padding: 0px 15px;*/
 }
 /* Image for increasing the number of LoPs */
 .plus{
-    width: 1em;
-    padding: 0px 15px;
+    width: 2em;
+/*    padding: 0px 15px;*/
 }
+.count{
+    font-size: 3em;
+}
+
 
 /* Image indicating if the victim is lifted or not */
 .lifted{
@@ -125,12 +133,18 @@ label.room-negoiated, span.room-negoiated{
 }
 
 
+#creator {
+    width: 1000px;
+    margin: 0 auto;
+}
+
 /* Box with tiles for building a map in the map editor */
 #tilesbox{
     width: 300px;
     border: 4px solid darkgreen;
     background-color: lightgreen;
     float: left;
+    margin-left: 5px;
 }
 
 
@@ -159,4 +173,15 @@ label.room-negoiated, span.room-negoiated{
 }
 #contextmenu li.hover{
     background: #ddd;
+}
+
+
+.outside{
+    border: 0px;
+}
+.right-edge{
+    border-right: 5px solid black;
+}
+.bottom-edge{
+    border-bottom: 5px solid black;
 }

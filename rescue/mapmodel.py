@@ -90,7 +90,7 @@ class SimpleRun(models.Model):
     map = models.ForeignKey(SimpleMap)
     round_number = models.IntegerField(default=0)
     referee = models.ForeignKey('auth.User')
-    team = models.ForeignKey(Team, related_name='simplerun_rescue')
+    team = models.ForeignKey(Team, related_name='simplerun_rescueb')
 
     points = models.IntegerField(default=0)
     time = models.FloatField(default=0.0)

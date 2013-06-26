@@ -139,13 +139,13 @@ $(document).ready(function () {
 
 
                     if(tile.data("speedbump")>0)
-                        $('<img src="'+ IMG_DIR +'img/speedbump.png">').appendTo(tile);
+                        $('<img src="'+ IMG_DIR +'img/rescueA/speedbump.png">').appendTo(tile);
                     if(tile.data("gap")>0)
-                        $('<img src="'+ IMG_DIR +'img/gap.png">').appendTo(tile);
+                        $('<img src="'+ IMG_DIR +'img/rescueA/gap.png">').appendTo(tile);
                     if(tile.data("obstacle")>0)
-                        $('<img src="'+ IMG_DIR +'img/obstacle.png">').appendTo(tile);
+                        $('<img src="'+ IMG_DIR +'img/rescueA/obstacle.png">').appendTo(tile);
                     if(tile.data("intersection")>0)
-                        $('<img src="img/intersection.png">').appendTo(tile);
+                        $('<img src="'+ IMG_DIR +'img/rescueA/intersection.png">').appendTo(tile);
                     
                 });
             },

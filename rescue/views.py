@@ -428,4 +428,18 @@ def mapeditor_listing(request):
     maps = SimpleMap.objects.all()
     return {'maps': maps}
 
+@render_to('rescue/simpleruns/listing.html')
+@login_required(login_url='/login/')
+def simpleruns_listing(request):
+    runs = SimpleRun.objects.all()
+    return {'runs': runs}
+
+@render_to('rescue/simpleruns/generate.html')
+@login_required(login_url='/login/')
+def simpleruns_generate(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    for team in group.teams:
+        simplerun = SimpleRun()
+
+
 

@@ -6,7 +6,7 @@ function scoreTracker(options)
     $this.scoreA = 0;
     $this.scoreB = 0;
 
-    $this.mins = 10;
+    $this.mins = 20;
     $this.secs = 0;
     $this.halftime = 1;
     $this.finished = false;

@@ -423,6 +423,7 @@ def group_live_json_result(request, group_id):
 
         return HttpResponse(out, mimetype="application/json")
     else:
-        return HttpResponse('{"status": "No match is being played at the moment"}', mimetype="application/json") 
+        return HttpResponse('{"status": "No match is being played at the moment"}', 
+                    mimetype="application/json") 
 
     

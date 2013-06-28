@@ -1,0 +1,200 @@
+<html>
+  <head>
+    <title> scoreBoard - {{ match.teamA.name }} vs {{ match.teamB.name }} </title>
+    <meta http-equiv="Content-Language" content="en-EN">
+
+    <script src="{{ STATIC_URL }}/js/lib/jquery.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery-ui.min.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/keylock.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.keylock.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.idle-timer.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.stopwatch.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/scoreBoard/style.css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/jquery-ui.css"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+    <script>
+        $(document).ready(function() {
+            $('#dialogMain').hide();
+            $('#tabs').tabs();
+
+            // only duration for now
+            if (window.location.hash !== ""){
+                var hash = parseInt(window.location.hash.match(/[0-9]+/)[0]);
+                var hash_min = Math.floor(hash / 60);
+                $('#fmins').val(hash_min);
+                $('#fsecs').val(Math.floor(hash % 60));
+            }
+
+            $.idleTimer(2500);
+            $(document).bind("contextmenu",function(e){
+                return false;
+            });
+
+            $(document).bind("idle.idleTimer", function() {
+              $("#main").fadeOut("slow");
+              $("#underMain").fadeOut("slow");
+            });
+
+            $(document).keylock({
+                c: function(){ $('.btn-slide').click(); },
+            });
+
+
+            $(document).bind("active.idleTimer", function() {
+                $("#main").fadeIn("slow");
+                $("#underMain").fadeIn("slow");
+            });
+
+            $(".btn-slide").click(function(){
+                $("#panel").slideToggle("slow");
+                if ($(this).text() == String.fromCharCode(9660)) {
+                    $(this).text(String.fromCharCode(9650));
+                } else {
+                    $(this).text(String.fromCharCode(9660));
+                }
+            });
+
+		});
+
+
+    function update() {
+      console.log('updating');
+      $.getJSON("{% url soccer.views.group_live_json_result group.id %}", {},
+        function(data) {
+          if (data.status) {
+            $("#name1").html('');
+            $("#name2").html('');
+
+            $("#team1").html('');
+            $("#team2").html('');
+
+            $('#time').html(data.status);
+
+            $(".colon").html('');
+
+          } else {
+            $("#name1").html(data.teamA);
+            $("#name2").html(data.teamB);
+
+            $("#team1").html(data.scoreA);
+            $("#team2").html(data.scoreB);
+
+            $('#time').html('');
+
+            $(".colon").html(':');
+
+          }
+        }
+      );
+    }
+
+    setInterval(function(){
+      update();
+    }, 5000);
+    update();
+
+
+	</script>
+  <style type="text/css">
+    #time { width: auto !important; }
+    #timeBar { width: auto !important; }
+  </style>
+
+</head>
+<body>
+    <audio id="whistle" no-controls preload='auto'>
+      <source src="{{ STATIC_URL }}/js/sound/whistle.ogg" />
+      <source src="{{ STATIC_URL }}/js/sound/whistle.mp3" />
+    </audio>
+		<div id="underMain">
+		  <div id="panel">
+				<div id="tabs">
+        	<ul>
+        		<li><a href="#fragment-1"><span>Settings</span></a></li>
+        		<li><a href="#fragment-2"><span>ADV Settings</span></a></li>
+    			</ul>
+					<div id="fragment-1">
+						<div class="placeholder2">
+							<form name="frmtime">
+								<center>Time: <input class="input" type="text" id="fmins" value="10"/>
+								: <input class="input" type="text" id="fsecs" value="00"/>
+									<input type="button"  value="Set time"/> <br />
+									<span class="saved">Saved!</span></center>
+							</form>
+						</div>
+					</div>
+
+					<div id="fragment-2">
+						<div class="placeholder3">
+							<form name="effects">
+								<b>Effects:</b>
+								<input type="radio" name="effgroup" value="ON" checked>ON</input>
+								<input type="radio" name="effgroup" value="OFF">OFF</input>
+							</form>
+						</div>
+						<div class="placeholder3">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slide" style="text-align: center;"><span class="btn-slide">&#9660;</span></div>
+		</div>
+
+		<div id="main">
+			<div class="leftBckg">
+				<span class="goalLText">Goal!</span>
+			</div>
+			<div class="rightBckg">
+				<span class="goalRText">Goal!</span>
+			</div>
+      <div class="startBckg" >
+				<span id="btnStart" class="startText">Start</span>
+      </div>
+		</div>
+
+		<!-- dialog, hidden at the begin of game by jquery funct .hide() -->
+		<div id="dialogMain">
+			<div id="dialog" title="Results" style="font-size:50.5%;">
+				<div style="margin: 0 auto;height: 70px; font-size:130.5%;">
+          <form action="" method="POST" id="dialogForm">
+              {% csrf_token %}
+                    <table style="width: 270px; margin: 0 auto;">
+                      <tr>
+                        <td style="width: 100px; text-align: right;"> <span id="dname"></span> </td>
+                        <td> <input style="width: 30px;" type="text"
+                          name="scoreA" id="dgoals"/> </td>
+                        <td> <b>:</b> </td>
+                        <td>  <input style="width: 30px;" type="text"
+                          name="scoreB" id="d2goals"/> </td>
+                        <td style="width: 100px; text-align: left;"><span id="d2name"></span> </td>
+                      </tr>
+                   </table>
+                   <table style="padding-top: 40px;">
+                      <tr>
+                        <td>Your password: </td>
+                        <td><input type="password" name="password" /> </td>
+                      </tr>
+                   </table>
+                    <input type="hidden" name="final" value="true" />
+          </form>
+				</div>
+			</div>
+		</div>
+
+    <div id="names">
+      <div class="half name"><span class="element1" id="name1">{{ match.teamA.name }}</span></div>
+      <div class="half name"><span class="element2" id="name2">{{ match.teamB.name }}</span></div>
+    </div>
+    <div id="scores" style="width: 100%;">
+      <div class="third score"><span class="element1" id="team1" style="display: inline-block;">0</span></div>
+      <div class="colon"><span class="element">:</span></div>
+      <div class="third score"><span class="element2" id="team2" style="display: inline-block;">0</span></div>
+      <dic style="clear:both;"></div>
+    </div>
+    <div id="timeBar" class="element3">
+			<div id="time" class="time"><span ></span>No match being played at the moment.</div>
+		</div>
+		<div id="halftime" class="halftime"><span><!--1. -->&nbsp;</span></div>
+    <div style="clear: both;"></div>
+	</body>
+</html>

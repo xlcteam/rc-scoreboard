@@ -397,3 +397,32 @@ def schedule_generate(request, group_id):
     
     return render_to_pdf(request, 'soccer/results/generate/schedule.html',
                             {'competition': competition, 'matches': matches, 'group': group})
+
+
+@render_to('soccer/results/livegroup.html')
+@login_required(login_url='/login/')
+def group_live_result(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+
+    #match = group.matches.filter(playing='P')
+
+    return {'group': group}
+
+
+@login_required(login_url='/login/')
+def group_live_json_result(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+
+    matches = group.matches.filter(playing='P')
+    if (len(matches) > 0):
+        match = matches[0]
+
+        out = '"teamA": "{0}", "teamB": "{1}", "scoreA": {2}, "scoreB": {3}'
+        out = out.format(match.teamA.name, match.teamB.name, match.scoreA, match.scoreB)
+        out = '{' + out + '}'
+
+        return HttpResponse(out, mimetype="application/json")
+    else:
+        return HttpResponse('{"status": "No match is being played at the moment"}', mimetype="application/json") 
+
+    

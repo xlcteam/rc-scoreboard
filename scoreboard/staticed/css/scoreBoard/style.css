@@ -377,3 +377,36 @@ button:active {
 
 }
 
+@media only screen and (min-width : 604px) and (orientation: landscape) {
+  #startAll, .startText {
+    font-size: 2.5em; 
+  } 
+
+  .name {
+    font-size: 2.2em;
+  }
+  .time {
+    font-size: 2.5em;
+    text-align: center;
+  }
+  .halftime {
+    font-size: 2.5em;
+  }
+
+  .goalRText, .goalLText {
+    font-size: 4em; 
+  }
+
+  .third {
+    width: 47%; 
+  }
+  .score, .colon {
+    font-size: 4em; 
+  }
+
+  .element2, .element1 {
+    width: auto !important; 
+  }
+
+ 
+}

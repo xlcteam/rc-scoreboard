@@ -21,6 +21,7 @@ urlpatterns = patterns('soccer.views',
 
     url(r'^matches/generate/?$', 'matches_generate_listing'),
     url(r'^matches/generate/(?P<group_id>\d+)/?$', 'matches_generate'),
+    url(r'^matches/new/?$', 'new_match', name='new_match'),
 
     url(r'^match/play/(?P<match_id>\d+)/?$', 'match_play',
         name='match_play'),

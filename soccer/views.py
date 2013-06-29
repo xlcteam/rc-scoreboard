@@ -2,7 +2,7 @@
 from django.shortcuts import (render_to_response, get_object_or_404, redirect,
             render)
 from soccer.models import (Team, Group, Competition, Match,
-        TeamResult, MatchSaveForm, NewEventForm, NewTeamForm)
+        TeamResult, MatchSaveForm, NewEventForm, NewTeamForm, NewMatchForm)
 from django.contrib.auth import authenticate
 from django.core.context_processors import csrf
 from django.template import Context, RequestContext
@@ -110,6 +110,37 @@ def new_team(request):
         c['form'] = form
         c['group'] = group
         c['competition'] = competition
+        return c
+
+
+@render_to('soccer/matches/new.html')
+@login_required(login_url='/login/')
+def new_match(request):
+    if 'group' in request.GET:
+        group = get_object_or_404(Group, pk=int(request.GET['group']))
+        competition = group.competition_set.all()[0]
+    if request.method == 'POST':
+        form = NewMatchForm(request.POST)
+        if form.is_valid():
+
+            teamA = form.cleaned_data['teamA']
+            teamB = form.cleaned_data['teamB']
+            referee = form.cleaned_data['referee']
+
+            match = Match(teamA=teamA, teamB=teamB, referee=referee)
+            match.save()
+
+            msg = "The match between {1} and {2} in group {0} has been created!"\
+                    .format(group.name, teamA, teamB)
+            messages.success(request, msg)
+
+            return redirect('soccer.views.group', str(group.id))
+    else:
+        form = NewMatchForm()
+        c = {}
+        c.update(csrf(request))
+        c['form'] = form
+        c['group'] = group
         return c
 
 

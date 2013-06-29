@@ -1,6 +1,6 @@
 from django.db import models
 from django import forms
-
+from django.forms import ModelForm
 
 class NewEventForm(forms.Form):
     name = forms.CharField(max_length=30)
@@ -85,3 +85,10 @@ class Competition(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class NewMatchForm(ModelForm):
+    class Meta:
+        model = Match
+        fields = ['teamA', 'teamB', 'referee']
+

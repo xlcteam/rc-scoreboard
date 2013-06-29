@@ -18,6 +18,8 @@
       <h3>Matches</h3>
       {% include "soccer/quicksearch.html" %}
       {% include "soccer/matches.html" %}
+      <br />
+      <p> <a href="{% url soccer.views.new_match %}?group={{group.id}}"><strong>Add match!</strong></a> </p>
     </section>
 
     <section class="col span_5 clr">

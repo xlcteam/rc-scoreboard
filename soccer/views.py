@@ -130,6 +130,8 @@ def new_match(request):
             match = Match(teamA=teamA, teamB=teamB, referee=referee)
             match.save()
 
+            group.matches.add(match)
+
             msg = "The match between {1} and {2} in group {0} has been created!"\
                     .format(group.name, teamA, teamB)
             messages.success(request, msg)

@@ -91,7 +91,11 @@ def new_team(request):
             for t in teams:
                 team = Team(name=t)
                 team.save()
+
+                result = TeamResult(team=team)
+
                 group.teams.add(team)
+                group.results.add(result)
             
             group.save()
 

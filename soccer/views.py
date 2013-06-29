@@ -99,7 +99,7 @@ def new_team(request):
             
             group.save()
 
-            msg = "Teams for group {0} has been created!".format(group.name)
+            msg = "Teams for group {0} have been created!".format(group.name)
             messages.success(request, msg)
 
             return redirect('soccer.views.group', str(group.id))

@@ -377,7 +377,7 @@ button:active {
 
 }
 
-@media only screen and (min-width : 604px) and (orientation: landscape) {
+@media only screen and (min-width : 604px) and (max-width: 640px) and (orientation: landscape) {
   #startAll, .startText {
     font-size: 2.5em; 
   } 
@@ -407,6 +407,4 @@ button:active {
   .element2, .element1 {
     width: auto !important; 
   }
-
- 
 }

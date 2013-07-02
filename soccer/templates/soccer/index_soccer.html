@@ -24,7 +24,7 @@
       {% if competitions %}
         <strong style="font-size: 20px;">Upcoming matches: </strong><br />
         {% include "soccer/quicksearch.html" %}
-        {% for competition in competitions %}
+        {% for competition in competitions reversed %}
             {% for group in competition.groups.all %}
                 <div class="gName">
                   <strong>{{ competition.name }}</strong> - {{ group.name }}

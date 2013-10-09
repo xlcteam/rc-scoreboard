@@ -21,6 +21,9 @@ can install other dependencies (see requirements.txt).
   superuser
 * Then, to get all we need `$ python manage.py collectstatic`
 * Now we shall sync the DB `$ python manage.py syncdb`
+* Than we need to get migrations into the DB
+    `$ python manage.py migrate soccer`
+    `$ python manage.py migrate rescue`
 * And in case we want to export results to PDF files, `wkhtmltopdf` has to be
   installed (the actual application, not the python wrapper)
 

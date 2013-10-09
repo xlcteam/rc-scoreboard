@@ -27,6 +27,8 @@ can install other dependencies (see requirements.txt).
 * And in case we want to export results to PDF files, `wkhtmltopdf` has to be
   installed (the actual application, not the python wrapper)
 
+Or just run the `dev_setup.sh` script.
+
 ### Server installation
 
 * Install Python, PIP and GIT. Make sure the `libevent-dev` is also installed.

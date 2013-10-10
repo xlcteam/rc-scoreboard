@@ -93,6 +93,7 @@ def new_team(request):
                 team.save()
 
                 result = TeamResult(team=team)
+                result.save()
 
                 group.teams.add(team)
                 group.results.add(result)

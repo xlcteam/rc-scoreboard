@@ -11,7 +11,7 @@ The [original scoreBoard](https://github.com/xlcteam/scoreBoard-php) has been wr
 comprehensive solution for the RoboCup competition.
 
 ## Dependencies
-The only real dependency is `python` (preferably cpython2) and `pip` so that you
+The only real dependency is `python` (preferably cpython2.7) and [pip](http://www.pip-installer.org/en/latest/installing.html)  so that you
 can install other dependencies (see requirements.txt).
 
 

@@ -1,6 +1,7 @@
 form{
-    float:left;
     margin-right: 3em;
+    margin: 0 auto;
+    width: 300px;
 }
 
 .field{/* table */
@@ -83,3 +84,5 @@ form{
 .right-col{
     padding-left: 5px;
 }
+
+

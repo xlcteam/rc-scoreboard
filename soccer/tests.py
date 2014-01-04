@@ -28,17 +28,27 @@ class ModelTest(TestCase):
         self.resultA = TeamResult.objects.create(team=self.teamA)
         self.resultB = TeamResult.objects.create(team=self.teamB)
 
-        ref = User.objects.create_user(username='joe', email='doe',
-                password='none')
-        self.match = Match.objects.create(teamA=self.teamA, teamB=self.teamB,
-                referee=ref)
+        ref = User.objects.create_user(username='joe',
+                                       email='doe',
+                                       password='none')
 
-        self.group = Group.objects.create(name="testGroup", teams=[self.teamA,
-            self.teamB, matches=[self.match], results=[self.resultA, self.resultB])
+        self.match = Match.objects.create(teamA=self.teamA,
+                                          teamB=self.teamB,
+                                          referee=ref)
+
+        self.group = Group.objects.create(name="testGroup",
+                                          teams=[self.teamA,
+                                          self.teamB,
+                                          matches=[self.match],
+                                          results=[self.resultA, self.resultB])
+
+        self.competition = Competition.objects.create(name="testCompetition",
+                                                      groups=[self.group])
+
+        self.event = Event.objects.create(name="testEvent",
+                                          competitions=[self.competition])
 
     def test_models(self):
-        #self.competition = Competition.objects.create(name="testCompetition", groups=[self.group])
-        #self.event = Event.objects.create(name="testEvent", competitions=[self.competition])
 
         self.assertEqual(self.teamA.name, "testTeamA")
         self.assertEqual(self.teamB.name, "testTeamB")

@@ -12,7 +12,7 @@
                   <a class='smaller button green' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>
                 {% elif performance.round_number == 2 %}
                   <a class='smaller button orange' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>
-                {% else %}
+                {% elif performance.round_number == 3 %}
                   <a class='smaller button blue' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>
                 {% endif %}
                 </td>

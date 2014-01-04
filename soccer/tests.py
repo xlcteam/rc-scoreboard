@@ -37,8 +37,7 @@ class ModelTest(TestCase):
                                           referee=ref)
 
         self.group = Group.objects.create(name="testGroup",
-                                          teams=[self.teamA,
-                                          self.teamB,
+                                          teams=[self.teamA, self.teamB],
                                           matches=[self.match],
                                           results=[self.resultA, self.resultB])
 
@@ -52,3 +51,7 @@ class ModelTest(TestCase):
 
         self.assertEqual(self.teamA.name, "testTeamA")
         self.assertEqual(self.teamB.name, "testTeamB")
+
+        self.assertEqual(self.)
+
+

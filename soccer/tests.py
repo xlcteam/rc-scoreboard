@@ -59,6 +59,26 @@ class ModelTest(TestCase):
         self.assertEqual(self.ref.username, "joe")
         self.assertEqual(self.ref.email, "doe")
 
+        self.assertEqual(self.resultA.team, self.teamA)
+        self.assertEqual(self.resultA.wins, 0)
+        self.assertEqual(self.resultA.draws, 0)
+        self.assertEqual(self.resultA.loses, 0)
+
+        self.assertEqual(self.resultA.goal_diff, 0)
+        self.assertEqual(self.resultA.goal_shot, 0)
+        self.assertEqual(self.resultA.matches_played, 0)
+        self.assertEqual(self.resultA.points, 0)
+
+        self.assertEqual(self.resultB.team, self.teamB)
+        self.assertEqual(self.resultB.wins, 0)
+        self.assertEqual(self.resultB.draws, 0)
+        self.assertEqual(self.resultB.loses, 0)
+
+        self.assertEqual(self.resultB.goal_diff, 0)
+        self.assertEqual(self.resultB.goal_shot, 0)
+        self.assertEqual(self.resultB.matches_played, 0)
+        self.assertEqual(self.resultB.points, 0)
+
 
         self.assertEqual(self.match.teamA, self.teamA)
         self.assertEqual(self.match.teamB, self.teamB)
@@ -69,6 +89,9 @@ class ModelTest(TestCase):
 
         self.assertEqual(self.group.teams.all()[0], self.teamA)
         self.assertEqual(self.group.teams.all()[1], self.teamB)
+
+        self.assertEqual(self.group.results.all()[0], self.resultA)
+        self.assertEqual(self.group.results.all()[1], self.resultB)
 
         self.assertEqual(self.group.matches.all()[0], self.match)
 

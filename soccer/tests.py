@@ -36,22 +36,25 @@ class ModelTest(TestCase):
                                           teamB=self.teamB,
                                           referee=ref)
 
-        self.group = Group.objects.create(name="testGroup",
-                                          teams=[self.teamA, self.teamB],
-                                          matches=[self.match],
-                                          results=[self.resultA, self.resultB])
+        self.group = Group.objects.create(name="testGroup")
+        self.group.teams.add(self.teamA)
+        self.group.teams.add(self.teamB)
 
-        self.competition = Competition.objects.create(name="testCompetition",
-                                                      groups=[self.group])
+        self.group.matches.add(self.match)
 
-        self.event = Event.objects.create(name="testEvent",
-                                          competitions=[self.competition])
+        self.group.results.add(self.resultA)
+        self.group.results.add(self.resultB)
+
+        self.competition = Competition.objects.create(name="testCompetition")
+        self.competition.groups.add(self.group)
 
     def test_models(self):
 
         self.assertEqual(self.teamA.name, "testTeamA")
         self.assertEqual(self.teamB.name, "testTeamB")
 
-        self.assertEqual(self.)
+        self.assertEqual(self.match.teamA, self.teamA)
+        self.assertEqual(self.match.teamB, self.teamB)
+
 
 

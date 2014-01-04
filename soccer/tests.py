@@ -19,15 +19,18 @@ from django.test.client import Client
 
 
 class ModelTest(TestCase):
-    def test_models(self):
+
+    def setUp(self):
         self.teamA = Team.objects.create(name="testTeamA")
         self.teamB = Team.objects.create(name="testTeamB")
         self.resultA = TeamResult.objects.create(team=self.teamA)
         self.resultB = TeamResult.objects.create(team=self.teamB)
-        #self.match = Match.objects.create(teamA=self.teamA, teamB=self.teamB, referee=)
 
+    def test_models(self):
+        #self.match = Match.objects.create(teamA=self.teamA, teamB=self.teamB, referee=)
         #self.group = Group.objects.create(name="testGroup", teams=[self.teamA, self.teamB, matches=[], results=[self.resultA, self.resultB])
         #self.competition = Competition.objects.create(name="testCompetition", groups=[self.group])
         #self.event = Event.objects.create(name="testEvent", competitions=[self.competition])
 
         self.assertEqual(self.teamA.name, "testTeamA")
+        self.assertEqual(self.teamB.name, "testTeamB")

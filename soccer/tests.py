@@ -28,13 +28,13 @@ class ModelTest(TestCase):
         self.resultA = TeamResult.objects.create(team=self.teamA)
         self.resultB = TeamResult.objects.create(team=self.teamB)
 
-        ref = User.objects.create_user(username='joe',
-                                       email='doe',
-                                       password='none')
+        self.ref = User.objects.create_user(username='joe',
+                                            email='doe',
+                                            password='none')
 
         self.match = Match.objects.create(teamA=self.teamA,
                                           teamB=self.teamB,
-                                          referee=ref)
+                                          referee=self.ref)
 
         self.group = Group.objects.create(name="testGroup")
         self.group.teams.add(self.teamA)
@@ -53,8 +53,25 @@ class ModelTest(TestCase):
         self.assertEqual(self.teamA.name, "testTeamA")
         self.assertEqual(self.teamB.name, "testTeamB")
 
+        self.assertEqual(self.group.name, "testGroup")
+        self.assertEqual(self.competition.name, "testCompetition")
+
+        self.assertEqual(self.ref.username, "joe")
+        self.assertEqual(self.ref.email, "doe")
+
+
         self.assertEqual(self.match.teamA, self.teamA)
         self.assertEqual(self.match.teamB, self.teamB)
 
+        self.assertEqual(self.match.scoreA, 0)
+        self.assertEqual(self.match.scoreB, 0)
+        self.assertEqual(self.match.playing, 'N')
+
+        self.assertEqual(self.group.teams.all()[0], self.teamA)
+        self.assertEqual(self.group.teams.all()[1], self.teamB)
+
+        self.assertEqual(self.group.matches.all()[0], self.match)
+
+        self.assertEqual(self.competition.groups.all()[0], self.group)
 
 

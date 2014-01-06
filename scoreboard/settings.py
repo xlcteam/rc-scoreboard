@@ -119,11 +119,15 @@ def create_secret_file(secret_file_name):
         secret_file.write("SECRET_KEY = '%s'\n" % generate_secret_key())
 
 # http://stackoverflow.com/questions/4664724/distributing-django-projects-with-unique-secret-keys
-try:
-    from scoreboard.secret_key import SECRET_KEY
-except ImportError:
-    create_secret_file('secret_key.py')
-    from scoreboard.secret_key import SECRET_KEY
+
+if os.environ.has_key('DJANGO_SECRET_KEY'):
+    SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+else:
+    try:
+        from scoreboard.secret_key import SECRET_KEY
+    except ImportError:
+        create_secret_file('secret_key.py')
+        from scoreboard.secret_key import SECRET_KEY
 
 
 # List of callables that know how to import templates from various sources.

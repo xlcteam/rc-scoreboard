@@ -18,3 +18,4 @@ reportlab==2.6
 sphinx-me==0.1.2
 wsgiref==0.1.2
 xhtml2pdf==0.0.4
+psycopg2==2.4.4

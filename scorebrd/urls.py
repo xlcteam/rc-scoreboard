@@ -8,3 +8,8 @@ urlpatterns = patterns('scorebrd.views',
     url(r'^login', 'my_login', name='login'),
     url(r'^logout', 'my_logout', name='logout'),
 )
+
+if not settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^staticed/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    )

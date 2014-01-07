@@ -38,3 +38,4 @@ admin/
 grappelli/
 secret_key.py
 logs/
+*.db

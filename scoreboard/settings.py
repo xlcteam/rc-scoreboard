@@ -15,6 +15,7 @@ from urlparse import urlparse
 
 # for general deployment
 if (os.environ.has_key('DATABASE_URL')):
+    DEBUG = False
     url = urlparse(os.environ['DATABASE_URL'])
     DATABASES = {
         'default' : {

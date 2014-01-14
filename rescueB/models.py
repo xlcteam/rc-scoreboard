@@ -10,26 +10,6 @@ class Team(models.Model):
         return self.name
 
 
-class SimpleMap(models.Model):
-    data = models.TextField()
-    name = models.CharField(max_length=60)
-
-    def __unicode__(self):
-        return self.name
-
-
-class SimpleRun(models.Model):
-    map = models.ForeignKey(SimpleMap)
-    round_number = models.IntegerField(default=0)
-    referee = models.ForeignKey('auth.User', related_name='simplerun_rescueb')
-    team = models.ForeignKey(Team, related_name='simplerun_rescueb')
-
-    points = models.IntegerField(default=0)
-    time = models.FloatField(default=0.0)
-
-    finished_at = models.DateTimeField(auto_now=True)
-
-
 class Performance(models.Model):
     """
         Each team has 3 performances. All of them are stored in group.performances
@@ -48,6 +28,12 @@ class Performance(models.Model):
     playing = models.CharField(max_length=1, choices=PLAYING_CHOICES,
         default='N')
 
+    floating_victim = models.IntegerField(default=0)
+    linear_victim = models.IntegerField(default=0)
+    false_victim = models.IntegerField(default=0)
+    lack_of_progress = models.IntegerField(default=0)
+    bonus_exit = models.IntegerField(default=0)
+    reliability = models.IntegerField(default=0)
     
     points = models.IntegerField(default=0)
     time = models.FloatField(default=0.0)
@@ -66,7 +52,7 @@ class Group(models.Model):
     # stuff for final table
     result_table_generated = models.BooleanField(default=False)
     perfs_final = models.ManyToManyField(Performance, related_name="final_results")
-    map = models.ForeignKey(SimpleMap)
+    
     RESULTS_CHOICES = (
         ('S', 'Play three rounds - take the sum of the best two as the result (slovak system)'),
         ('D', 'Play two rounds - take the best one as the result (dutch system)'),
@@ -102,8 +88,22 @@ class Competition(models.Model):
 class NewGroupForm(ModelForm):
     class Meta:
         model = Group
-        fields = ['name', 'map', 'results_type']
+        fields = ['name', 'results_type']
 
 
 class NewTeamForm(forms.Form):
     names = forms.CharField(widget=forms.Textarea(attrs={'size':'20'}))
+
+
+class MatchSaveForm(forms.Form):
+    floating_victim = forms.IntegerField(label='Floating Victim')
+    linear_victim = forms.IntegerField(label='Linear Victim')
+    false_victim = forms.IntegerField(label='False Victim')
+    lack_of_progress = forms.IntegerField(label='Lack of Progress')
+    bonus_exit = forms.IntegerField(label='Successful Exit Bonus')
+    reliability = forms.IntegerField(label='Reliability')
+    points = forms.IntegerField(label='Points')
+    time = forms.CharField(label='Time')
+    
+    password = forms.CharField(widget=forms.PasswordInput(render_value=False),
+                                max_length=100)

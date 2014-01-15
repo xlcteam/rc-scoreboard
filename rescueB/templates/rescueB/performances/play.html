@@ -1,0 +1,223 @@
+<html>
+  <head>
+    <title> Robot - rescue B scoreTracker </title>
+    <meta http-equiv="Content-Language" content="en-EN">
+
+    <script src="{{ STATIC_URL }}/js/lib/jquery.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery-ui.min.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/keylock.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.keylock.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.idle-timer.js"></script>
+    <script src="{{ STATIC_URL }}/js/lib/jquery.stopwatch.js"></script>
+    <script src="{{ STATIC_URL }}/js/scoreTracker_rescueb.js"></script>
+    <script src="{{ STATIC_URL }}/js/fills.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/style_rescueb.css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/css/jquery-ui.css" type="text/css"/>
+
+    <script>
+            window.onbeforeunload = function(){
+                    if (window.finished)
+                        return;
+                    else
+                        return 'Are you sure you want to quit?';
+            }
+    </script>
+
+    <script>
+        var ST = new scoreTracker({
+          'update_url':  "{% url rescueB.views.performance_play performance_id %}",
+          'back_url': "{% url rescueB.views.index_rescueB %}",
+          'round_number': "{{ round_number }}"
+        });
+
+        $(document).ready(function() {
+            $('#dialogMain').hide();
+            $('#tabs').tabs();
+
+          $(".btn-slide").click(function(){
+              $("#panel").slideToggle("slow");
+              if ($(this).text() == String.fromCharCode(9660)) {
+                  $(this).text(String.fromCharCode(9650));
+              } else {
+                  $(this).text(String.fromCharCode(9660));
+              }
+          });
+
+          $.idleTimer(2500);
+          $(document).bind("idle.idleTimer", function() {
+            $("#main").fadeOut("slow");
+            $("#underMain").fadeOut("slow");
+          });
+          $(document).bind("active.idleTimer", function() {
+            $("#main").fadeIn("slow");
+            $("#underMain").fadeIn("slow");
+          });
+
+          $('.element3').click(ST.toggle);
+          $(".element3").bind("mouseover", fill3);
+          $(".element3").bind("mouseout", unfill3);
+          $(".startBckg").bind("mouseover", fill3);
+          $(".startBckg").bind("mouseout", unfill3);
+
+        });
+  	</script>
+
+</head>
+<body>
+    <div id="startAll" onclick="ST.startPerf()">
+      <div id="startText">Start 1. round</div>
+    </div>
+	<div id="underMain">
+        <div id="panel">
+			<div id="tabs">
+    	<ul>
+    		<li><a href="#fragment-1"><span>Settings</span></a></li>
+    		<li><a href="#fragment-2"><span>ADV Settings</span></a></li>
+			</ul>
+
+				<div id="fragment-1">
+					<div class="placeholder"><button id="btnResetTime" onclick="ST.resetTime()">Reset Time</button></div>
+					<div class="placeholder"><button id="btnResetScore" onclick="ST.resetScore()">Reset Score</button></div>
+				    <div class="placeholder2">
+					    <form name="frmtime">
+						    <center>Time: <input class="input" type="text" id="fmins" value="8"/>
+						    : <input class="input" type="text" id="fsecs" value="00"/>
+							    <input type="button" onclick="ST.newTime()" value="Set time"/> <br />
+							    <span class="saved">Saved!</span></center>
+					    </form>
+				    </div>
+				</div>
+
+                <div id="fragment-2">
+					<div class="placeholder"><button id="btnShowDialog" onclick="ST.showD()">Show Dialog</button></div>
+                </div>
+			</div>
+		</div>
+		<div class="slide" style="text-align: center;"><span class="btn-slide">&#9660;</span></div>
+	</div>
+
+	<div id="main">
+		<div class="middleBckg"></div>
+    <div class="startBckg" onclick="ST.toggle()">
+			<span id="btnStart" class="startText">Start</span>
+    </div>
+	</div>
+
+	<!-- dialog, hidden at the begin of game by jquery funct .hide() -->
+	<div id="dialogMain">
+    <div id="dialog" title="Results of the team Robot (1. round)" style="font-size:50.5%;">
+			<div style="height: 70px; font-size:130.5%;text-align: center;">
+        <form action="{% url rescueB.views.performance_save performance_id %}" method="POST" id="dialogForm">
+          <table style="margin: 0 auto;">
+            <tr>
+              <td style="float: right;">Floating Victim:</td>
+              <td> <input style="width: 30px;" type="text" id="floating_victim" name="floating_victim"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">Linear Victim:</td>
+              <td> <input style="width: 30px;" type="text" id="linear_victim" name="linear_victim"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">False Victim:</td>
+              <td> <input style="width: 30px;" type="text" id="false_victim" name="false_victim"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">Lack of Progress:</td>
+              <td> <input style="width: 30px;" type="text" id="lack_of_progress" name="lack_of_progress"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">Successful Exit Bonus:</td>
+              <td> <input style="width: 30px;" type="text" id="successful_exit" name="successful_exit"/>x</td>
+            <tr>
+          </table>
+          <div style="clear: both;" ></div>
+
+          <div style="width: 100%; text-align: center;">
+            <hr>
+            <table style="margin: 0 auto;">
+              <tr>
+                <td >Reliability:</td>
+                <td> <input style="width: 60px;" type="text" id="reliability" name="reliability"/></td>
+              <tr>
+            </table>
+            <table style="float: right;">
+              <tr>
+                <td><strong>Points:</strong></td>
+                <td><input style="width: 130px;" type="text" id="points" name="points"/></td>
+                <td><input type="button" value="Recount" onclick="ST.recount();"/></td>
+              </tr>
+            </table>
+            <table>
+              <tr>
+                <td>Time:</td>
+                <td><input style="width: 130px;" type="text" id="time" name="time"/></td>
+              </tr>
+            </table>
+          </div>
+          <hr>
+          <table style="padding-top: 10px;">
+            <tr>
+              <td>Your password: </td>
+              <td><input type="password" name="password" /> </td>
+            </tr>
+          </table>
+          <input type="hidden" name="final" value="true" />
+        </form>
+			</div>
+		</div>
+	</div>
+
+  <div id="names">
+    <div class="name"><span class="element1" id="name1">Robot</span></div>
+  </div>
+
+  <div id="scores_try" class="scores" style="width: 100%; text-align: center;">
+    <table style="margin: 0 auto; font-size: 100%; color: #8E8E8E;">
+      <tr>
+        <td> Floating Victim: </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachfloating_victim', 'floating_victim');">-</a> </td>
+        <td> <span id="Eachfloating_victim" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachfloating_victim', 'floating_victim');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td> Linear Victim: </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachlinear_victim', 'linear_victim');">-</a> </td>
+        <td> <span id="Eachlinear_victim" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachlinear_victim', 'linear_victim');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td> False Victim: </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachfalse_victim', 'false_victim');">-</a> </td>
+        <td> <span id="Eachfalse_victim" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachfalse_victim', 'false_victim');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td> Lack of Progress </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachlack_of_progress', 'lack_of_progress');">-</a> </td>
+        <td> <span id="Eachlack_of_progress" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachlack_of_progress', 'lack_of_progress');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td> Successful Exit </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachsuccessful_exit', 'successful_exit');">-</a> </td>
+        <td> <span id="Eachsuccessful_exit" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachsuccessful_exit', 'successful_exit');">+</a> </td>
+      </tr>
+    </table>
+
+    <a class="button bigger blue" onclick='ST.showD();'>Send Results</a>
+  </div>
+
+  <div style="clear:both;"></div>
+
+  <div id="timeBar" class="element3">
+		<div id="timeStopwatch" class="time">00:00,00</div>
+	</div>
+	<div id="halftime" class="halftime"><span>1.</span></div>
+  <div style="clear: both;"></div>
+</body>
+</html>

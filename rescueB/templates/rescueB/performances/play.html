@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title> Robot - rescue B scoreTracker </title>
+    <title> {{ performance.team.name }} - rescue B scoreTracker </title>
     <meta http-equiv="Content-Language" content="en-EN">
 
     <script src="{{ STATIC_URL }}/js/lib/jquery.js"></script>
@@ -27,7 +27,7 @@
         var ST = new scoreTracker({
           'update_url':  "{% url rescueB.views.performance_play performance_id %}",
           'back_url': "{% url rescueB.views.index_rescueB %}",
-          'round_number': "{{ round_number }}"
+          'round_number': "{{ performance.round_number }}"
         });
 
         $(document).ready(function() {
@@ -105,7 +105,7 @@
 
 	<!-- dialog, hidden at the begin of game by jquery funct .hide() -->
 	<div id="dialogMain">
-    <div id="dialog" title="Results of the team Robot (1. round)" style="font-size:50.5%;">
+    <div id="dialog" title="Results of the team {{performance.team.name}} ({{performance.round_number}}. round)" style="font-size:50.5%;">
 			<div style="height: 70px; font-size:130.5%;text-align: center;">
         <form action="{% url rescueB.views.performance_save performance_id %}" method="POST" id="dialogForm">
           <table style="margin: 0 auto;">
@@ -217,7 +217,7 @@
   <div id="timeBar" class="element3">
 		<div id="timeStopwatch" class="time">00:00,00</div>
 	</div>
-	<div id="halftime" class="halftime"><span>1.</span></div>
+	<div id="halftime" class="halftime"><span>{{performance.round_number}}.</span></div>
   <div style="clear: both;"></div>
 </body>
 </html>

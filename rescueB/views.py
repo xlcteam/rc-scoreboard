@@ -222,34 +222,23 @@ def performance_play(request, performance_id):
 @render_to('rescueB/performances/save.html')
 @login_required(login_url='/login/')
 def performance_save(request, performance_id):
-    scoresheet = {
-        'try' : {
-            'room1' : {0: 0, 1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},
-            'room2' : {0: 0, 1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},
-            'room3' : {0: 0, 1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},
-            'ramp'  : {0: 0, 1 : 30, 2 : 20, 3 : 10, '---': 0, u'---': 0},
-            'hallway':{0: 0, 1 : 30, 2 : 20, 3 : 10, '---': 0, u'---': 0},
-            'victim': {0: 0, 1 : 60, 2 : 40, 3 : 20, '---': 0, u'---': 0},      
-        },
-        'each' : {
-            'gap' : 10,
-            'obstacle': 10,
-            'speed_bump': 5,
-            'intersection': 10,
-            'lift': 20,
-        }
+    scoresheet = {  
+          'floating_victim' : 25,
+          'linear_victim': 10,
+          'false_victim' : -10,
+          'successful_exit': 10,
     }    
 
     def errorHandle(error, request, performance_id):
         post = request.POST
-        initial = {'gap': post["gap"], 'obstacle': post["obstacle"],
-                   'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
-                   'lift': post['lift'], 'time': post["time"], 'points': post["points"],}
+        initial = {'floating_victim': post["floating_victim"], 'linear_victim': post["linear_victim"],
+                   'false_victim': post["false_victim"], 'lack_of_progress': post["lack_of_progress"],
+                   'successful_exit': post["successful_exit"], 'reliability': post['reliability'], 
+                   'time': post["time"], 'points': post["points"],}
 
-        for x in scoresheet["try"]:
-            
+        for x in scoresheet:
             if post[x] == u'---' or post[x] == '---':
-                initial[x] = u'4'
+                initial[x] = "0"
             else:            
                 initial[x] = post[x]
 
@@ -260,12 +249,6 @@ def performance_save(request, performance_id):
         c['error'] = error
         c['performance_id'] = performance_id
         return c
-    
-    def check_try(post):
-        if post == '---' or post == u'---':
-            return scoresheet["try"]["room1"][post]
-        else:
-            return scoresheet["try"]["room1"][int(post)]
 
     def authorize_and_save(request):
         username = request.user
@@ -276,21 +259,16 @@ def performance_save(request, performance_id):
             if user.is_active:
                 performance = get_object_or_404(Performance, pk=performance_id)
                 performance.referee = request.user
-                performance.playing = 'D'
+                performance.playing = 'D'           
                 
-                performance.room1 = check_try(request.POST['room1'])
-                performance.room2 = check_try(request.POST['room2'])
-                performance.room3 = check_try(request.POST['room3'])
-                performance.ramp = check_try(request.POST['ramp'])
-                performance.hallway = check_try(request.POST['hallway'])
-                performance.victim = check_try(request.POST['victim'])              
-                
-                performance.gap = scoresheet["each"]["gap"] * int(request.POST["gap"])
-                performance.obstacle = scoresheet["each"]["obstacle"] * int(request.POST["obstacle"])
-                performance.speed_bump = scoresheet["each"]["speed_bump"] * int(request.POST["speed_bump"])
-                performance.intersection = scoresheet["each"]["intersection"] * int(request.POST["intersection"])
-                performance.lift = scoresheet["each"]["lift"] * int(request.POST["lift"])
+                performance.floating_victim = scoresheet["floating_victim"] * int(request.POST["floating_victim"])
+                performance.linear_victim = scoresheet["linear_victim"] * int(request.POST["linear_victim"])
+                performance.false_victim = scoresheet["false_victim"] * int(request.POST["false_victim"])
+                performance.successful_exit = scoresheet["successful_exit"] * int(request.POST["successful_exit"])
 
+                performance.lack_of_progress = scoresheet["lack_of_progress"]
+
+                performance.reliability = int(request.POST["reliability"])
                 performance.points = int(request.POST["points"])
                 
                 strtime = request.POST["time"]

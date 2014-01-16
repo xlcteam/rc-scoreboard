@@ -31,8 +31,8 @@ class Performance(models.Model):
     floating_victim = models.IntegerField(default=0)
     linear_victim = models.IntegerField(default=0)
     false_victim = models.IntegerField(default=0)
+    successful_exit = models.IntegerField(default=0)
     lack_of_progress = models.IntegerField(default=0)
-    bonus_exit = models.IntegerField(default=0)
     reliability = models.IntegerField(default=0)
     
     points = models.IntegerField(default=0)
@@ -104,7 +104,7 @@ class MatchSaveForm(forms.Form):
     linear_victim = forms.IntegerField(label='Linear Victim')
     false_victim = forms.IntegerField(label='False Victim')
     lack_of_progress = forms.IntegerField(label='Lack of Progress')
-    bonus_exit = forms.IntegerField(label='Successful Exit Bonus')
+    successful_exit = forms.IntegerField(label='Successful Exit Bonus')
     reliability = forms.IntegerField(label='Reliability')
     points = forms.IntegerField(label='Points')
     time = forms.CharField(label='Time')

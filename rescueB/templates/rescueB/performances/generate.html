@@ -4,7 +4,7 @@
   {% if groups %}
     <h2> Select the group in which you want to generate performances </h2>
     {% for group in groups %}
-      <li><a href="/rescueB/performances/generate/{{ group.id }}">{{group.name}}</a></li> 
+      <li><a href="{% rescueB.views.perf_generate group.id %}">{{group.name}}</a></li> 
     {% endfor %}
 
   {% else %}

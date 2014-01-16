@@ -1,0 +1,39 @@
+{% if performances %}
+
+<table class='matchTable'>
+        {% for performance in performances %}
+          <tr>
+            {% if performance.playing == 'N' %}
+                <td class='left'>
+                        {{ performance.team.name }}
+                </td>
+                <td align="center">
+                {% if performance.round_number == 1 %}
+                  <a class='smaller button green' href="{% url rescueB.views.performance_play performance.id %}"> Start {{performance.round_number}}. round! </a>
+                {% elif performance.round_number == 2 %}
+                  <a class='smaller button orange' href="{% url rescueB.views.performance_play performance.id %}"> Start {{performance.round_number}}. round! </a>
+                {% elif performance.round_number == 3 %}
+                  <a class='smaller button blue' href="{% url rescueB.views.performance_play performance.id %}"> Start {{performance.round_number}}. round! </a>
+                {% endif %}
+                </td>
+            {% elif not_started_only == False %}
+                <td class='left'>
+                    {{ performance.team.name }}
+                </td>
+                <td align="center">
+                  <a class="smaller button" href="{% url rescueB.views.result_performance_view performance.id %}"> See more info!</a>
+                </td>
+           {% endif %}
+        </tr>
+      {% endfor %}
+</table>
+
+{% else %}
+      Unfortunately, no performances were found.
+        {% if group %}
+        <a href="{% rescueB.views.perf_generate group.id %}"> Generate some!</a>
+        {% else %}
+        <a href="{% rescueB.views.perf_generate %}"> Generate some!</a>
+        {% endif %}
+
+{% endif %}

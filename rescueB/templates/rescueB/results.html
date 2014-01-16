@@ -1,0 +1,14 @@
+{% load substract %}
+{% if performances %}
+  {% if group.result_table_generated %}
+    {% include "rescueB/table.html" with performances=group.results_final %}
+  {% endif %}
+  {% include "rescueB/table.html" with performances=group.results_round_1 round=1 %}
+  {% include "rescueB/table.html" with performances=group.results_round_2 round=2 %}
+  {% include "rescueB/table.html" with performances=group.results_round_3 round=3 %}
+  <div style="clear: both;"></div>
+{% else %}
+  Unfortunately, no performances have been performed yet.
+{% endif %}
+
+

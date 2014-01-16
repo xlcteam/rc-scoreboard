@@ -95,6 +95,10 @@ class NewTeamForm(forms.Form):
     names = forms.CharField(widget=forms.Textarea(attrs={'size':'20'}))
 
 
+class NewEventForm(forms.Form):
+    name = forms.CharField(max_length=30)
+
+
 class MatchSaveForm(forms.Form):
     floating_victim = forms.IntegerField(label='Floating Victim')
     linear_victim = forms.IntegerField(label='Linear Victim')

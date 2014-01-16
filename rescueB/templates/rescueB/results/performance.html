@@ -1,0 +1,26 @@
+{% extends "@layout.html" %}
+
+{% block fastinfo %}
+<div id="fastinfo">&raquo;
+    <a href="{% url scorebrd.views.index %}">{{SITE_NAME}}</a> &raquo;
+    <a href="{% url rescueB.views.index_rescueB %}">rescueB</a> &raquo;
+    <a href="{% url rescueB.views.competition competition.id %}">{{competition.name}}</a> &raquo;
+    <a href="{% url rescueB.views.group group.id %}">{{group.name}}</a> &raquo;
+    <a href="{% url rescueB.views.results_performance_view group.id %}"> </a>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<h2> Performance of the <strong>{{performance.team.name}}</strong></h2>
+
+{% if performance.playing == 'D'%}
+  Result - Time <strong>{{performance.time}}</strong> secs, Points <strong>{{performance.points}}</strong><br>
+  Referee - <strong>{{performance.referee.username}}</strong><br>
+  Finished at - <strong>{{performance.finished_at}}</strong>
+{% else %}
+  <h3>Round has not been started yet</h3>
+{% endif %}
+
+
+{% endblock %}

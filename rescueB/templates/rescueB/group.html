@@ -1,0 +1,45 @@
+{% extends "@layout.html" %}
+{% block fastinfo %}
+<div id="fastinfo">&raquo;
+    <a href="{% url scorebrd.views.index %}">{{SITE_NAME}}</a> &raquo;
+    <a href="{% url rescueB.views.index_rescueB %}">rescueB</a> &raquo;
+    <a href="{% url rescueB.views.competition competition.id %}">{{competition.name}}</a> &raquo;
+    <a href="{% url rescueB.views.group group.id %}">{{group.name}}</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<h2> Group {{ group.name }} </h2>
+
+{% if teams %}
+  <section class="row">
+
+    <section class="col span_3 clr">
+      <h3>Performances</h3>
+      {% include "rescueB/quicksearch.html" %}
+      {% include "rescueB/performances.html" %}
+    </section>
+
+    <section class="col span_6 clr">
+      <h3>Results</h3>
+      {% include "rescueB/results.html" %}
+      {% if performances %}
+        {% if not group.result_table_generated %}
+            <a class='button green' style="margin-top: 10px;" href="{% url rescueB.views.table_final_generate group.id %}">Generate final table</a>
+        {% endif %}        
+        <a class='button' style="margin-top: 10px;" href="{% url rescueB.views.results_group_pdf group.id %}.pdf">Download results in PDF.</a>
+      {% endif %}
+    </section>
+
+    <section class="col span_3 clr">
+      <h3>Teams </h3>
+      {% include "rescueB/teams.html" %}
+      <p> <a href="{% url rescueB.views.new_team %}?group={{group.id}}"><strong>Add another teams!</strong></a> </p>
+    </section>
+
+  </section>
+{% else %}
+  <p> No teams were found. <a href="{% url rescueB.views.new_team %}?group={{group.id}}"><strong>Add some!</strong></a> </p>
+{% endif %}
+
+{% endblock %}

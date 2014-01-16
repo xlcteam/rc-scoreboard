@@ -1,0 +1,38 @@
+{% extends "@layout.html" %}
+{% block content %}
+
+{% if competitions %}
+<h2>Create new group </h2>
+{% else %}
+<h2>Create new group in {{ event.name }} - {{ competition.name }}</h2>
+{% endif %}
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
+<form action="{% url rescueB.views.new_group %}?competition={{competition.id}}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}" />
+    {% if competitions %}
+    <p>
+      <label for="competition">Competition: </label>
+      <select id="competition" name="competition">
+        {% for competition in competitions %}
+        <option value="{{ competition.id }}"> {{ competition.name }} in
+        {% for event in competition.event_set.all %}
+        {{ event.name }}
+        {% endfor %}
+        </option>
+        {% endfor %}
+      </select>
+    </p>
+    {% endif %}
+
+
+    <input type="submit" value="Save" /> <br>
+</form>
+
+
+{% endblock %}

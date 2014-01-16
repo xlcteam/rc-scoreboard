@@ -1,0 +1,82 @@
+{% if liveresults == 1 %}
+  {% if performances %}
+    {% if round %}
+      <h4>Round {{ round }}</h4>
+    {% else %}
+      <h4>Final</h4>
+    {% endif %}
+
+    <table class='results_table'>
+      <tr>
+        <th> <abbr title="Position in the table"> Pos. </abbr></th>
+        <th>&nbsp;</th>
+        <th> <abbr title="Time"         > Time </abbr></th>
+        <th> <abbr title="Points"       > Pts. </abbr></th>
+      </tr>
+      {% for result in performances %}
+        <tr>
+          <td> {{ forloop.counter }}. </td>
+          <td class='name-live'> {{ result.team.name }} </td>
+          <td> {{ result.time }} </td>
+          <td class="points"> {{ result.points }} </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+
+{% else %}
+
+  {% if performances %}
+    {% if round %}
+      <h4>Round {{ round }}</h4>
+    {% else %}
+      <h1>Final</h1>
+    {% endif %}
+
+    <table class='teamTable'>
+      <tr>
+        <th> <abbr title="Position in the table"> Pos. </abbr></th>
+        <th>&nbsp;</th>
+        <th> <abbr title="Room 1"       > R1 </abbr></th>
+        <th> <abbr title="Room 2"       > R2 </abbr></th>
+        <th> <abbr title="Room 3"       > R3 </abbr></th>
+        <th> <abbr title="Ramp"         > R </abbr></th>
+        <th> <abbr title="Hallway"      > H </abbr></th>
+        <th> <abbr title="Gaps"         > G </abbr></th>
+        <th> <abbr title="Obstacles"    > O </abbr></th>
+        <th> <abbr title="Speed bumps"  > S </abbr></th>
+        <th> <abbr title="Intersections"> I </abbr></th>
+        <th> <abbr title="Victim"       > V </abbr></th>
+        <th> <abbr title="Lift"       > L </abbr></th>
+        <th> <abbr title="Time"         > Time </abbr></th>
+        <th> <abbr title="Points"       > Pts. </abbr></th>
+      </tr>
+      {% for result in performances %}
+        {% if forloop.counter0|divisibleby:"2" %}
+          <tr class="even">
+        {% else %}
+          <tr class="odd">
+        {% endif %}
+          <td> {{ forloop.counter }}. </td>
+          <td class='name'> {{ result.team.name }} </td>
+          <td> {{ result.room1 }} </td>
+          <td> {{ result.room2 }} </td>
+          <td> {{ result.room3 }} </td>
+          <td> {{ result.ramp }} </td>
+          <td> {{ result.hallway }} </td>
+          <td> {{ result.gap }} </td>
+          <td> {{ result.obstacle }} </td>
+          <td> {{ result.speed_bump }} </td>
+          <td> {{ result.intersection }} </td>
+          <td> {{ result.victim }} </td>
+          <td> {{ result.lift }} </td>
+
+          <td> {{ result.time }} </td>
+          <td class="points"> {{ result.points }} </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% endif %}
+{% endif %}
+

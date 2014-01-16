@@ -1,0 +1,21 @@
+{% extends "@layout.html" %}
+
+{% block fastinfo %}
+<div id="fastinfo">&raquo;
+    <a href="{% url scorebrd.views.index %}">{{SITE_NAME}}</a> &raquo;
+    <a href="{% url rescueB.views.index_rescueB %}">rescueB</a> &raquo;
+    <a href="{% url rescueB.views.competition competition.id %}">{{competition.name}}</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="row">
+  <div class="col span_6">
+    <h2> Groups competing in {{ competition.name }} </h2>
+    {% include "rescueB/groups.html" %}
+    <a class='button' style="margin-top: 10px; float: left;"
+      href="/rescueB/results/competition/{{ competition.id }}.pdf">Generate PDF
+      of results!</a>
+  </div>
+</section>
+{% endblock %}

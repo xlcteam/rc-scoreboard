@@ -1,0 +1,41 @@
+{% extends "@layout.html" %}
+{% block title %} - Dashboard {% endblock %}
+{% block content %}
+
+<h1>Welcome to rescueB</h1>
+
+{% if user.is_authenticated %}
+<section class="row">
+    <div class="col span_6">
+        <h2>rescueB competitions registered with scoreBoard</h2>
+        {% include "rescueB/competitions.html" %}
+    </div>
+
+    <div class="col span_6">
+      {% if competitions %}
+        <strong style="font-size: 20px;">Upcoming performances: </strong><br />
+        {% include "rescueB/quicksearch.html" %}
+        {% for competition in competitions %}
+            {% for group in competition.groups.all %}
+                <div class="gName">
+                  <strong>{{ competition.name }}</strong> - {{ group.name }}
+                </div>
+                <div class="groupMatches">
+                    {% include "rescueB/performances.html" with performances=group.performances.all not_started_only=True %}
+                </div>
+            {% endfor %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </section>
+
+
+{% else %}
+
+<p>Since you are not logged in may I suggest you look at <a href="">live scores</a>?</p>
+
+<p>Or you can still <a href="{% url login %}/?next={% url rescueB.views.index_rescueB %}">log in</a>.</p>
+
+{% endif %}
+
+{% endblock %}

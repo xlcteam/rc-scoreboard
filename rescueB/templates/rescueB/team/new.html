@@ -1,0 +1,19 @@
+{% extends "@layout.html" %}
+{% block content %}
+
+<h2>Add teams into group {{group.name}}</h2>
+<p>Write one team per line!</p>
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
+<form action="{% url rescueB.views.new_team %}?group={{group.id}}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}" />
+    <input type="submit" value="Save" /> <br>
+</form>
+
+
+{% endblock %}

@@ -27,7 +27,8 @@
     <script>
         var ST = new scoreTracker({
           'update_url':  "{% url rescue.views.performance_play performance_id %}",
-          'back_url': "{% url rescue.views.index_rescue %}"
+          'back_url': "{% url rescue.views.index_rescue %}",
+          'round_number': "{{ performance.round_number }}"
         });
 
         $(document).ready(function() {

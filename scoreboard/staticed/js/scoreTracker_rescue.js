@@ -3,6 +3,7 @@ function scoreTracker(options)
     $this = this;
     $this.team = 'Robot';
     $this.final_score = 0;
+    $this.round_number = options['round_number'];
 
     $this.mins = 8;
     $this.secs = 0;
@@ -143,10 +144,10 @@ scoreTracker.prototype = {
             $("#btnStart").html("Start");
         }
         if ($("#startAll").is(':hidden')){
-            $('#startText').html("Start round");
+            $('#startText').html("Start "+ $this.round_number +". round");
             $('#startAll').show();
         }else {
-            $('#startText').html("Start round");
+            $('#startText').html("Start "+ $this.round_number +". round");
         }
 
 	
@@ -178,6 +179,7 @@ scoreTracker.prototype = {
     },
 
     showD: function () {
+        $this.toggle();
 	    $('#dialogMain').show();    
 	    $("#dialog").dialog({ 
             buttons: {

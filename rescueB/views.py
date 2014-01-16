@@ -11,9 +11,20 @@ from django.contrib.auth.decorators import login_required
 import json
 
 @render_to('rescueB/index.html')
-@login_required(login_url='/login/')
 def index_rescueB(request):
-    return {}
+    competitions = Competition.objects.all()
+    return {'user': request.user, 'competitions': competitions}
+
+
+
+
+
+
+
+
+
+
+
 
 @render_to('rescueB/map/editor.html')
 @login_required(login_url='/login/')

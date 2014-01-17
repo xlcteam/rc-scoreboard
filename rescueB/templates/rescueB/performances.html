@@ -21,7 +21,7 @@
                     {{ performance.team.name }}
                 </td>
                 <td align="center">
-                  <a class="smaller button" href="{% url rescueB.views.result_performance_view performance.id %}"> See more info!</a>
+                  <a class="smaller button" href="{% url rescueB.views.results_performance_view performance.id %}">More info! ({{performance.round_number}}.)</a>
                 </td>
            {% endif %}
         </tr>

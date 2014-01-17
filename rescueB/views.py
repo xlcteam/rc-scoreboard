@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.template import Context, RequestContext
-# from rescueB.helpers import *
+from rescueB.helpers import *
 from django.http import HttpResponse
 import json
 
@@ -265,7 +265,7 @@ def performance_save(request, performance_id):
                 performance.false_victim = scoresheet["false_victim"] * int(request.POST["false_victim"])
                 performance.successful_exit = scoresheet["successful_exit"] * int(request.POST["successful_exit"])
 
-                performance.lack_of_progress = scoresheet["lack_of_progress"]
+                performance.lack_of_progress = int(request.POST["lack_of_progress"])
 
                 performance.reliability = int(request.POST["reliability"])
                 performance.points = int(request.POST["points"])

@@ -16,8 +16,8 @@ urlpatterns = patterns('rescueB.views',
   url(r'^team/(?P<team_id>\d+)/?$', 'team', name="team"),
   url(r'^team/new/?$', 'new_team', name='new_team'),
 
-  url(r'^performances/generate/(?P<group_id>\d+)/?$', 'performances_generate', name="perf_generate"),
-  url(r'^performances/generate/?$', 'performances_generate_listing', name="perf_generate_listing"),
+  url(r'^performances/generate/(?P<group_id>\d+)/?$', 'performances_generate', name="performances_generate"),
+  url(r'^performances/generate/?$', 'performances_generate_listing', name="performances_generate_listing"),
 
   url(r'^table/final/generate/(?P<group_id>\d+)/?$', 'table_final_generate', name="table_final_generate"),
   url(r'^performance/play/(?P<performance_id>\d+)/?$', 'performance_play',

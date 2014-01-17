@@ -31,9 +31,9 @@
 {% else %}
       Unfortunately, no performances were found.
         {% if group %}
-        <a href="{% url rescueB.views.perf_generate group.id %}"> Generate some!</a>
+        <a href="{% url rescueB.views.performances_generate group.id %}"> Generate some!</a>
         {% else %}
-        <a href="{% url rescueB.views.perf_generate %}"> Generate some!</a>
+        <a href="{% url rescueB.views.performances_generate %}"> Generate some!</a>
         {% endif %}
 
 {% endif %}

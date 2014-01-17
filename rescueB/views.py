@@ -313,17 +313,12 @@ def table_final_generate(request, group_id):
 
             newperf = Performance(team=team, round_number=4)
             newperf.referee = request.user
-            newperf.room1 = teamres[0].room1 + teamres[1].room1
-            newperf.room2 = teamres[0].room2 + teamres[1].room2
-            newperf.room3 = teamres[0].room3 + teamres[1].room3
-            newperf.ramp = teamres[0].ramp + teamres[1].ramp
-            newperf.hallway = teamres[0].hallway + teamres[1].hallway
-            newperf.gap = teamres[0].gap + teamres[1].gap
-            newperf.obstacle = teamres[0].obstacle + teamres[1].obstacle
-            newperf.speed_bump = teamres[0].speed_bump + teamres[1].speed_bump
-            newperf.intersection = teamres[0].intersection + teamres[1].intersection
-            newperf.victim = teamres[0].victim + teamres[1].victim
-            newperf.lift = teamres[0].lift + teamres[1].lift
+            newperf.floating_victim = teamres[0].floating_victim + teamres[1].floating_victim
+            newperf.linear_victim = teamres[0].linear_victim + teamres[1].linear_victim
+            newperf.false_victim = teamres[0].false_victim + teamres[1].false_victim
+            newperf.successful_exit = teamres[0].successful_exit + teamres[1].successful_exit
+            newperf.lack_of_progress = teamres[0].lack_of_progress + teamres[1].lack_of_progress
+            newperf.reliability = teamres[0].reliability + teamres[1].reliability
 
             newperf.points = teamres[0].points + teamres[1].points
             newperf.time = teamres[0].time + teamres[1].time

@@ -24,7 +24,7 @@
       <h3>Results</h3>
       {% include "rescueB/results.html" %}
       {% if performances %}
-        {% if not group.result_table_generated %}
+        {% if not group.result_table_generated and not group.not_played_performances %}
             <a class='button green' style="margin-top: 10px;" href="{% url rescueB.views.table_final_generate group.id %}">Generate final table</a>
         {% endif %}        
         <a class='button' style="margin-top: 10px;" href="{% url rescueB.views.results_group_pdf group.id %}.pdf">Download results in PDF.</a>

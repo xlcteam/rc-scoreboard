@@ -64,6 +64,9 @@ class Group(models.Model):
     def __unicode__(self):
         return self.name
 
+    def not_played_performances(self):
+        return len(self.performances.filter(playing='N'))
+
     def results_round_1(self):
         return self.performances.filter(round_number=1).order_by('points', '-time').reverse()
 

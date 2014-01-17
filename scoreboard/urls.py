@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     url(r'^rescueB/', include('rescueB.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^rescurer/', include('rescueB.urls')),
+    # url(r'^rescurer/', include('rescueB.urls')),
     url(r'', include('django_socketio.urls')),
     url(r'', include('scorebrd.urls')),
 

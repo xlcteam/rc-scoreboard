@@ -8,8 +8,8 @@
   {% endfor %}
 </table>
 
-<p> <a href="{% url rescueB.views.new_competition %}?event={{event.id}}"><strong>Add another competition!</strong></a> </p>
+<p> <a href="{% url rescueB.views.new_competition %}"><strong>Add another competition!</strong></a> </p>
 
 {% else %}
-<p> No competitions were found. <a href="{% url rescueB.views.new_competition %}?event={{event.id}}"><strong>Add some!</strong></a> </p>
+<p> No competitions were found. <a href="{% url rescueB.views.new_competition %}"><strong>Add some!</strong></a> </p>
 {% endif %}

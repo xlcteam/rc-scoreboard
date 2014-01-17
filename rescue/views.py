@@ -87,8 +87,7 @@ def new_group(request):
             name = form.cleaned_data['name']
             results_type = form.cleaned_data['results_type']
 
-            group = Group(name=name, results_type=results_type,
-                          map=form.cleaned_data['map'])
+            group = Group(name=name, results_type=results_type) #map=form.cleaned_data['map'])
             group.save()
 
             competition.groups.add(group)

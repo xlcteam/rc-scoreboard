@@ -57,7 +57,7 @@ class Group(models.Model):
     # stuff for final table
     result_table_generated = models.BooleanField(default=False)
     perfs_final = models.ManyToManyField(Performance, related_name="final_results")
-    map = models.ForeignKey(SimpleMap)
+    # map = models.ForeignKey(SimpleMap)
     RESULTS_CHOICES = (
         ('S', 'Play three rounds - take the sum of the best two as the result (slovak system)'),
         ('D', 'Play two rounds - take the best one as the result (dutch system)'),
@@ -68,6 +68,9 @@ class Group(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def not_played_performances(self):
+        return len(self.performances.filter(playing='N'))
 
     def results_round_1(self):
         return self.performances.filter(round_number=1).order_by('points', '-time').reverse()
@@ -105,7 +108,7 @@ class NewEventForm(forms.Form):
 class NewGroupForm(ModelForm):
     class Meta:
         model = Group
-        fields = ['name', 'map', 'results_type']
+        fields = ['name', 'results_type']
 
 
 class NewTeamForm(forms.Form):

@@ -27,6 +27,7 @@ urlpatterns = patterns('rescueB.views',
 
   url(r'^results/live/?$', 'results_live'),
   url(r'^results/group/(?P<group_id>\d+)\.pdf/?$', 'results_group_pdf', name="results_group_pdf"),
+  url(r'^results/competition/(?P<competition_id>\d+)\.pdf/?$', 'results_competition_pdf', name="results_competition_pdf"),
   url(r'^results/performance/(?P<performance_id>\d+)/?$', 'results_performance_view', name="results_performance_view"),
 
   url(r'^map/new$', 'mapeditor_view'),

@@ -344,6 +344,15 @@ def results_group_pdf(request, group_id):
                             {'competition': competition, 'group': group,
                              'performances': performances, 'title': group.name})
 
+@login_required(login_url='/login/')
+def results_competition_pdf(request, competition_id):
+    competition = get_object_or_404(Competition, pk=competition_id)
+    groups = competition.groups.all()
+
+    return render_to_pdf(request, 'rescueB/results/generate/competition.html',
+                            {'competition': competition, 'groups': groups,
+                             'title': competition.name})
+
 @render_to('rescueB/results/performance.html')
 @login_required(login_url='/login/')
 def results_performance_view(request, performance_id):

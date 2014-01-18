@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Disposition" content="attachment; filename={{title}}.pdf">
+    <style>
+      {% include "rescueB/results/generate/teamtable.css" %}
+    </style>
+
+  </head>
+  <body>
+    <div id="paper">
+      <strong><h1>{{ SITE_NAME }}</h1></strong>
+      {% for group in groups %}
+          <h2>{{ competition.name}} - {{group.name}}</h2>
+          {% include "rescueB/results.html" with performances=group.performances.all %}
+          <br><br><br>
+      {% endfor %}
+
+      {% include "rescueB/results/generate/legend.html" %}
+      {% include "rescueB/results/generate/footer.html" %}
+  </div>
+  </body>
+</html>

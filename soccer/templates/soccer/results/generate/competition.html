@@ -12,7 +12,7 @@
       <strong><h1>{{ SITE_NAME }} - {{ competition.name}}</h1></strong>
 
       {% for group in groups %}
-        <h3>{{ group.name }}</h3>
+        <h2>{{ group.name }}</h2>
         {% include "soccer/results.html" with team_results=group.sorted_results %}
 
         {% if group.sorted_matches %}

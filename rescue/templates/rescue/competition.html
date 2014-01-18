@@ -13,7 +13,7 @@
   <div class="col span_6">
     <h2> Groups competing in {{ competition.name }} </h2>
     {% include "rescue/groups.html" %}
-    <a class='button' style="margin-top: 10px; float: left;"
+    <a class='button red' style="margin-top: 10px; float: left;"
       href="{% url rescue.views.results_competition_pdf competition.id %}">Generate PDF
       of results!</a>
   </div>

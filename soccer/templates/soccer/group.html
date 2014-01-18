@@ -27,9 +27,9 @@
       {% include "soccer/results.html" %}
       {% if team_results %}
         <a class='button orange' style="margin-top: 10px;"
-          href="/soccer/group/generate/schedule/{{ group.id }}.pdf">Export
+          href="{% url soccer.views.schedule_generate group.id %}">Export
           schedule to PDF!</a>
-        <a class='button' style="margin-top: 10px;" href="/soccer/results/group/{{ group.id }}.pdf">Download results in PDF.</a>
+        <a class='button red' style="margin-top: 10px;" href="{% url soccer.views.results_group_pdf group.id %}">Download results in PDF.</a>
       {% endif %}
     </section>
 

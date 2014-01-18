@@ -4,7 +4,7 @@
   {% if groups %}
     <h2> Select the group in which you want to generate matches </h2>
     {% for group in groups %}
-      <li><a href="/soccer/matches/generate/{{ group.id }}">{{group.name}}</a></li> 
+      <li><a href="{% url soccer.views.matches_generate group.id %}">{{group.name}}</a></li> 
     {% endfor %}
 
   {% else %}

@@ -9,10 +9,10 @@
 
   <body>
     <div id="paper">
-      <strong><h1>{{ SITE_NAME }} - {{ competition.name}}</h1></strong>
+      <strong><h1>{{ SITE_NAME }}</h1></strong>
 
       {% for group in groups %}
-        <h2>{{ group.name }}</h2>
+        <h2>{{ competition.name}} - {{ group.name }}</h2>
         {% include "soccer/results.html" with team_results=group.sorted_results %}
 
         {% if group.sorted_matches %}
@@ -37,6 +37,7 @@
         <br />
       {% endfor %}
 
+      {% include "soccer/results/generate/legend.html" %}
       {% include "soccer/results/generate/footer.html" %}
     </div>
   </body>

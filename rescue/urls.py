@@ -16,7 +16,7 @@ urlpatterns = patterns('rescue.views',
     url(r'^team/(?P<team_id>\d+)/?$', 'team', name="team"),
     url(r'^team/new/?$', 'new_team', name='new_team'),
 
-    url(r'^performances/generate/(?P<group_id>\d+)/?$', 'performances_generate', name="performances_generate"),
+    url(r'^performances/generate/(?P<group_id>\d+)/?$', 'performances_generate', name="performances_generate="),
     url(r'^performances/generate/?$', 'performances_generate_listing', name="performances_generate_listing"),
 
     url(r'^table/final/generate/(?P<group_id>\d+)/?$', 'table_final_generate', name="table_final_generate"),
@@ -27,6 +27,7 @@ urlpatterns = patterns('rescue.views',
 
     url(r'^results/live/?$', 'results_live'),
     url(r'^results/group/(?P<group_id>\d+)\.pdf/?$', 'results_group_pdf', name="results_group_pdf"),
+    url(r'^results/competition/(?P<competition_id>\d+)\.pdf/?$', 'results_competition_pdf', name="results_competition_pdf"),
     url(r'^results/performance/(?P<performance_id>\d+)/?$', 'results_performance_view', name="results_performance_view"),
 
 

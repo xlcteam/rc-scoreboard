@@ -14,7 +14,7 @@
     <h2> Groups competing in {{ competition.name }} </h2>
     {% include "rescue/groups.html" %}
     <a class='button' style="margin-top: 10px; float: left;"
-      href="/rescue/results/competition/{{ competition.id }}.pdf">Generate PDF
+      href="{% url rescue.views.results_competition_pdf competition.id %}">Generate PDF
       of results!</a>
   </div>
 </section>

@@ -11,8 +11,12 @@
   <body>
     <div id="paper">
       <strong><h1>{{ SITE_NAME }}</h1></strong>
-      <h3>{{ competition.name}} - {{group.name}}</h3>
-      {% include "rescue/results.html" %}
+      {% for group in groups %}
+          <h2>{{ competition.name}} - {{group.name}}</h2>
+          {% include "rescue/results.html" with performances=group.performances.all %}
+          <br><br><br>
+      {% endfor %}
+
       {% include "rescue/results/generate/legend.html" %}
       {% include "rescue/results/generate/footer.html" %}
   </div>

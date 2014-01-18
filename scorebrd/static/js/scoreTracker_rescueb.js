@@ -183,7 +183,9 @@ scoreTracker.prototype = {
           reliability = 0;
         } else {
           $this.final_score += reliability;
-        }    
+        }
+
+        if ($this.final_score < 0) $this.final_score = 0;
 
         $('#reliability').val(reliability);
         $('#points').val($this.final_score);

@@ -25,7 +25,7 @@
       {% include "rescue/results.html" %}
       {% if performances %}
         {% if not group.result_table_generated and not group.not_played_performances%}
-            <a class='button green' style="margin-top: 10px;" href="{% rescue.views.table_final_generate group.id %}">Generate final table</a>
+            <a class='button green' style="margin-top: 10px;" href="{% url rescue.views.table_final_generate group.id %}">Generate final table</a>
         {% endif %}        
         <a class='button' style="margin-top: 10px;" href="{% url rescue.views.results_group_pdf group.id %}">Download results in PDF.</a>
       {% endif %}

@@ -9,11 +9,11 @@
                 </td>
                 <td align="center">
                 {% if performance.round_number == 1 %}
-                  <a class='smaller button green' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>
+                  <a class='smaller button green' href="{% url rescue.views.performance_play performance.id %}"> Start {{performance.round_number}}. round! </a>
                 {% elif performance.round_number == 2 %}
-                  <a class='smaller button orange' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>
+                  <a class='smaller button orange' href="{% url rescue.views.performance_play performance.id %}"> Start {{performance.round_number}}. round! </a>
                 {% elif performance.round_number == 3 %}
-                  <a class='smaller button blue' href="/rescue/performance/play/{{ performance.id }}"> Start {{performance.round_number}}. round! </a>
+                  <a class='smaller button blue' href="{% url rescue.views.performance_play performance.id %}"> Start {{performance.round_number}}. round! </a>
                 {% endif %}
                 </td>
             {% elif not_started_only == False %}
@@ -21,7 +21,7 @@
                     {{ performance.team.name }}
                 </td>
                 <td align="center">
-                  <a class="smaller button" href="/rescue/results/performance/{{ performance.id }}">More info! ({{performance.round_number}}.)</a>
+                  <a class="smaller button" href="{% url rescue.views.results_performance_view performance.id %}">More info! ({{performance.round_number}}.)</a>
                 </td>
            {% endif %}
         </tr>
@@ -31,9 +31,9 @@
 {% else %}
       Unfortunately, no performances were found.
         {% if group %}
-        <a href="/rescue/performances/generate/{{ group.id }}"> Generate some!</a>
+        <a href="{% url rescue.views.performances_generate group.id %}"> Generate some!</a>
         {% else %}
-        <a href="/rescue/performances/generate/"> Generate some!</a>
+        <a href="{% url rescue.views.performances_generate %}"> Generate some!</a>
         {% endif %}
 
 {% endif %}

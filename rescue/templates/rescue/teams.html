@@ -1,6 +1,6 @@
 
 <ul>
 {% for team in teams %}
-  <li><a href="/rescue/team/{{ team.id }}">{{team.name}}</a></li>
+  <li><a href="{% url rescue.views.team team.id %}">{{team.name}}</a></li>
 {% endfor %}
 </ul>

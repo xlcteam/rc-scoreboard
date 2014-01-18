@@ -16,18 +16,18 @@ urlpatterns = patterns('rescue.views',
     url(r'^team/(?P<team_id>\d+)/?$', 'team', name="team"),
     url(r'^team/new/?$', 'new_team', name='new_team'),
 
-    url(r'^performances/generate/(?P<group_id>\d+)/?$', 'performances_generate'),
-    url(r'^performances/generate/?$', 'performances_generate_listing'),
+    url(r'^performances/generate/(?P<group_id>\d+)/?$', 'performances_generate', name="performances_generate"),
+    url(r'^performances/generate/?$', 'performances_generate_listing', name="performances_generate_listing"),
 
-    url(r'^table/final/generate/(?P<group_id>\d+)/?$', 'table_final_generate'),
+    url(r'^table/final/generate/(?P<group_id>\d+)/?$', 'table_final_generate', name="table_final_generate"),
     url(r'^performance/play/(?P<performance_id>\d+)/?$', 'performance_play',
-        name='performance_play'),
+      name='performance_play'),
     url(r'^performance/save/(?P<performance_id>\d+)/?$', 'performance_save', 
-        name='performance_save'),
+      name='performance_save'),
 
     url(r'^results/live/?$', 'results_live'),
-    url(r'^results/group/(?P<group_id>\d+)\.pdf/?$', 'results_group_pdf'),
-    url(r'^results/performance/(?P<performance_id>\d+)/?$', 'results_performance_view'),
+    url(r'^results/group/(?P<group_id>\d+)\.pdf/?$', 'results_group_pdf', name="results_group_pdf"),
+    url(r'^results/performance/(?P<performance_id>\d+)/?$', 'results_performance_view', name="results_performance_view"),
 
 
     url(r'^map/new', 'mapeditor_view'),

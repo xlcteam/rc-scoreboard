@@ -12,6 +12,7 @@ echo "Step 3: setting up the DB"
 ./manage.py syncdb
 ./manage.py migrate soccer 
 ./manage.py migrate rescue 
+./manage.py migrate rescueB
 
 echo "And you are ready to use scoreboard by running"
 echo

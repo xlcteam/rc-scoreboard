@@ -11,14 +11,6 @@ from django.test.client import Client
 from django.contrib.auth.models import User
 
 
-#class SimpleTest(TestCase):
-#    def test_basic_addition(self):
-#        """
-#        Tests that 1 + 1 always equals 2.
-#        """
-#        self.assertEqual(1 + 1, 2)
-
-
 class ModelTest(TestCase):
     def setUp(self):
         self.team = Team.objects.create(name="testTeam")

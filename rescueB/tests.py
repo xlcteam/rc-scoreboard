@@ -37,6 +37,8 @@ class ModelTest(TestCase):
         self.assertEqual(self.group.name, "testGroup")
         self.assertEqual(self.competition.name, "testCompetition")
 
+        self.assertEqual(self.group.results_type, "S")
+
         self.assertEqual(self.ref.username, "doe")
         self.assertEqual(self.ref.email, "joe")
 

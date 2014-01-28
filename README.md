@@ -48,6 +48,9 @@ Or just run the `dev_setup.sh` script.
 You can run the tests by executing
 
     $ ./manage.py test scorebrd
+    $ ./manage.py test soccer
+    $ ./manage.py test rescue
+    $ ./manage.py test rescueB
 
 
 We really appreciate feedback, so if you have any questions or find any bug please create [new issue](https://github.com/xlcteam/scoreBoard/issues/new).

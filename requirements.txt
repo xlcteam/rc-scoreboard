@@ -1,5 +1,5 @@
 Django==1.4
-PIL==1.1.7
+#PIL==1.1.7
 South==0.7.6
 django-annoying==0.7.6
 django-grappelli==2.4.3
@@ -13,9 +13,9 @@ gevent-websocket==0.3.6
 greenlet==0.4.0
 gunicorn==0.17.2
 html5lib==0.95
-pyPdf==1.13
+#pyPdf==1.13
 reportlab==2.6
 sphinx-me==0.1.2
 wsgiref==0.1.2
-xhtml2pdf==0.0.4
+xhtml2pdf==0.0.5
 psycopg2==2.4.4

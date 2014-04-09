@@ -331,9 +331,9 @@ def table_final_generate(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     for team in group.teams.all():
         teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()   
+        newperf = Performance(team=team, round_number=4)
         if group.results_type == 'S':
 
-            newperf = Performance(team=team, round_number=4)
             newperf.referee = request.user
             newperf.room1 = teamres[0].room1 + teamres[1].room1
             newperf.room2 = teamres[0].room2 + teamres[1].room2
@@ -350,10 +350,10 @@ def table_final_generate(request, group_id):
             newperf.points = teamres[0].points + teamres[1].points
             newperf.time = teamres[0].time + teamres[1].time
 
-            newperf.save()
         else:
             newperf = teamres[0]
 
+        newperf.save()
         group.perfs_final.add(newperf)
 
     group.result_table_generated = True

@@ -309,9 +309,8 @@ def table_final_generate(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     for team in group.teams.all():
         teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()   
+        newperf = Performance(team=team, round_number=4)
         if group.results_type == 'S':
-
-            newperf = Performance(team=team, round_number=4)
             newperf.referee = request.user
             newperf.floating_victim = teamres[0].floating_victim + teamres[1].floating_victim
             newperf.linear_victim = teamres[0].linear_victim + teamres[1].linear_victim
@@ -323,10 +322,10 @@ def table_final_generate(request, group_id):
             newperf.points = teamres[0].points + teamres[1].points
             newperf.time = teamres[0].time + teamres[1].time
 
-            newperf.save()
         else:
             newperf = teamres[0]
-
+        
+        newperf.save()
         group.perfs_final.add(newperf)
 
     group.result_table_generated = True

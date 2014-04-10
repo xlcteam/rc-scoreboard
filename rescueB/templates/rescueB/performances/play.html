@@ -109,7 +109,30 @@
 			<div style="height: 70px; font-size:130.5%;text-align: center;">
         <form action="{% url rescueB.views.performance_save performance_id %}" method="POST" id="dialogForm">
           {% csrf_token %}
-          <table style="margin: 0 auto;">
+          <table style="width: 50%; float: right;">
+            <tr>
+              <td style="float: right;">Bump:</td>
+              <td> <input style="width: 30px;" type="text" id="bump" name="bump"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">Ramp Up:</td>
+              <td> <input style="width: 30px;" type="text" id="ramp_up" name="ramp_up"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">Ramp Down:</td>
+              <td> <input style="width: 30px;" type="text" id="ramp_down" name="ramp_down"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">Checkpoints:</td>
+              <td> <input style="width: 30px;" type="text" id="checkpoints" name="checkpoints"/>x</td>
+            <tr>
+            <tr>
+              <td style="float: right;">Successful Exit Bonus:</td>
+              <td> <input style="width: 30px;" type="text" id="successful_exit" name="successful_exit"/>x</td>
+            <tr>
+          </table>
+
+          <table style="width: 50%;">
             <tr>
               <td style="float: right;">Floating Victim:</td>
               <td> <input style="width: 30px;" type="text" id="floating_victim" name="floating_victim"/>x</td>
@@ -119,16 +142,12 @@
               <td> <input style="width: 30px;" type="text" id="linear_victim" name="linear_victim"/>x</td>
             <tr>
             <tr>
-              <td style="float: right;">False Victim:</td>
-              <td> <input style="width: 30px;" type="text" id="false_victim" name="false_victim"/>x</td>
+              <td style="float: right;">Kit deploy:</td>
+              <td> <input style="width: 30px;" type="text" id="kit_deploy" name="kit_deploy"/>x</td>
             <tr>
             <tr>
               <td style="float: right;">Lack of Progress:</td>
               <td> <input style="width: 30px;" type="text" id="lack_of_progress" name="lack_of_progress"/>x</td>
-            <tr>
-            <tr>
-              <td style="float: right;">Successful Exit Bonus:</td>
-              <td> <input style="width: 30px;" type="text" id="successful_exit" name="successful_exit"/>x</td>
             <tr>
           </table>
           <div style="clear: both;" ></div>
@@ -172,7 +191,48 @@
     <div class="name"><span class="element1" id="name1">Robot</span></div>
   </div>
 
-  <div id="scores_try" class="scores" style="width: 100%; text-align: center;">
+  <div id="scores_each" class="scores" style="width: 50%;float:right;">
+    <table style="margin: 0 auto; font-size: 100%; color: #8E8E8E;">
+      <tr>
+        <td> Bump: </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachbump', 'bump');">-</a> </td>
+        <td> <span id="Eachbump" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachbump', 'bump');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td> Ramp Up: </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachramp_up', 'ramp_up');">-</a> </td>
+        <td> <span id="Eachramp_up" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachramp_up', 'ramp_up');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td> Ramp Down: </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachramp_down', 'ramp_down');">-</a> </td>
+        <td> <span id="Eachramp_down" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachramp_down', 'ramp_down');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td> Checkpoints: </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachcheckpoints', 'checkpoints');">-</a> </td>
+        <td> <span id="Eachcheckpoints" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachcheckpoints', 'checkpoints');">+</a> </td>
+      </tr>
+
+      <tr>
+        <td> Successful Exit </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachsuccessful_exit', 'successful_exit');">-</a> </td>
+        <td> <span id="Eachsuccessful_exit" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachsuccessful_exit', 'successful_exit');">+</a> </td>
+      </tr>
+    </table>
+
+    <a class="button bigger blue" onclick='ST.showD();'>Send Results</a>
+  </div>
+
+  <div id="scores_try" class="scores" style="width: 50%;">
     <table style="margin: 0 auto; font-size: 100%; color: #8E8E8E;">
       <tr>
         <td> Floating Victim: </td>
@@ -189,10 +249,10 @@
       </tr>
 
       <tr>
-        <td> False Victim: </td>
-        <td> <a class="button red" onclick="ST.rmEach('#Eachfalse_victim', 'false_victim');">-</a> </td>
-        <td> <span id="Eachfalse_victim" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
-        <td> <a class="button green" onclick="ST.addEach('#Eachfalse_victim', 'false_victim');">+</a> </td>
+        <td> Kit deploy: </td>
+        <td> <a class="button red" onclick="ST.rmEach('#Eachkit_deploy', 'kit_deploy');">-</a> </td>
+        <td> <span id="Eachkit_deploy" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
+        <td> <a class="button green" onclick="ST.addEach('#Eachkit_deploy', 'kit_deploy');">+</a> </td>
       </tr>
 
       <tr>
@@ -201,18 +261,8 @@
         <td> <span id="Eachlack_of_progress" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
         <td> <a class="button green" onclick="ST.addEach('#Eachlack_of_progress', 'lack_of_progress');">+</a> </td>
       </tr>
-
-      <tr>
-        <td> Successful Exit </td>
-        <td> <a class="button red" onclick="ST.rmEach('#Eachsuccessful_exit', 'successful_exit');">-</a> </td>
-        <td> <span id="Eachsuccessful_exit" style="color: #ffffff;">0<span style="font-size: 50%;">x</span></span> </td>
-        <td> <a class="button green" onclick="ST.addEach('#Eachsuccessful_exit', 'successful_exit');">+</a> </td>
-      </tr>
     </table>
-
-    <a class="button bigger blue" onclick='ST.showD();'>Send Results</a>
   </div>
-
   <div style="clear:both;"></div>
 
   <div id="timeBar" class="element3">

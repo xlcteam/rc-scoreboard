@@ -13,7 +13,11 @@ function scoreTracker(options)
     $this.scores = {
           'floating_victim' : 0,
           'linear_victim': 0,
-          'false_victim' : 0,
+          'kit_deploy' : 0,
+          'bump': 0,
+          'ramp_up': 0,
+          'ramp_down': 0,
+          'checkpoints': 0,
           'lack_of_progress': 0,
           'successful_exit': 0,
     };
@@ -21,7 +25,11 @@ function scoreTracker(options)
     $this.scoresheet = {
           'floating_victim' : 25,
           'linear_victim': 10,
-          'false_victim' : -10,
+          'kit_deploy': 10,
+          'bump': 5,
+          'ramp_up': 20,
+          'ramp_down': 10,
+          'checkpoints': 10,
           'successful_exit': 10,
     };
 }
@@ -32,7 +40,7 @@ scoreTracker.prototype = {
 
 
     addEach: function (Each, string){
-        if (string == 'successful_exit' && $this.scores[string] == 1){
+        if ((string == 'successful_exit' || string == 'ramp_up' || string == 'ramp_down') && $this.scores[string] == 1){
             return;    
         }
         $this.scores[string]++;
@@ -169,15 +177,23 @@ scoreTracker.prototype = {
         $this.final_score += $this.scores["floating_victim"] * $this.scoresheet["floating_victim"];
         // linear victims        
         $this.final_score += $this.scores["linear_victim"] * $this.scoresheet["linear_victim"];
-        // false victims
-        $this.final_score += $this.scores["false_victim"] * $this.scoresheet["false_victim"];
+        // kit deploys
+        $this.final_score += $this.scores["kit_deploy"] * $this.scoresheet["kit_deploy"];
+        // bumps
+        $this.final_score += $this.scores["bump"] * $this.scoresheet["bump"];
+        // ramp up
+        $this.final_score += $this.scores["ramp_up"] * $this.scoresheet["ramp_up"];
+        // ramp down
+        $this.final_score += $this.scores["ramp_down"] * $this.scoresheet["ramp_down"];
+        // checkpoints
+        $this.final_score += $this.scores["checkpoints"] * $this.scoresheet["checkpoints"];
         // successful exit bonus
         if ($this.scores["successful_exit"])
           $this.final_score += ($this.scores["floating_victim"] + $this.scores["linear_victim"]) * $this.scoresheet["successful_exit"];
 
         // reliability
         var reliability = 0;
-        reliability += ($this.scores["floating_victim"] + $this.scores["linear_victim"] - $this.scores["lack_of_progress"]) * 10;
+        reliability += ($this.scores["floating_victim"] + $this.scores["linear_victim"] + $this.scores["kit_deploy"] - $this.scores["lack_of_progress"]) * 10;
 
         if (reliability < 0){
           reliability = 0;

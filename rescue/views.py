@@ -349,6 +349,7 @@ def table_final_generate(request, group_id):
             newperf.intersection = teamres[0].intersection + teamres[1].intersection
             newperf.victim = teamres[0].victim + teamres[1].victim
             newperf.lift = teamres[0].lift + teamres[1].lift
+            newperf.victim_reach = teamres[0].victim_reach + teamres[1].victim_reach
 
             newperf.points = teamres[0].points + teamres[1].points
             newperf.time = teamres[0].time + teamres[1].time

@@ -26,6 +26,7 @@ function scoreTracker(options)
             'speed_bump': 0,
             'intersection': 0,
             'lift': 0,
+            'reach': 0,
         }
     };
 
@@ -44,6 +45,7 @@ function scoreTracker(options)
             'speed_bump': 5,
             'intersection': 10,
             'lift': 20,
+            'reach': 20,
         }
     }
 }
@@ -74,7 +76,7 @@ scoreTracker.prototype = {
     },
 
     addEach: function (Each, string){
-        if (string == 'lift' && $this.scores["each"][string] == 1){
+        if ((string == 'lift' || string == 'reach') && $this.scores["each"][string] == 1){
             return;    
         }
         $this.scores["each"][string]++;

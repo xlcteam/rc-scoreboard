@@ -39,6 +39,7 @@ class Performance(models.Model):
     intersection = models.IntegerField(default=0)
     victim = models.IntegerField(default=0)
     lift = models.IntegerField(default=0)
+    victim_reach = models.IntegerField(default=0)
     
     points = models.IntegerField(default=0)
     time = models.FloatField(default=0.0)
@@ -125,6 +126,7 @@ class MatchSaveForm(forms.Form):
     obstacle = forms.IntegerField(label='Obstacle')
     speed_bump = forms.IntegerField(label='Speed Bump')
     intersection = forms.IntegerField(label='Intersection')
+    victim_reach = forms.IntegerField(label="Victim reach")
     lift = forms.IntegerField(label="Lift (secondary)")
     points = forms.IntegerField(label='Points')
     time = forms.CharField(label='Time')

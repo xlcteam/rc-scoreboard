@@ -107,7 +107,7 @@ def new_group(request):
             c['competition'] = competition
         else:
             c['competitions'] = Competition.objects.all()
- 
+
         return c
 
 # team/s
@@ -142,12 +142,12 @@ def new_team(request):
             teams = form.cleaned_data['names']
             teams = teams.replace('\r', "")
             teams = teams.split('\n')
-            
+
             for t in teams:
                 team = Team(name=t)
                 team.save()
                 group.teams.add(team)
-            
+
             group.save()
 
             msg = "Teams for group {0} has been created!".format(group.name)
@@ -204,7 +204,7 @@ def performances_generate_listing(request):
             performance = Performance(team=team, round_number=rnd, referee=request.user)
             performance.save()
             group.performances.add(performance)
-       
+
     group.save()
     performances = group.performances.all().order_by('round_number')
     return {'performances': performances, 'group': group}
@@ -213,7 +213,7 @@ def performances_generate_listing(request):
 @csrf_exempt
 def performance_play(request, performance_id):
     performance = get_object_or_404(Performance, pk=performance_id)
-       
+
     return render_to_response('rescue/performances/play.html',
                               {'performance': performance, 'performance_id': performance_id},
                               context_instance=RequestContext(request))
@@ -236,6 +236,7 @@ def performance_save(request, performance_id):
             'speed_bump': 5,
             'intersection': 10,
             'lift': 20,
+            'reach': 20,
         }
     }    
 
@@ -243,7 +244,8 @@ def performance_save(request, performance_id):
         post = request.POST
         initial = {'gap': post["gap"], 'obstacle': post["obstacle"],
                    'speed_bump': post["speed_bump"], 'intersection': post["intersection"],
-                   'lift': post['lift'], 'time': post["time"], 'points': post["points"],}
+                   'lift': post['lift'], 'reach': post['reach'], 'time': post["time"], 
+                   'points': post["points"],}
 
         for x in scoresheet["try"]:
             
@@ -289,6 +291,7 @@ def performance_save(request, performance_id):
                 performance.speed_bump = scoresheet["each"]["speed_bump"] * int(request.POST["speed_bump"])
                 performance.intersection = scoresheet["each"]["intersection"] * int(request.POST["intersection"])
                 performance.lift = scoresheet["each"]["lift"] * int(request.POST["lift"])
+                performance.victim_reach = scoresheet["each"]["reach"] * int(request.POST["reach"])
 
                 performance.points = int(request.POST["points"])
                 
@@ -330,10 +333,10 @@ def performance_save(request, performance_id):
 def table_final_generate(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     for team in group.teams.all():
-        teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()   
-        newperf = Performance(team=team, round_number=4)
+        teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()
         if group.results_type == 'S':
 
+            newperf = Performance(team=team, round_number=4)
             newperf.referee = request.user
             newperf.room1 = teamres[0].room1 + teamres[1].room1
             newperf.room2 = teamres[0].room2 + teamres[1].room2
@@ -346,14 +349,15 @@ def table_final_generate(request, group_id):
             newperf.intersection = teamres[0].intersection + teamres[1].intersection
             newperf.victim = teamres[0].victim + teamres[1].victim
             newperf.lift = teamres[0].lift + teamres[1].lift
+            newperf.victim_reach = teamres[0].victim_reach + teamres[1].victim_reach
 
             newperf.points = teamres[0].points + teamres[1].points
             newperf.time = teamres[0].time + teamres[1].time
 
+            newperf.save()
         else:
             newperf = teamres[0]
 
-        newperf.save()
         group.perfs_final.add(newperf)
 
     group.result_table_generated = True
@@ -407,7 +411,7 @@ def mapeditor_save(request):
                 mimetype="application/json")
 
 
-    if data['mapID'] == -1: 
+    if data['mapID'] == -1:
         name = data['name']
         map = SimpleMap(name=name, data='')
         map.save()

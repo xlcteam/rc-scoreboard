@@ -196,7 +196,7 @@ def performances_generate_listing(request):
     teams = list(group.teams.all())
 
     n_rounds = 3
-    if group.results_type == 'D':
+    if group.results_type == 'D' or group.results_type == 'P':
         n_rounds = 2
 
     for rnd in range(1, 1+n_rounds):
@@ -334,7 +334,7 @@ def table_final_generate(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     for team in group.teams.all():
         teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()
-        if group.results_type == 'S':
+        if group.results_type == 'S' or group.results_type == 'P':
 
             newperf = Performance(team=team, round_number=4)
             newperf.referee = request.user

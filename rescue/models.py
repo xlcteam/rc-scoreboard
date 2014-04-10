@@ -62,6 +62,7 @@ class Group(models.Model):
     RESULTS_CHOICES = (
         ('S', 'Play three rounds - take the sum of the best two as the result (slovak system)'),
         ('D', 'Play two rounds - take the best one as the result (dutch system)'),
+        ('P', 'Play two rounds - take the sum of them (Petrovic system)'),
     )
 
     results_type = models.CharField(max_length=1, choices=RESULTS_CHOICES,

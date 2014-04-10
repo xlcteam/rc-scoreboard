@@ -224,14 +224,19 @@ def performance_save(request, performance_id):
     scoresheet = {  
           'floating_victim' : 25,
           'linear_victim': 10,
-          'false_victim' : -10,
+          'kit_deploy': 10,
+          'bump': 5,
+          'ramp_up': 20,
+          'ramp_down': 10,
+          'checkpoints': 10,
           'successful_exit': 10,
     }    
 
     def errorHandle(error, request, performance_id):
         post = request.POST
         initial = {'floating_victim': post["floating_victim"], 'linear_victim': post["linear_victim"],
-                   'false_victim': post["false_victim"], 'lack_of_progress': post["lack_of_progress"],
+                   'kit_deploy': post["kit_deploy"], 'bump': post["bump"], 'ramp_up': post["ramp_up"],
+                   'ramp_down': post["ramp_down"], 'checkpoints': post["checkpoints"], 'lack_of_progress': post["lack_of_progress"],
                    'successful_exit': post["successful_exit"], 'reliability': post['reliability'], 
                    'time': post["time"], 'points': post["points"],}
 
@@ -262,7 +267,11 @@ def performance_save(request, performance_id):
                 
                 performance.floating_victim = scoresheet["floating_victim"] * int(request.POST["floating_victim"])
                 performance.linear_victim = scoresheet["linear_victim"] * int(request.POST["linear_victim"])
-                performance.false_victim = scoresheet["false_victim"] * int(request.POST["false_victim"])
+                performance.kit_deploy = scoresheet["kit_deploy"] * int(request.POST["kit_deploy"])
+                performance.bump = scoresheet["bump"] * int(request.POST["bump"])
+                performance.ramp_up = scoresheet["ramp_up"] * int(request.POST["ramp_up"])
+                performance.ramp_down = scoresheet["ramp_down"] * int(request.POST["ramp_down"])
+                performance.checkpoints = scoresheet["checkpoints"] * int(request.POST["checkpoints"])                
                 performance.successful_exit = scoresheet["successful_exit"] * int(request.POST["successful_exit"])
 
                 performance.lack_of_progress = int(request.POST["lack_of_progress"])
@@ -314,7 +323,11 @@ def table_final_generate(request, group_id):
             newperf.referee = request.user
             newperf.floating_victim = teamres[0].floating_victim + teamres[1].floating_victim
             newperf.linear_victim = teamres[0].linear_victim + teamres[1].linear_victim
-            newperf.false_victim = teamres[0].false_victim + teamres[1].false_victim
+            newperf.kit_deploy = teamres[0].kit_deploy + teamres[1].kit_deploy
+            newperf.bump = teamres[0].bump + teamres[1].bump
+            newperf.ramp_up = teamres[0].ramp_up + teamres[1].ramp_up
+            newperf.ramp_down = teamres[0].ramp_down + teamres[1].ramp_down
+            newperf.checkpoints = teamres[0].checkpoints + teamres[1].checkpoints
             newperf.successful_exit = teamres[0].successful_exit + teamres[1].successful_exit
             newperf.lack_of_progress = teamres[0].lack_of_progress + teamres[1].lack_of_progress
             newperf.reliability = teamres[0].reliability + teamres[1].reliability

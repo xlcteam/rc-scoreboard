@@ -41,6 +41,12 @@ Or just run the `dev_setup.sh` script.
   executable is present at the server.
 
 
+### Deploynment
+
+* Set `DEBUG` in `settings.py` to False
+* Start nginx by running `nginx -c ./nginx.conf -p $PWD` in `./conf/`
+* Run `python2 ./manage.py run_gunicorn`
+
 *Note*: This application is still in the alpha version and not meant for actual use. Please [contact us](http://xlc-team.info/contact) if you plan on using it.
 
 ## Tests

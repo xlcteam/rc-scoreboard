@@ -428,13 +428,27 @@ def schedule_generate(request, group_id):
     matches = group.matches.all()
 
     # time stuff
-    match_length = request.POST["match_length"]
-    start_time = request.POST["start_time"]
-    break_matches = request.POST["break_matches"]
-    long_break = request.POST["long_break"]
+    match_length = int(request.GET["match_length"])
+    start_time = request.GET["start_time"]
+    break_matches = int(request.GET["break_matches"])
+    long_break_length = int(request.GET["long_break_length"])
+    long_break_after = int(request.GET["long_break_after"])
     
+    def add_time(time, addmin, addbreak):
+        h = int(time.split(":")[0])
+        m = int(time.split(":")[1])
+        
+        m += addmin + addbreak
+        h += m // 60
+        m = m % 60
+        return str(h) + ":" + ("0" if m < 10 else "" ) + str(m)
+
+    
+    for x in range(0, len(matches)):
+        matches[x].time = add_time(start_time, x*match_length, x*break_matches + x//long_break_after*long_break_length- x//long_break_after*break_matches)
+
     return render_to_pdf(request, 'soccer/results/generate/schedule.html',
-                            {'competition': competition, 'matches': matches, 'group': group})
+                            {'competition': competition, 'matches': matches, 'group': group,})
 
 
 @render_to('soccer/results/livegroup.html')

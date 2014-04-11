@@ -206,22 +206,70 @@ scoreTracker.prototype = {
     },
 
     resetTimers: function() {
-        $("#rPenalty1time").stopwatch().stopwatch('stop');
-        $("#rPenalty1time").stopwatch().stopwatch('reset');
-        $("#rPenalty1time").html('-----');
 
-        $("#rPenalty2time").stopwatch().stopwatch('stop');
-        $("#rPenalty2time").stopwatch().stopwatch('reset');
-        $("#rPenalty2time").html('-----');
- 
-        $("#lPenalty1time").stopwatch().stopwatch('stop');
-        $("#lPenalty1time").stopwatch().stopwatch('reset');
-        $("#lPenalty1time").html('-----');
+        function pad2(number) {
+             return (number < 10 ? '0' : '') + number;
+        }
+
+        function penaltyFormat (millis, t) {
+          var seconds, minutes;
+          minutes = Math.floor(millis / 60000);
+          millis %= 60000;
+          seconds = Math.floor(millis / 1000);
+          millis = Math.floor(millis % 1000);
+          millis = Math.floor(millis / 10);
+
+          if (seconds == 59 && millis > 50) {
+            t.stopwatch('reset');
+            t.stopwatch('stop');
+            return '-----';
+          }
+
+          return [pad2(minutes), pad2(seconds)].join(':') + ',' + pad2(millis);
+        }
+
+        
+        $("#lPenalty1time").stopwatch().stopwatch('destroy');
+        $("#lPenalty1time").text('-----');
+        $("#lPenalty2time").stopwatch().stopwatch('destroy');
+        $("#lPenalty2time").text('-----');
+        $("#rPenalty1time").stopwatch().stopwatch('destroy');
+        $("#rPenalty1time").text('-----');
+        $("#rPenalty2time").stopwatch().stopwatch('destroy');
+        $("#rPenalty2time").text('-----');
+
+        $('#rPenalty1').click(function(){
+          if ($("#rPenalty1time").text() == '-----') {
+                $("#rPenalty1time").stopwatch().stopwatch('destroy');
+                $("#rPenalty1time").stopwatch({formatter: penaltyFormat,updateInterval: 50})
+                              .stopwatch('start');
+          }
             
-        $("#lPenalty2time").stopwatch().stopwatch('stop');
-        $("#lPenalty2time").stopwatch().stopwatch('reset');
-        $("#lPenalty2time").html('-----');
+        });
+        $('#rPenalty2').click(function(){
+          if ($("#rPenalty2time").text() == '-----') {
+            $("#rPenalty2time").stopwatch().stopwatch('destroy');
+            $("#rPenalty2time").stopwatch({formatter: penaltyFormat,updateInterval: 50})
+                              .stopwatch('start');
 
+          }
+        });
+
+        $('#lPenalty1').click(function(){
+          if ($("#lPenalty1time").text() == '-----') {
+            $("#lPenalty1time").stopwatch().stopwatch('destroy');
+            $("#lPenalty1time").stopwatch({formatter: penaltyFormat,updateInterval: 50})
+                              .stopwatch('start');
+
+          }
+        });
+        $('#lPenalty2').click(function(){
+          if ($("#lPenalty2time").text() == '-----') {
+            $("#lPenalty2time").stopwatch().stopwatch('destroy');
+            $("#lPenalty2time").stopwatch({formatter: penaltyFormat,updateInterval: 50})
+                             .stopwatch('start');
+          }
+        });
     },
 
     newTime: function (){

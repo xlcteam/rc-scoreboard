@@ -431,7 +431,8 @@ def schedule_generate(request, group_id):
     match_length = int(request.GET["match_length"])
     start_time = request.GET["start_time"]
     break_matches = int(request.GET["break_matches"])
-    long_break = int(request.GET["long_break"])
+    long_break_length = int(request.GET["long_break_length"])
+    long_break_after = int(request.GET["long_break_after"])
     
     def add_time(time, addmin, addbreak):
         h = int(time.split(":")[0])
@@ -444,7 +445,7 @@ def schedule_generate(request, group_id):
 
     
     for x in range(0, len(matches)):
-        matches[x].time = add_time(start_time, x*match_length, x*break_matches)
+        matches[x].time = add_time(start_time, x*match_length, x*break_matches + x//long_break_after*long_break_length- x//long_break_after*break_matches)
 
     return render_to_pdf(request, 'soccer/results/generate/schedule.html',
                             {'competition': competition, 'matches': matches, 'group': group,})

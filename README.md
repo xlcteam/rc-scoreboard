@@ -41,7 +41,7 @@ Or just run the `dev_setup.sh` script.
   executable is present at the server.
 
 
-### Deploynment
+### Deployment
 
 * Set `DEBUG` in `settings.py` to False
 * Start nginx by running `nginx -c ./nginx.conf -p $PWD` in `./conf/`

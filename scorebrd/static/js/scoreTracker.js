@@ -62,6 +62,7 @@ scoreTracker.prototype = {
         }
 
         this.syncMatch();
+        this.resetTimers();
     },
 
     teamBGoal: function (){
@@ -85,6 +86,7 @@ scoreTracker.prototype = {
 	    }
 
         this.syncMatch();
+        this.resetTimers();
     },
 
     teamADown: function (){
@@ -113,6 +115,7 @@ scoreTracker.prototype = {
 	    }
 
         this.syncMatch();
+        this.resetTimers();
     },
 
     teamBDown: function (){
@@ -140,6 +143,7 @@ scoreTracker.prototype = {
 	    }
 
         this.syncMatch();
+        this.resetTimers();
     },
 
     resetScore: function (){
@@ -199,6 +203,25 @@ scoreTracker.prototype = {
         $this.halftime = 1;
 	
         return;
+    },
+
+    resetTimers: function() {
+        $("#rPenalty1time").stopwatch().stopwatch('stop');
+        $("#rPenalty1time").stopwatch().stopwatch('reset');
+        $("#rPenalty1time").html('-----');
+
+        $("#rPenalty2time").stopwatch().stopwatch('stop');
+        $("#rPenalty2time").stopwatch().stopwatch('reset');
+        $("#rPenalty2time").html('-----');
+ 
+        $("#lPenalty1time").stopwatch().stopwatch('stop');
+        $("#lPenalty1time").stopwatch().stopwatch('reset');
+        $("#lPenalty1time").html('-----');
+            
+        $("#lPenalty2time").stopwatch().stopwatch('stop');
+        $("#lPenalty2time").stopwatch().stopwatch('reset');
+        $("#lPenalty2time").html('-----');
+
     },
 
     newTime: function (){

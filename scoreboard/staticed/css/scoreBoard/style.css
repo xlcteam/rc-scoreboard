@@ -90,8 +90,8 @@ body {
 .leftBckg {
 	opacity: 0;
 	background-color: #006699;
-	width: 50%;
-	height: 80%;
+	width: 100%;
+	height: 90%;
 	float: left;
   position: relative;
 }
@@ -100,8 +100,8 @@ body {
   position: relative;
 	opacity: 0;
 	background-color: #006699;
-	width: 50%;
-	height: 80%;
+	width: 100%;
+	height: 90%;
 	float: right;
 }
 
@@ -407,4 +407,40 @@ button:active {
   .element2, .element1 {
     width: auto !important; 
   }
+}
+
+.leftSide {
+  width: 50%;
+  height: 80%;
+  position: relative;
+  float: left;
+}
+
+.rightSide {
+  width: 50%;
+  height: 80%;
+  position: relative;
+  float: left;
+}
+
+.leftPenalties, .rightPenalties {
+  height: 10%;
+  width: 100%;
+}
+
+.leftPenalties {
+  float: left;
+}
+
+.rightPenalties {
+  float: right;
+}
+
+.penalty1, .penalty2 {
+  font-size: 110%;
+  text-align: center;
+  width: 50%;
+  position: relative;
+  float: left;
+  height: 100%;
 }

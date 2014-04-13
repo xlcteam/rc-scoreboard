@@ -34,17 +34,24 @@ $(window).load(function() {
     });
   }, 10000);
 
+  setTimeout(function(){
+      window.location = window.location;
+  }, 60000);
+
   setInterval(function() {
     $.get(TABLES_URL, function(data){
-        tbls = $('<div/>').html(data).contents().toArray();
-        tbls = tbls.slice(1, tbls.length - 1);
-        var i = 0;
-        $('.table').each(function(){
-            $(this).html($(tbls[i]).html());
-            i += 1;
-        });
+        console.log('sending', data);
+        $('tables').html(data);
+      //tbls = $('<div/>').html(data).contents().toArray();
+      //console.log(tbls);
+      //tbls = tbls.slice(1, tbls.length - 1);
+      //var i = 0;
+      //$('.table').each(function(){
+      //    $(this).html($(tbls[i]).html());
+      //    i += 1;
+      //});
 
-        arrange();
+      //arrange();
     });
   }, 10000);
 
@@ -54,17 +61,17 @@ $(window).load(function() {
     return;
   }
 
-  for (var i = 2; i < tables.length; i++) {
-    tables[i].hide();
-  };
+//for (var i = 2; i < tables.length; i++) {
+//  tables[i].hide();
+//};
 
-  setInterval(function(){
-    table = tables.shift();
-    table.fadeOut('slow');
-    tables[tables.length-1].fadeIn('slow');
-    //console.log(tables[tables.length-1].find('.group_name').text());
-    tables.push(table);
+//setInterval(function(){
+//  table = tables.shift();
+//  table.fadeOut('slow');
+//  tables[tables.length-1].fadeIn('slow');
+//  //console.log(tables[tables.length-1].find('.group_name').text());
+//  tables.push(table);
 
-  }, 10000);
+//}, 10000);
 
 });

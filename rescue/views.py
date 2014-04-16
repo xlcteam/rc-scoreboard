@@ -262,11 +262,11 @@ def performance_save(request, performance_id):
         c['performance_id'] = performance_id
         return c
     
-    def check_try(post):
+    def check_try(post, what):
         if post == '---' or post == u'---':
-            return scoresheet["try"]["room1"][post]
+            return scoresheet["try"][what][post]
         else:
-            return scoresheet["try"]["room1"][int(post)]
+            return scoresheet["try"][what][int(post)]
 
     def authorize_and_save(request):
         username = request.user
@@ -279,12 +279,12 @@ def performance_save(request, performance_id):
                 performance.referee = request.user
                 performance.playing = 'D'
                 
-                performance.room1 = check_try(request.POST['room1'])
-                performance.room2 = check_try(request.POST['room2'])
-                performance.room3 = check_try(request.POST['room3'])
-                performance.ramp = check_try(request.POST['ramp'])
-                performance.hallway = check_try(request.POST['hallway'])
-                performance.victim = check_try(request.POST['victim'])              
+                performance.room1 = check_try(request.POST['room1'], "room1")
+                performance.room2 = check_try(request.POST['room2'], "room2")
+                performance.room3 = check_try(request.POST['room3'], "room3")
+                performance.ramp = check_try(request.POST['ramp'], "ramp")
+                performance.hallway = check_try(request.POST['hallway'], "hallway")
+                performance.victim = check_try(request.POST['victim'], "victim")              
                 
                 performance.gap = scoresheet["each"]["gap"] * int(request.POST["gap"])
                 performance.obstacle = scoresheet["each"]["obstacle"] * int(request.POST["obstacle"])

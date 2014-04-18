@@ -29,7 +29,7 @@
         <a class='button red' style="margin-top: 10px;" href="{% url soccer.views.results_group_pdf group.id %}">Download results in PDF.</a>
         <hr/>
         <h3>Export schedule to PDF</h3>
-        <form action="{% url soccer.views.schedule_generate group.id %}" method="GET">
+        <form action="{% url soccer.views.schedule_generate group.id %}" method="GET" id="schedule_table">
             {% csrf_token %}
             <input type="text" name="match_length" placeholder="Length of match (mins)"/>
             <br />
@@ -38,6 +38,7 @@
             <input type="text" name="break_matches"placeholder="Break between matches (mins)"/>
             <br />
             <input type="text" name="long_break_length" placeholder="Longer break (mins)"/>
+            <br />
             <input type="text" name="long_break_after" placeholder="Longer break after matches"/>
             <br />
             <input type="submit" class="button orange" value="Export schedule to PDF!" />

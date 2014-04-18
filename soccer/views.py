@@ -164,6 +164,7 @@ def competitions(request):
 # group/s
 @render_to('soccer/group.html')
 @login_required(login_url='/login/')
+@csrf_exempt
 def group(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     teams = group.teams.all()

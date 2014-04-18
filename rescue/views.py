@@ -333,7 +333,7 @@ def performance_save(request, performance_id):
 def table_final_generate(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     for team in group.teams.all():
-        teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()
+        teamres = group.performances.filter(team=team).order_by('points', '-time').reverse()
         if group.results_type == 'S' or group.results_type == 'P':
 
             newperf = Performance(team=team, round_number=4)

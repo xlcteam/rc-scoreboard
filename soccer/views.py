@@ -441,7 +441,7 @@ def schedule_generate(request, group_id):
         m += addmin + addbreak
         h += m // 60
         m = m % 60
-        return str(h) + ":" + ("0" if m < 10 else "" ) + str(m)
+        return ("0" if h < 10 else "" ) + str(h) + ":" + ("0" if m < 10 else "" ) + str(m)
 
     
     for x in range(0, len(matches)):

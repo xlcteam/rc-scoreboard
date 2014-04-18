@@ -24,10 +24,25 @@
       <h3>Results</h3>
       {% include "rescue/results.html" %}
       {% if performances %}
-        {% if not group.result_table_generated and not group.not_played_performances%}
+        {% if not group.result_table_generated and not group.not_played_performances %}
             <a class='button green' style="margin-top: 10px;" href="{% url rescue.views.table_final_generate group.id %}">Generate final table</a>
         {% endif %}        
         <a class='button red' style="margin-top: 10px;" href="{% url rescue.views.results_group_pdf group.id %}">Download results in PDF</a>
+        <hr/>
+        <h3>Export schedule to PDF</h3>
+        <form action="{% url rescue.views.schedule_generate group.id %}" method="GET">
+            {% csrf_token %}
+            <input type="text" name="perf_length" placeholder="Length of round (mins)"/>
+            <br />
+            <input type="text" name="start_time" placeholder="Start time"/>
+            <br />
+            <input type="text" name="break_perfs"placeholder="Break between perfs (mins)"/>
+            <br />
+            <input type="text" name="long_break_length" placeholder="Longer break (mins)"/>
+            <input type="text" name="long_break_after" placeholder="Longer break after perfs"/>
+            <br />
+            <input type="submit" class="button orange" value="Export schedule to PDF!" />
+        </form>
       {% endif %}
     </section>
 

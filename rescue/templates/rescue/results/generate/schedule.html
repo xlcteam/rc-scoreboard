@@ -14,15 +14,42 @@
 
       {% if performances %}
         <table class='matchTable'>
-          {% for performance in performances %}
-            <tr>
-              <td style="font-size: 180%; text-align: right;">
-                  {{ performance.team.name }}
-              </td>
-              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-              <td style="font-size: 180%; font-weight: bold; text-aling: right;">{{ performance.schedule_time }}</td>
-            </tr>
+          <h2>Round 1</h2>
+          {% for performance in group.filter_rounds|performances,1 %}
+                <tr>
+                  <td style="font-size: 180%; text-align: right;">
+                      {{ performance.team.name }}
+                  </td>
+                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td style="font-size: 180%; font-weight: bold; text-aling: right;">{{ performance.schedule_time }}</td>
+                </tr>
           {% endfor %}
+          
+          <hr/>
+          <h2>Round 2</h2>
+          {% for performance in group.filter_rounds|performances,2 %}
+                <tr>
+                  <td style="font-size: 180%; text-align: right;">
+                      {{ performance.team.name }}
+                  </td>
+                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td style="font-size: 180%; font-weight: bold; text-aling: right;">{{ performance.schedule_time }}</td>
+                </tr>
+          {% endfor %}
+
+          {% if group.results_type == 'S'%}
+            <hr />
+            <h2>Round 3</h2>
+            {% for performance in group.filter_rounds|performances,3 %}
+                <tr>
+                  <td style="font-size: 180%; text-align: right;">
+                      {{ performance.team.name }}
+                  </td>
+                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td style="font-size: 180%; font-weight: bold; text-aling: right;">{{ performance.schedule_time }}</td>
+                </tr>
+            {% endfor %}
+          {% endif %}
         </table>
 
       {% else %}

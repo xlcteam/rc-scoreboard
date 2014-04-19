@@ -418,7 +418,7 @@ def schedule_generate(request, group_id):
 
     
     for x in range(0, len(performances)):
-        performances[x].schedule_time = add_time(start_time, x*perf_length, x*break_perfs + x//long_break_after*long_break_length- x//long_break_after*break_perfs)
+        performances[x].schedule_time = add_time(start_time, x*perf_length, x*break_perfs + performances[x].round_number//long_break_after*long_break_length- performances[x].round_number//long_break_after*break_perfs)
 
 
     return render_to_pdf(request, 'rescue/results/generate/schedule.html',

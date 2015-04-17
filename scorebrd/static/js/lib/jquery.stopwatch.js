@@ -91,7 +91,7 @@
         render: function() {
             var $this = $(this),
                 data = $this.data('stopwatch');
-            $this.html(data.formatter(data.elapsed));
+            $this.html(data.formatter(data.elapsed, $this));
         },
         
         toggle: function() {

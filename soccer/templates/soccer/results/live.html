@@ -39,7 +39,7 @@
 
     <div id="tables">
       {% if competition_only %}
-        {% for group in competition.groups.all %}
+        {% for group in competition.groups.all reversed %}
           <div class="table">
             <div class="title"><span class="group_name">{{group.name}}</span></div>
             <div class="results">
@@ -128,7 +128,7 @@
 
       {% else %}
           {% for competition in competitions %}
-            {% for group in competition.groups.all %}
+            {% for group in competition.groups.all reversed %}
               <div class="table">
                 <div class="title"><span class="group_name">{{group.name}}</span></div>
                 <div class="results">

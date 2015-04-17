@@ -317,7 +317,7 @@ def performance_save(request, performance_id):
 def table_final_generate(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     for team in group.teams.all():
-        teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()   
+        teamres = group.performances.filter(team=team).order_by('points', '-time').reverse()   
         newperf = Performance(team=team, round_number=4)
         if group.results_type == 'S':
             newperf.referee = request.user

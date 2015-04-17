@@ -56,6 +56,7 @@ def new_competition(request):
 # group/s
 @render_to('rescue/group.html')
 @login_required(login_url='/login/')
+@csrf_exempt
 def group(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     teams = group.teams.all()
@@ -262,11 +263,11 @@ def performance_save(request, performance_id):
         c['performance_id'] = performance_id
         return c
     
-    def check_try(post):
+    def check_try(post, what):
         if post == '---' or post == u'---':
-            return scoresheet["try"]["room1"][post]
+            return scoresheet["try"][what][post]
         else:
-            return scoresheet["try"]["room1"][int(post)]
+            return scoresheet["try"][what][int(post)]
 
     def authorize_and_save(request):
         username = request.user
@@ -279,12 +280,12 @@ def performance_save(request, performance_id):
                 performance.referee = request.user
                 performance.playing = 'D'
                 
-                performance.room1 = check_try(request.POST['room1'])
-                performance.room2 = check_try(request.POST['room2'])
-                performance.room3 = check_try(request.POST['room3'])
-                performance.ramp = check_try(request.POST['ramp'])
-                performance.hallway = check_try(request.POST['hallway'])
-                performance.victim = check_try(request.POST['victim'])              
+                performance.room1 = check_try(request.POST['room1'], "room1")
+                performance.room2 = check_try(request.POST['room2'], "room2")
+                performance.room3 = check_try(request.POST['room3'], "room3")
+                performance.ramp = check_try(request.POST['ramp'], "ramp")
+                performance.hallway = check_try(request.POST['hallway'], "hallway")
+                performance.victim = check_try(request.POST['victim'], "victim")              
                 
                 performance.gap = scoresheet["each"]["gap"] * int(request.POST["gap"])
                 performance.obstacle = scoresheet["each"]["obstacle"] * int(request.POST["obstacle"])
@@ -333,7 +334,7 @@ def performance_save(request, performance_id):
 def table_final_generate(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     for team in group.teams.all():
-        teamres = group.performances.filter(team=team).order_by('points', 'time').reverse()
+        teamres = group.performances.filter(team=team).order_by('points', '-time').reverse()
         if group.results_type == 'S' or group.results_type == 'P':
 
             newperf = Performance(team=team, round_number=4)
@@ -393,6 +394,35 @@ def results_performance_view(request, performance_id):
     competition = group.competition_set.all()[0]
     return {'group': group, 'performance': performance,
             'competition': competition}
+
+def schedule_generate(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    competition = group.competition_set.all()[0]
+    performances = group.performances.all()
+
+    # time stuff
+    perf_length = int(request.GET["perf_length"])
+    start_time = request.GET["start_time"]
+    break_perfs = int(request.GET["break_perfs"])
+    long_break_length = int(request.GET["long_break_length"])
+    long_break_after = int(request.GET["long_break_after"])
+    
+    def add_time(time, addmin, addbreak):
+        h = int(time.split(":")[0])
+        m = int(time.split(":")[1])
+        
+        m += addmin + addbreak
+        h += m // 60
+        m = m % 60
+        return ("0" if h < 10 else "" ) + str(h) + ":" + ("0" if m < 10 else "" ) + str(m)
+
+    
+    for x in range(0, len(performances)):
+        performances[x].schedule_time = add_time(start_time, x*perf_length, x*break_perfs + x//long_break_after*long_break_length- x//long_break_after*break_perfs)
+
+
+    return render_to_pdf(request, 'rescue/results/generate/schedule.html',
+                            {'competition': competition, 'performances': performances, 'group': group,})
 
 @render_to('rescue/map/editor.html')
 @login_required(login_url='/login/')

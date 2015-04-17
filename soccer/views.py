@@ -164,6 +164,7 @@ def competitions(request):
 # group/s
 @render_to('soccer/group.html')
 @login_required(login_url='/login/')
+@csrf_exempt
 def group(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     teams = group.teams.all()
@@ -441,7 +442,7 @@ def schedule_generate(request, group_id):
         m += addmin + addbreak
         h += m // 60
         m = m % 60
-        return str(h) + ":" + ("0" if m < 10 else "" ) + str(m)
+        return ("0" if h < 10 else "" ) + str(h) + ":" + ("0" if m < 10 else "" ) + str(m)
 
     
     for x in range(0, len(matches)):

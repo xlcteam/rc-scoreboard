@@ -179,6 +179,10 @@ a[href^="error:"] {
   margin-left: 2em;
 }
 
+#schedule_table input {
+    width: 50%;
+}
+
 .finished {
         color: #ccc;
 }

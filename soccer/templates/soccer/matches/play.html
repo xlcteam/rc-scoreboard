@@ -50,8 +50,8 @@
             });
 
             $(document).bind("idle.idleTimer", function() {
-              $("#main").fadeOut("slow");
-              $("#underMain").fadeOut("slow");
+            //$("#main").fadeOut("slow");
+            //$("#underMain").fadeOut("slow");
             });
 
             $(document).keylock({
@@ -68,8 +68,8 @@
 
 
             $(document).bind("active.idleTimer", function() {
-                $("#main").fadeIn("slow");
-                $("#underMain").fadeIn("slow");
+              //$("#main").fadeIn("slow");
+              //$("#underMain").fadeIn("slow");
             });
 
             $(".btn-slide").click(function(){
@@ -94,6 +94,9 @@
             });
 
 
+
+            ST.resetTimers();
+
             $(".element1").bind("mouseover", fill1);
             $(".element1").bind("mouseout", unfill1);
             $(".element2").bind("mouseover", fill2);
@@ -107,6 +110,15 @@
             $(".rightBckg").bind("mouseout", unfill2);
             $(".startBckg").bind("mouseover", fill3);
             $(".startBckg").bind("mouseout", unfill3);
+
+            $(".penalty1, .penalty2").mouseover(function(){
+              $(this).css('background-color', '#c78a35');
+              $(this).css('color', 'black');
+            });
+            $(".penalty1, .penalty2").mouseout(function(){
+              $(this).css('background-color', 'black');
+              $(this).css('color', 'white');
+            });
 		});
 
 
@@ -159,12 +171,37 @@
 		</div>
 
 		<div id="main">
-			<div class="leftBckg">
-				<span class="goalLText">Goal!</span>
-			</div>
-			<div class="rightBckg">
-				<span class="goalRText">Goal!</span>
-			</div>
+      <div class="leftSide">
+        <div class="leftBckg">
+          <span class="goalLText">Goal!</span>
+        </div>
+        <div class="leftPenalties">
+          <div id="lPenalty1" class="penalty1">
+            Damaged robot 1<br/>
+            <span id="lPenalty1time">-----</span>
+          </div>
+          <div id="lPenalty2" class="penalty2">
+            Damaged robot 2 <br/>
+            <span id="lPenalty2time">-----</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rightSide">
+        <div class="rightBckg">
+          <span class="goalRText">Goal!</span>
+        </div>
+        <div class="rightPenalties">
+          <div id="rPenalty1" class="penalty1">
+            Damaged robot 1<br/>
+            <span id="rPenalty1time">-----</span>
+          </div>
+          <div id="rPenalty2" class="penalty2">
+            Damaged robot 2<br/>
+            <span id="rPenalty2time">-----</span>
+          </div>
+        </div>
+      </div>
       <div class="startBckg" onclick="ST.toggle()">
 				<span id="btnStart" class="startText">Start</span>
       </div>

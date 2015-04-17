@@ -164,7 +164,6 @@ def competitions(request):
 # group/s
 @render_to('soccer/group.html')
 @login_required(login_url='/login/')
-@csrf_exempt
 def group(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
     teams = group.teams.all()
@@ -278,8 +277,8 @@ def match_save(request, match_id):
         if user is not None:
             if user.is_active:
                 match = get_object_or_404(Match, pk=match_id)
-                match.scoreA = scoreA
-                match.scoreB = scoreB
+                match.scoreA = int(scoreA)
+                match.scoreB = int(scoreB)
                 match.playing = 'D'
                 match.save()
 
@@ -338,6 +337,52 @@ def match_save(request, match_id):
                 return errorHandle(u'Invalid login')
     else:
         return {'error': "How on earth did you get here?"}
+
+
+@login_required(login_url='/login/')
+def recompute_group_table(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    team_results = group.results.all()
+    for team_result in team_results:
+        team_result.wins = 0
+        team_result.draws = 0
+        team_result.loses = 0
+        team_result.goal_shot = 0
+        team_result.goal_diff = 0
+        team_result.matches_played = 0
+        team_result.points = 0
+        team_result.save()
+    matches = group.matches.filter(playing='D')
+    for match in matches:
+        rA = get_object_or_404(TeamResult, pk=match.teamA.id)
+        rB = get_object_or_404(TeamResult, pk=match.teamB.id)
+
+        if int(match.scoreA) > int(match.scoreB):
+            rA.wins += 1
+            rA.points += 3
+            rB.loses += 1
+        elif (match.scoreB) > int(match.scoreA):
+            rB.wins += 1
+            rB.points += 3
+            rA.loses += 1
+        else:
+            rA.draws += 1
+            rB.draws += 1
+            rA.points += 1
+            rB.points += 1
+
+        rA.matches_played += 1
+        rB.matches_played += 1
+
+        rA.goal_shot += int(match.scoreA)
+        rB.goal_shot += int(match.scoreB)
+
+        rA.goal_diff += int(match.scoreA) - int(match.scoreB)
+        rB.goal_diff += int(match.scoreB) - int(match.scoreA)
+        rA.save()
+        rB.save()
+    return HttpResponse('{"status": "' + matches + '"}',
+                        mimetype="application/json")
 
 @render_to('soccer/results/live.html')
 def results_live(request):
@@ -442,7 +487,7 @@ def schedule_generate(request, group_id):
         m += addmin + addbreak
         h += m // 60
         m = m % 60
-        return ("0" if h < 10 else "" ) + str(h) + ":" + ("0" if m < 10 else "" ) + str(m)
+        return str(h) + ":" + ("0" if m < 10 else "" ) + str(m)
 
     
     for x in range(0, len(matches)):

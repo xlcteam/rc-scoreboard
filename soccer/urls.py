@@ -39,6 +39,8 @@ urlpatterns = patterns('soccer.views',
 
     url(r'^results/group/(?P<group_id>\d+)/?$', 'results_group_view',
         name="results_group_view"),
+    url(r'^results/group/(?P<group_id>\d+)/recompute/?$', 'recompute_group_table',
+        name="recompute_group_table"),
     url(r'^results/group/(?P<group_id>\d+)\.pdf/?$', 'results_group_pdf',
         name="results_group_pdf"),
     url(r'^results/competition/(?P<competition_id>\d+)\.pdf/?$', 'results_competition_pdf',

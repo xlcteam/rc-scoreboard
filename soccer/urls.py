@@ -18,6 +18,7 @@ urlpatterns = patterns('soccer.views',
 
     url(r'^teams/?$', 'teams', name="teams"),
     url(r'^team/(?P<team_id>\d+)/?$', 'team', name="team"),
+    url(r'^team/edit/(?P<team_id>\d+)/?$', 'team_edit', name='team_edit'),
     url(r'^team/new/?$', 'new_team', name='new_team'),
 
     url(r'^matches/generate/?$', 'matches_generate_listing', 

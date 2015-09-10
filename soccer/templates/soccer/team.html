@@ -11,6 +11,8 @@
 {% endblock %}
 
 {% block content %}
+<h1>Team {{team.name}}</h1>
+<a href="{% url soccer.views.team_edit team.id %}" class="button blue">Edit team</a>
 <h2> Matches for team {{ team.name }} </h2>
 {% include "soccer/matches.html" %}
 

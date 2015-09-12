@@ -10,7 +10,7 @@
 <form action="{% url soccer.views.add_team group.id %}" method="POST">
     {% csrf_token %}
     <select name="teams" multiple class="chosen-select"
-        data-placeholder="Choose teams..." style="width: 500px;">
+        data-placeholder="Choose teams..." style="width: 25%;">
         {% for team in teams %}
             <option value="{{ team.id }}">{{ team.name }}</option>
         {% endfor %}

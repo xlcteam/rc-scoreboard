@@ -112,10 +112,12 @@ def team_edit(request, team_id):
     team = get_object_or_404(Team, pk=int(team_id))
     if request.method == 'POST':
         new_name = request.POST['new_name']
-        if team.name is not new_name and new_name is not "":
+        old_name = team.name
+        if old_name is not new_name and new_name is not "":
             team.name = new_name
             team.save()
-            msg = 'Team was successfully renamed to {0}'.format(new_name)
+            msg = 'Team {0} was successfully renamed to {1}'.format(old_name,
+                                                                    new_name)
             messages.success(request, msg)
     c = {}
     c.update(csrf(request))
@@ -203,7 +205,11 @@ def add_team(request, group_id):
         if request.POST.getlist('teams') != []:
             for team in request.POST.getlist('teams'):
                 t = get_object_or_404(Team, pk=int(team))
+                result = TeamResult(team=t)
+                result.save()
+
                 group.teams.add(t)
+                group.results.add(result)
                 group.save()
             messages.success(request, 'Teams added successfully')
         return redirect('soccer.views.group', str(group.id))

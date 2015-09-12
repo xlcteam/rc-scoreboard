@@ -12,6 +12,7 @@
 {% block content %}
 
 <h1>Welcome to soccer</h1>
+<a class="button orange" href="{% url soccer.views.new_team %}">Add Teams</a>
 
 {% if user.is_authenticated %}
   <section class="row">

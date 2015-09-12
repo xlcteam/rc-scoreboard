@@ -82,9 +82,6 @@ def new_group(request):
 @render_to('soccer/team/new.html')
 @login_required(login_url='/login/')
 def new_team(request):
-    if 'group' in request.GET:
-        group = get_object_or_404(Group, pk=int(request.GET['group']))
-        competition = group.competition_set.all()[0]
     if request.method == 'POST':
         form = NewTeamForm(request.POST)
         if form.is_valid():
@@ -96,18 +93,9 @@ def new_team(request):
                 team = Team(name=t)
                 team.save()
 
-                result = TeamResult(team=team)
-                result.save()
+            messages.success(request, "Teams have been created!")
 
-                group.teams.add(team)
-                group.results.add(result)
-
-            group.save()
-
-            msg = "Teams for group {0} have been created!".format(group.name)
-            messages.success(request, msg)
-
-            return redirect('soccer.views.group', str(group.id))
+            return redirect('/soccer/')
     else:
         form = NewTeamForm()
         c = {}
@@ -205,6 +193,23 @@ def group(request, group_id):
 def groups(request):
     groups = Group.objects.all()
     return {'groups': groups}
+
+
+@render_to('soccer/group/add_team.html')
+@login_required(login_url='/login/')
+def add_team(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    if request.method == 'POST':
+        if request.POST.getlist('teams') != []:
+            for team in request.POST.getlist('teams'):
+                t = get_object_or_404(Team, pk=int(team))
+                group.teams.add(t)
+                group.save()
+            messages.success(request, 'Teams added successfully')
+        return redirect('soccer.views.group', str(group.id))
+
+    teams = list(set(Team.objects.all()) - set(group.teams.all()))
+    return {'teams': teams, 'group': group}
 
 
 # team/s

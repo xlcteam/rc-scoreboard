@@ -1,0 +1,11 @@
+{% extends "@layout.html" %}
+
+{% block content %}
+<h2> Editing team {{ team.name }} </h2>
+<form action="{% url soccer.views.team_edit team.id %}" method="POST">
+    {% csrf_token %}
+    New team name: <input type="text" name="new_name"/>
+    <input type="hidden" name="next" value="{{ next }}" />
+    <input type="submit" value="Save" /> <br>
+</form>
+{% endblock %}

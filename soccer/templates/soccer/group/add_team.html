@@ -1,0 +1,23 @@
+{% extends "@layout.html" %}
+{% block content %}
+
+<h2>Add teams into group {{ group.name }}</h2>
+
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
+<form action="{% url soccer.views.add_team group.id %}" method="POST">
+    {% csrf_token %}
+    <select name="teams" multiple class="chosen-select"
+        data-placeholder="Choose teams..." style="width: 25%;">
+        {% for team in teams %}
+            <option value="{{ team.id }}">{{ team.name }}</option>
+        {% endfor %}
+    </select>
+    <input type="hidden" name="next" value="{{ next }}" />
+    <input type="submit" value="Save" /> <br>
+</form>
+
+
+{% endblock %}

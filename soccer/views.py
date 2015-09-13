@@ -13,10 +13,12 @@ from django.http import HttpResponse
 from django.contrib import messages
 from soccer.helpers import *
 
+
 @render_to('soccer/results_live.html')
 def results_live(request):
     groups = Group.objects.all()
     return {'groups': groups, 'event': events}
+
 
 @render_to('soccer/competition/new.html')
 @login_required(login_url='/login/')
@@ -39,6 +41,7 @@ def new_competition(request):
         c.update(csrf(request))
         c['form'] = form
         return c
+
 
 @render_to('soccer/group/new.html')
 @login_required(login_url='/login/')
@@ -75,35 +78,24 @@ def new_group(request):
 
         return c
 
+
 @render_to('soccer/team/new.html')
 @login_required(login_url='/login/')
 def new_team(request):
-    if 'group' in request.GET:
-        group = get_object_or_404(Group, pk=int(request.GET['group']))
-        competition = group.competition_set.all()[0]
     if request.method == 'POST':
         form = NewTeamForm(request.POST)
         if form.is_valid():
             teams = form.cleaned_data['names']
             teams = teams.replace('\r', "")
             teams = teams.split('\n')
-            
+
             for t in teams:
                 team = Team(name=t)
                 team.save()
 
-                result = TeamResult(team=team)
-                result.save()
+            messages.success(request, "Teams have been created!")
 
-                group.teams.add(team)
-                group.results.add(result)
-            
-            group.save()
-
-            msg = "Teams for group {0} have been created!".format(group.name)
-            messages.success(request, msg)
-
-            return redirect('soccer.views.group', str(group.id))
+            return redirect('/soccer/')
     else:
         form = NewTeamForm()
         c = {}
@@ -112,6 +104,25 @@ def new_team(request):
         c['group'] = group
         c['competition'] = competition
         return c
+
+
+@render_to('soccer/team/edit.html')
+@login_required(login_url='/login/')
+def team_edit(request, team_id):
+    team = get_object_or_404(Team, pk=int(team_id))
+    if request.method == 'POST':
+        new_name = request.POST['new_name']
+        old_name = team.name
+        if old_name is not new_name and new_name is not "":
+            team.name = new_name
+            team.save()
+            msg = 'Team {0} was successfully renamed to {1}'.format(old_name,
+                                                                    new_name)
+            messages.success(request, msg)
+    c = {}
+    c.update(csrf(request))
+    c['team'] = team
+    return c
 
 
 @render_to('soccer/matches/new.html')
@@ -155,11 +166,13 @@ def competition(request, competition_id):
     groups = competition.groups.all()
     return {'competition': competition, 'groups': groups}
 
+
 @render_to('soccer/competitions.html')
 @login_required(login_url='/login/')
 def competitions(request):
     competitions = Competition.objects.all()
     return {'competitions': competitions}
+
 
 # group/s
 @render_to('soccer/group.html')
@@ -172,9 +185,10 @@ def group(request, group_id):
                     .order_by('points').reverse()
     matches = group.matches.all().order_by('playing')
     return {'group': group, 'teams': teams,
-            'competition': competition, 
+            'competition': competition,
             'matches': matches,
             'team_results': team_results}
+
 
 @render_to('soccer/groups.html')
 @login_required(login_url='/login/')
@@ -182,12 +196,35 @@ def groups(request):
     groups = Group.objects.all()
     return {'groups': groups}
 
+
+@render_to('soccer/group/add_team.html')
+@login_required(login_url='/login/')
+def add_team(request, group_id):
+    group = get_object_or_404(Group, pk=group_id)
+    if request.method == 'POST':
+        if request.POST.getlist('teams') != []:
+            for team in request.POST.getlist('teams'):
+                t = get_object_or_404(Team, pk=int(team))
+                result = TeamResult(team=t)
+                result.save()
+
+                group.teams.add(t)
+                group.results.add(result)
+                group.save()
+            messages.success(request, 'Teams added successfully')
+        return redirect('soccer.views.group', str(group.id))
+
+    teams = list(set(Team.objects.all()) - set(group.teams.all()))
+    return {'teams': teams, 'group': group}
+
+
 # team/s
 @render_to('soccer/teams.html')
 @login_required(login_url='/login/')
 def teams(request):
     teams = Team.objects.all()
     return {'teams': teams}
+
 
 @render_to('soccer/team.html')
 @login_required(login_url='/login/')
@@ -205,11 +242,13 @@ def team(request, team_id):
     return {'group': group, 'competition': competition,
             'team': team, 'matches': matches, 'played': played}
 
+
 @render_to('soccer/index_soccer.html')
 def index_soccer(request):
     matches = Match.objects.all()
     competitions = Competition.objects.all()
     return {'user': request.user, 'competitions': competitions, 'matches': matches}
+
 
 @render_to('soccer/matches/generate.html')
 @login_required(login_url='/login/')
@@ -217,6 +256,7 @@ def matches_generate(request, group_id=None):
     group = get_object_or_404(Group, pk=group_id)
     competition = group.competition_set.all()[0]
     return {'group': group, 'competition': competition}
+
 
 @render_to('soccer/matches/generate_listing.html')
 def matches_generate_listing(request):
@@ -248,16 +288,17 @@ def match_play(request, match_id):
 
             match.save()
 
-        return HttpResponse('{ok: true}', mimetype="application/json") 
-       
+        return HttpResponse('{ok: true}', mimetype="application/json")
+
     return render_to_response('soccer/matches/play.html',
                               {'match': match, 'match_id': match_id},
                               context_instance=RequestContext(request))
 
+
 @render_to('soccer/matches/save.html')
 @login_required(login_url='/login/')
 def match_save(request, match_id):
-    
+
     def errorHandle(error, request, scoreA, scoreB, match_id):
         form = MatchSaveForm(request.POST, initial={'scoreA': scoreA, 'scoreB': scoreB})
         c = {}
@@ -266,7 +307,7 @@ def match_save(request, match_id):
         c['error'] = error
         c['match_id'] = match_id
         return c
-    
+
     def authorize_and_save(request):
         username = request.user
         password = request.POST['password']
@@ -304,7 +345,7 @@ def match_save(request, match_id):
 
                 rA.goal_shot += int(match.scoreA)
                 rB.goal_shot += int(match.scoreB)
-                
+
                 rA.goal_diff += int(match.scoreA) - int(match.scoreB)
                 rB.goal_diff += int(match.scoreB) - int(match.scoreA)
 
@@ -327,7 +368,7 @@ def match_save(request, match_id):
                 return res
         else:
             form = MatchSaveForm(request.POST)
-            if form.is_valid(): 
+            if form.is_valid():
                 res = authorize_and_save(request)
                 if res is True:
                     return redirect('index')
@@ -384,6 +425,7 @@ def recompute_group_table(request, group_id):
     return HttpResponse('{"status": "' + matches + '"}',
                         mimetype="application/json")
 
+
 @render_to('soccer/results/live.html')
 def results_live(request):
     if 'competition' in request.GET:
@@ -401,21 +443,24 @@ def results_live(request):
         return {'competitions': Competition.objects.all(), 
                 'matches': Match.objects.filter(playing='P')}
 
+
 @render_to('soccer/results/livefeed.html')
 def results_live_feed(request):
     return {'matches': Match.objects.filter(playing='P')}
+
 
 @render_to('soccer/results/livetables.html')
 def results_live_tables(request):
     return {'competitions': Competition.objects.all()}
 
 
-
 def results(request):
     pass
 
+
 def results_team_view(request, team_id):
     pass
+
 
 @render_to('soccer/results/group.html')
 @login_required(login_url='/login/')
@@ -428,6 +473,7 @@ def results_group_view(request, group_id):
             'competition': competition,
             'team_results': team_results}
 
+
 @render_to('soccer/results/match.html')
 @login_required(login_url='/login/')
 def results_match_view(request, match_id):
@@ -437,6 +483,7 @@ def results_match_view(request, match_id):
     competition = group.competition_set.all()[0]
     return {'group': group, 'match': match,
             'competition': competition}
+
 
 @login_required(login_url='/login/')
 def results_group_pdf(request, group_id):
@@ -452,6 +499,7 @@ def results_group_pdf(request, group_id):
                              'group': group, 'team_results': team_results,
                              'matches': matches})
 
+
 @login_required(login_url='/login/')
 def results_competition_pdf(request, competition_id):
     competition = get_object_or_404(Competition, pk=competition_id)
@@ -461,12 +509,14 @@ def results_competition_pdf(request, competition_id):
                             {'competition': competition,
                              'groups': groups})
 
+
 @login_required(login_url='/login/')
 def results_event_pdf(request, event_id):
     competitions = event.competitions.all()
 
     return render_to_pdf(request, 'soccer/results/generate/event.html', 
                             {'competitions': competitions})
+
 
 def schedule_generate(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
@@ -479,17 +529,16 @@ def schedule_generate(request, group_id):
     break_matches = int(request.GET["break_matches"])
     long_break_length = int(request.GET["long_break_length"])
     long_break_after = int(request.GET["long_break_after"])
-    
+
     def add_time(time, addmin, addbreak):
         h = int(time.split(":")[0])
         m = int(time.split(":")[1])
-        
+
         m += addmin + addbreak
         h += m // 60
         m = m % 60
         return str(h) + ":" + ("0" if m < 10 else "" ) + str(m)
 
-    
     for x in range(0, len(matches)):
         matches[x].time = add_time(start_time, x*match_length, x*break_matches + x//long_break_after*long_break_length- x//long_break_after*break_matches)
 
@@ -523,5 +572,3 @@ def group_live_json_result(request, group_id):
     else:
         return HttpResponse('{"status": "No match is being played at the moment"}', 
                     mimetype="application/json") 
-
-    

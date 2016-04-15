@@ -182,7 +182,7 @@ def group(request, group_id):
     teams = group.teams.all()
     competition = group.competition_set.all()[0]
     team_results = group.results.all()\
-                    .order_by('points').reverse()
+                    .order_by('points', 'goal_diff').reverse()
     matches = group.matches.all().order_by('playing')
     return {'group': group, 'teams': teams,
             'competition': competition,
@@ -491,7 +491,7 @@ def results_group_pdf(request, group_id):
     competition = group.competition_set.all()[0]
 
     team_results = group.results.all()\
-                    .order_by('points').reverse()
+                    .order_by('points', 'goal_diff').reverse()
     matches = group.matches.filter(playing='D')
 
     return render_to_pdf(request, 'soccer/results/generate/group.html', 

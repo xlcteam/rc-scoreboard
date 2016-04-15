@@ -72,7 +72,7 @@ class Group(models.Model):
         return self.name
 
     def sorted_results(self):
-        return self.results.all().order_by('points').reverse()
+        return self.results.all().order_by('points', 'goal_diff').reverse()
 
     def sorted_matches(self):
         return self.matches.filter(playing='D').reverse()

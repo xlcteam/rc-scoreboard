@@ -540,7 +540,8 @@ def schedule_generate(request, group_id):
         return str(h) + ":" + ("0" if m < 10 else "" ) + str(m)
 
     for x in range(0, len(matches)):
-        matches[x].time = add_time(start_time, x*match_length, x*break_matches + x//long_break_after*long_break_length- x//long_break_after*break_matches)
+        is_after_long_break = int(x // long_break_after >= 1)
+        matches[x].time = add_time(start_time, x*match_length, x*break_matches + is_after_long_break * (long_break_length- break_matches))
 
     return render_to_pdf(request, 'soccer/results/generate/schedule.html',
                             {'competition': competition, 'matches': matches, 'group': group,})

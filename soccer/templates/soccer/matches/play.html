@@ -141,8 +141,6 @@
         		<li><a href="#fragment-2"><span>ADV Settings</span></a></li>
     			</ul>
 					<div id="fragment-1">
-						<div class="placeholder"><button id="btnResetTime" onclick="ST.resetTime()">Reset Time</button></div>
-						<div class="placeholder"><button id="btnResetScore" onclick="ST.resetScore()">Reset Score</button></div>
 						<div class="placeholder2">
 							<form name="frmtime">
 								<center>Time: <input class="input" type="text" id="fmins" value="10"/>
@@ -151,9 +149,14 @@
 									<span class="saved">Saved!</span></center>
 							</form>
 						</div>
+						<div class="placeholder"><button onclick="ST.teamADown();">{{ match.teamA.name }} missclick</button></div>
+						<div class="placeholder"><button onclick="ST.teamBDown();">{{ match.teamB.name }} missclick</button></div>
 					</div>
 
 					<div id="fragment-2">
+
+						<div class="placeholder"><button id="btnResetTime" onclick="ST.resetTime()">Reset Time</button></div>
+						<div class="placeholder"><button id="btnResetScore" onclick="ST.resetScore()">Reset Score</button></div>
 						<div class="placeholder3">
 							<form name="effects">
 								<b>Effects:</b>
